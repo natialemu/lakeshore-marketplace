@@ -1,0 +1,8 @@
+                              THINGS THE PROGRAM WILL NOT HAVE BY OCTOBER 2 DEADLINE
+
+1. Payment validation not implemented --> Braintree integration
+2. Spring is not used
+3. Subscription to product not implemented
+4. Review system module not implemented
+5. RxJava not implemented
+6. Statistics and Visualization module not implemented

@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff373cd5-84f7-4df3-b5dd-fd36a23b5d4f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/design/domain layer uml/Lakeshore Marketplace UML.asta" afterPath="$PROJECT_DIR$/design/domain layer uml/Lakeshore Marketplace UML.asta" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -189,12 +187,12 @@
       <option name="presentableId" value="Default" />
       <updated>1506396886376</updated>
       <workItem from="1506396890594" duration="919000" />
-      <workItem from="1506405168826" duration="126000" />
+      <workItem from="1506405168826" duration="173000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1045000" />
+    <option name="totallyTimeSpent" value="1092000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1513" height="973" extended-state="6" />
