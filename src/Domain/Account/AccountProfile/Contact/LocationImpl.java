@@ -11,6 +11,19 @@ public class LocationImpl implements Location {
     private int zipcode;
     private String state;
     private String country;
+
+    @Override
+    public String toString() {
+        return "LocationImpl{" +
+                "streetAddress='" + streetAddress + '\'' +
+                ", city='" + city + '\'' +
+                ", zipcode=" + zipcode +
+                ", state='" + state + '\'' +
+                ", country='" + country + '\'' +
+                ", pobox=" + pobox +
+                '}';
+    }
+
     private int pobox;
 
     public LocationImpl(String streetAddress, String city, int zipcode, String state){
