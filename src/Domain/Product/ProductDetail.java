@@ -4,7 +4,7 @@ public interface ProductDetail {
 	
 	void setProductName(String productName);
 	void setProductID(long productID);
-	void setProductCost(double cost);
+	void setProductCost(double productCost);
 	void setProductType(String productType);
 	void setProductTag(String productTag);
 	void setProductPhoto(String Photo);
