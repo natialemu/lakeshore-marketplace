@@ -9,7 +9,7 @@ public class ProductDetailImpl implements ProductDetail {
 	private String productPhoto;
 	
 	public String getProductName() {
-		return this.productName = productName;
+		return this.productName;
 	}
 	
 	public void setProductName(String productName) {
