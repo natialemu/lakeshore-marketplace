@@ -1,12 +1,6 @@
 package Domain.Product;
 
 public interface ProductDetail {
-	private String productName;
-	private long productID;
-	private double cost;
-	private String productType;
-	private String productTag;
-	private String productPhoto;
 	
 	void setProductName(String productName);
 	void setProductID(long productID);
