@@ -7,3 +7,8 @@
 5. RxJava not implemented
 6. Statistics and Visualization module not implemented
 7. Tests
+
+
+TODO on account module:
+1. Account management package is not complete
+2. After completing account package module, go over use cases
