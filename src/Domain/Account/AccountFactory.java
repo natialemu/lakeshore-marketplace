@@ -41,11 +41,6 @@ public interface AccountFactory {
     //Re-activate Account
     boolean ReactivateAccount(String oldUsername, String oldPassword);
 
-
-
-
-
-
     //Creating an account
     boolean createBasicAccount(String username, String password);
     boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);

@@ -1,4 +1,4 @@
 package Domain.Account.AccountManagement;
 
-public class AccountValidationImpl {
+public class AccountValidationImpl implements AccountValidation{
 }

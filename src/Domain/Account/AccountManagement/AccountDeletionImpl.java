@@ -1,4 +1,4 @@
 package Domain.Account.AccountManagement;
 
-public class AccountDeletionImpl {
+public class AccountDeletionImpl implements AccountDeletion{
 }

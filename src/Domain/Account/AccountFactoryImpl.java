@@ -19,7 +19,6 @@ public class AccountFactoryImpl implements AccountFactory {
 
     }
 
-
     @Override
     public boolean updateUserName(String username) {
         if(account != null && account.updateUserName(username)){

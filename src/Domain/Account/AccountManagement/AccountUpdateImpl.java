@@ -1,4 +1,4 @@
 package Domain.Account.AccountManagement;
 
-public class AccountUpdateImpl {
+public class AccountUpdateImpl implements AccountUpdate {
 }
