@@ -40,20 +40,6 @@ public interface AccountManagement {
     boolean ReactivateAccount(String oldUsername, String oldPassword);
 
 
-    //Set and get accountStates
-    void setAccountState(AccountState accountState);
-    AccountState getAccountSate();
-    AccountState getActiveState();
-    AccountState getInActiveState();
-    AccountState  getLoggedInState();
-
-    //Setter and getter
-    AccountProfile getAccountProfile();
-    AccountSettings getAccountSettings();
-    void setAccountSettings(AccountSettings accountSettings);
-    void setAccountProfile(AccountProfile accountProfile);
-
-
 
     //Creating an account
     boolean createBasicAccount(String username, String password);

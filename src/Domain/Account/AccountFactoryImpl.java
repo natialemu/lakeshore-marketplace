@@ -115,6 +115,7 @@ public class AccountFactoryImpl implements AccountFactory {
     public void setDefaultLocation(Location location) {
         if(account != null){
             account.setDefaultLocation(location);
+            accountManagement.setDefaultLocation(location);
         }
 
     }
@@ -123,6 +124,7 @@ public class AccountFactoryImpl implements AccountFactory {
     public void setDefaultPaymentCard(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
         if(account != null){
             account.setDefaultPaymentCard(cardHolderName,cardNumber,cardExpirationDate,securityNumber);
+            accountManagement.setDefaultPaymentCard(cardHolderName,cardNumber,cardExpirationDate,securityNumber);
         }
 
     }
@@ -131,6 +133,7 @@ public class AccountFactoryImpl implements AccountFactory {
     public void setDefaultBankAccount(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
         if(account != null){
             account.setDefaultBankAccount(bankName,routingNumber,accountType,billingAddress,swiftCode);
+            accountManagement.setDefaultBankAccount(bankName,routingNumber,accountType,billingAddress,swiftCode);
         }
     }
 
