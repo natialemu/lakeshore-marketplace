@@ -1,4 +1,4 @@
 package Domain.Transaction;
 
-public class TransactionImpl {
+public class TransactionImpl implements Transaction {
 }

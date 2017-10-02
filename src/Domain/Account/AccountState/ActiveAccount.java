@@ -16,7 +16,7 @@ public class ActiveAccount implements AccountState {
     }
 
     @Override
-    public boolean updatePassword(String password) {
+    public boolean updatePassword(String username, String password) {
         return false;
     }
 
@@ -61,7 +61,7 @@ public class ActiveAccount implements AccountState {
     }
 
     @Override
-    public boolean getPassowrd(String securityQuestion, String securityQuestionAnswer) {
+    public boolean getPassowrd(String username, String securityQuestion, String securityQuestionAnswer) {
         return true;
     }
 

@@ -47,8 +47,8 @@ public class AccountImpl implements Account{
     }
 
     @Override
-    public boolean updatePassword(String password) {
-        return currentstate.updatePassword(password);
+    public boolean updatePassword(String username, String password) {
+        return currentstate.updatePassword(username,password);
     }
 
     @Override
@@ -93,8 +93,8 @@ public class AccountImpl implements Account{
     }
 
     @Override
-    public boolean getPassowrd(String securityQuestion, String securityQuestionAnswer) {
-        return currentstate.getPassowrd(securityQuestion,securityQuestionAnswer);
+    public boolean getPassowrd(String username, String securityQuestion, String securityQuestionAnswer) {
+        return currentstate.getPassowrd(username,securityQuestion,securityQuestionAnswer);
     }
 
     @Override
