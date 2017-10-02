@@ -1,6 +1,7 @@
 package Domain.Account;
 
 import Domain.Account.AccountManagement.AccountManagement;
+import Domain.Account.AccountManagement.AccountManagementImpl;
 import Domain.Account.AccountProfile.AccountProfile;
 import Domain.Account.AccountProfile.Contact.Location;
 import Domain.Account.AccountSettings.AccountSettings;
@@ -8,7 +9,11 @@ import Domain.Account.AccountState.AccountState;
 
 public class AccountFactoryImpl implements AccountFactory {
     private AccountManagement accountManagement;
-    private Account account;
+
+    public AccountFactoryImpl(){
+        accountManagement = new AccountManagementImpl();
+    }
+
 
     @Override
     public boolean updateUserName(String username) {

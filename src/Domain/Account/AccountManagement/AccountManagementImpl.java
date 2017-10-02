@@ -1,4 +1,4 @@
 package Domain.Account.AccountManagement;
 
-public class AccountManagementImpl {
+public class AccountManagementImpl implements AccountManagement {
 }
