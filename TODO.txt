@@ -12,3 +12,7 @@
 TODO on account module:
 1. Account management package is not complete
 2. After completing account package module, go over use cases
+
+TODO on order module:
+1. order states
+2. order commands
