@@ -3,65 +3,63 @@ package Domain.Account.AccountState;
 import Domain.Account.Account;
 import Domain.Account.AccountProfile.Contact.Location;
 
-public class InactiveAccount implements AccountState{
+public class LoggedInState implements AccountState {
     private Account account;
 
-    public InactiveAccount(Account account){
+    public LoggedInState(Account account){
         this.account = account;
     }
-
-    public Account getAccount() {
-        return account;
-    }
-
     @Override
     public boolean updateUserName(String username) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean updatePassword(String password) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean updateDateOfBirth(String dateOfBirth) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean updateEmail(String email) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean updatePaymentCard(String cardNumber, String expirationDate, String cardHolderName, int securityCode) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean updateBankInformation(String bankName, String accountNumber, String routingNumber) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean deleteAccount(int accountID) {
-        return false;
+        account.setAccountState(account.getInActiveState());
+        return true;
     }
 
     @Override
     public boolean deleteAccountAccount(String email, String password) {
-        return false;
+        account.setAccountState(account.getInActiveState());
+        return true;
     }
 
     @Override
     public boolean deleteAccountWithPassword(String username, String password) {
-        return false;
+        account.setAccountState(account.getInActiveState());
+        return true;
     }
 
     @Override
@@ -76,17 +74,19 @@ public class InactiveAccount implements AccountState{
 
     @Override
     public void setDefaultLocation(Location location) {
+        account.getAccountSettings().setDefaultLocation(location);
 
     }
 
     @Override
     public void setDefaultPaymentCard(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
+        account.getAccountSettings().setDefaultPaymentCard(cardHolderName,cardNumber,cardExpirationDate,securityNumber);
 
     }
 
     @Override
     public void setDefaultBankAccount(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-
+        account.getAccountSettings().setDefaultBankAccount(bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
     @Override
@@ -101,8 +101,7 @@ public class InactiveAccount implements AccountState{
 
     @Override
     public boolean ReactivateAccount(String oldUsername, String oldPassword) {
-        account.setAccountState(account.getActiveState());
-        return true;
+        return false;
     }
 
 

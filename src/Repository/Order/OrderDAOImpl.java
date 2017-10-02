@@ -1,4 +1,4 @@
 package Repository.Order;
 
-public class OrderDAOImpl {
+public class OrderDAOImpl implements OrderDAO {
 }

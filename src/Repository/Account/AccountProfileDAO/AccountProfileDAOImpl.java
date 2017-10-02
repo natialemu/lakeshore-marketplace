@@ -1,4 +1,4 @@
 package Repository.Account.AccountProfileDAO;
 
-public class AccountProfileDAOImpl {
+public class AccountProfileDAOImpl implements AccountProfileDAO {
 }
