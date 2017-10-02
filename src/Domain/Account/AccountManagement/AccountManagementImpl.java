@@ -29,8 +29,8 @@ public class AccountManagementImpl implements AccountManagement {
     }
 
     @Override
-    public boolean updatePassword(String password) {
-        return accountUpdate.updatePassword(password);
+    public boolean updatePassword(String username, String password) {
+        return accountUpdate.updatePassword(username, password);
     }
 
     @Override
@@ -74,19 +74,20 @@ public class AccountManagementImpl implements AccountManagement {
     }
 
     @Override
-    public boolean getPassowrd(String securityQuestion, String securityQuestionAnswer) {
-        //TODO: needs to be implemented here
-        return false;
+    public boolean getPassowrd(String username, String securityQuestion, String securityQuestionAnswer) {
+
+        return accountValidation.getPassword(username,securityQuestion,securityQuestionAnswer);
     }
 
     @Override
     public boolean getPasswordThroughEmail(String email) {
         //TODO: needs to be implemented here
-        return false;
+        return accountValidation.getPasswordThroughEmail(email);
     }
 
     @Override
     public void setDefaultLocation(Location location) {
+        accountUpdate.setDefaultLocation(location);
         //TODO: needs to be impelemented here
 
     }
@@ -94,12 +95,15 @@ public class AccountManagementImpl implements AccountManagement {
     @Override
     public void setDefaultPaymentCard(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
         //TODO: needs to be impelemented here
+        accountUpdate.setDefaultPaymentCard(cardHolderName,cardNumber,cardExpirationDate,securityNumber);
 
     }
 
     @Override
     public void setDefaultBankAccount(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
         //TODO: needs to be implemented here
+        accountUpdate.setDefaultBankAccount(bankName,routingNumber,accountType,billingAddress,swiftCode);
+
 
     }
 
@@ -116,7 +120,7 @@ public class AccountManagementImpl implements AccountManagement {
     @Override
     public boolean ReactivateAccount(String oldUsername, String oldPassword) {
         //TODO: needs to be implemented here
-        return false;
+        return accountUpdate.activateStatusOfAccount(oldUsername,oldPassword);
     }
 
     @Override
@@ -146,14 +150,14 @@ public class AccountManagementImpl implements AccountManagement {
 
     @Override
     public Account getAccount(String username) {
-        //TODO: to be implemented here
-        return null;
+
+        return accountValidation.getAccount(username);
     }
 
     @Override
     public Account getAccountWithEmail(String email) {
-        //TODO: to be implemented here
-        return null;
+
+        return accountValidation.getAccountWithEmail(email);
     }
 
     @Override

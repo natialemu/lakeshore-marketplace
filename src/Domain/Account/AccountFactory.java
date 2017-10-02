@@ -11,7 +11,7 @@ public interface AccountFactory {
 
     //Update Account information
     boolean updateUserName(String username);
-    boolean updatePassword(String password);
+    boolean updatePassword(String username, String password);
     boolean updateDateOfBirth(String dateOfBirth);
     boolean updateEmail(String email);
     boolean updatePaymentCard(String cardNumber, String expirationDate, String cardHolderName, int securityCode);
@@ -24,7 +24,7 @@ public interface AccountFactory {
     boolean deleteAccountWithUsername(String username, String password);
 
     //Recovering an account
-    boolean getPassowrd(String securityQuestion, String securityQuestionAnswer);
+    boolean getPassowrd(String username, String securityQuestion, String securityQuestionAnswer);
     boolean getPasswordThroughEmail(String email);
 
 
