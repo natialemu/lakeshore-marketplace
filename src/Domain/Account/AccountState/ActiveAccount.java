@@ -27,7 +27,7 @@ public class ActiveAccount implements AccountState {
 
     @Override
     public boolean updateEmail(String email) {
-        return false;
+        return true;
     }
 
     @Override
@@ -62,71 +62,47 @@ public class ActiveAccount implements AccountState {
 
     @Override
     public boolean getPassowrd(String securityQuestion, String securityQuestionAnswer) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean getPasswordThroughEmail(String email) {
-        return false;
+        return true;
     }
 
-    @Override
-    public boolean createBasicAccount(String username, String password) {
-        return false;
-    }
-
-    @Override
-    public boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
-        return false;
-    }
-
-    @Override
-    public boolean createAccountFinancialProfile(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        return false;
-    }
-
-    @Override
-    public boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
-        return false;
-    }
 
     @Override
     public void setDefaultLocation(Location location) {
+        //account.getAccountSettings().setDefaultLocation(location);
 
     }
 
     @Override
     public void setDefaultPaymentCard(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
+        //account.getAccountSettings().setDefaultPaymentCard(cardHolderName,cardNumber,cardExpirationDate,securityNumber);
 
     }
 
     @Override
     public void setDefaultBankAccount(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
 
+        //account.getAccountSettings().setDefaultBankAccount(bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
     @Override
     public boolean logInToAccount(String username, String password) {
-        return false;
+        account.setAccountState(account.getLoggedInState());
+        return true;
     }
 
     @Override
     public boolean logInToAccountWithEmail(String email, String password) {
-        return false;
+        account.setAccountState(account.getLoggedInState());
+        return true;
     }
 
     @Override
     public boolean ReactivateAccount(String oldUsername, String oldPassword) {
-        return false;
-    }
-
-    @Override
-    public boolean flagAccount(String username) {
-        return false;
-    }
-
-    @Override
-    public boolean unflagAccount(String username) {
         return false;
     }
 }

@@ -1,6 +1,9 @@
 package Domain.Account;
 
+import Domain.Account.AccountProfile.AccountProfile;
+import Domain.Account.AccountProfile.AccountProfileImpl;
 import Domain.Account.AccountProfile.Contact.Location;
+import Domain.Account.AccountSettings.AccountSettings;
 import Domain.Account.AccountState.AccountState;
 import Domain.Account.AccountState.ActiveAccount;
 
@@ -41,15 +44,17 @@ public interface Account {
     //Re-activate Account
     boolean ReactivateAccount(String oldUsername, String oldPassword);
 
-    //Flag account
-    boolean flagAccount(String username);
-    boolean unflagAccount(String username);
 
     //Set and get accountStates
     void setAccountState(AccountState accountState);
     AccountState getAccountSate();
     AccountState getActiveState();
     ActiveAccount getInActiveState();
-    ActiveAccount getDeletedState();
-    ActiveAccount getFlaggedState();
+    ActiveAccount  getLoggedInState();
+
+    //Setter and getter
+    AccountProfile getAccountProfile();
+    AccountSettings getAccountSettings();
+    void setAccountSettings(AccountSettings accountSettings);
+    void setAccountProfile(AccountProfile accountProfile);
 }

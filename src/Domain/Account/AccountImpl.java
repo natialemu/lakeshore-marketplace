@@ -8,13 +8,29 @@ import Domain.Account.AccountState.*;
 
 public class AccountImpl implements Account{
     private AccountState currentstate;
+
+    public AccountProfile getAccountProfile() {
+        return accountProfile;
+    }
+
+    public void setAccountProfile(AccountProfile accountProfile) {
+        this.accountProfile = accountProfile;
+    }
+
+    public AccountSettings getAccountSettings() {
+        return accountSettings;
+    }
+
+    public void setAccountSettings(AccountSettings accountSettings) {
+        this.accountSettings = accountSettings;
+    }
+
     private AccountProfile accountProfile;
     private AccountSettings accountSettings;
 
     private AccountState ACTIVE_STATE = new ActiveAccount(this);
     private AccountState INACTIVE_STATE = new InactiveAccount(this);
-    private AccountState DELETED_STATE = new DeletedAccount(this);
-    private AccountState FLAGGED_STATE = new FlaggedAccount(this);
+    private AccountState LOGGED_IN_STATE = new LoggedInState(this);
 
     public AccountImpl(String username, String password){
         //set account info
@@ -133,16 +149,6 @@ public class AccountImpl implements Account{
     }
 
     @Override
-    public boolean flagAccount(String username) {
-        return false;
-    }
-
-    @Override
-    public boolean unflagAccount(String username) {
-        return false;
-    }
-
-    @Override
     public void setAccountState(AccountState accountState) {
 
     }
@@ -163,12 +169,7 @@ public class AccountImpl implements Account{
     }
 
     @Override
-    public ActiveAccount getDeletedState() {
-        return null;
-    }
-
-    @Override
-    public ActiveAccount getFlaggedState() {
+    public ActiveAccount getLoggedInState() {
         return null;
     }
 }

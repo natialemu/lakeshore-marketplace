@@ -10,14 +10,45 @@ public class AccountProfileImpl implements AccountProfile{
     private ContactInfo contactInfo;
     private FinancialInfo financialInfo;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public ContactInfo getContactInfo() {
+        return contactInfo;
+    }
+
+    public void setContactInfo(ContactInfo contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+
+    public FinancialInfo getFinancialInfo() {
+        return financialInfo;
+    }
+
+    public void setFinancialInfo(FinancialInfo financialInfo) {
+        this.financialInfo = financialInfo;
+    }
+
     public AccountProfileImpl(String username, String password){
         this.username = username;
         this.password = password;
     }
-    public AccountProfileImpl(String username, String password, String fullName, String email, String securityQuestion, String securityQuestionAnswer){
-        this.username = username;
-        this.password = password;
+    public AccountProfileImpl(String username, String password, String fullName, String email, String securityQuestion, String securityQuestionAnswer, String birthDate){
+        this(username,password);
 
-        contactInfo = new ContactInfoImpl();
+        contactInfo = new ContactInfoImpl(fullName,email,securityQuestion,securityQuestionAnswer,birthDate);
     }
 }

@@ -75,26 +75,6 @@ public class InactiveAccount implements AccountState{
     }
 
     @Override
-    public boolean createBasicAccount(String username, String password) {
-        return false;
-    }
-
-    @Override
-    public boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
-        return false;
-    }
-
-    @Override
-    public boolean createAccountFinancialProfile(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        return false;
-    }
-
-    @Override
-    public boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
-        return false;
-    }
-
-    @Override
     public void setDefaultLocation(Location location) {
 
     }
@@ -121,16 +101,9 @@ public class InactiveAccount implements AccountState{
 
     @Override
     public boolean ReactivateAccount(String oldUsername, String oldPassword) {
-        return false;
+        account.setAccountState(account.getActiveState());
+        return true;
     }
 
-    @Override
-    public boolean flagAccount(String username) {
-        return false;
-    }
 
-    @Override
-    public boolean unflagAccount(String username) {
-        return false;
-    }
 }
