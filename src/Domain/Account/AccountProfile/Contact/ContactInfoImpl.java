@@ -14,6 +14,24 @@ public class ContactInfoImpl implements ContactInfo{
     private String birthDate;
     private String securityQuestionAnswer;
 
+    public ContactInfoImpl(String fullName, String email, String securityQuestion, String securityQuestionAnswer, String birthDate){
+        this.fullName = fullName;
+        this.email = email;
+        this.securityQuestion = securityQuestion;
+        this.securityQuestionAnswer = securityQuestionAnswer;
+        this.birthDate = birthDate;
+    }
+
+    public ContactInfoImpl(String fullName, String email, String securityQuestion, String securityQuestionAnswer, String birthDate,String streetAddress, String city, int zipcode, String state, String country, int pobox ){
+        this(fullName,email,securityQuestion,securityQuestionAnswer,birthDate);
+        this.location = new LocationImpl(streetAddress,city,zipcode,state,country,pobox);
+    }
+    public ContactInfoImpl(String fullName, String email, String birthDate){
+        this.fullName = fullName;
+        this.email = email;
+        this.birthDate = birthDate;
+    }
+
     public String getFullName() {
         return fullName;
     }
