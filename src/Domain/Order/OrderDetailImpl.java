@@ -72,10 +72,11 @@ public class OrderDetailImpl implements OrderDetail {
 
     private double calculateTotalCost(List<Product> products) {
 
-        return 0.0;
+        return 10.0;
     }
 
     private void populateMapInventory(List<Product> products, Map<Partner, List<Product>> mapProductInOrder) {
+        //TODO
 
     }
 

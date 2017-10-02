@@ -13,4 +13,5 @@ public interface OrderConfirmation {
     String getMessageHeader();
     String getMessageBody();
 
+    void confirmOrder(Order order);
 }

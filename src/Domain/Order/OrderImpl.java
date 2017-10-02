@@ -1,6 +1,10 @@
 package Domain.Order;
 
+import Domain.Customer.Customer;
 import Domain.Order.OrderState.*;
+import Domain.Product.Product;
+
+import java.util.List;
 
 public class OrderImpl implements Order{
     private OrderState CANCELLED_ORDER = new CancelledOrder(this);
@@ -16,39 +20,39 @@ public class OrderImpl implements Order{
     private String stringCurrentState;
 
 
-    public OrderImpl(){
+    public OrderImpl(List<Product> products, Customer customer){
+        orderDetail = new OrderDetailImpl(products,customer);
         setState(UNPROCCESSED_ORDER);
-
     }
 
     @Override
     public boolean verifyPayment() {
-        return false;
+        return currentState.verifyPayment();
     }
 
     @Override
     public boolean verifyOrderContent() {
-        return false;
+        return currentState.verifyOrderContent();
     }
 
     @Override
     public boolean processPayment() {
-        return false;
+        return currentState.processPayment();
     }
 
     @Override
     public boolean shipOrder() {
-        return false;
+        return currentState.shipOrder();
     }
 
     @Override
     public boolean cancelOrder() {
-        return false;
+        return currentState.cancelOrder();
     }
 
     @Override
     public boolean sendConfirmation() {
-        return false;
+        return currentState.sendConfirmation();
     }
 
     @Override
@@ -60,61 +64,63 @@ public class OrderImpl implements Order{
 
     @Override
     public String getStringOrderState() {
-        return null;
+        return stringCurrentState;
     }
 
     @Override
     public OrderState getCurrentState() {
-        return null;
+        return currentState;
     }
 
     @Override
     public OrderState getCancelledState() {
-        return null;
+        return CANCELLED_ORDER;
     }
 
     @Override
     public OrderState getDeliveredState() {
-        return null;
+        return DELIVERED_ORDER;
     }
 
     @Override
     public OrderState getProccessedState() {
-        return null;
+        return PROCCESSED_ORDER;
     }
 
     @Override
     public OrderState getUnproccessedState() {
-        return null;
+        return UNPROCCESSED_ORDER;
     }
 
     @Override
     public OrderDetail getOrderDetail() {
-        return null;
+        return orderDetail;
     }
 
     @Override
     public void setOrderDetail(OrderDetail orderDetail) {
+        this.orderDetail = orderDetail;
 
     }
 
     @Override
     public boolean orderContentVerified() {
-        return false;
+        return orderContentVerified;
     }
 
     @Override
     public boolean paymentValidated() {
-        return false;
+        return paymentValidated;
     }
 
     @Override
     public void setOrderContentVerified(boolean orderContentVerified) {
+        this.orderContentVerified = orderContentVerified;
 
     }
 
     @Override
     public void setPaymentValidation(boolean paymentValidation) {
-
+        this.paymentValidated =  paymentValidation;
     }
 }

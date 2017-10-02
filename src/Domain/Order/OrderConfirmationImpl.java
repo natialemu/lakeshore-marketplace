@@ -36,6 +36,11 @@ public class OrderConfirmationImpl implements OrderConfirmation{
         return messageBody;
     }
 
+    @Override
+    public void confirmOrder(Order order) {
+        //TODO
+    }
+
     public void setMessageBody(String messageBody) {
         this.messageBody = messageBody;
     }
