@@ -3,13 +3,12 @@ package Domain.Account.AccountState;
 import Domain.Account.Account;
 import Domain.Account.AccountProfile.Contact.Location;
 
-public class ActiveAccount implements AccountState {
+public class DeletedAccount implements AccountState {
     private Account account;
 
-    public ActiveAccount(Account account){
+    public DeletedAccount(Account account){
         this.account = account;
     }
-
     @Override
     public boolean updateUserName(String username) {
         return false;
