@@ -20,17 +20,13 @@ public interface Account {
     //Deleting An account
     boolean deleteAccount(int accountID);
     boolean deleteAccountAccount(String email, String password);
-    boolean deleteAccountWithPassword(String username, String password);
+    boolean deleteAccountWithEmail(String username, String password);
 
     //Recovering an account
     boolean getPassowrd(String securityQuestion, String securityQuestionAnswer);
     boolean getPasswordThroughEmail(String email);
 
-    //Creating an account
-    boolean createBasicAccount(String username, String password);
-    boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);
-    boolean createAccountFinancialProfile(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
-    boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
+
 
     //Set Preferences
     void setDefaultLocation(Location location);
@@ -49,8 +45,8 @@ public interface Account {
     void setAccountState(AccountState accountState);
     AccountState getAccountSate();
     AccountState getActiveState();
-    ActiveAccount getInActiveState();
-    ActiveAccount  getLoggedInState();
+    AccountState getInActiveState();
+    AccountState  getLoggedInState();
 
     //Setter and getter
     AccountProfile getAccountProfile();

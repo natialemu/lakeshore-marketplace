@@ -40,136 +40,120 @@ public class AccountImpl implements Account{
 
     @Override
     public boolean updateUserName(String username) {
-        return false;
+        return currentstate.updateUserName(username);
     }
 
     @Override
     public boolean updatePassword(String password) {
-        return false;
+        return currentstate.updatePassword(password);
     }
 
     @Override
     public boolean updateDateOfBirth(String dateOfBirth) {
-        return false;
+        return currentstate.updateDateOfBirth(dateOfBirth);
     }
 
     @Override
     public boolean updateEmail(String email) {
-        return false;
+        return currentstate.updateEmail(email);
     }
 
     @Override
     public boolean updatePaymentCard(String cardNumber, String expirationDate, String cardHolderName, int securityCode) {
-        return false;
+        return currentstate.updatePaymentCard(cardNumber,expirationDate,cardHolderName,securityCode);
     }
 
     @Override
     public boolean updateBankInformation(String bankName, String accountNumber, String routingNumber) {
-        return false;
+        return currentstate.updateBankInformation(bankName,accountNumber,routingNumber);
     }
 
     @Override
     public boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox) {
-        return false;
+        return currentstate.updateAddress(streetAddress,state,city,zipcode,country,pobox);
     }
 
     @Override
     public boolean deleteAccount(int accountID) {
-        return false;
+        return currentstate.deleteAccount(accountID);
     }
 
     @Override
     public boolean deleteAccountAccount(String email, String password) {
-        return false;
+        return currentstate.deleteAccountAccount(email,password);
     }
 
     @Override
-    public boolean deleteAccountWithPassword(String username, String password) {
-        return false;
+    public boolean deleteAccountWithEmail(String username, String password) {
+
+        return currentstate.deleteAccountWithPassword(username,password);
     }
 
     @Override
     public boolean getPassowrd(String securityQuestion, String securityQuestionAnswer) {
-        return false;
+        return currentstate.getPassowrd(securityQuestion,securityQuestionAnswer);
     }
 
     @Override
     public boolean getPasswordThroughEmail(String email) {
-        return false;
-    }
-
-    @Override
-    public boolean createBasicAccount(String username, String password) {
-        return false;
-    }
-
-    @Override
-    public boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
-        return false;
-    }
-
-    @Override
-    public boolean createAccountFinancialProfile(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        return false;
-    }
-
-    @Override
-    public boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
-        return false;
+        return currentstate.getPasswordThroughEmail(email);
     }
 
     @Override
     public void setDefaultLocation(Location location) {
+        currentstate.setDefaultLocation(location);
 
     }
 
     @Override
     public void setDefaultPaymentCard(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
 
+        currentstate.setDefaultPaymentCard(cardHolderName,cardNumber,cardExpirationDate,securityNumber);
     }
 
     @Override
     public void setDefaultBankAccount(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
 
+        currentstate.setDefaultBankAccount(bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
     @Override
     public boolean logInToAccount(String username, String password) {
-        return false;
+        return currentstate.logInToAccount(username,password);
     }
 
     @Override
     public boolean logInToAccountWithEmail(String email, String password) {
-        return false;
+        return currentstate.logInToAccountWithEmail(email,password);
     }
 
     @Override
     public boolean ReactivateAccount(String oldUsername, String oldPassword) {
-        return false;
+        return currentstate.ReactivateAccount(oldUsername,oldPassword);
     }
 
     @Override
     public void setAccountState(AccountState accountState) {
-
+             currentstate = accountState;
     }
 
     @Override
     public AccountState getAccountSate() {
-        return null;
+        return currentstate;
     }
 
     @Override
     public AccountState getActiveState() {
-        return null;
+        return ACTIVE_STATE;
     }
 
     @Override
-    public ActiveAccount getInActiveState() {
-        return null;
+    public AccountState getInActiveState() {
+        return INACTIVE_STATE;
     }
 
     @Override
-    public ActiveAccount getLoggedInState() {
-        return null;
+    public AccountState getLoggedInState() {
+        return LOGGED_IN_STATE;
     }
 }
