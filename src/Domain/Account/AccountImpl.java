@@ -7,7 +7,9 @@ import Domain.Account.AccountSettings.AccountSettings;
 import Domain.Account.AccountState.*;
 
 public class AccountImpl implements Account{
+
     private AccountState currentstate;
+    private String stringCurrentState;
 
     public AccountProfile getAccountProfile() {
         return accountProfile;
@@ -36,6 +38,7 @@ public class AccountImpl implements Account{
         //set account info
         accountProfile = new AccountProfileImpl(username,password);
         setAccountState(ACTIVE_STATE);
+        stringCurrentState = ACTIVE_STATE.getClass().getSimpleName();
     }
 
     @Override
@@ -84,7 +87,7 @@ public class AccountImpl implements Account{
     }
 
     @Override
-    public boolean deleteAccountWithEmail(String username, String password) {
+    public boolean deleteAccountWithUsername(String username, String password) {
 
         return currentstate.deleteAccountWithPassword(username,password);
     }
@@ -135,6 +138,7 @@ public class AccountImpl implements Account{
     @Override
     public void setAccountState(AccountState accountState) {
              currentstate = accountState;
+             stringCurrentState = accountState.getClass().getSimpleName();
     }
 
     @Override
@@ -156,4 +160,11 @@ public class AccountImpl implements Account{
     public AccountState getLoggedInState() {
         return LOGGED_IN_STATE;
     }
+
+    @Override
+    public String getStringAccountState() {
+        return stringCurrentState;
+    }
+
+
 }

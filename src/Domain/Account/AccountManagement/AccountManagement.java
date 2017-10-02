@@ -1,5 +1,6 @@
 package Domain.Account.AccountManagement;
 
+import Domain.Account.Account;
 import Domain.Account.AccountProfile.AccountProfile;
 import Domain.Account.AccountProfile.Contact.Location;
 import Domain.Account.AccountSettings.AccountSettings;
@@ -18,7 +19,7 @@ public interface AccountManagement {
     //Deleting An account
     boolean deleteAccount(int accountID);
     boolean deleteAccountAccount(String email, String password);
-    boolean deleteAccountWithEmail(String username, String password);
+    boolean deleteAccountWithUsername(String username, String password);
 
     //Recovering an account
     boolean getPassowrd(String securityQuestion, String securityQuestionAnswer);
@@ -59,5 +60,13 @@ public interface AccountManagement {
     boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);
     boolean createAccountFinancialProfile(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
     boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
+
+    boolean validateAccount(String username, String password);
+
+    Account getAccount(String username);
+
+    Account getAccountWithEmail(String email);
+
+    boolean validateAccountWithEmail(String email, String password);
 
 }

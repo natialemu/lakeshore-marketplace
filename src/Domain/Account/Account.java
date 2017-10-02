@@ -20,7 +20,7 @@ public interface Account {
     //Deleting An account
     boolean deleteAccount(int accountID);
     boolean deleteAccountAccount(String email, String password);
-    boolean deleteAccountWithEmail(String username, String password);
+    boolean deleteAccountWithUsername(String username, String password);
 
     //Recovering an account
     boolean getPassowrd(String securityQuestion, String securityQuestionAnswer);
@@ -47,6 +47,7 @@ public interface Account {
     AccountState getActiveState();
     AccountState getInActiveState();
     AccountState  getLoggedInState();
+    String getStringAccountState();
 
     //Setter and getter
     AccountProfile getAccountProfile();
