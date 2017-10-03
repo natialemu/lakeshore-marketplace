@@ -1,4 +1,4 @@
 package Repository.Customer;
 
-public class CustomerDAOimpl {
+public class CustomerDAOimpl implements CustomerDAO {
 }
