@@ -2,8 +2,16 @@ package Repository.Account.AccountProfileDAO;
 
 import Domain.Account.AccountProfile.AccountProfile;
 import Domain.Account.AccountProfile.Contact.Location;
+import Domain.Account.AccountProfile.Finance.FinancialInfo;
 
 public class AccountProfileDAOImpl implements AccountProfileDAO {
+    private ContactDAO contactDAO;
+    private FinancialInfoDAO financialInfoDAO;
+
+    public AccountProfileDAOImpl(){
+        contactDAO = new ContactDAOImpl();
+        financialInfoDAO = new FinancialInfoDAOImpl();
+    }
     @Override
     public boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
         return false;
@@ -79,5 +87,10 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
         //get all account profiles that have email as a foreign key
         //build the account profile and return it
         return null;
+    }
+
+    @Override
+    public boolean logInToAccount(String username, String password) {
+        return false;
     }
 }
