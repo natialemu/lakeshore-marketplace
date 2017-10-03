@@ -55,7 +55,7 @@ public class ProductSearchImpl implements ProductSearch {
 		return this.sortPartnerID;
 	}	
 	
-	public List<Product> productsearchByName(List<Product> products, String searchName, boolean order){
+	public List<Product> productSearchByName(List<Product> products, String searchName, boolean order){
 		List<Product> productNames = new ArrayList<Product>();
 		 
 		for (Product product : products) {
@@ -65,7 +65,7 @@ public class ProductSearchImpl implements ProductSearch {
 		}
 		return productNames;
 	}
-	public Product productsearchByID(List<Product> products, long searchID, boolean order){
+	public Product productSearchByID(List<Product> products, long searchID, boolean order){
 		for (Product product : products) {
 			if (product.getProductID().equalsIgnoreCase(searchID)) {
 				return product;
@@ -73,7 +73,7 @@ public class ProductSearchImpl implements ProductSearch {
 		}
 		return null;
 	}
-	public List<Product> productsearchByCost(List<Product> products, double searchCost, boolean order){
+	public List<Product> productSearchByCost(List<Product> products, double searchCost, boolean order){
 		List<Product> productCosts = new ArrayList<Product>();
 		 
 		for (Product product : products) {
@@ -83,7 +83,7 @@ public class ProductSearchImpl implements ProductSearch {
 		}
 		return productCosts;
 	}
-	public List<Product> productsearchByTag(List<Product> products, String searchTag, boolean order){
+	public List<Product> productSearchByTag(List<Product> products, String searchTag, boolean order){
 		List<Product> productTags = new ArrayList<Product>();
 		 
 		for (Product product : products) {
@@ -94,7 +94,7 @@ public class ProductSearchImpl implements ProductSearch {
 		return productTags;
 	}
 	
-	public List<Product> productsearchByType(List<Product> products, String searchType, boolean order){
+	public List<Product> productSearchByType(List<Product> products, String searchType, boolean order){
 		List<Product> productTypes = new ArrayList<Product>();
 		 
 		for (Product product : products) {
@@ -104,7 +104,7 @@ public class ProductSearchImpl implements ProductSearch {
 		}
 		return productTypes;
 	}
-	public List<Product> productsearchByPartnerName(List<Product> products, String searchPartnerName, boolean order){
+	public List<Product> productSearchByPartnerName(List<Product> products, String searchPartnerName, boolean order){
 		List<Product> productPartnerNames = new ArrayList<Product>();
 		 
 		for (Product product : products) {
@@ -114,7 +114,7 @@ public class ProductSearchImpl implements ProductSearch {
 		}
 		return productPartnerNames;
 	}
-	public List<Product> productsearchByPartnerID(List<Product> products, long searchPartnerID, boolean order){
+	public List<Product> productSearchByPartnerID(List<Product> products, long searchPartnerID, boolean order){
 		List<Product> productPartnerIDs = new ArrayList<Product>();
 		 
 		for (Product product : products) {
