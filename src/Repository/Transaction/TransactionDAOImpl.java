@@ -1,4 +1,10 @@
 package Repository.Transaction;
 
-public class TransactionDAOImpl {
+import Domain.Order.Order;
+
+public class TransactionDAOImpl implements TransactionDAO {
+    @Override
+    public void createTransaction(Order order) {
+
+    }
 }

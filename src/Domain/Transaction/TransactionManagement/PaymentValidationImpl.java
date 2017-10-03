@@ -1,4 +1,11 @@
 package Domain.Transaction.TransactionManagement;
 
-public class PaymentValidationImpl {
+import Domain.Order.Order;
+
+public class PaymentValidationImpl implements PaymentValidation {
+    @Override
+    public boolean validatePayment(Order order) {
+        System.out.println("Payment successfully validated!");
+        return true;
+    }
 }
