@@ -7,7 +7,6 @@ import Domain.Account.AccountProfile.Contact.Location;
 import Domain.Account.AccountSettings.AccountSettings;
 import Repository.Account.AccountProfileDAO.AccountProfileDAO;
 import Repository.Account.AccountProfileDAO.AccountProfileDAOImpl;
-import Repository.Account.AccountProfileDAO.ContactDAO;
 import Repository.Account.AccountSettingsDAO.AccountSettingsDAO;
 import Repository.Account.AccountSettingsDAO.AccountSettingsDAOImpl;
 
@@ -109,6 +108,14 @@ public class AccountDAOImpl implements AccountDAO {
 
             } catch (SQLException se) {
                 se.printStackTrace();
+            }finally {
+
+
+                if (connection != null) {
+                    try {
+                        connection.close();
+                    } catch (SQLException e) { /* ignored */}
+                }
             }
         }
         return false;
@@ -141,6 +148,14 @@ public class AccountDAOImpl implements AccountDAO {
         } catch (SQLException se) {
 
             se.printStackTrace();
+        }finally {
+
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
         }
         return false;
 
@@ -169,8 +184,16 @@ public class AccountDAOImpl implements AccountDAO {
 
         } catch (SQLException se) {
             se.printStackTrace();
+        }finally {
+
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
         }
-        //TODO
+
         return false;
     }
 
@@ -207,7 +230,6 @@ public class AccountDAOImpl implements AccountDAO {
 
     @Override
     public boolean activateStatusOfAccount(String oldUsername, String oldPassword) {
-        //TODO: perform an update here
         Connection connection = openConnection();
 
         try {
@@ -220,6 +242,14 @@ public class AccountDAOImpl implements AccountDAO {
 
         } catch (SQLException se) {
             se.printStackTrace();
+        }finally {
+
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
         }
 
         return false;
@@ -273,8 +303,16 @@ public class AccountDAOImpl implements AccountDAO {
 
         } catch (SQLException es) {
             es.printStackTrace();
+        }finally {
+
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
         }
-        //TODO: select and check
+
 
         return false;
     }
@@ -286,6 +324,10 @@ public class AccountDAOImpl implements AccountDAO {
 
     @Override
     public Account getAccount(String username) {
+        String acct_settings_id = "";
+        Account account = null;
+        String account_state = "";
+        AccountProfile accountProfile = accountProfileDAO.getAccountProfile(username);
         Connection connection = openConnection();
         try {
             Statement statement = connection.createStatement();
@@ -294,21 +336,9 @@ public class AccountDAOImpl implements AccountDAO {
             assert (resultSet.isLast());
             resultSet.next();
             int account_id = resultSet.getInt(0);
-            String account_State = resultSet.getString(1);
-            String acct_settings_id = resultSet.getString(3);
+            account_state = resultSet.getString(1);
+            acct_settings_id = resultSet.getString(3);
 
-            AccountProfile accountProfile = accountProfileDAO.getAccountProfile(username);
-            AccountSettings accountSettings = accountSettingsDAO.getAccountSettings(acct_settings_id);
-
-            Account account = new AccountImpl(username, accountProfile.getPassword());
-            account.setAccountProfile(accountProfile);
-            account.setAccountSettings(accountSettings);
-            if (account_State.equals("ActiveAccount")) {
-                account.setAccountState(account.getActiveState());
-            } else if (account_State.equals("InactiveAccount")) {
-                account.setAccountState(account.getInActiveState());
-            }
-            return account;
         } catch (SQLException exception) {
 
         } finally {
@@ -318,21 +348,30 @@ public class AccountDAOImpl implements AccountDAO {
             } catch (Exception e) {
 
             }
-
         }
 
+        AccountSettings accountSettings = accountSettingsDAO.getAccountSettings(acct_settings_id);
+        account = new AccountImpl(username, accountProfile.getPassword());
+        account.setAccountProfile(accountProfile);
+        account.setAccountSettings(accountSettings);
+        if (account_state.equals("ActiveAccount")) {
+            account.setAccountState(account.getActiveState());
+        } else if (account_state.equals("InactiveAccount")) {
+            account.setAccountState(account.getInActiveState());
+        }
 
-        return null;
+        return account;
     }
 
     @Override
     public Account getAccountWithEmail(String email) {
 
+        AccountProfile accountProfile = accountProfileDAO.getAccountProfilewithEmail(email);
+        String username = accountProfile.getUsername();
         Connection connection = openConnection();
         try {
             Statement statement = connection.createStatement();
-            AccountProfile accountProfile = accountProfileDAO.getAccountProfilewithEmail(email);
-            String username = accountProfile.getUsername();
+
             return getAccount(username);
         } catch (SQLException exception) {
 
@@ -345,7 +384,6 @@ public class AccountDAOImpl implements AccountDAO {
             }
 
         }
-
 
         return null;
     }
