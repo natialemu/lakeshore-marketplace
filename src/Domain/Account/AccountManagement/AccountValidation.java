@@ -15,7 +15,7 @@ public interface AccountValidation {
 
     Account getAccountWithEmail(String email);
 
-    boolean getPassword(String username, String securityQuestion, String securityQuestionAnswer);
+    String getPassword(String username, String securityQuestion, String securityQuestionAnswer);
 
     boolean getPasswordThroughEmail(String email);
 }

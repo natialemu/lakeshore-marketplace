@@ -24,8 +24,8 @@ public class AccountManagementImpl implements AccountManagement {
         accountUpdate = new AccountUpdateImpl();
     }
     @Override
-    public boolean updateUserName(String username) {
-        return accountUpdate.updateUserName(username);
+    public boolean updateUserName(String username,String password) {
+        return accountUpdate.updateUserName(username,password);
     }
 
     @Override
@@ -39,8 +39,8 @@ public class AccountManagementImpl implements AccountManagement {
     }
 
     @Override
-    public boolean updateEmail(String email) {
-        return accountUpdate.updateEmail(email);
+    public boolean updateEmail(String email,String password) {
+        return accountUpdate.updateEmail(email,password);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class AccountManagementImpl implements AccountManagement {
     }
 
     @Override
-    public boolean getPassowrd(String username, String securityQuestion, String securityQuestionAnswer) {
+    public String getPassowrd(String username, String securityQuestion, String securityQuestionAnswer) {
 
         return accountValidation.getPassword(username,securityQuestion,securityQuestionAnswer);
     }

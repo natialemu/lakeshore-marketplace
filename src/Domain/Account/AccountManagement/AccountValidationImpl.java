@@ -37,7 +37,7 @@ public class AccountValidationImpl implements AccountValidation{
     }
 
     @Override
-    public boolean getPassword(String username, String securityQuestion, String securityQuestionAnswer) {
+    public String getPassword(String username, String securityQuestion, String securityQuestionAnswer) {
         return accountDAO.getPassword(username,securityQuestion,securityQuestionAnswer);
     }
 

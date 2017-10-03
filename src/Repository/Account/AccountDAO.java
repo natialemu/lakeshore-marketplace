@@ -20,12 +20,12 @@ public interface AccountDAO {
 
     boolean deleteAccountWithUsername(String username, String password);
 
-    boolean updateUserName(String username);
+    boolean updateUserName(String username,String password);
 
 
     boolean updatePassword(String username, String password);
 
-    boolean updateEmail(String email);
+    boolean updateEmail(String email,String password);
 
     boolean updatePaymentCard(String cardNumber, String expirationDate, String cardHolderName, int securityCode);
 
@@ -53,7 +53,7 @@ public interface AccountDAO {
 
     Account getAccountWithEmail(String email);
 
-    boolean getPassword(String username, String securityQuestion, String securityQuestionAnswer);
+    String getPassword(String username, String securityQuestion, String securityQuestionAnswer);
 
     boolean getPasswordThroughEmail(String email);
 
