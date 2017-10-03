@@ -12,8 +12,8 @@ public class AccountUpdateImpl implements AccountUpdate {
     }
 
     @Override
-    public boolean updateUserName(String username) {
-        return accountDAO.updateUserName(username);
+    public boolean updateUserName(String username, String password) {
+        return accountDAO.updateUserName(username,password);
     }
 
     @Override
@@ -28,9 +28,9 @@ public class AccountUpdateImpl implements AccountUpdate {
     }
 
     @Override
-    public boolean updateEmail(String email) {
+    public boolean updateEmail(String email,String password) {
 
-        return accountDAO.updateEmail(email);
+        return accountDAO.updateEmail(email,password);
     }
 
     @Override

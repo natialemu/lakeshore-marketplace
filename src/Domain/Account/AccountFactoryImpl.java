@@ -20,9 +20,9 @@ public class AccountFactoryImpl implements AccountFactory {
     }
 
     @Override
-    public boolean updateUserName(String username) {
+    public boolean updateUserName(String username,String password) {
         if(account != null && account.updateUserName(username)){
-            return accountManagement.updateUserName(username);
+            return accountManagement.updateUserName(username,password);
         }
         return false;
     }
@@ -44,9 +44,9 @@ public class AccountFactoryImpl implements AccountFactory {
     }
 
     @Override
-    public boolean updateEmail(String email) {
+    public boolean updateEmail(String email,String password) {
         if(account != null && account.updateEmail(email)){
-            return accountManagement.updateEmail(email);
+            return accountManagement.updateEmail(email,password);
         }
         return false;
     }
@@ -100,7 +100,7 @@ public class AccountFactoryImpl implements AccountFactory {
     }
 
     @Override
-    public boolean getPassowrd(String username, String securityQuestion, String securityQuestionAnswer) {
+    public String getPassowrd(String username, String securityQuestion, String securityQuestionAnswer) {
         return accountManagement.getPassowrd(username, securityQuestion,securityQuestionAnswer);
 
     }

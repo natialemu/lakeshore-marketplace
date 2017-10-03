@@ -198,8 +198,8 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public boolean updateUserName(String username) {
-        accountProfileDAO.updateUserName(username);
+    public boolean updateUserName(String username,String password) {
+        accountProfileDAO.updateUserName(username,password);
         return false;
     }
 
@@ -209,8 +209,8 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public boolean updateEmail(String email) {
-        return accountProfileDAO.updateEmail(email);
+    public boolean updateEmail(String email,String password) {
+        return accountProfileDAO.updateEmail(email,password);
     }
 
     @Override
@@ -368,28 +368,11 @@ public class AccountDAOImpl implements AccountDAO {
 
         AccountProfile accountProfile = accountProfileDAO.getAccountProfilewithEmail(email);
         String username = accountProfile.getUsername();
-        Connection connection = openConnection();
-        try {
-            Statement statement = connection.createStatement();
-
-            return getAccount(username);
-        } catch (SQLException exception) {
-
-        } finally {
-            try {
-                connection.close();
-
-            } catch (Exception e) {
-
-            }
-
-        }
-
-        return null;
+        return getAccount(username);
     }
 
     @Override
-    public boolean getPassword(String username, String securityQuestion, String securityQuestionAnswer) {
+    public String getPassword(String username, String securityQuestion, String securityQuestionAnswer) {
         return accountProfileDAO.getPassword(username, securityQuestion, securityQuestionAnswer);
     }
 

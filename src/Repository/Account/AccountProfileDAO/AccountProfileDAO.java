@@ -11,11 +11,11 @@ public interface AccountProfileDAO {
     boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
 
 
-    void updateUserName(String username);
+    void updateUserName(String username, String password);
 
     boolean updatePassword(String username, String password);
 
-    boolean updateEmail(String email);
+    boolean updateEmail(String email, String password);
 
     boolean updatePaymentCard(String cardNumber, String expirationDate, String cardHolderName, int securityCode);
 
@@ -27,7 +27,7 @@ public interface AccountProfileDAO {
 
     boolean validateAccountWithEmail(String email, String password);
 
-    boolean getPassword(String username, String securityQuestion, String securityQuestionAnswer);
+    String getPassword(String username, String securityQuestion, String securityQuestionAnswer);
 
     boolean getPasswordThroughEmail(String email);
 
