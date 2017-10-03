@@ -1,5 +1,6 @@
 package Repository.Account.AccountProfileDAO;
 
+import Domain.Account.AccountProfile.AccountProfile;
 import Domain.Account.AccountProfile.Contact.Location;
 
 public interface AccountProfileDAO {
@@ -23,4 +24,17 @@ public interface AccountProfileDAO {
     boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox);
 
     boolean logIntoAccountWithEmail(String email, String password);
+
+    boolean validateAccountWithEmail(String email, String password);
+
+    boolean getPassword(String username, String securityQuestion, String securityQuestionAnswer);
+
+    boolean getPasswordThroughEmail(String email);
+
+
+    AccountProfile getAccountProfile(String username);
+
+    AccountProfile getAccountProfilewithEmail(String email);//get
+
+    boolean logInToAccount(String username, String password);
 }
