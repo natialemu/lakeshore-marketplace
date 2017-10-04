@@ -1,4 +1,5 @@
 package Repository.Delivery;
 
-public class DeliveryConfirmationDAOImpl {
+public class DeliveryConfirmationDAOImpl implements DeliveryConfirmationDAO
+{
 }

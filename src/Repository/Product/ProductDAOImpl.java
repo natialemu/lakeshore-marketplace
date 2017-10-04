@@ -40,7 +40,7 @@ public class ProductDAOImpl implements ProductDAO{
 
     }
     @Override
-    public List<Product> getProducts(int order_id) {
+    public List<Product> getProducts() {
         int product_id = 0;
         String productName = null;
         double productCost = 0;
@@ -57,7 +57,7 @@ public class ProductDAOImpl implements ProductDAO{
         try {
             Statement selectStatement = connection.createStatement();
 
-            String selectQuery = "SELECT * from product where order_id=" + order_id;
+            String selectQuery = "SELECT * from product=";
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
             while(resultSet.next()){
 

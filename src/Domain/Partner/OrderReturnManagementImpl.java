@@ -1,4 +1,4 @@
 package Domain.Partner;
 
-public class OrderReturnManagementImpl {
+public class OrderReturnManagementImpl implements OrderReturnManagement {
 }

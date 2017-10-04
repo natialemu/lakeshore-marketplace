@@ -1,4 +1,4 @@
 package Domain.Partner;
 
-public class DeliveryManagementImpl {
+public class DeliveryManagementImpl implements DeliveryManagement {
 }

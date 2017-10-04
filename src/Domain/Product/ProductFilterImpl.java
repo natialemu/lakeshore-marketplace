@@ -1,30 +1,35 @@
 package Domain.Product;
 
+import Repository.Product.ProductDAO;
+import Repository.Product.ProductDAOImpl;
+
+import java.util.List;
+
 public class ProductFilterImpl implements ProductFilter {
-	private String filterType;
-	private boolean order;
-	
-	
-	public void setFilterType(String filterType) {
-		this.filterType = filterType;
+	private ProductDAO productDAO;
+
+	public ProductFilterImpl(){
+		productDAO = new ProductDAOImpl();
 	}
-	
-	public List<Product> productFilter(List<Product> products, String filterType, boolean order){
-		List<Product> productTypes = new ArrayList<Product>();
-		 
-		for (Product product : products) {
-			if (product.getProductType().equalsIgnoreCase(filterType)) {
-				productTypes.add(product);
-			}
-		}
-		return productTypes;
+
+	@Override
+	public List<Product> filterProductByTag(List<Product> products) {
+		return products;
 	}
-	public List<Product> productSearch(List<Product> products){
-		return products
+
+	@Override
+	public List<Product> sortProductsByName(List<Product> products) {
+		return products;
 	}
-	
-	public List<Product> productSort(List<Product> products){
-		return products
-	}	
+
+	@Override
+	public List<Product> sortProductsByPrice(List<Product> products) {
+		return products;
+	}
+
+	@Override
+	public List<Product> sortProductsByRating(List<Product> products) {
+		return products;
+	}
 }
 
