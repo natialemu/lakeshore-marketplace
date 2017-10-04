@@ -1,8 +1,12 @@
 package Domain.Partner;
 
+import Domain.Account.AccountFactory;
+import Domain.ReviewSystem.ReviewSystem;
+
 public interface Partner {
-	public getAccount();
-	public void setAccount(Account account);
-	public Inventory getInventory();
-	public void addInventory(Inventory inventory);
+	public void addProductToInventory(Product, Integer);
+	public void provideDeliveryStatus(String status);
+	public boolean notifyOrderReturn();
+	public AccountFactory getAccountFactory();
+    void setAccountFactory(AccountFactory accountFactory);
 }
