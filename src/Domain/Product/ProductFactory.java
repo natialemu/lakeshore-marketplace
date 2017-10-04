@@ -22,35 +22,35 @@ public interface ProductFactory {
 	public List<Product> retrieveAllProductList();
 
 	
-	public List<Product> sortProductListByProductName(List<Product> product, boolean order);
+	public List<Product> sortProductListByProductName(List<Product> products, boolean order);
 	
-	public List<Product> sortProductListByProductID(List<Product> product, boolean order);
+	public List<Product> sortProductListByProductID(List<Product> products, boolean order);
 	
-	public List<Product> sortProductListByProductType(List<Product> product, boolean order);
+	public List<Product> sortProductListByProductType(List<Product> products, boolean order);
 	
-	public List<Product> sortProductListByProductTag(List<Product> product, boolean order);
+	public List<Product> sortProductListByProductTag(List<Product> products, boolean order);
 	
-	public List<Product> sortProductListByProductCost(List<Product> product, boolean order);
-	
-	
-	public List<Product> filterProductListByProductName(List<Product> product, String productName, boolean order);
-	
-	public List<Product> filterProductListByProductID(List<Product> product, long productID, boolean order);
-	
-	public List<Product> filterProductListByProductType(List<Product> product, String productType, boolean order);
-	
-	public List<Product> filterProductListByProductTag(List<Product> product, String productTag, boolean order);
-	
-	public List<Product> filterProductListByProductCost(List<Product> product, double productCost, boolean order);
+	public List<Product> sortProductListByProductCost(List<Product> products, boolean order);
 	
 	
-	public List<Product> searchProductListByProductName(List<Product> product);
+	public List<Product> filterProductListByProductName(List<Product> products, String productName, boolean order);
 	
-	public Product searchProductListByProductID(List<Product> product, long productID);
+	public List<Product> filterProductListByProductID(List<Product> products, long productID, boolean order);
 	
-	public List<Product> searchProductListByProductType(List<Product> product, String productType);
+	public List<Product> filterProductListByProductType(List<Product> products, String productType, boolean order);
 	
-	public List<Product> searchProductListByProductTag(List<Product> product, String productTag);
+	public List<Product> filterProductListByProductTag(List<Product> products, String productTag, boolean order);
 	
-	public List<Product> searchProductListByProductCost(List<Product> product, double productCost);
+	public List<Product> filterProductListByProductCost(List<Product> products, double productCost, boolean order);
+	
+	
+	public List<Product> searchProductListByProductName(List<Product> products, String productName);
+	
+	public Product searchProductListByProductID(List<Product> products, long productID);
+	
+	public List<Product> searchProductListByProductType(List<Product> products, String productType);
+	
+	public List<Product> searchProductListByProductTag(List<Product> products, String productTag);
+	
+	public List<Product> searchProductListByProductCost(List<Product> products, double productCost);
 }
