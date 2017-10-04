@@ -1,4 +1,4 @@
 package Repository.Delivery;
 
-public class DeliveryDAOImpl {
+public class DeliveryDAOImpl implements DeliveryDAO {
 }

@@ -1,4 +1,4 @@
 package Repository.Account.AccountProfileDAO;
 
-public class FinancialInfoDAOImpl {
+public class FinancialInfoDAOImpl implements FinancialInfoDAO {
 }

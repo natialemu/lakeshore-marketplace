@@ -1,4 +1,4 @@
 package Domain.Transaction;
 
-public class TransactionHistoryImpl {
+public class TransactionHistoryImpl implements TransactionHistory{
 }

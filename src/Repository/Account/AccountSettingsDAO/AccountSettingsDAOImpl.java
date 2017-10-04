@@ -1,4 +1,4 @@
 package Repository.Account.AccountSettingsDAO;
 
-public class AccountSettingsDAOImpl {
+public class AccountSettingsDAOImpl implements AccountSettingsDAO {
 }
