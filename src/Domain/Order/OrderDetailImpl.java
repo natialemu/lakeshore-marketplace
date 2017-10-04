@@ -4,10 +4,7 @@ import Domain.Customer.Customer;
 import Domain.Partner.Partner;
 import Domain.Product.Product;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class OrderDetailImpl implements OrderDetail {
     private Map<Partner, List<Product>> mapProductInOrder;
@@ -20,6 +17,13 @@ public class OrderDetailImpl implements OrderDetail {
 
     public Map<Partner, List<Product>> getMapProductInOrder() {
         return mapProductInOrder;
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        List<Product> products = new ArrayList<>();
+        products.addAll(mapProductCount.keySet());
+        return products;
     }
 
     public void setMapProductInOrder(Map<Partner, List<Product>> mapProductInOrder) {

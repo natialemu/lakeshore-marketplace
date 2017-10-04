@@ -6,9 +6,12 @@ import Domain.Order.Order;
 import Domain.Order.OrderConfirmation;
 import Domain.Order.OrderDetail;
 import Domain.Order.OrderImpl;
+import Domain.Product.Product;
 import Domain.Transaction.Transaction;
 import Repository.Delivery.DeliveryDAO;
 import Repository.Delivery.DeliveryDAOImpl;
+import Repository.Product.ProductDAO;
+import Repository.Product.ProductDAOImpl;
 import Repository.Transaction.TransactionDAO;
 import Repository.Transaction.TransactionDAOImpl;
 
@@ -21,12 +24,14 @@ public class OrderDAOImpl implements OrderDAO {
     private OrderDetailDAO orderDetailDAO;
     private TransactionDAO transactionDAO;
     private DeliveryDAO deliveryDAO;
+    private ProductDAO productDAO;
 
     public OrderDAOImpl(){
         orderConfirmationDAO = new OrderConfirmationDAOImpl();
         orderDetailDAO = new OrderDetailDAOImpl();
         transactionDAO = new TransactionDAOImpl();
         deliveryDAO = new DeliveryDAOImpl();
+        productDAO = new ProductDAOImpl();
     }
 
     private Connection openConnection() {
@@ -83,6 +88,9 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public boolean createOrder(Order order) {
         boolean inserted = false;
+        for(Product p: order.getOrderDetail().getAllProducts()){
+            productDAO.setOrderID(p,order.getOrderID());
+        }
 
         Connection connection = openConnection();
         try{

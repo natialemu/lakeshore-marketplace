@@ -21,4 +21,6 @@ public interface OrderDetail {
     void setMapProductInOrder(Map<Partner, List<Product>> mapProductInOrder);
     Map<Partner, List<Product>> getMapProductInOrder();
 
+    List<Product> getAllProducts();
+
 }
