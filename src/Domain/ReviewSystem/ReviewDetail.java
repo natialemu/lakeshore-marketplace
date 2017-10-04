@@ -12,5 +12,11 @@ public interface ReviewDetail {
 	public void setReviewDate();
 	public int getReviewID();
 	public void setReviewID(int reviewID);
+	public int getReviewLikes();
+	public void setReviewLikes(int reviewDisLikes);
+	public int getReviewDislikes();
+	public void setReviewDisLikes(int reviewDisLikes);
+	public boolean getReviewCategory(boolean reviewCategory);
+	public void setReviewCategory();
 
 }
