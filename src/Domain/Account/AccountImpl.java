@@ -11,6 +11,18 @@ public class AccountImpl implements Account{
     private AccountState currentstate;
     private String stringCurrentState;
 
+    @Override
+    public int getAccountID() {
+        return accountID;
+    }
+
+    @Override
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
+    }
+
+    private int accountID;
+
     public AccountProfile getAccountProfile() {
         return accountProfile;
     }

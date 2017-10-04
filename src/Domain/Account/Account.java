@@ -54,4 +54,7 @@ public interface Account {
     AccountSettings getAccountSettings();
     void setAccountSettings(AccountSettings accountSettings);
     void setAccountProfile(AccountProfile accountProfile);
+
+    int getAccountID();
+    void setAccountID(int accountID);
 }

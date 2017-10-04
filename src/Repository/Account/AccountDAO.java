@@ -58,4 +58,5 @@ public interface AccountDAO {
     boolean getPasswordThroughEmail(String email);
 
 
+    Account getAccount(int account_id);
 }

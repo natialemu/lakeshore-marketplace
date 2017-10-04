@@ -380,4 +380,34 @@ public class AccountDAOImpl implements AccountDAO {
     public boolean getPasswordThroughEmail(String email) {
         return accountProfileDAO.getPasswordThroughEmail(email);
     }
+
+    @Override
+    public Account getAccount(int account_id) {
+        String username = null;
+        Connection connection = openConnection();
+        try {
+            Statement statement = connection.createStatement();
+            String query = "SELECT * from account where account_id=" + account_id;
+            ResultSet resultSet = statement.executeQuery(query);
+            assert (resultSet.isLast());
+            resultSet.next();
+            username = resultSet.getString("username");
+
+
+        } catch (SQLException exception) {
+
+        } finally {
+            try {
+                connection.close();
+
+            } catch (Exception e) {
+
+            }
+        }
+        if(username != null){
+            return getAccount(username);
+        }
+        return null;
+
+    }
 }
