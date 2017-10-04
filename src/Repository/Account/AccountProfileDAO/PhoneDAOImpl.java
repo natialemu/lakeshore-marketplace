@@ -1,4 +1,4 @@
 package Repository.Account.AccountProfileDAO;
 
-public class PhoneDAOImpl {
+public class PhoneDAOImpl implements PhoneDAO{
 }
