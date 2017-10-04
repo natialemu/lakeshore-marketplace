@@ -1,5 +1,5 @@
 package Domain.Product;
-
+import java.util*;
 public class ProductFilterImpl implements ProductFilter {
 	
 	private String sortName;
@@ -57,76 +57,144 @@ public class ProductFilterImpl implements ProductFilter {
 		return this.sortPartnerID;
 	}	
 	
-	public List<Product> productSortByName(List<Product> products, String sortName, boolean order){
-		List<Product> productNames = new ArrayList<Product>();
-		 
-		for (Product product : products) {
-			if (product.getProductName().equalsIgnoreCase(sortName)) {
-				productNames.add(product);
-			}
-		}
-		return productNames;
+	public List<Product> productSortByName(List<Product> products, boolean order){
+		List<Product> listOfProducts = products;
+		if (order == true){collections.sort(listOfProducts, Product.ProductNameAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductNameDesComparator);}
+		
+		return listOfProducts;
 	}
-	public List<Product> productSortByID(List<Product> products, long sortID, boolean order){
-		List<Product> productIDs = new ArrayList<Product>();
-		 
-		for (Product product : products) {
-			if (product.getProductID().equalsIgnoreCase(sortID)) {
-				productIDs.add(product);
-			}
-		}
-		return productIDs;
+	public List<Product> productSortByID(List<Product> products, boolean order){
+		List<Product> listOfProducts = products;
+		if (order == true){collections.sort(listOfProducts, Product.ProductIDAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductIDDesComparator);}
+		
+		return listOfProducts;
 	}
-	public List<Product> productSortByCost(List<Product> products, double sortCost, boolean order){
-		List<Product> productCosts = new ArrayList<Product>();
-		 
-		for (Product product : products) {
-			if (product.getProductCost().equalsIgnoreCase(sortCost)) {
-				productCosts.add(product);
-			}
-		}
-		return productCosts;
+	public List<Product> productSortByCost(List<Product> products, boolean order){
+		List<Product> listOfProducts = products;
+		if (order == true){collections.sort(listOfProducts, Product.ProductCostAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductCostDesComparator);}
+		
+		return listOfProducts;
 	}
-	public List<Product> productSortByTag(List<Product> products, String sortTag, boolean order){
-		List<Product> productTags = new ArrayList<Product>();
-		 
-		for (Product product : products) {
-			if (product.getProductTag().equalsIgnoreCase(sortTag)) {
-				productTags.add(product);
-			}
-		}
-		return productTags;
+	public List<Product> productSortByTag(List<Product> products, boolean order){
+		List<Product> listOfProducts = products;
+		if (order == true){collections.sort(listOfProducts, Product.ProductTagAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductTagDesComparator);}
+		
+		return listOfProducts;
 	}
 	
-	public List<Product> productSortByType(List<Product> products, String sortType, boolean order){
-		List<Product> productTypes = new ArrayList<Product>();
-		 
-		for (Product product : products) {
-			if (product.getProductType().equalsIgnoreCase(sortType)) {
-				productTypes.add(product);
-			}
-		}
-		return productTypes;
+	public List<Product> productSortByType(List<Product> products, boolean order){
+		List<Product> listOfProducts = products;
+		if (order == true){collections.sort(listOfProducts, Product.ProductTypeAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductTypeDesComparator);}
+		
+		return listOfProducts;
 	}
-	public List<Product> productSortByPartnerName(List<Product> products, String sortPartnerName, boolean order){
-		List<Product> productPartnerNames = new ArrayList<Product>();
-		 
-		for (Product product : products) {
-			if (product.getProductPartnerName().equalsIgnoreCase(sortPartnerName)) {
-				productPartnerNames.add(product);
-			}
-		}
-		return productPartnerNames;
+	public List<Product> productSortByPartnerName(List<Product> products, boolean order){
+		List<Product> listOfProducts = products;
+		if (order == true){collections.sort(listOfProducts, Product.ProductPartnerNameAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductPartnerNameDesComparator);}
+		
+		return listOfProducts;
 	}
-	public List<Product> productSortByPartnerID(List<Product> products, long sortPartnerID, boolean order){
-		List<Product> productPartnerIDs = new ArrayList<Product>();
+	
+	public List<Product> productSortByPartnerID(List<Product> products, boolean order){
+		List<Product> listOfProducts = products;
+		if (order == true){collections.sort(listOfProducts, Product.ProductPartnerIDAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductPartnerIDDesComparator);}
+		
+		return listOfProducts;
+	}
+
+	public List<Product> filterByName(List<Product> products, String filterName, boolean order){
+		 List<Product> listOfProducts = new ArrayList<Product>();
 		 
 		for (Product product : products) {
-			if (product.getProductPartnerID().equalsIgnoreCase(sortPartnerID)) {
-				productPartnerIDs.add(product);
+			if (product.getProductID().equalsIgnoreCase(filterName)) {
+				listOfProducts.add(product);
 			}
 		}
-		return productPartnerIDs;
+		
+		if (order == true){collections.sort(listOfProducts, Product.ProductNameAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductNameDesComparator);}
+		return listOfProducts;
+	}
+	
+	public List<Product> productSortByID(List<Product> products, long filterID, boolean order){
+		List<Product> listOfProducts = new ArrayList<Product>();
+		 
+		for (Product product : products) {
+			if (product.getProductID().equalsIgnoreCase(filterID)) {
+				listOfProducts.add(product);
+			}
+		}
+		if (order == true){collections.sort(listOfProducts, Product.ProductIDAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductIDDesComparator);}
+		
+		return listOfProducts;
+	}
+	public List<Product> productSortByCost(List<Product> products, double filterCost, boolean order){
+		List<Product> listOfProducts = new ArrayList<Product>();
+		 
+		for (Product product : products) {
+			if (product.getProductCost().equalsIgnoreCase(filterCost)) {
+				listOfProducts.add(product);
+			}
+		}
+		if (order == true){collections.sort(listOfProducts, Product.ProductCostAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductCostDesComparator);}
+		return listOfProducts;
+	}
+	public List<Product> productSortByTag(List<Product> products, String filterTag, boolean order){
+		List<Product> listOfProducts = new ArrayList<Product>();
+		 
+		for (Product product : products) {
+			if (product.getProductTag().equalsIgnoreCase(filterTag)) {
+				listOfProducts.add(product);
+			}
+		}
+		if (order == true){collections.sort(listOfProducts, Product.ProductTagAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductTagDesComparator);}
+		return listOfProducts;
+	}
+	
+	public List<Product> productSortByType(List<Product> products, String filterType, boolean order){
+		List<Product> listOfProducts = new ArrayList<Product>();
+		 
+		for (Product product : products) {
+			if (product.getProductType().equalsIgnoreCase(filterType)) {
+				listOfProducts.add(product);
+			}
+		}
+		if (order == true){collections.sort(listOfProducts, Product.ProductTypeAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductTypeDesComparator);}
+		return listOfProducts;
+	}
+	public List<Product> productSortByPartnerName(List<Product> products, StringfilterPartnerName, boolean order){
+		List<Product> listOfProducts = new ArrayList<Product>();
+		 
+		for (Product product : products) {
+			if (product.getProductPartnerName().equalsIgnoreCase(filterPartnerName)) {
+				listOfProducts.add(product);
+			}
+		}
+		if (order == true){collections.sort(listOfProducts, Product.ProductPartnerNameAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductPartnerNameDesComparator);}
+		return listOfProducts;
+	}
+	public List<Product> productSortByPartnerID(List<Product> products, long filterPartnerID, boolean order){
+		List<Product> listOfProducts = new ArrayList<Product>();
+		 
+		for (Product product : products) {
+			if (product.getProductPartnerID().equalsIgnoreCase(filterPartnerID)) {
+				listOfProducts.add(product);
+			}
+		}
+		if (order == true){collections.sort(listOfProducts, Product.ProductPartnerIDAscComparator);}
+		else{collections.sort(listOfProducts, Product.ProductPartnerIDDesComparator);}
+		return listOfProducts;
 	}
 }
-
