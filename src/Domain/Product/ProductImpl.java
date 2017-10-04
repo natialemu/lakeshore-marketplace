@@ -140,5 +140,53 @@ public class ProductImpl implements Product {
 	   return ((int)ProductID2 - (int)ProductID1);
 
     }};
+	
+	/*Comparator for sorting the list by Product PartnerName - Ascending*/
+    public static Comparator<Product> ProductPartnerNameAscComparator = new Comparator<Product>() {
+
+	public int compare(Product p1, Product p2) {
+	   String ProductID1 = p1.getProductDetails().getProductPartnerName().toUpperCase();
+	   String ProductID2 = p2.getProductDetails().getProductPartnerName().toUpperCase();
+
+	   ///ascending order
+	   return ProductTag1.compareTo(ProductTag2);
+
+    }};
+	
+	/*Comparator for sorting the list by Product PartnerName - descending*/
+    public static Comparator<Product> ProductPartnerNameDesComparator = new Comparator<Product>() {
+
+	public int compare(Product p1, Product p2) {
+	   String ProductID1 = p1.getProductDetails().getProductPartnerName().toUpperCase();
+	   String ProductID2 = p2.getProductDetails().getProductPartnerName().toUpperCase();
+
+	   ///descending order
+	   return ProductTag2.compareTo(ProductTag1);
+
+    }};
+	
+	/*Comparator for sorting the list by Product Partner ID - Ascending*/
+    public static Comparator<Product> ProductPartnerIDAscComparator = new Comparator<Product>() {
+
+	public int compare(Product p1, Product p2) {
+	   double ProductID1 = p1.getProductDetails().getProductPartnerID().toUpperCase();
+	   double ProductID2 = p2.getProductDetails().getProductPartnerID().toUpperCase();
+
+	   //Ascending order
+	   return ((int)ProductID1 - (int)ProductID2);
+
+    }};
+	
+	/*Comparator for sorting the list by Product Partner ID - Descending*/
+    public static Comparator<Product> ProductPartnerIDDesComparator = new Comparator<Product>() {
+
+	public int compare(Product p1, Product p2) {
+	   double ProductID1 = p1.getProductDetails().getProductPartnerID().toUpperCase();
+	   double ProductID2 = p2.getProductDetails().getProductPartnerID().toUpperCase();
+
+	   //Descending order
+	   return ((int)ProductID2 - (int)ProductID1);
+
+    }};
 }
 
