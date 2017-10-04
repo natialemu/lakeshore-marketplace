@@ -3,38 +3,43 @@ package Domain.Transaction;
 import Domain.Order.Order;
 import Domain.Partner.Partner;
 import Domain.Transaction.TransactionManagement.*;
+import Repository.Transaction.TransactionDAO;
+import Repository.Transaction.TransactionDAOImpl;
 
 import java.util.Date;
 
 public class TransactionFactoryImpl implements TransactionFactory{
     private  Transaction transaction;
-    private Order order;
     private PaymentNotification paymentNotification;
     private ProcessPayment processPayment;
     private PaymentValidation paymentValidation;
     private TransactionHistory transactionHistory;
+    private TransactionDAO transactionDAO;
 
 
 
 
-    public TransactionFactoryImpl(){
-        transaction = new TransactionImpl();
+
+    public TransactionFactoryImpl(Order order){
+        transaction = new TransactionImpl(order);
         paymentNotification = new PaymentNotificationImpl();
         transactionHistory = new TransactionHistoryImpl();
 
         processPayment = new ProcessPaymentImpl();
         paymentValidation = new PaymentValidationImpl();
+        transactionDAO = new TransactionDAOImpl();
 
     }
     @Override
     public boolean validatePayment(Order order) {
-        this.order = order;
         return paymentValidation.validatePayment(order);
     }
 
     @Override
     public void processPayment(Order order) {
         processPayment.processPayment(order,true);
+
+        transactionDAO.createTransaction(transaction);
 
     }
 
@@ -46,13 +51,6 @@ public class TransactionFactoryImpl implements TransactionFactory{
         this.transaction = transaction;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
 
     public PaymentNotification getPaymentNotification() {
         return paymentNotification;

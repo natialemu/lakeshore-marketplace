@@ -34,8 +34,11 @@ public interface Order {
     void setPaymentValidation(boolean paymentValidation);
 
 
+    int getConfirmationID();
 
+    OrderConfirmation getOrderConfirmation();
+    void setOrderConfirmation(OrderConfirmation orderConfirmation);
 
-
-
+    int getOrderID();
+    void setOrderID(int orderID);
 }

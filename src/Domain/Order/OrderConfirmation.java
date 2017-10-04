@@ -3,15 +3,17 @@ package Domain.Order;
 import Domain.Customer.Customer;
 
 public interface OrderConfirmation {
-    void setCustomer(Customer customer);
-    void setConfirmationID(long confirmationID);
+
+    void setConfirmationID(int confirmationID);
+
     void setMessageHeader(String messageHeader);
+
     void setMessageBody(String messageBody);
 
-    Customer getCustomer();
-    long getConfirmationID();
+    int getConfirmationID();
+
     String getMessageHeader();
+
     String getMessageBody();
 
-    void confirmOrder(Order order);
 }

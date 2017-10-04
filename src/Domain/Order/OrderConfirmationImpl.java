@@ -3,24 +3,17 @@ package Domain.Order;
 import Domain.Customer.Customer;
 
 public class OrderConfirmationImpl implements OrderConfirmation{
-    private Customer customer;
-    private long confirmationID;
+    private int confirmationID;
     private String messageHeader;
     private String messageBody;
+    //TODO: get the confirmation through the ID
 
-    public Customer getCustomer() {
-        return customer;
-    }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public long getConfirmationID() {
+    public int getConfirmationID() {
         return confirmationID;
     }
 
-    public void setConfirmationID(long confirmationID) {
+    public void setConfirmationID(int confirmationID) {
         this.confirmationID = confirmationID;
     }
 
@@ -36,10 +29,6 @@ public class OrderConfirmationImpl implements OrderConfirmation{
         return messageBody;
     }
 
-    @Override
-    public void confirmOrder(Order order) {
-        //TODO
-    }
 
     public void setMessageBody(String messageBody) {
         this.messageBody = messageBody;
@@ -48,7 +37,6 @@ public class OrderConfirmationImpl implements OrderConfirmation{
     @Override
     public String toString() {
         return "OrderConfirmationImpl{" +
-                "customer=" + customer +
                 ", confirmationID=" + confirmationID +
                 ", messageHeader='" + messageHeader + '\'' +
                 ", messageBody='" + messageBody + '\'' +

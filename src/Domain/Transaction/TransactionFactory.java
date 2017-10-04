@@ -11,8 +11,6 @@ public interface TransactionFactory {
     void processPayment(Order order);
     Transaction getTransaction();
     void setTransaction(Transaction transaction);
-    Order getOrder();
-    void setOrder(Order order);
 
     ProcessPayment getProcessPayment();
     void setProcessPayment(ProcessPayment processPayment);

@@ -21,7 +21,6 @@ import java.util.List;
 public class OrderFactoryImpl implements OrderFactory{
     private TransactionFactory transaction;
     private Validator validator;
-    private OrderConfirmation orderConfirmation;
     private OrderCancellation orderCancellation;
     private Order order;
     private DeliveryFactory delivery;
@@ -33,7 +32,6 @@ public class OrderFactoryImpl implements OrderFactory{
     public OrderFactoryImpl(){
         transaction = new TransactionFactoryImpl();
         delivery = new DeliveryFactoryImpl();
-        orderConfirmation = new OrderConfirmationImpl();
         orderCancellation = new OrderCancellationImpl();
         orderValidation = new OrderValidationImpl();
         orderDAO = new OrderDAOImpl();
@@ -61,7 +59,7 @@ public class OrderFactoryImpl implements OrderFactory{
 
         validator = new ValidatorImpl(new ConfirmOrder(order));
         if(validator.executeCommand()){
-            orderConfirmation.confirmOrder(order);
+            confirmOrder();
             order.sendConfirmation();
         }
 
@@ -79,16 +77,20 @@ public class OrderFactoryImpl implements OrderFactory{
         Order retrievedOrder = orderDAO.retrieveOrder(confirmationID);
         if(retrievedOrder.cancelOrder() && retrievedOrder.getStringOrderState().equals("ProcessedOrder")){
             orderCancellation.cancelProccessedOrder(retrievedOrder);
-            orderDAO.updateStatus(retrievedOrder);
+            orderDAO.updateStatus(retrievedOrder,retrievedOrder.getConfirmationID());
         }else if(retrievedOrder.cancelOrder() && retrievedOrder.getStringOrderState().equals("DeliveredOrder")){
             orderCancellation.cancelDeliveredOrder(retrievedOrder);
-            orderDAO.updateStatus(retrievedOrder);
+            orderDAO.updateStatus(retrievedOrder, retrievedOrder.getConfirmationID());
         }
         return true;
     }
 
     public String getOrderStatus(){
         return order.getStringOrderState();
+    }
+
+    public void confirmOrder(){
+        System.out.println("Order sent out for delivery! ");
     }
 
 

@@ -12,6 +12,28 @@ public class OrderImpl implements Order{
     private OrderState PROCCESSED_ORDER = new ProcessedOrder(this);
     private OrderState UNPROCCESSED_ORDER = new UnprocessedOrder(this);
 
+    @Override
+    public int getOrderID() {
+        return orderID;
+    }
+
+    @Override
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
+
+    private int orderID;
+
+    public OrderConfirmation getOrderConfirmation() {
+        return orderConfirmation;
+    }
+
+    public void setOrderConfirmation(OrderConfirmation orderConfirmation) {
+        this.orderConfirmation = orderConfirmation;
+    }
+
+    private OrderConfirmation orderConfirmation;
+
     private OrderState currentState;
     private OrderDetail orderDetail;
 
@@ -23,6 +45,12 @@ public class OrderImpl implements Order{
     public OrderImpl(List<Product> products, Customer customer){
         orderDetail = new OrderDetailImpl(products,customer);
         setState(UNPROCCESSED_ORDER);
+        orderConfirmation = new OrderConfirmationImpl();
+
+    }
+    public OrderImpl(OrderDetail orderDetail){
+        this.orderDetail = orderDetail;
+        orderConfirmation = new OrderConfirmationImpl();
     }
 
     @Override
@@ -122,5 +150,10 @@ public class OrderImpl implements Order{
     @Override
     public void setPaymentValidation(boolean paymentValidation) {
         this.paymentValidated =  paymentValidation;
+    }
+
+    @Override
+    public int getConfirmationID() {
+        return orderConfirmation.getConfirmationID();
     }
 }

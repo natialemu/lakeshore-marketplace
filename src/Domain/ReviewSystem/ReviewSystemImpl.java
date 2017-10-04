@@ -1,4 +1,4 @@
 package Domain.ReviewSystem;
 
-public class ReviewSystemImpl {
+public class ReviewSystemImpl implements ReviewSystem {
 }

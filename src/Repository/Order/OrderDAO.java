@@ -11,5 +11,5 @@ public interface OrderDAO {
 
     Order retrieveOrder(int confirmationID);
 
-    void updateStatus(Order retrievedOrder);
+    void updateStatus(Order retrievedOrder, int confirmation_id);
 }
