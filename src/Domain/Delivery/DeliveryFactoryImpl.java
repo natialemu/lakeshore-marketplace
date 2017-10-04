@@ -1,4 +1,10 @@
 package Domain.Delivery;
 
-public class DeliveryFactoryImpl {
+import Domain.Order.Order;
+
+public class DeliveryFactoryImpl implements DeliveryFactory{
+    @Override
+    public void sendDelivery(Order order) {
+
+    }
 }
