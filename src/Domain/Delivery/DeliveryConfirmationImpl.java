@@ -1,14 +1,33 @@
 package Domain.Delivery;
 
-import Domain.Customer.Customer;
-
 public class DeliveryConfirmationImpl implements DeliveryConfirmation {
-     private int deliveryConfirmation_id;
-     private String header;
+     private int deliveryID;
+
+    public int getDeliveryID() {
+        return deliveryID;
+    }
+
+    public void setDeliveryID(int deliveryID) {
+        this.deliveryID = deliveryID;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    private String header;
      private String body;
 
-    @Override
-    public void sendConfirmation(Customer customer) {
-        System.out.println("Confirmation sent to " +customer.getAccount().getAccountProfile().getContactInfo().getEmail());
-    }
 }

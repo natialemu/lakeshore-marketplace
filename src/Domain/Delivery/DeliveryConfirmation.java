@@ -5,6 +5,14 @@ import Domain.Customer.Customer;
 public interface DeliveryConfirmation {
 
 
-    void sendConfirmation(Customer customer);
+    void setDeliveryID(int deliveryID);
+    void setHeader(String header);
+    void setBody(String body);
+
+    int getDeliveryID();
+    String getHeader();
+    String getBody();
+
+
 
 }

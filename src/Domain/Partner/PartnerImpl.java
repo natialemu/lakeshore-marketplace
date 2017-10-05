@@ -4,31 +4,41 @@ import Domain.Account.Account;
 import Domain.Account.AccountFactory;
 import Domain.Account.AccountFactoryImpl;
 import Domain.Account.AccountImpl;
+import Domain.Customer.Customer;
 import Domain.Delivery.Delivery;
 import Domain.Delivery.DeliveryFactory;
 import Domain.Delivery.DeliveryFactoryImpl;
+import Domain.Order.Order;
+import Domain.Order.OrderFactory;
+import Domain.Product.Product;
 import Domain.Tools.IDGenerator;
+import Repository.Partner.PartnerDAO;
+
+import java.util.List;
 
 public class PartnerImpl implements Partner{
     private Account account;
     private int partnerID;
     private DeliveryFactory deliveryFactory;
     private AccountFactory accountFactory;
-    private DeliveryManagement deliveryManagement;
-    private OrderReturnManagement orderReturnManagement;
+    private OrderFactory orderFactory;
+    private Inventory inventory;
+    private PartnerDAO partnerDAO;
+
 
 
     public PartnerImpl(){
         partnerID = IDGenerator.getId();
         deliveryFactory = new DeliveryFactoryImpl();
         accountFactory = new AccountFactoryImpl();
-        deliveryManagement = new DeliveryManagementImpl();
-        orderReturnManagement = new OrderReturnManagementImpl();
+
+
     }
 
     public void createAccount(String username, String passowrd){
         account = new AccountImpl(username,passowrd);
         accountFactory.createBasicAccount(username,passowrd);
+        partnerDAO.createPartner(this);
     }
     @Override
     public Account getAccount() {
@@ -43,7 +53,7 @@ public class PartnerImpl implements Partner{
 
     @Override
     public Inventory getInventory() {
-        return null;
+        return inventory;
     }
 
     @Override
@@ -67,8 +77,25 @@ public class PartnerImpl implements Partner{
     }
 
     @Override
-    public void acceptDelivery(Delivery delivery) {
-        deliveryManagement.acceptDelivery(delivery);
+    public Delivery acceptDelivery(Delivery delivery) {
+        //subscription
+       return deliveryFactory.sendDelivery();
 
+    }
+
+    @Override
+    public void acceptOrder(List<Product> products, Customer customer) {
+        System.out.println("Order accepted by partner");
+    }
+
+    public void sendDeliveryStatus(int deliveryID, int trackingNumber){
+        deliveryFactory.acceptDeliveryStatus(deliveryID,trackingNumber);
+    }
+    public void sendDeliveryStatus(int deliveryID, int trackingNumber, String deliveryMethod,String deliveryCarrier){
+        deliveryFactory.acceptDeliveryStatus(deliveryID,trackingNumber,deliveryMethod,deliveryCarrier);
+    }
+
+    public boolean orderReturned(Order order){
+        return orderFactory.cancelOrder(order.getOrderID());
     }
 }

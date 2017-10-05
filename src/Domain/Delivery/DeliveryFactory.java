@@ -3,9 +3,10 @@ package Domain.Delivery;
 import Domain.Order.Order;
 
 public interface DeliveryFactory {
-    void sendDelivery();
+    Delivery sendDelivery();
 
-    void acceptDeliveryStatus(int trackingNumber);
-    void acceptDeliveryStatus(int trackingNumber, String deliveryCarrier, String deliveryMethod);
+    void acceptDeliveryStatus(int deliveryID, int trackingNumber);
+    void acceptDeliveryStatus(int deliveryId, int trackingNumber, String deliveryCarrier, String deliveryMethod);
+    void sendConfirmation();
 
 }

@@ -30,8 +30,8 @@ public class OrderFactoryImpl implements OrderFactory{
 
 
     public OrderFactoryImpl(){
-        transaction = new TransactionFactoryImpl();
-        delivery = new DeliveryFactoryImpl();
+
+
         orderCancellation = new OrderCancellationImpl();
         orderValidation = new OrderValidationImpl();
         orderDAO = new OrderDAOImpl();
@@ -44,6 +44,7 @@ public class OrderFactoryImpl implements OrderFactory{
 
         validator = new ValidatorImpl(new ValidatePayment(order));
         if(validator.executeCommand()){
+            transaction = new TransactionFactoryImpl(order);
             order.setPaymentValidation(transaction.validatePayment(order));
         }
         validator = new ValidatorImpl(new ValidateOrderContent(order));
@@ -52,6 +53,7 @@ public class OrderFactoryImpl implements OrderFactory{
         }
         validator = new ValidatorImpl(new ProcessPayment(order));
         if(validator.executeCommand()){
+
             transaction.processPayment(order);
             order.processPayment();
         }
@@ -66,7 +68,7 @@ public class OrderFactoryImpl implements OrderFactory{
 
         validator = new ValidatorImpl(new DeliverOrder(order));
         if(validator.executeCommand()){
-            delivery.sendDelivery(order);
+            delivery = new DeliveryFactoryImpl(order);
             order.shipOrder();
         }
 

@@ -23,4 +23,7 @@ public interface OrderDetail {
 
     List<Product> getAllProducts();
 
+    List<Partner> getAllPartners();
+
+
 }

@@ -16,4 +16,6 @@ public interface Delivery {
     void setDeliveryStatus(DeliveryStatus deliveryStatus);
     int getDeliveryID();
     void setDeliveryID(int deliveryID);
+    void setDeliveryConfirmation(DeliveryConfirmation confirmation);
+    DeliveryConfirmation getDeliveryConfirmation();
 }

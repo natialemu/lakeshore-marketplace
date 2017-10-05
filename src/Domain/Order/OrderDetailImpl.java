@@ -26,6 +26,13 @@ public class OrderDetailImpl implements OrderDetail {
         return products;
     }
 
+    @Override
+    public List<Partner> getAllPartners() {
+        List<Partner> partners = new ArrayList<>();
+        partners.addAll(mapProductInOrder.keySet());
+        return partners;
+    }
+
     public void setMapProductInOrder(Map<Partner, List<Product>> mapProductInOrder) {
         this.mapProductInOrder = mapProductInOrder;
     }

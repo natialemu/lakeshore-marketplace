@@ -8,9 +8,9 @@ public interface DeliveryDAO {
 
     void createDelivery(Delivery delivery);
 
-    void insertDeliveryStatusWithJustTrackingNo(Delivery delivery);
+    void insertDeliveryStatusWithJustTrackingNo(int deliveryID, int trackingnumber);
 
 
-    void insertDeliveryStatus(Delivery delivery);
+    void insertDeliveryStatus(int deliveryId,int trackingNumber, String deliveryMethod, String deliveryCarrier);
 
 }

@@ -1,13 +1,19 @@
 package Repository.Partner;
 
+import Domain.Account.Account;
 import Domain.Partner.Partner;
+import Domain.Partner.PartnerImpl;
+import Repository.Account.AccountDAO;
+import Repository.Account.AccountDAOImpl;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class PartnerDAOImpl implements PartnerDAO {
+    private AccountDAO accountDAO;
+
+    public PartnerDAOImpl(){
+        accountDAO = new AccountDAOImpl();
+    }
 
     private Connection openConnection() {
         Connection connection = null;
@@ -57,6 +63,38 @@ public class PartnerDAOImpl implements PartnerDAO {
 
     @Override
     public Partner getPartner(int partner_id) {
-        return null;
+        int account_id = 0;
+
+
+
+        Connection connection = openConnection();
+        try {
+            Statement selectStatement = connection.createStatement();
+
+            String selectQuery = "SELECT * from partner where partner_id=" + partner_id;
+            ResultSet resultSet = selectStatement.executeQuery(selectQuery);
+            resultSet.next();
+
+
+            account_id = resultSet.getInt("partner_account_id");
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+
+        Account account = accountDAO.getAccount(account_id);
+
+        Partner partner = new PartnerImpl();
+        partner.setAccount(account);
+
+        return partner;
     }
 }
