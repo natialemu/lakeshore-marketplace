@@ -15,8 +15,8 @@ public class BankAccountDAOImpl implements BankAccountDAO{
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO bank_account (account_number,routing_number,bank_name) VALUES("+accountNumber+", "+routingNumber+", "+bankName+")";
-            insertSatement.executeQuery(insertQuery);
+            String insertQuery = "INSERT INTO bank_account (account_number,routing_number,bank_name) VALUES("+Integer.parseInt(accountNumber)+", "+Integer.parseInt(routingNumber)+", '"+bankName+"')";
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){
@@ -67,7 +67,7 @@ public class BankAccountDAOImpl implements BankAccountDAO{
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
             resultSet.next();
             bankName = resultSet.getString("bank_name");
-            routingNumber = Integer.toString(resultSet.getInt("security_code"));
+            routingNumber = Integer.toString(resultSet.getInt("routing_number"));
             swiftCode = resultSet.getString("swift_code");
             accountType = resultSet.getString("account_type");
 

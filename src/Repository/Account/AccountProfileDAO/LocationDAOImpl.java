@@ -33,8 +33,8 @@ public class LocationDAOImpl implements LocationDAO{
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO location (zipcode,street_address,city,state,country,pobox) VALUES("+zipcode+", "+streetAddress+", "+city+", "+state+", "+country+","+pobox+")";
-            insertSatement.executeQuery(insertQuery);
+            String insertQuery = "INSERT INTO location (zipcode,street_address,city,state,country,pobox) VALUES ("+zipcode+", '"+streetAddress+"', '"+city+"', '"+state+"', '"+country+"',"+pobox+")";
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){
