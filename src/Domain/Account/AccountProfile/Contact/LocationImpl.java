@@ -80,6 +80,33 @@ public class LocationImpl implements Location {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LocationImpl location = (LocationImpl) o;
+
+        if (zipcode != location.zipcode) return false;
+        if (pobox != location.pobox) return false;
+        if (streetAddress != null ? !streetAddress.equals(location.streetAddress) : location.streetAddress != null)
+            return false;
+        if (city != null ? !city.equals(location.city) : location.city != null) return false;
+        if (state != null ? !state.equals(location.state) : location.state != null) return false;
+        return country != null ? country.equals(location.country) : location.country == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = streetAddress != null ? streetAddress.hashCode() : 0;
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + zipcode;
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + pobox;
+        return result;
+    }
+
+    @Override
     public int getZipcode() {
         return zipcode;
     }

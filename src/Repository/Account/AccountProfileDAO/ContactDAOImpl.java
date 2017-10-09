@@ -43,8 +43,8 @@ public class ContactDAOImpl implements ContactDAO {
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO contact (email,brithdate,security_question,security_question_answer,full_name,location_zipcode) VALUES("+email+", "+dateOfBirth+", "+securityQuestion+", "+securityQuestionAnswer+", "+fullName+","+location.getZipcode()+")";
-            insertSatement.executeQuery(insertQuery);
+            String insertQuery = "INSERT INTO contact (email,birthdate,security_question,security_question_answer,full_name,location_zipcode) VALUES('"+email+"', '"+dateOfBirth+"', '"+securityQuestion+"', '"+securityQuestionAnswer+"', '"+fullName+"',"+location.getZipcode()+")";
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){
@@ -78,7 +78,7 @@ public class ContactDAOImpl implements ContactDAO {
         try {
             Statement selectStatement = connection.createStatement();
 
-            String selectQuery = "SELECT * from contact where email=" + email;
+            String selectQuery = "SELECT * from contact where email='" + email+"'";
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
             resultSet.next();
             actualAnswer = resultSet.getString("security_question_answer");
@@ -109,7 +109,7 @@ public class ContactDAOImpl implements ContactDAO {
         try {
             Statement selectStatement = connection.createStatement();
 
-            String selectQuery = "SELECT * from contact where email=" + email;
+            String selectQuery = "SELECT * from contact where email='" + email+"'";
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
             resultSet.next();
             birthDate = resultSet.getString("birthdate");
