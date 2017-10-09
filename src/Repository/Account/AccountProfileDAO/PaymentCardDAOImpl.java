@@ -15,8 +15,8 @@ public class PaymentCardDAOImpl implements PaymentCardDAO {
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO payment_card (card_number,card_holder_name,security_code,expiration_date) VALUES("+cardNumber+", "+cardHolderName+", "+securityNumber+", "+cardExpirationDate+")";
-            insertSatement.executeQuery(insertQuery);
+            String insertQuery = "INSERT INTO payment_card (card_number,card_holder_name,security_code,expriation_date) VALUES("+Long.parseLong(cardNumber)+", '"+cardHolderName+"', "+securityNumber+", '"+cardExpirationDate+"')";
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){
@@ -54,7 +54,7 @@ public class PaymentCardDAOImpl implements PaymentCardDAO {
 
     @Override
     public boolean updatePaymentCard(String cardNumber, String expirationDate, String cardHolderName, int securityCode) {
-        return createPaymentCardProfile(cardNumber,expirationDate,cardHolderName,securityCode);
+        return createPaymentCardProfile(cardHolderName,cardNumber,expirationDate,securityCode);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class PaymentCardDAOImpl implements PaymentCardDAO {
             resultSet.next();
             cardHolderName = resultSet.getString("card_holder_name");
             securityCode = resultSet.getInt("security_code");
-            expirationDate = resultSet.getString("expiration_date");
+            expirationDate = resultSet.getString("expriation_date");
 
 
         } catch (SQLException se) {
