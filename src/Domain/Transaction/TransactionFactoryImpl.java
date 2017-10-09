@@ -38,7 +38,6 @@ public class TransactionFactoryImpl implements TransactionFactory{
     @Override
     public void processPayment(Order order) {
         processPayment.processPayment(order,true);
-
         transactionDAO.createTransaction(transaction);
 
     }

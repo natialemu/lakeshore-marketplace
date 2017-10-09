@@ -76,7 +76,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO{
 
 
 
-        List<Product> productList = productDAO.getProducts(order_id);
+        List<Product> productList = productDAO.getProducts();
         OrderDetail orderDetail = new OrderDetailImpl(productList,customer);
         return orderDetail;
     }

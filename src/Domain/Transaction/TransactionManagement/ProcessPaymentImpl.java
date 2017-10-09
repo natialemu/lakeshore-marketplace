@@ -18,7 +18,6 @@ public class ProcessPaymentImpl implements ProcessPayment {
     public void processPayment(Order order, boolean direction) {
         System.out.println("Payment proccessed! ");
         paymentNotification.notifyPartnerOfPayment(order);
-        transactionDAO.createTransaction(order);
 
     }
 
