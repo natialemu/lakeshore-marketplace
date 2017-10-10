@@ -42,12 +42,15 @@ public class AccountProfileImpl implements AccountProfile{
         this.financialInfo = financialInfo;
     }
 
-    public AccountProfileImpl(String username, String password){
+
+    public AccountProfileImpl(String username, String email, String password){
         this.username = username;
         this.password = password;
+        this.contactInfo = new ContactInfoImpl(email);
     }
     public AccountProfileImpl(String username, String password, String fullName, String email, String securityQuestion, String securityQuestionAnswer, String birthDate){
-        this(username,password);
+        this.username = username;
+        this.password = password;
 
         contactInfo = new ContactInfoImpl(fullName,email,securityQuestion,securityQuestionAnswer,birthDate);
     }

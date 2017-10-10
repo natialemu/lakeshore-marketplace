@@ -169,22 +169,28 @@ public class AccountFactoryImpl implements AccountFactory {
     }
 
     @Override
-    public boolean createBasicAccount(String username, String email, String password) {
-        return accountManagement.createBasicAccount(username, email, password);
+    public boolean createBasicAccount(Account account) {
+        return accountManagement.createBasicAccount(account);
     }
 
     @Override
-    public boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
-        return accountManagement.createAccountContactProfile(email,fullName,location,dateOfBirth,securityQuestion,securityQuestionAnswer);
+    public boolean createAccountContactProfile(String username,String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
+        return accountManagement.createAccountContactProfile(username,email,fullName,location,dateOfBirth,securityQuestion,securityQuestionAnswer);
     }
 
     @Override
-    public boolean createAccountFinancialProfile(String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        return accountManagement.createAccountFinancialProfile(accountNumber,bankName,routingNumber,accountType,billingAddress,swiftCode);
+    public boolean createAccountFinancialProfile(String username,String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+        return accountManagement.createAccountFinancialProfile(username,accountNumber,bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
     @Override
     public boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
         return accountManagement.createPaymentCardProfile(accountNumber, cardHolderName,cardNumber,cardExpirationDate,securityNumber);
+    }
+
+    @Override
+    public Account getNewAccount(String email, String username, String password) {
+
+        return new AccountImpl(email,username,password);
     }
 }

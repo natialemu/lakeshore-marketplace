@@ -35,9 +35,8 @@ public class PartnerImpl implements Partner{
 
     }
 
-    public void createAccount(String username, String passowrd){
-        account = new AccountImpl(username,passowrd);
-        accountFactory.createBasicAccount(username,passowrd);
+    public void createPartner(){
+
         partnerDAO.createPartner(this);
     }
     @Override
@@ -57,8 +56,14 @@ public class PartnerImpl implements Partner{
     }
 
     @Override
-    public void addInventory(Inventory inventory) {
+    public void addProducts(List<Product> products) {
 
+        inventory.addProducts(products);
+    }
+
+    @Override
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
     @Override

@@ -5,6 +5,7 @@ import Domain.Account.AccountProfile.AccountProfileImpl;
 import Domain.Account.AccountProfile.Contact.Location;
 import Domain.Account.AccountSettings.AccountSettings;
 import Domain.Account.AccountState.*;
+import Domain.Tools.IDGenerator;
 
 public class AccountImpl implements Account{
 
@@ -46,11 +47,18 @@ public class AccountImpl implements Account{
     private AccountState INACTIVE_STATE = new InactiveAccount(this);
     private AccountState LOGGED_IN_STATE = new LoggedInState(this);
 
-    public AccountImpl(String username, String password){
+
+
+    private String email;
+
+    public AccountImpl(String email, String username, String password){
         //set account info
-        accountProfile = new AccountProfileImpl(username,password);
+        accountProfile = new AccountProfileImpl(username,email,password);
         setAccountState(ACTIVE_STATE);
         stringCurrentState = ACTIVE_STATE.getClass().getSimpleName();
+        accountID = IDGenerator.getId();
+
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package Domain.Product;
 import Domain.Partner.Partner;
+import Domain.Tools.IDGenerator;
 
 import java.util.Comparator;
 
@@ -9,14 +10,15 @@ public class ProductImpl implements Product {
 	private String productName;
 	private double productCost;
 
-	public ProductImpl(int productID, double productCost, String productName, String productPhoto, String productTag, String productType){
+	public ProductImpl(double productCost, String productName, String productPhoto, String productTag, String productType){
 	    this.productPhoto = productPhoto;
-	    this.productID = productID;
+	    this.productID = IDGenerator.getId();
 	    this.productCost = productCost;
 	    this.productName = productName;
 	    this.productTag = productTag;
 	    this.productType = productType;
     }
+
 
     public ProductImpl(){
 	    //Does nothing

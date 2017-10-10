@@ -91,7 +91,7 @@ public class OrderFactoryImpl implements OrderFactory{
         return order.getStringOrderState();
     }
 
-    public void confirmOrder(){
+    private void confirmOrder(){
         System.out.println("Order sent out for delivery! ");
     }
 

@@ -124,18 +124,18 @@ public class AccountManagementImpl implements AccountManagement {
     }
 
     @Override
-    public boolean createBasicAccount(String username, String email, String password) {
-        return accountRegistration.createBasicAccount(username,email,password);
+    public boolean createBasicAccount(Account account) {
+        return accountRegistration.createBasicAccount(account);
     }
 
     @Override
-    public boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
-        return accountRegistration.createAccountContactProfile(email,fullName,location,dateOfBirth,securityQuestion,securityQuestionAnswer);
+    public boolean createAccountContactProfile(String username,String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
+        return accountRegistration.createAccountContactProfile(username,email,fullName,location,dateOfBirth,securityQuestion,securityQuestionAnswer);
     }
 
     @Override
-    public boolean createAccountFinancialProfile(String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        return accountRegistration.createAccountFinancialProfile(accountNumber, bankName,routingNumber,accountType,billingAddress,swiftCode);
+    public boolean createAccountFinancialProfile(String username, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+        return accountRegistration.createAccountFinancialProfile(username,accountNumber, bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
     @Override

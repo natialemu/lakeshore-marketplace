@@ -1,5 +1,6 @@
 package Domain.Account.AccountManagement;
 
+import Domain.Account.Account;
 import Domain.Account.AccountProfile.Contact.Location;
 import Domain.Tools.IDGenerator;
 import Repository.Account.AccountDAO;
@@ -13,22 +14,22 @@ public class AccountRegistrationImpl implements AccountRegistration{
         accountDAO = new AccountDAOImpl();
     }
     @Override
-    public boolean createBasicAccount(String username, String email, String password) {
-        int account_id = IDGenerator.getId();
+    public boolean createBasicAccount(Account account) {
+        int account_id = account.getAccountID();
         int account_settings_id = IDGenerator.getId();
         int fin_profile_id = IDGenerator.getId();
 
-        return accountDAO.createBasicAccount(username,email, password,account_id,account_settings_id,fin_profile_id);
+        return accountDAO.createBasicAccount(account.getAccountProfile().getUsername(),account.getAccountProfile().getContactInfo().getEmail(), account.getAccountProfile().getPassword(),account_id,account_settings_id,fin_profile_id);
     }
 
     @Override
-    public boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
-        return accountDAO.createAccountContactProfile(email,fullName,location,dateOfBirth,securityQuestion,securityQuestionAnswer);
+    public boolean createAccountContactProfile(String username,String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
+        return accountDAO.createAccountContactProfile(username,email,fullName,location,dateOfBirth,securityQuestion,securityQuestionAnswer);
     }
 
     @Override
-    public boolean createAccountFinancialProfile(String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        return accountDAO.createAccountFinancialProfile(accountNumber, bankName,routingNumber,accountType,billingAddress,swiftCode);
+    public boolean createAccountFinancialProfile(String username, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+        return accountDAO.createAccountFinancialProfile(username, accountNumber, bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
     @Override

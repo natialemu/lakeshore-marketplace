@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryImpl implements Inventory {
+
     public List<Product> getProductList() {
         return productList;
     }
