@@ -52,7 +52,7 @@ public class CustomerDAOimpl implements CustomerDAO {
             Statement insertSatement = connection.createStatement();
 
             String insertQuery = "INSERT INTO customer (customer_id, account_id,review_system_id) VALUES("+customer.getCustomerID()+","+customer.getAccount().getAccountID()+", "+", "+customer.getReviewSystem().getReviewSystemID()+")";
-            insertSatement.executeQuery(insertQuery);
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){

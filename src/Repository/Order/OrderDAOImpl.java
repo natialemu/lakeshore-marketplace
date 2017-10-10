@@ -96,8 +96,8 @@ public class OrderDAOImpl implements OrderDAO {
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO placed_order (order_id, order_status,order_confirmation_id,order_date) VALUES("+order.getOrderID()+","+order.getStringOrderState()+", "+order.getConfirmationID()+", "+order.getOrderDetail().getOrderCreated()+")";
-            insertSatement.executeQuery(insertQuery);
+            String insertQuery = "INSERT INTO placed_order (order_id, order_status,order_confirmation_id,order_date) VALUES("+order.getOrderID()+",'"+order.getStringOrderState()+"', "+order.getConfirmationID()+", "+order.getOrderDetail().getOrderCreated()+")";
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){
@@ -179,8 +179,8 @@ public class OrderDAOImpl implements OrderDAO {
         Connection connection = openConnection();
         try {
             Statement updateSqlStatement = connection.createStatement();
-            String updateQuery = "UPDATE placed_order SET order_status=" + retrievedOrder.getStringOrderState() + " WHERE order_confirmation_id=" + confirmation_id;
-            updateSqlStatement.executeQuery(updateQuery);
+            String updateQuery = "UPDATE placed_order SET order_status='" + retrievedOrder.getStringOrderState() + "' WHERE order_confirmation_id=" + confirmation_id;
+            updateSqlStatement.executeUpdate(updateQuery);
 
         } catch (SQLException se) {
             se.printStackTrace();

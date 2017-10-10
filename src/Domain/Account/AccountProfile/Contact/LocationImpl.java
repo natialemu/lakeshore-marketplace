@@ -31,6 +31,7 @@ public class LocationImpl implements Location {
         this.streetAddress = streetAddress;
         this.zipcode = zipcode;
         this.city = city;
+        this.country = "NOT PROVIDED";
     }
 
     public LocationImpl(String streetAddress, String city, int zipcode, String state, String country, int pobox){

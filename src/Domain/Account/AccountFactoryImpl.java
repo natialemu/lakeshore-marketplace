@@ -169,8 +169,8 @@ public class AccountFactoryImpl implements AccountFactory {
     }
 
     @Override
-    public boolean createBasicAccount(String username, String password) {
-        return accountManagement.createBasicAccount(username,password);
+    public boolean createBasicAccount(String username, String email, String password) {
+        return accountManagement.createBasicAccount(username, email, password);
     }
 
     @Override
@@ -179,12 +179,12 @@ public class AccountFactoryImpl implements AccountFactory {
     }
 
     @Override
-    public boolean createAccountFinancialProfile(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        return accountManagement.createAccountFinancialProfile(bankName,routingNumber,accountType,billingAddress,swiftCode);
+    public boolean createAccountFinancialProfile(String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+        return accountManagement.createAccountFinancialProfile(accountNumber,bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
     @Override
-    public boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
-        return accountManagement.createPaymentCardProfile(cardHolderName,cardNumber,cardExpirationDate,securityNumber);
+    public boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
+        return accountManagement.createPaymentCardProfile(accountNumber, cardHolderName,cardNumber,cardExpirationDate,securityNumber);
     }
 }

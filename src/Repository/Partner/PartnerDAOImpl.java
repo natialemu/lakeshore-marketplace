@@ -44,7 +44,7 @@ public class PartnerDAOImpl implements PartnerDAO {
             Statement insertSatement = connection.createStatement();
 
             String insertQuery = "INSERT INTO partner (partner_id, partner_acct_id,partner_delivery_id) VALUES("+partner.getPartnerID()+","+partner.getAccount().getAccountID()+", "+partner.getDelivery().getDeliveryID()+", "+")";
-            insertSatement.executeQuery(insertQuery);
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){

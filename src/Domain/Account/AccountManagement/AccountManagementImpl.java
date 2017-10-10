@@ -124,8 +124,8 @@ public class AccountManagementImpl implements AccountManagement {
     }
 
     @Override
-    public boolean createBasicAccount(String username, String password) {
-        return accountRegistration.createBasicAccount(username,password);
+    public boolean createBasicAccount(String username, String email, String password) {
+        return accountRegistration.createBasicAccount(username,email,password);
     }
 
     @Override
@@ -134,13 +134,13 @@ public class AccountManagementImpl implements AccountManagement {
     }
 
     @Override
-    public boolean createAccountFinancialProfile(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        return accountRegistration.createAccountFinancialProfile(bankName,routingNumber,accountType,billingAddress,swiftCode);
+    public boolean createAccountFinancialProfile(String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+        return accountRegistration.createAccountFinancialProfile(accountNumber, bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
     @Override
-    public boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
-        return accountRegistration.createPaymentCardProfile(cardHolderName,cardNumber,cardExpirationDate,securityNumber);
+    public boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
+        return accountRegistration.createPaymentCardProfile(accountNumber, cardHolderName,cardNumber,cardExpirationDate,securityNumber);
     }
 
     @Override

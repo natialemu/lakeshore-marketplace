@@ -44,7 +44,7 @@ public class TransactionDAOImpl implements TransactionDAO {
             Statement insertSatement = connection.createStatement();
 
             String insertQuery = "INSERT INTO TRANSACTION (transaction_id, order_id,transaction_date) VALUES("+transaction.getTransactionID()+","+transaction.getOrder().getOrderID()+", "+", "+transaction.getTransactionDate()+")";
-            insertSatement.executeQuery(insertQuery);
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){

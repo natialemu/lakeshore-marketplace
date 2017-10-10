@@ -4,11 +4,11 @@ import Domain.Account.AccountProfile.AccountProfile;
 import Domain.Account.AccountProfile.Contact.Location;
 
 public interface AccountProfileDAO {
-    boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);
+    boolean createAccountContactProfile(String username, String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);
 
-    boolean createAccountFinancialProfile(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
+    boolean createAccountFinancialProfile(String username, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
 
-    boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
+    boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
 
 
     void updateUserName(String username, String password);
@@ -37,4 +37,7 @@ public interface AccountProfileDAO {
     AccountProfile getAccountProfilewithEmail(String email);//get
 
     boolean logInToAccount(String username, String password);
+
+    void createBasicProfile(String username, String email, int fin_profile_id, String password);
+
 }

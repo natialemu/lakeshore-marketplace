@@ -74,7 +74,7 @@ public class OrderConfirmationDAOImpl implements OrderConfirmationDAO{
             Statement insertSatement = connection.createStatement();
 
             String insertQuery = "INSERT INTO order_confirmation (confirmation_id,total_cost,order_creation_Date) VALUES("+orderConfirmation.getConfirmationID()+", "+orderConfirmation.getMessageHeader()+", "+orderConfirmation.getMessageBody()+")";
-            insertSatement.executeQuery(insertQuery);
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){

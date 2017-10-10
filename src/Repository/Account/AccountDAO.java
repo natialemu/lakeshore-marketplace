@@ -5,13 +5,13 @@ import Domain.Account.AccountProfile.Contact.Location;
 
 public interface AccountDAO {
 
-    boolean createBasicAccount(String username, String password);
+    boolean createBasicAccount(String username, String email, String password,int account_id, int account_Settings_id, int fin_profile_id);
 
-    boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);
+    boolean createAccountContactProfile(String username, String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);
 
-    boolean createAccountFinancialProfile(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
+    boolean createAccountFinancialProfile(String usernmae, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
 
-    boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
+    boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
 
 
     boolean deleteAccount(int accountID);

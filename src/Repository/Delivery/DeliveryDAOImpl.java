@@ -95,7 +95,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
             Statement insertSatement = connection.createStatement();
 
             String insertQuery = "INSERT INTO delivery (delivery_id, delivery_tracking_no,delivery_conf_number,order_id,delivery_date) VALUES("+delivery.getDeliveryID()+","+delivery.getDeliveryStatus().getTracking_number()+", "+delivery.getDeliveryConfirmation().getDeliveryID()+", "+delivery.getOrder().getOrderID()+","+delivery.getDeliveryCreationDate()+")";
-            insertSatement.executeQuery(insertQuery);
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){

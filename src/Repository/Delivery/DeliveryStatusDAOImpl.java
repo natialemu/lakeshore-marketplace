@@ -38,9 +38,9 @@ public class DeliveryStatusDAOImpl implements DeliveryStatusDAO {
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO delivery_status (tracking_number) VALUES("+trackingnumber+")";
+            String insertQuery = "INSERT INTO delivery_status (tracking_number) VALUE("+trackingnumber+")";
 
-            insertSatement.executeQuery(insertQuery);
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){
@@ -67,9 +67,9 @@ public class DeliveryStatusDAOImpl implements DeliveryStatusDAO {
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO delivery_status (tracking_number,delivery_carrier,delivery_method) VALUES("+trackingNumber+", "+deliveryCarrier+", "+deliveryMethod+")";
+            String insertQuery = "INSERT INTO delivery_status (tracking_number,delivery_carrier,delivery_method) VALUES("+trackingNumber+", '"+deliveryCarrier+"', '"+deliveryMethod+"')";
 
-            insertSatement.executeQuery(insertQuery);
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){

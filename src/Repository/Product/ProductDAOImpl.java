@@ -112,7 +112,7 @@ public class ProductDAOImpl implements ProductDAO{
         try {
             Statement selectStatement = connection.createStatement();
 
-            String selectQuery = "SELECT * from product where product_name=" + productName;
+            String selectQuery = "SELECT * from product where product_name='" + productName+"'";
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
             while(resultSet.next()){
 
@@ -164,7 +164,7 @@ public class ProductDAOImpl implements ProductDAO{
         try {
             Statement selectStatement = connection.createStatement();
 
-            String selectQuery = "SELECT * from product where product_type=" + productType;
+            String selectQuery = "SELECT * from product where product_type='" + productType+"'";
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
             while(resultSet.next()){
 
@@ -256,8 +256,8 @@ public class ProductDAOImpl implements ProductDAO{
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO product (product_id, product_name,product_cost,product_type,product_photo,partner_id,product_tag) VALUES("+product.getProductID()+","+product.getProductName()+", "+product.getProductCost()+", "+product.getProductType()+","+product.getProductType()+","+product.getProductPhoto()+","+product.getParner().getPartnerID()+","+product.getProductTag()+")";
-            insertSatement.executeQuery(insertQuery);
+            String insertQuery = "INSERT INTO product (product_id, product_name,product_cost,product_type,product_photo,partner_id,product_tag) VALUES("+product.getProductID()+",'"+product.getProductName()+"', "+product.getProductCost()+", '"+product.getProductType()+"','"+product.getProductType()+"','"+product.getProductPhoto()+"',"+product.getParner().getPartnerID()+",'"+product.getProductTag()+"')";
+            insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){
@@ -284,7 +284,7 @@ public class ProductDAOImpl implements ProductDAO{
             Statement updateStatement = connection.createStatement();
 
             String updateQuery = "UPDATE product SET order_id="+orderID+" where product_id=" + p.getProductID();
-            updateStatement.executeQuery(updateQuery);
+            updateStatement.executeUpdate(updateQuery);
 
 
         }catch (SQLException se){

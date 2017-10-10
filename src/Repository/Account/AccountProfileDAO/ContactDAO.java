@@ -12,4 +12,5 @@ public interface ContactDAO {
 
     ContactInfo getContactInfo(String email);
 
+    void createBasicContact(String email);
 }

@@ -37,23 +37,73 @@ public class FinancialInfoDAOImpl implements FinancialInfoDAO {
 
     }
     @Override
-    public boolean createAccountFinancialProfile(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        //TODO
+    public boolean createAccountFinancialProfile(int financial_id, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+        boolean inserted = false;
+        Connection connection = openConnection();
+        try{
+            Statement insertSatement = connection.createStatement();
+
+            String insertQuery = "INSERT INTO financial_info (fin_profile_id, zip_code,account_no) VALUES("+financial_id+", "+billingAddress.getZipcode()+", "+Integer.parseInt(accountNumber)+")";
+            insertSatement.executeUpdate(insertQuery);
+
+            inserted = true;
+        }catch (SQLException se){
+            se.printStackTrace();
+
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+
+                }catch (Exception e){}
+
+            }
+        }
+        if(inserted){
+            //Only if it doesnt exist
+            locationDAO.createLocation(billingAddress);
+            bankAccountDAO.updateBankInformation(bankName,accountNumber,routingNumber);
+            return true;
+        }
+
         return false;
     }
 
     @Override
-    public boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
+    public boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
+        updateCardNumber(cardNumber, accountNumber);
         return paymentCardDAO.createPaymentCardProfile(cardHolderName,cardNumber,cardExpirationDate,securityNumber);
+    }
+
+    private void updateCardNumber(String cardNumber, String accountNumber) {
+        Connection connection = openConnection();
+        try {
+            Statement updateSqlStatement = connection.createStatement();
+            String updateQuery = "UPDATE financial_info SET card_no=" + Integer.parseInt(cardNumber) + " WHERE account_no=" + Integer.parseInt(accountNumber);
+            updateSqlStatement.executeUpdate(updateQuery);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
     }
 
     @Override
     public boolean updatePaymentCard(String cardNumber, String expirationDate, String cardHolderName, int securityCode) {
+        //TODO: update the card number foreign key in financial_info table
         return paymentCardDAO.updatePaymentCard(cardNumber,expirationDate,cardHolderName,securityCode);
     }
 
     @Override
     public boolean updateBankInformation(String bankName, String accountNumber, String routingNumber) {
+        //TODO: update the account number foreign key in financial_info table
         return bankAccountDAO.updateBankInformation(bankName,accountNumber,routingNumber);
     }
 
@@ -97,5 +147,34 @@ public class FinancialInfoDAOImpl implements FinancialInfoDAO {
         financialInfo.setPaymentCard(paymentCard);
 
         return financialInfo;
+    }
+
+    @Override
+    public void createBasicFinProfile(int fin_profile_id) {
+        Connection connection = openConnection();
+        Statement sqlStatement = null;
+        try {
+
+
+            sqlStatement = connection.createStatement();
+            String insertAccountProfile = "INSERT INTO financial_info (fin_profile_id) VALUE (" +fin_profile_id+")";
+            sqlStatement.executeUpdate(insertAccountProfile);
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+
+        } finally {
+
+            if (sqlStatement != null) {
+                try {
+                    sqlStatement.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
     }
 }

@@ -18,18 +18,66 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
     }
 
     @Override
-    public boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
+    public boolean createAccountContactProfile(String username, String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
+        createEmailForeignKey(username,email);
         return contactDAO.createAccountContactProfile(email, fullName, location, dateOfBirth, securityQuestion, securityQuestionAnswer);
     }
 
-    @Override
-    public boolean createAccountFinancialProfile(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        return financialInfoDAO.createAccountFinancialProfile(bankName, routingNumber, accountType, billingAddress, swiftCode);
+    private void createEmailForeignKey(String username, String email) {
+
+        Connection connection = openConnection();
+        try {
+            Statement updateSqlStatement = connection.createStatement();
+            String updateQuery = "UPDATE account_profile SET email='" + email + "' WHERE uesrname='" + username+"'";
+            updateSqlStatement.executeUpdate(updateQuery);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+        //TODO: update email foreign key
     }
 
     @Override
-    public boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
-        return financialInfoDAO.createPaymentCardProfile(cardHolderName, cardNumber, cardExpirationDate, securityNumber);
+    public boolean createAccountFinancialProfile(String username, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+
+        int financial_id = getFinProfileId(username);
+        return financialInfoDAO.createAccountFinancialProfile(financial_id,accountNumber,bankName, routingNumber, accountType, billingAddress, swiftCode);
+    }
+
+    private int getFinProfileId(String username) {
+        Connection connection = openConnection();
+        try {
+            Statement selectSqlStatement = connection.createStatement();
+            String selectQuery = "SELECT * from account_profile WHERE username='" + username+"'";
+            ResultSet resultSet = selectSqlStatement.executeQuery(selectQuery);
+
+            resultSet.next();
+            return resultSet.getInt("fin_profile_id");
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+        return -1;
+    }
+
+
+    @Override
+    public boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
+        return financialInfoDAO.createPaymentCardProfile(accountNumber, cardHolderName, cardNumber, cardExpirationDate, securityNumber);
     }
 
     private Connection openConnection() {
@@ -55,8 +103,8 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
         Connection connection = openConnection();
         try {
             Statement updateSqlStatement = connection.createStatement();
-            String updateQuery = "UPDATE account_profile SET username=" + username + " WHERE password=" + password;
-            updateSqlStatement.executeQuery(updateQuery);
+            String updateQuery = "UPDATE account_profile SET username='" + username + "' WHERE password='" + password+"'";
+            updateSqlStatement.executeUpdate(updateQuery);
 
         } catch (SQLException se) {
             se.printStackTrace();
@@ -76,8 +124,8 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
         Connection connection = openConnection();
         try {
             Statement updateSqlStatement = connection.createStatement();
-            String updateQuery = "UPDATE account_profile SET password=" + password + " WHERE username=" + username;
-            updateSqlStatement.executeQuery(updateQuery);
+            String updateQuery = "UPDATE account_profile SET password='" + password + "' WHERE username='" + username+"'";
+            updateSqlStatement.executeUpdate(updateQuery);
 
         } catch (SQLException se) {
             se.printStackTrace();
@@ -97,8 +145,8 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
         Connection connection = openConnection();
         try {
             Statement updateSqlStatement = connection.createStatement();
-            String updateQuery = "UPDATE account_profile SET email=" + email + " WHERE password=" + password;
-            updateSqlStatement.executeQuery(updateQuery);
+            String updateQuery = "UPDATE account_profile SET email='" + email + "' WHERE password='" + password+"'";
+            updateSqlStatement.executeUpdate(updateQuery);
 
         } catch (SQLException se) {
             se.printStackTrace();
@@ -140,7 +188,7 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
         Connection connection = openConnection();
         try {
             Statement selectSqlStatement = connection.createStatement();
-            String selectQuery = "SELECT * from account_profile WHERE email=" + email;
+            String selectQuery = "SELECT * from account_profile WHERE email='" + email+"'";
             ResultSet resultSet = selectSqlStatement.executeQuery(selectQuery);
 
             boolean empty = true;
@@ -177,7 +225,7 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
         Connection connection = openConnection();
         try {
             Statement selectSqlStatement = connection.createStatement();
-            String selectQuery = "SELECT * from account_profile WHERE username=" + username;
+            String selectQuery = "SELECT * from account_profile WHERE username='" + username+"'";
             ResultSet resultSet = selectSqlStatement.executeQuery(selectQuery);
             resultSet.next();
             String password = resultSet.getString("password");
@@ -202,7 +250,7 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
         Connection connection = openConnection();
         try {
             Statement selectSqlStatement = connection.createStatement();
-            String selectQuery = "SELECT * from account_profile WHERE email=" + email;
+            String selectQuery = "SELECT * from account_profile WHERE email='" + email+"'";
             ResultSet resultSet = selectSqlStatement.executeQuery(selectQuery);
             resultSet.next();
             String password = resultSet.getString("password");
@@ -238,7 +286,7 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
         try {
             Statement selectStatement = connection.createStatement();
 
-            String selectQuery = "SELECT * from account_profile where username=" + username;
+            String selectQuery = "SELECT * from account_profile where username='" + username+"'";
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
             resultSet.next();
             email = resultSet.getString("email");
@@ -271,7 +319,7 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
         Connection connection = openConnection();
         try {
             Statement selectStatement = connection.createStatement();
-            String selectQuery = "SELECT * from account_profile where email=" + email;
+            String selectQuery = "SELECT * from account_profile where email='" + email+"'";
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
             resultSet.next();
             username = resultSet.getString("username");
@@ -298,7 +346,7 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
         Connection connection = openConnection();
         try {
             Statement selectStatement = connection.createStatement();
-            String selectQuery = "SELECT * from account_profile where username=" + username;
+            String selectQuery = "SELECT * from account_profile where username='" + username+"'";
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
             resultSet.next();
             email = resultSet.getString("email");
@@ -318,6 +366,40 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
         }
 
         return validateAccountWithEmail(email, password);
+
+    }
+
+    @Override
+    public void createBasicProfile(String username, String email, int fin_profile_id, String password) {
+
+        Connection connection = openConnection();
+        Statement sqlStatement = null;
+        try {
+
+
+            sqlStatement = connection.createStatement();
+            String insertAccountProfile = "INSERT INTO account_profile (username, email,fin_profile_id,password) VALUES ('" + username + "', '" +email +"', "+fin_profile_id+", '"+password+"')";
+            sqlStatement.executeUpdate(insertAccountProfile);
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+
+        } finally {
+
+            if (sqlStatement != null) {
+                try {
+                    sqlStatement.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+        contactDAO.createBasicContact(email);
+        financialInfoDAO.createBasicFinProfile(fin_profile_id);
 
     }
 }

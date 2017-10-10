@@ -43,18 +43,16 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public boolean createBasicAccount(String username, String password) {
+    public boolean createBasicAccount(String username, String email, String password,int account_id, int account_Settings_id, int fin_profile_id) {
         Connection connection = openConnection();
         Statement sqlStatement = null;
         try {
 
 
             sqlStatement = connection.createStatement();
-            String insertAccountProfile = "INSERT INTO account_profile (username, password) VALUES (" + username + "," + password + ")";
-            sqlStatement.executeQuery(insertAccountProfile);
+            String insertAccountProfile = "INSERT INTO account (account_id, account_state,acct_username,acct_settings_id) VALUES (" + account_id + ",'ActiveAccount','" +username +"', "+account_Settings_id+")";
+            sqlStatement.executeUpdate(insertAccountProfile);
 
-            String insertAccount = "INSERT INTO account (account_state,acct_username) VALUES ('ActiveAccount'," + username + ")";
-            sqlStatement.executeQuery(insertAccount);
         } catch (SQLException exception) {
             exception.printStackTrace();
             return false;
@@ -71,26 +69,29 @@ public class AccountDAOImpl implements AccountDAO {
                 } catch (SQLException e) { /* ignored */}
             }
         }
+        accountProfileDAO.createBasicProfile(username,email,fin_profile_id,password);
+        //TODO: create the basic account settings in a simillar way
+
         return true;
     }
 
     @Override
-    public boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
-        return accountProfileDAO.createAccountContactProfile(email, fullName, location, dateOfBirth, securityQuestion, securityQuestionAnswer);
+    public boolean createAccountContactProfile(String username, String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer) {
+        return accountProfileDAO.createAccountContactProfile(username, email, fullName, location, dateOfBirth, securityQuestion, securityQuestionAnswer);
 
     }
 
     @Override
-    public boolean createAccountFinancialProfile(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+    public boolean createAccountFinancialProfile(String username, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
 
-        return accountProfileDAO.createAccountFinancialProfile(bankName, routingNumber, accountType, billingAddress, swiftCode);
+        return accountProfileDAO.createAccountFinancialProfile(username, accountNumber, bankName, routingNumber, accountType, billingAddress, swiftCode);
 
     }
 
     @Override
-    public boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
+    public boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
 
-        return accountProfileDAO.createPaymentCardProfile(cardHolderName, cardNumber, cardExpirationDate, securityNumber);
+        return accountProfileDAO.createPaymentCardProfile(accountNumber,cardHolderName, cardNumber, cardExpirationDate, securityNumber);
 
 
     }
@@ -103,7 +104,7 @@ public class AccountDAOImpl implements AccountDAO {
             try {
                 Statement sqlStatement = connection.createStatement();
                 String deleteQuery = "DELETE FROM account WHERE account_id=" + accountID;
-                sqlStatement.executeQuery(deleteQuery);
+                sqlStatement.executeUpdate(deleteQuery);
                 return true;
 
             } catch (SQLException se) {
@@ -178,8 +179,8 @@ public class AccountDAOImpl implements AccountDAO {
 
         try {
             Statement sqlStatement = connection.createStatement();
-            String deleteQuery = "DELETE FROM account WHERE acct_username=" + username;
-            sqlStatement.executeQuery(deleteQuery);
+            String deleteQuery = "DELETE FROM account WHERE acct_username='" + username+"'";
+            sqlStatement.executeUpdate(deleteQuery);
             return true;
 
         } catch (SQLException se) {
@@ -235,9 +236,9 @@ public class AccountDAOImpl implements AccountDAO {
         try {
             Statement sqlStatement = connection.createStatement();
 
-            String updateQuery = "UPDATE account SET account_state='ActiveAccount' where acct_username=" + oldUsername;
+            String updateQuery = "UPDATE account SET account_state='ActiveAccount' where acct_username='" + oldUsername+"'";
 
-            sqlStatement.executeQuery(updateQuery);
+            sqlStatement.executeUpdate(updateQuery);
             return true;
 
         } catch (SQLException se) {
@@ -288,7 +289,7 @@ public class AccountDAOImpl implements AccountDAO {
         Connection connection = openConnection();
         try {
             Statement sqlStatement = connection.createStatement();
-            String selectQuery = "SELECT * from account where username=" + username;
+            String selectQuery = "SELECT * from account where username='" + username+"'";
             ResultSet resultSet = sqlStatement.executeQuery(selectQuery);
             boolean empty = true;
             while (resultSet.next()) {
@@ -331,7 +332,7 @@ public class AccountDAOImpl implements AccountDAO {
         Connection connection = openConnection();
         try {
             Statement statement = connection.createStatement();
-            String query = "SELECT * from account where acct_username=" + username;
+            String query = "SELECT * from account where acct_username='" + username+"'";
             ResultSet resultSet = statement.executeQuery(query);
             assert (resultSet.isLast());
             resultSet.next();

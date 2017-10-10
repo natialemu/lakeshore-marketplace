@@ -135,4 +135,33 @@ public class ContactDAOImpl implements ContactDAO {
 
         return contactInfo;
     }
+
+    @Override
+    public void createBasicContact(String email) {
+        Connection connection = openConnection();
+        Statement sqlStatement = null;
+        try {
+
+
+            sqlStatement = connection.createStatement();
+            String insertAccountProfile = "INSERT INTO contact (email) VALUE ('" + email + "')";
+            sqlStatement.executeUpdate(insertAccountProfile);
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+
+        } finally {
+
+            if (sqlStatement != null) {
+                try {
+                    sqlStatement.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
 }
