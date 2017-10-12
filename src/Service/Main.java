@@ -97,6 +97,8 @@ public class Main {
         secondPartnerProducts.add(product5);
 
         Partner secondPartner = partnerFacade.createPartner();
+        partnerFacade.registerPartner(secondPartner,"partner2@gmail.com","partner2Test","testpassword");
+
         partnerFacade.addProducts(secondPartnerProducts,secondPartner);
 
 

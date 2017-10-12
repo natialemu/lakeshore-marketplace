@@ -8,6 +8,7 @@ import Repository.Order.OrderDAO;
 import Repository.Order.OrderDAOImpl;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 public class TransactionDAOImpl implements TransactionDAO {
 
@@ -42,7 +43,7 @@ public class TransactionDAOImpl implements TransactionDAO {
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO TRANSACTION (transaction_id, order_id,transaction_date) VALUES("+transaction.getTransactionID()+","+transaction.getOrder().getOrderID()+", "+", "+transaction.getTransactionDate()+")";
+            String insertQuery = "INSERT INTO TRANSACTION (transaction_id, order_id,transaction_date) VALUES("+transaction.getTransactionID()+","+transaction.getOrder().getOrderID()+", "+getDateSring(transaction.getTransactionDate())+")";
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
@@ -62,6 +63,10 @@ public class TransactionDAOImpl implements TransactionDAO {
 
     }
 
+    private String getDateSring(java.util.Date date) {
+        String stringDate =  new SimpleDateFormat("yyyyMMdd").format(date);
+        return stringDate;
+    }
     @Override
     public Transaction getTransaction(int transactionId) {
         int order_id = 0;

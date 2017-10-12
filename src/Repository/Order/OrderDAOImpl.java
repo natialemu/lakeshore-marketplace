@@ -16,6 +16,7 @@ import Repository.Transaction.TransactionDAO;
 import Repository.Transaction.TransactionDAOImpl;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,8 +96,9 @@ public class OrderDAOImpl implements OrderDAO {
         Connection connection = openConnection();
         try{
             Statement insertSatement = connection.createStatement();
+            java.util.Date date = order.getOrderDetail().getOrderCreated();
 
-            String insertQuery = "INSERT INTO placed_order (placed_order_id, order_status,order_confirmation_id,order_date) VALUES("+order.getOrderID()+",'"+order.getStringOrderState()+"', "+order.getConfirmationID()+", "+new java.sql.Date(order.getOrderDetail().getOrderCreated().getTime())+")";
+            String insertQuery = "INSERT INTO placed_order (placed_order_id, order_status,order_confirmation_id,order_date) VALUES("+order.getOrderID()+",'"+order.getStringOrderState()+"', "+order.getConfirmationID()+", "+getDateSring(date)+")";
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
@@ -120,6 +122,10 @@ public class OrderDAOImpl implements OrderDAO {
         return false;
     }
 
+    private String getDateSring(java.util.Date date) {
+        String stringDate =  new SimpleDateFormat("yyyyMMdd").format(date);
+        return stringDate;
+    }
 
 
     @Override

@@ -11,6 +11,7 @@ import Repository.Order.OrderDAO;
 import Repository.Order.OrderDAOImpl;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 public class DeliveryDAOImpl implements DeliveryDAO {
     private DeliveryConfirmationDAO deliveryConfirmationDAO;
@@ -93,7 +94,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO delivery (delivery_id, delivery_tracking_no,delivery_conf_number,order_id,delivery_date) VALUES("+delivery.getDeliveryID()+","+delivery.getDeliveryStatus().getTracking_number()+", "+delivery.getDeliveryConfirmation().getDeliveryID()+", "+delivery.getOrder().getOrderID()+","+delivery.getDeliveryCreationDate()+")";
+            String insertQuery = "INSERT INTO delivery (delivery_id,delivery_conf_number,order_id,delivery_date) VALUES("+delivery.getDeliveryID()+", "+delivery.getDeliveryConfirmation().getDeliveryID()+", "+delivery.getOrder().getOrderID()+","+getDateSring(delivery.getDeliveryCreationDate())+")";
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
@@ -110,11 +111,14 @@ public class DeliveryDAOImpl implements DeliveryDAO {
             }
         }
 
-        if(inserted){
-            insertDeliveryStatus(delivery.getDeliveryID(),delivery.getDeliveryStatus().getTracking_number(),delivery.getDeliveryStatus().getDeliveryCarrier(),delivery.getDeliveryStatus().getDeliveryMethod());
-        }
 
 
+
+    }
+
+    private String getDateSring(java.util.Date date) {
+        String stringDate =  new SimpleDateFormat("yyyyMMdd").format(date);
+        return stringDate;
     }
 
     @Override

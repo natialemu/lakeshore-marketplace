@@ -11,6 +11,7 @@ import Repository.Customer.CustomerDAOimpl;
 import Repository.Product.ProductDAO;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -89,7 +90,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO{
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO order_detail (customer_id,total_cost,order_creation_Date) VALUES("+orderDetail.getCustomer().getCustomerID()+", "+orderDetail.getTotalCost()+", "+orderDetail.getOrderCreated()+")";
+            String insertQuery = "INSERT INTO order_detail (customer_id,total_cost,order_creation_Date) VALUES("+orderDetail.getCustomer().getCustomerID()+", "+orderDetail.getTotalCost()+", "+getDateSring(orderDetail.getOrderCreated())+")";
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
@@ -107,5 +108,9 @@ public class OrderDetailDAOImpl implements OrderDetailDAO{
         }
 
         return inserted;
+    }
+    private String getDateSring(java.util.Date date) {
+        String stringDate =  new SimpleDateFormat("yyyyMMdd").format(date);
+        return stringDate;
     }
 }

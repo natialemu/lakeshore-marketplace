@@ -49,10 +49,12 @@ public class OrderFactoryImpl implements OrderFactory{
         }
         validator = new ValidatorImpl(new ValidateOrderContent(order));
         if(validator.executeCommand()){
-            order.setPaymentValidation(orderValidation.validateOrderContent(order));
+            order.setOrderContentVerified(orderValidation.validateOrderContent(order));
         }
         validator = new ValidatorImpl(new ProcessPayment(order));
+
         if(validator.executeCommand()){
+
 
             transaction.processPayment(order);
         }

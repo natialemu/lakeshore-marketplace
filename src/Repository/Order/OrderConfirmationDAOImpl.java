@@ -4,6 +4,7 @@ import Domain.Order.OrderConfirmation;
 import Domain.Order.OrderConfirmationImpl;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 public class OrderConfirmationDAOImpl implements OrderConfirmationDAO{
 
@@ -73,7 +74,7 @@ public class OrderConfirmationDAOImpl implements OrderConfirmationDAO{
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO order_confirmation (confirmation_id,total_cost,order_creation_Date) VALUES("+orderConfirmation.getConfirmationID()+", "+orderConfirmation.getMessageHeader()+", "+orderConfirmation.getMessageBody()+")";
+            String insertQuery = "INSERT INTO order_confirmation (confirmation_id,header,body) VALUES("+orderConfirmation.getConfirmationID()+", '"+orderConfirmation.getMessageHeader()+"', '"+orderConfirmation.getMessageBody()+"')";
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
@@ -91,5 +92,10 @@ public class OrderConfirmationDAOImpl implements OrderConfirmationDAO{
         }
 
         return inserted;
+    }
+
+    private String getDateSring(java.util.Date date) {
+        String stringDate =  new SimpleDateFormat("yyyyMMdd").format(date);
+        return stringDate;
     }
 }
