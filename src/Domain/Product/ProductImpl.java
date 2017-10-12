@@ -20,6 +20,19 @@ public class ProductImpl implements Product {
     }
 
 
+    @Override
+    public String toString() {
+        return "ProductImpl{" +
+                "partner=" + partner +
+                ", productID=" + productID +
+                ", productName='" + productName + '\'' +
+                ", productCost=" + productCost +
+                ", productType='" + productType + '\'' +
+                ", productPhoto='" + productPhoto + '\'' +
+                ", productTag='" + productTag + '\'' +
+                '}';
+    }
+
     public ProductImpl(){
 	    //Does nothing
     }

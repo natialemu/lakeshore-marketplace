@@ -14,22 +14,29 @@ public class Main {
 
         CustomerFaccade customerFaccade = new CustomerFacadeImpl();
 
+
         PartnerFacade partnerFacade = new PartnerFacadeImpl();
 
 
         Customer customer = customerFaccade.createCustomer();
+        System.out.println("Customer with ID " + customer.getCustomerID() + " has been created");
         Partner partner  = partnerFacade.createPartner();
+        System.out.println("Partner with ID " + partner.getPartnerID() + " has been created");
 
 
         String username = "testUsername";
         String passowrd = "testPassword";
         String email = "test@gmail.com";
         customerFaccade.registerACustomer(customer,email,username,passowrd);
+        System.out.println("Customer with ID " + customer.getCustomerID() + " has been just registered");
+
 
         String partnerUsername = "partnerUsername";
         String partnerPassword = "partner1123";
         String partnerEmail = "partner@gmail.com";
         partnerFacade.registerPartner(partner,partnerEmail,partnerUsername,partnerPassword);
+        System.out.println("Partner with ID " + partner.getPartnerID() + " has registered");
+
 
         List<Product> products = new ArrayList<>();
 
@@ -68,6 +75,11 @@ public class Main {
         products.add(product3);
 
 
+        System.out.println("Partner with ID " + customer.getCustomerID() + " has added the following products to the system: ");
+
+        for(Product p: products){
+            System.out.println(p);
+        }
 
         partnerFacade.addProducts(products,partner);
 
@@ -99,16 +111,35 @@ public class Main {
         Partner secondPartner = partnerFacade.createPartner();
         partnerFacade.registerPartner(secondPartner,"partner2@gmail.com","partner2Test","testpassword");
 
+
+        System.out.println("------------------------------------------------------------------------------------");
+        System.out.println("Partner with ID " + secondPartner.getPartnerID() + " has the following products: ");
+
+        for(Product p: secondPartnerProducts){
+            System.out.println(p);
+        }
+
+
+
         partnerFacade.addProducts(secondPartnerProducts,secondPartner);
+        System.out.println("Partner with id" +partner.getPartnerID()+ " just added products to the system");
 
 
 
         List<Product> shoppingCart = new ArrayList<>();
         shoppingCart.add(product1);
         shoppingCart.add(product4);
+
+        System.out.println("Customer is placing an order on the following products: ");
+        for(Product p: shoppingCart){
+            System.out.println(p);
+        }
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("Order is being proccessed ...");
+
         customerFaccade.placeOrder(shoppingCart,customer);
 
-        //System.out.println("The status of your order is: "+ customerFaccade.getOrderStatus());
+        System.out.println("The status of your order is: "+ customerFaccade.getOrderStatus());
 
 
 
