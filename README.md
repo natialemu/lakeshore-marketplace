@@ -2,8 +2,7 @@
 
 ## Overview
 
-Lakeshore marketplace is a system that provides e-commerce related web service APIs exclusively for students of Loyola University Chicago’s lake shore campus. It lets 
-students buy anything that is up for sale by other students by providing services like other e-commerce sites except that the features here are tailored specifically to this niche.
+Lakeshore marketplace is a system that provides e-commerce related web service APIs 
  
 ## Core dependencies/libraries/frameworks
 
