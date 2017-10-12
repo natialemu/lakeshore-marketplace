@@ -23,4 +23,10 @@ public class AccountSettingsDAOImpl implements AccountSettingsDAO {
     public AccountSettings getAccountSettings(String acct_settings_id) {
         return null;
     }
+
+    @Override
+    public void createBasicSettings(int account_settings_id) {
+
+
+    }
 }

@@ -24,7 +24,7 @@ public class DeliveryImpl implements Delivery {
     public DeliveryImpl(Order order){
         deliveryConfirmation = new DeliveryConfirmationImpl();
         this.order = order;
-        int deliveryID = IDGenerator.getId();
+        deliveryID = IDGenerator.getId();
         deliveryCreationDate = new Date();
     }
 

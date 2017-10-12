@@ -15,12 +15,10 @@ import java.sql.*;
 public class DeliveryDAOImpl implements DeliveryDAO {
     private DeliveryConfirmationDAO deliveryConfirmationDAO;
     private DeliveryStatusDAO deliveryStatusDAO;
-    private OrderDAO orderDAO;
 
     public DeliveryDAOImpl(){
         deliveryConfirmationDAO = new DeliveryConfirmationDAOImpl();
         deliveryStatusDAO = new DeliveryStatusDAOImpl();
-        orderDAO = new OrderDAOImpl();
     }
 
     private Connection openConnection() {
@@ -75,6 +73,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
             }
         }
 
+        OrderDAO orderDAO = new OrderDAOImpl();
 
         DeliveryStatus status = deliveryStatusDAO.getDeliveryStatus(tracking_number);
         DeliveryConfirmation confirmation = deliveryConfirmationDAO.getConfirmation(confirmation_id);

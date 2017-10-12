@@ -69,7 +69,8 @@ public class ProductDAOImpl implements ProductDAO{
                 partner_id = resultSet.getInt("partner_id");
                 productPhoto = resultSet.getString("product_photo");
 
-                Product product = new ProductImpl(product_id,productCost,productName,productPhoto,productTag,productType);
+                Product product = new ProductImpl(productCost,productName,productPhoto,productTag,productType);
+                product.setProductID(product_id);
                 products.add(product);
                 partnerIDs.add(partner_id);
             }
@@ -123,7 +124,8 @@ public class ProductDAOImpl implements ProductDAO{
                 partner_id = resultSet.getInt("partner_id");
                 productPhoto = resultSet.getString("product_photo");
 
-                Product product = new ProductImpl(product_id,productCost,productName,productPhoto,productTag,productType);
+                Product product = new ProductImpl(productCost,productName,productPhoto,productTag,productType);
+                product.setProductID(product_id);
                 products.add(product);
                 partnerIDs.add(partner_id);
             }
@@ -175,7 +177,8 @@ public class ProductDAOImpl implements ProductDAO{
                 partner_id = resultSet.getInt("partner_id");
                 productPhoto = resultSet.getString("product_photo");
 
-                Product product = new ProductImpl(product_id,productCost,productName,productPhoto,productTag,productType);
+                Product product = new ProductImpl(productCost,productName,productPhoto,productTag,productType);
+                product.setProductID(product_id);
                 products.add(product);
                 partnerIDs.add(partner_id);
             }
@@ -242,7 +245,9 @@ public class ProductDAOImpl implements ProductDAO{
 
 
         Partner partner = partnerDAO.getPartner(partner_id);
-        Product product = new ProductImpl(productID,productCost,productName,productPhoto,productTag,productType);
+        Product product = new ProductImpl(productCost,productName,productPhoto,productTag,productType);
+        product.setProductID(productID);
+
         product.setPartner(partner);
 
         return product;
@@ -256,7 +261,7 @@ public class ProductDAOImpl implements ProductDAO{
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO product (product_id, product_name,product_cost,product_type,product_photo,partner_id,product_tag) VALUES("+product.getProductID()+",'"+product.getProductName()+"', "+product.getProductCost()+", '"+product.getProductType()+"','"+product.getProductType()+"','"+product.getProductPhoto()+"',"+product.getParner().getPartnerID()+",'"+product.getProductTag()+"')";
+            String insertQuery = "INSERT INTO product (product_id, product_name,product_cost,product_type,product_photo,partner_id,product_tag) VALUES("+product.getProductID()+",'"+product.getProductName()+"', "+product.getProductCost()+", '"+product.getProductType()+"','"+product.getProductPhoto()+"',"+product.getParner().getPartnerID()+",'"+product.getProductTag()+"')";
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;

@@ -16,8 +16,8 @@ public class AccountRegistrationImpl implements AccountRegistration{
     @Override
     public boolean createBasicAccount(Account account) {
         int account_id = account.getAccountID();
-        int account_settings_id = IDGenerator.getId();
-        int fin_profile_id = IDGenerator.getId();
+        int account_settings_id = account.getAccountSettings().getAccountSettingsID();
+        int fin_profile_id = account.getAccountProfile().getFinancialInfo().getFinancialInfoID();
 
         return accountDAO.createBasicAccount(account.getAccountProfile().getUsername(),account.getAccountProfile().getContactInfo().getEmail(), account.getAccountProfile().getPassword(),account_id,account_settings_id,fin_profile_id);
     }

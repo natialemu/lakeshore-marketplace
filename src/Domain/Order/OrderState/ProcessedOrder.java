@@ -39,6 +39,6 @@ public class ProcessedOrder implements OrderState {
 
     @Override
     public boolean sendConfirmation() {
-        return false;
+        return true;
     }
 }

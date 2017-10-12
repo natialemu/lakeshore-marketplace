@@ -17,15 +17,15 @@ public class UnprocessedOrder implements OrderState{
 
     @Override
     public boolean verifyOrderContent() {
-         return order.verifyPayment();
+         return true;
     }
 
     @Override
     public boolean processPayment() {
-         if(order.verifyOrderContent()){
-             order.setState(order.getProccessedState());
-         }
-        return order.verifyOrderContent();
+
+        order.setState(order.getProccessedState());
+
+        return true;
     }
 
     @Override

@@ -67,6 +67,8 @@ public class Main {
 
         products.add(product3);
 
+
+
         partnerFacade.addProducts(products,partner);
 
 
@@ -98,12 +100,16 @@ public class Main {
         partnerFacade.addProducts(secondPartnerProducts,secondPartner);
 
 
+
         List<Product> shoppingCart = new ArrayList<>();
         shoppingCart.add(product1);
         shoppingCart.add(product4);
         customerFaccade.placeOrder(shoppingCart,customer);
 
-        System.out.println("The status of your order is: "+ customerFaccade.getOrderStatus());
+        //System.out.println("The status of your order is: "+ customerFaccade.getOrderStatus());
+
+
+
 
 
 

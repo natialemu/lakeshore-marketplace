@@ -3,6 +3,7 @@ package Domain.Order;
 import Domain.Customer.Customer;
 import Domain.Order.OrderState.*;
 import Domain.Product.Product;
+import Domain.Tools.IDGenerator;
 
 import java.util.List;
 
@@ -46,11 +47,13 @@ public class OrderImpl implements Order{
         orderDetail = new OrderDetailImpl(products,customer);
         setState(UNPROCCESSED_ORDER);
         orderConfirmation = new OrderConfirmationImpl();
+        orderID = IDGenerator.getId();
 
     }
     public OrderImpl(OrderDetail orderDetail){
         this.orderDetail = orderDetail;
         orderConfirmation = new OrderConfirmationImpl();
+        orderID = IDGenerator.getId();
     }
 
     @Override
@@ -65,7 +68,10 @@ public class OrderImpl implements Order{
 
     @Override
     public boolean processPayment() {
-        return currentState.processPayment();
+        if(paymentValidated && orderContentVerified){
+           return currentState.processPayment();
+        }
+        return false;
     }
 
     @Override

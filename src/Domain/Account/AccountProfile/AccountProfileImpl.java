@@ -3,6 +3,7 @@ package Domain.Account.AccountProfile;
 import Domain.Account.AccountProfile.Contact.ContactInfo;
 import Domain.Account.AccountProfile.Contact.ContactInfoImpl;
 import Domain.Account.AccountProfile.Finance.FinancialInfo;
+import Domain.Account.AccountProfile.Finance.FinancialInfoImpl;
 
 public class AccountProfileImpl implements AccountProfile{
     private String username;
@@ -47,6 +48,7 @@ public class AccountProfileImpl implements AccountProfile{
         this.username = username;
         this.password = password;
         this.contactInfo = new ContactInfoImpl(email);
+        financialInfo = new FinancialInfoImpl();
     }
     public AccountProfileImpl(String username, String password, String fullName, String email, String securityQuestion, String securityQuestionAnswer, String birthDate){
         this.username = username;

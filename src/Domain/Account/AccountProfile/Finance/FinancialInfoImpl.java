@@ -1,11 +1,26 @@
 package Domain.Account.AccountProfile.Finance;
 
 import Domain.Account.AccountProfile.Contact.Location;
+import Domain.Tools.IDGenerator;
 
 public class FinancialInfoImpl implements FinancialInfo{
     private Location billingAddress;
     private BankAccount bankAccount;
     private PaymentCard paymentCard;
+
+    public int getFinancialInfoID() {
+        return financialInfoID;
+    }
+
+    public void setFinancialInfoID(int financialInfoID) {
+        this.financialInfoID = financialInfoID;
+    }
+
+    private int financialInfoID;
+
+    public FinancialInfoImpl(){
+        financialInfoID = IDGenerator.getId();
+    }
 
     public Location getBillingAddress() {
         return billingAddress;

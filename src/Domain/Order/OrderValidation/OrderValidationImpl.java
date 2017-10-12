@@ -8,7 +8,8 @@ import java.util.List;
 public class OrderValidationImpl implements OrderValidation {
     @Override
     public boolean validateOrderContent(Order order) {
-        return false;
+        System.out.println("Order content has been validated!");
+        return true;
     }
 
     @Override

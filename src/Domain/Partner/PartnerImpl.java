@@ -10,17 +10,24 @@ import Domain.Delivery.DeliveryFactory;
 import Domain.Delivery.DeliveryFactoryImpl;
 import Domain.Order.Order;
 import Domain.Order.OrderFactory;
+import Domain.Order.OrderFactoryImpl;
 import Domain.Product.Product;
 import Domain.Tools.IDGenerator;
 import Repository.Partner.PartnerDAO;
+import Repository.Partner.PartnerDAOImpl;
 
 import java.util.List;
 
 public class PartnerImpl implements Partner{
     private Account account;
+
+    public void setPartnerID(int partnerID) {
+        this.partnerID = partnerID;
+    }
+
     private int partnerID;
+
     private DeliveryFactory deliveryFactory;
-    private AccountFactory accountFactory;
     private OrderFactory orderFactory;
     private Inventory inventory;
     private PartnerDAO partnerDAO;
@@ -30,7 +37,9 @@ public class PartnerImpl implements Partner{
     public PartnerImpl(){
         partnerID = IDGenerator.getId();
         deliveryFactory = new DeliveryFactoryImpl();
-        accountFactory = new AccountFactoryImpl();
+        partnerDAO = new PartnerDAOImpl();
+        orderFactory = new OrderFactoryImpl();
+
 
 
     }
@@ -67,8 +76,8 @@ public class PartnerImpl implements Partner{
     }
 
     @Override
-    public String getPartnerID() {
-        return null;
+    public int getPartnerID() {
+        return partnerID;
     }
 
     @Override

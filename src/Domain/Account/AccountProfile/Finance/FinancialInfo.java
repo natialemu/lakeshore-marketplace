@@ -12,4 +12,7 @@ public interface FinancialInfo {
     Location getBillingAddress();
     BankAccount getBankAccount();
     PaymentCard getPaymentCard();
+
+    void setFinancialInfoID(int financialInfoID);
+    int getFinancialInfoID();
 }

@@ -41,10 +41,10 @@ public class PartnerDAOImpl implements PartnerDAO {
 
         Connection connection = openConnection();
         try{
-            Statement insertSatement = connection.createStatement();
+            Statement insertStatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO partner (partner_id, partner_acct_id,partner_delivery_id) VALUES("+partner.getPartnerID()+","+partner.getAccount().getAccountID()+", "+partner.getDelivery().getDeliveryID()+", "+")";
-            insertSatement.executeUpdate(insertQuery);
+            String insertQuery = "INSERT INTO partner (partner_id, partner_acct_id) VALUES("+partner.getPartnerID()+","+partner.getAccount().getAccountID()+")";
+            insertStatement.executeUpdate(insertQuery);
 
             inserted = true;
         }catch (SQLException se){
@@ -94,6 +94,7 @@ public class PartnerDAOImpl implements PartnerDAO {
 
         Partner partner = new PartnerImpl();
         partner.setAccount(account);
+        partner.setPartnerID(partner_id);
 
         return partner;
     }

@@ -7,6 +7,10 @@ import Domain.ReviewSystem.ReviewSystem;
 import Domain.Tools.IDGenerator;
 
 public class CustomerImpl implements Customer {
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
     private int customerID;
     private Account account;
     private Partner partner;

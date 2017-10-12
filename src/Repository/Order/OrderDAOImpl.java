@@ -96,7 +96,7 @@ public class OrderDAOImpl implements OrderDAO {
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO placed_order (order_id, order_status,order_confirmation_id,order_date) VALUES("+order.getOrderID()+",'"+order.getStringOrderState()+"', "+order.getConfirmationID()+", "+order.getOrderDetail().getOrderCreated()+")";
+            String insertQuery = "INSERT INTO placed_order (placed_order_id, order_status,order_confirmation_id,order_date) VALUES("+order.getOrderID()+",'"+order.getStringOrderState()+"', "+order.getConfirmationID()+", "+new java.sql.Date(order.getOrderDetail().getOrderCreated().getTime())+")";
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
@@ -160,6 +160,7 @@ public class OrderDAOImpl implements OrderDAO {
         OrderDetail orderDetail = orderDetailDAO.getOrderDetail(orderDate,order_id);
         order = new OrderImpl(orderDetail);
         order.setOrderConfirmation(orderConfirmation);
+        order.setOrderID(order_id);
         if(order_status == "CancelledOrder"){
             order.setState(order.getCancelledState());
         }else if(order_status == "ProcessedOrder"){

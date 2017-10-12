@@ -14,4 +14,7 @@ public interface AccountSettings {
     Location getDefaultLocation();
     PaymentCard getDefaultPaymentCard();
     BankAccount getDefaultBankAccount();
+
+    void setAccountSettingsID(int accountSettingsID);
+    int getAccountSettingsID();
 }

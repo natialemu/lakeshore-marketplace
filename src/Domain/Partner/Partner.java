@@ -14,7 +14,7 @@ public interface Partner {
 	public void addProducts(List<Product> products);
 	void setInventory(Inventory inventory);
 
-    String getPartnerID();
+    int getPartnerID();
     Delivery getDelivery();
     void setDelivery(Delivery delivery);
 
@@ -23,4 +23,6 @@ public interface Partner {
     void acceptOrder(List<Product> products, Customer customer);
 
     void createPartner();
+
+    void setPartnerID(int partnerID);
 }

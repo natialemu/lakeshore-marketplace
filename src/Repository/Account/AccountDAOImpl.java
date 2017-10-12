@@ -46,12 +46,14 @@ public class AccountDAOImpl implements AccountDAO {
     public boolean createBasicAccount(String username, String email, String password,int account_id, int account_Settings_id, int fin_profile_id) {
         Connection connection = openConnection();
         Statement sqlStatement = null;
+        boolean inserted = false;
         try {
 
 
             sqlStatement = connection.createStatement();
-            String insertAccountProfile = "INSERT INTO account (account_id, account_state,acct_username,acct_settings_id) VALUES (" + account_id + ",'ActiveAccount','" +username +"', "+account_Settings_id+")";
+            String insertAccountProfile = "INSERT INTO account (account_id, acct_username,acct_settings_id,account_state) VALUES (" + account_id +",'" +username +"', "+account_Settings_id+", 'ActiveAccount')";
             sqlStatement.executeUpdate(insertAccountProfile);
+            inserted = true;
 
         } catch (SQLException exception) {
             exception.printStackTrace();
@@ -70,7 +72,8 @@ public class AccountDAOImpl implements AccountDAO {
             }
         }
         accountProfileDAO.createBasicProfile(username,email,fin_profile_id,password);
-        //TODO: create the basic account settings in a simillar way
+        accountSettingsDAO.createBasicSettings(account_Settings_id);
+
 
         return true;
     }
@@ -328,6 +331,7 @@ public class AccountDAOImpl implements AccountDAO {
         String acct_settings_id = "";
         Account account = null;
         String account_state = "";
+        int account_id = 0;
         AccountProfile accountProfile = accountProfileDAO.getAccountProfile(username);
         Connection connection = openConnection();
         try {
@@ -336,7 +340,7 @@ public class AccountDAOImpl implements AccountDAO {
             ResultSet resultSet = statement.executeQuery(query);
             assert (resultSet.isLast());
             resultSet.next();
-            int account_id = resultSet.getInt(0);
+            account_id = resultSet.getInt(0);
             account_state = resultSet.getString(1);
             acct_settings_id = resultSet.getString(3);
 
@@ -352,7 +356,8 @@ public class AccountDAOImpl implements AccountDAO {
         }
 
         AccountSettings accountSettings = accountSettingsDAO.getAccountSettings(acct_settings_id);
-        account = new AccountImpl(username, accountProfile.getPassword());
+        account = new AccountImpl(username, accountProfile.getContactInfo().getEmail(),accountProfile.getPassword());
+        account.setAccountID(account_id);
         account.setAccountProfile(accountProfile);
         account.setAccountSettings(accountSettings);
         if (account_state.equals("ActiveAccount")) {

@@ -306,7 +306,7 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
 
         ContactInfo contactInfo = contactDAO.getContactInfo(email);
         FinancialInfo financialInfo = financialInfoDAO.getFinancialInfo(fin_profile_id);
-        AccountProfile accountProfile = new AccountProfileImpl(username, password);
+        AccountProfile accountProfile = new AccountProfileImpl(username, email,password);
         accountProfile.setContactInfo(contactInfo);
         accountProfile.setFinancialInfo(financialInfo);
 

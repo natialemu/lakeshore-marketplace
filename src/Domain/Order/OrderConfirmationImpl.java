@@ -1,12 +1,19 @@
 package Domain.Order;
 
 import Domain.Customer.Customer;
+import Domain.Tools.IDGenerator;
 
 public class OrderConfirmationImpl implements OrderConfirmation{
     private int confirmationID;
     private String messageHeader;
     private String messageBody;
     //TODO: get the confirmation through the ID
+
+    public OrderConfirmationImpl(){
+        confirmationID = IDGenerator.getId();
+        messageHeader = "test header";
+        messageBody = "test body";
+    }
 
 
     public int getConfirmationID() {

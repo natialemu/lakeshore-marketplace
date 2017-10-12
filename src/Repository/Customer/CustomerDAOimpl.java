@@ -51,7 +51,7 @@ public class CustomerDAOimpl implements CustomerDAO {
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO customer (customer_id, account_id,review_system_id) VALUES("+customer.getCustomerID()+","+customer.getAccount().getAccountID()+", "+", "+customer.getReviewSystem().getReviewSystemID()+")";
+            String insertQuery = "INSERT INTO customer (customer_id, account_id,review_system_id) VALUES("+customer.getCustomerID()+","+customer.getAccount().getAccountID()+", "+customer.getReviewSystem().getReviewSystemID()+")";
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
@@ -106,6 +106,7 @@ public class CustomerDAOimpl implements CustomerDAO {
         Customer customer = new CustomerImpl();
         customer.setAccount(account);
         customer.setReviewSystem(reviewSystem);
+        customer.setCustomerID(customer_id);
 
         return customer;
     }

@@ -55,21 +55,19 @@ public class OrderFactoryImpl implements OrderFactory{
         if(validator.executeCommand()){
 
             transaction.processPayment(order);
-            order.processPayment();
         }
 
 
         validator = new ValidatorImpl(new ConfirmOrder(order));
         if(validator.executeCommand()){
             confirmOrder();
-            order.sendConfirmation();
         }
 
 
         validator = new ValidatorImpl(new DeliverOrder(order));
         if(validator.executeCommand()){
             delivery = new DeliveryFactoryImpl(order);
-            order.shipOrder();
+
         }
 
         return orderDAO.createOrder(order);
@@ -92,7 +90,7 @@ public class OrderFactoryImpl implements OrderFactory{
     }
 
     private void confirmOrder(){
-        System.out.println("Order sent out for delivery! ");
+        System.out.println("Order has been proccessed! ");
     }
 
 

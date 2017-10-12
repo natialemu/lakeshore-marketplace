@@ -17,6 +17,7 @@ class FinancialInfoDAOImplTest {
     private String accountType = "checking";
     private Location billingAddress = new LocationImpl("test loc",":city",202,"il");
     private String swiftCode = "ADG4";
+    private int fin_id  = 8;
 
 
     @BeforeEach
@@ -29,7 +30,7 @@ class FinancialInfoDAOImplTest {
     @Test
     void createAccountFinancialProfile() {
 
-        financialInfoDAO.createAccountFinancialProfile(accountNumber,bankName,routingNumbe,accountType,billingAddress,swiftCode);
+        financialInfoDAO.createAccountFinancialProfile(fin_id,accountNumber,bankName,routingNumbe,accountType,billingAddress,swiftCode);
 
     }
 

@@ -11,4 +11,5 @@ public interface Customer {
     void setAccount(Account account);
     ReviewSystem getReviewSystem();
     void setReviewSystem(ReviewSystem reviewSystem);
+    void setCustomerID(int customerID);
 }

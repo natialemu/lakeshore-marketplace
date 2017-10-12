@@ -142,6 +142,7 @@ public class FinancialInfoDAOImpl implements FinancialInfoDAO {
         BankAccount bankAccount = bankAccountDAO.getBankAccount(accountNumber);
         Location billingAddress = locationDAO.getLocation(zipcode);
         FinancialInfo financialInfo = new FinancialInfoImpl();
+        financialInfo.setFinancialInfoID(fin_profile_id);
         financialInfo.setBankAccount(bankAccount);
         financialInfo.setBillingAddress(billingAddress);
         financialInfo.setPaymentCard(paymentCard);

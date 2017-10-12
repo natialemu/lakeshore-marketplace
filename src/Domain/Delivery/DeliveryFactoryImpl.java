@@ -56,7 +56,7 @@ public class DeliveryFactoryImpl implements DeliveryFactory{
 
     @Override
     public void sendConfirmation() {
-        System.out.println("Delivery confirmation just sent!");
+        System.out.println("Delivery has been sent to partner!");
     }
 
     public Delivery getDelivery(int deliveryID){

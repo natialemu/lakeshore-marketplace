@@ -1,8 +1,13 @@
 package Domain.Delivery;
 
+import Domain.Tools.IDGenerator;
+
 public class DeliveryConfirmationImpl implements DeliveryConfirmation {
      private int deliveryID;
 
+     public DeliveryConfirmationImpl(){
+         deliveryID = IDGenerator.getId();
+     }
     public int getDeliveryID() {
         return deliveryID;
     }

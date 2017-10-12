@@ -4,6 +4,7 @@ import Domain.Account.AccountProfile.AccountProfile;
 import Domain.Account.AccountProfile.AccountProfileImpl;
 import Domain.Account.AccountProfile.Contact.Location;
 import Domain.Account.AccountSettings.AccountSettings;
+import Domain.Account.AccountSettings.AccountSettingsImpl;
 import Domain.Account.AccountState.*;
 import Domain.Tools.IDGenerator;
 
@@ -57,6 +58,7 @@ public class AccountImpl implements Account{
         setAccountState(ACTIVE_STATE);
         stringCurrentState = ACTIVE_STATE.getClass().getSimpleName();
         accountID = IDGenerator.getId();
+        accountSettings = new AccountSettingsImpl();
 
 
     }

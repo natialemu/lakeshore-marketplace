@@ -11,4 +11,7 @@ public interface AccountSettingsDAO {
     void setDefaultPaymentCard(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
 
     AccountSettings getAccountSettings(String acct_settings_id);
+
+    void createBasicSettings(int account_settings_id);
+
 }

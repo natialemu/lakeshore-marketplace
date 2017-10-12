@@ -10,10 +10,9 @@ import Repository.Order.OrderDAOImpl;
 import java.sql.*;
 
 public class TransactionDAOImpl implements TransactionDAO {
-    private OrderDAO orderDAO;
+
 
     public TransactionDAOImpl(){
-        orderDAO = new OrderDAOImpl();
     }
 
     private Connection openConnection() {
@@ -92,6 +91,7 @@ public class TransactionDAOImpl implements TransactionDAO {
             }
         }
 
+        OrderDAO orderDAO = new OrderDAOImpl();
 
         Order order = orderDAO.retrieveOrder(order_id);
 
