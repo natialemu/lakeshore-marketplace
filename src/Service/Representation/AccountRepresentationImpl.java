@@ -1,5 +1,5 @@
 package Service.Representation;
 
-public class AccountRepresentationImpl {
+public class AccountRepresentationImpl implements AccountRepresentation{
 
 }
