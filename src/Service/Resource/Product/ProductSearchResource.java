@@ -1,5 +1,5 @@
 package Service.Resource.Product;
 
-public class ProductSearchResource {
+public class ProductSearchResource implements ProductSearchService{
 
 }

@@ -9,6 +9,6 @@ public interface DeliveryStatusRepresentation {
 	String getDeliveryConfirmationID();
 	String getDeliveryMethod();
 	String getDeliveryCarrier();
-	String getDeliveryTracking_number();
+	String getTracking_number();
 
 }

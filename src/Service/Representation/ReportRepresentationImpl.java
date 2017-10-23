@@ -1,5 +1,5 @@
 package Service.Representation;
 
-public class ReportRepresentationImpl {
+public class ReportRepresentationImpl implements ReportRepresentation {
 
 }
