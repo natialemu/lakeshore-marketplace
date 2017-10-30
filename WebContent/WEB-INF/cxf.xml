@@ -14,7 +14,7 @@
   	
   <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
   
-  <jaxrs:server name="AccountService" address="http://localhost:8081/account">
+  <jaxrs:server name="AccountService" address="http://localhost:8081/account-service">
 		<jaxrs:serviceBeans>
 			<ref bean="accountServiceRest" />
 		</jaxrs:serviceBeans>
@@ -23,8 +23,8 @@
 		</jaxrs:providers> 
 
 		<jaxrs:schemaLocations>
-			<jaxrs:schemaLocation>Service.Representation.AccountRepresentation</jaxrs:schemaLocation>
-			<jaxrs:schemaLocation>Service.Representation.AccountRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Account.AccountRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Account.AccountRequest</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
@@ -32,7 +32,44 @@
   
 </beans>
 
-<jaxrs:server name="DeliveryService" address="http://localhost:8081/delivery">
+<jaxrs:server name="BankInfoService" address="http://localhost:8081/bank-information-service">
+		<jaxrs:serviceBeans>
+			<ref bean="bankInfoServiceRest" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<ref bean="jacksonProvider" />
+		</jaxrs:providers> 
+
+		<jaxrs:schemaLocations>
+			<jaxrs:schemaLocation>Service.Representation.Account.BankInfoRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Account.BankInfoRequest</jaxrs:schemaLocation>
+		</jaxrs:schemaLocations>
+
+	</jaxrs:server>
+  	<bean id="bankInfoServiceRest" class="Service.Resource.Account.BankInfoResource" />
+  
+</beans>
+
+<jaxrs:server name="PersonalInfoService" address="http://localhost:8081/personal-information-service">
+		<jaxrs:serviceBeans>
+			<ref bean="personalInfoServiceRest" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<ref bean="jacksonProvider" />
+		</jaxrs:providers> 
+
+		<jaxrs:schemaLocations>
+			<jaxrs:schemaLocation>Service.Representation.Account.PersonalInformationRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Account.PersonalInformationRequest</jaxrs:schemaLocation>
+		</jaxrs:schemaLocations>
+
+	</jaxrs:server>
+  	<bean id="personalInfoServiceRest" class="Service.Resource.Account.PersonalInfoResource" />
+  
+</beans>
+
+
+<jaxrs:server name="DeliveryService" address="http://localhost:8081/delivery-delivery-service">
 		<jaxrs:serviceBeans>
 			<ref bean="deliveryServiceRest" />
 		</jaxrs:serviceBeans>
@@ -41,8 +78,8 @@
 		</jaxrs:providers> 
 
 		<jaxrs:schemaLocations>
-			<jaxrs:schemaLocation>Service.Representation.DeliveryStatusRepresentation</jaxrs:schemaLocation>
-			<jaxrs:schemaLocation>Service.Representation.DeliveryStatusRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Delivery.DeliveryStatusRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Delivery.DeliveryStatusRequest</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
@@ -50,7 +87,7 @@
   
 </beans>
 
-<jaxrs:server name="OrderService" address="http://localhost:8081/order">
+<jaxrs:server name="OrderService" address="http://localhost:8081/order-service">
 		<jaxrs:serviceBeans>
 			<ref bean="orderServiceRest" />
 		</jaxrs:serviceBeans>
@@ -59,8 +96,8 @@
 		</jaxrs:providers> 
 
 		<jaxrs:schemaLocations>
-			<jaxrs:schemaLocation>Service.Representation.OrderRepresentation</jaxrs:schemaLocation>
-			<jaxrs:schemaLocation>Service.Representation.OrderRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Order.OrderRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Order.OrderRequest</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
@@ -68,7 +105,7 @@
   
 </beans>
 
-<jaxrs:server name="ProductFilterService" address="http://localhost:8081/productfilter">
+<jaxrs:server name="ProductFilterService" address="http://localhost:8081/product-filter-service">
 		<jaxrs:serviceBeans>
 			<ref bean="productFilterServiceRest" />
 		</jaxrs:serviceBeans>
@@ -77,8 +114,8 @@
 		</jaxrs:providers> 
 
 		<jaxrs:schemaLocations>
-			<jaxrs:schemaLocation>Service.Representation.ProductRepresentation</jaxrs:schemaLocation>
-			<jaxrs:schemaLocation>Service.Representation.ProductRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Product.ProductRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Product.ProductRequest</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
@@ -86,7 +123,7 @@
   
 </beans>
 
-<jaxrs:server name="ProductSearchService" address="http://localhost:8081/productsearch">
+<jaxrs:server name="ProductSearchService" address="http://localhost:8081/product-search-service">
 		<jaxrs:serviceBeans>
 			<ref bean="productSearchServiceRest" />
 		</jaxrs:serviceBeans>
@@ -95,8 +132,8 @@
 		</jaxrs:providers> 
 
 		<jaxrs:schemaLocations>
-			<jaxrs:schemaLocation>Service.Representation.ProductRepresentation</jaxrs:schemaLocation>
-			<jaxrs:schemaLocation>Service.Representation.ProductRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Product.ProductRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Product.ProductRequest</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
@@ -104,7 +141,7 @@
   
 </beans>
 
-<jaxrs:server name="ReportService" address="http://localhost:8081/report">
+<jaxrs:server name="ReportService" address="http://localhost:8081/report-service">
 		<jaxrs:serviceBeans>
 			<ref bean="reportServiceRest" />
 		</jaxrs:serviceBeans>
@@ -113,8 +150,8 @@
 		</jaxrs:providers> 
 
 		<jaxrs:schemaLocations>
-			<jaxrs:schemaLocation>Service.Representation.ReportRepresentation</jaxrs:schemaLocation>
-			<jaxrs:schemaLocation>Service.Representation.ReportRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Report.ReportRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Report.ReportRequest</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
