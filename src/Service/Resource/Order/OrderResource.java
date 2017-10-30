@@ -13,6 +13,8 @@ import javax.ws.rs.QueryParam;
 import Service.Representation.Order.OrderRepresentation;
 import Service.Representation.Order.OrderStatusRepresentation;
 import Service.Representation.Product.ProductRequest;
+import Service.Workflow.Order.OrderActivity;
+import Service.Workflow.Order.OrderActivityImpl;
 
 @Path("/")
 public class OrderResource implements OrderService{
@@ -23,7 +25,8 @@ public class OrderResource implements OrderService{
 	@Override
 	public void placeOrder(Set<ProductRequest> products, @PathParam("username") String username) {
 		// TODO Auto-generated method stub
-		
+		OrderActivity orderActivity = new OrderActivityImpl();
+		orderActivity.placeOrder(products,username);
 	}
 
 	@PUT
@@ -32,7 +35,8 @@ public class OrderResource implements OrderService{
 	@Override
 	public void cancelOrder(@PathParam("orderID") int orderID) {
 		// TODO Auto-generated method stub
-		
+		OrderActivity orderActivity = new OrderActivityImpl();
+		orderActivity.cancelOrder(orderID);
 	}
 
 	@GET
@@ -41,7 +45,9 @@ public class OrderResource implements OrderService{
 	@Override
 	public OrderRepresentation getOrder(@PathParam("orderID") int orderID) {
 		// TODO Auto-generated method stub
-		return null;
+		OrderActivity orderActivity = new OrderActivityImpl();
+		return orderActivity.getOrder(orderID);
+		
 	}
 
 	@GET
@@ -50,7 +56,9 @@ public class OrderResource implements OrderService{
 	@Override
 	public OrderStatusRepresentation getOrderStatus(@PathParam("orderID")int orderID) {
 		// TODO Auto-generated method stub
-		return null;
+		OrderActivity orderActivity = new OrderActivityImpl();
+		return orderActivity.getOrderStatus(orderID);
+		
 	}
 
 }

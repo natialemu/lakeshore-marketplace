@@ -23,8 +23,8 @@ public class ProductFilterResource implements ProductFilterService {
 	public Set<ProductRepresentation> filterProductByCost(Set<ProductRequest> products, @QueryParam("minimum_cost") double minCost,
 			@QueryParam("maximum_cost") double maxCost) {
 		ProductAcitvity productActivity = new ProductActivityImpl();
+		return productActivity.filterProductByCost(products,minCost,maxCost);
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@POST
@@ -34,7 +34,9 @@ public class ProductFilterResource implements ProductFilterService {
 	public Set<ProductRepresentation> filterProductByRating(Set<ProductRequest> products, @QueryParam("minimum_rating") int minRating,
 			@QueryParam("maximum_rating") int maxRating) {
 		// TODO Auto-generated method stub
-		return null;
+		ProductAcitvity productActivity = new ProductActivityImpl();
+		return productActivity.filterProductByRating(products,minRating,maxRating);
+
 	}
 	
 
@@ -44,8 +46,8 @@ public class ProductFilterResource implements ProductFilterService {
 	@Override
 	public Set<ProductRepresentation> sortInAscendingOrder(Set<ProductRequest> products) {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		ProductAcitvity productActivity = new ProductActivityImpl();
+		return productActivity.sortInAscendingOrder(products);	}
 
 	@POST
 	@Produces({"application/xml" , "application/json"})
@@ -53,7 +55,9 @@ public class ProductFilterResource implements ProductFilterService {
 	@Override
 	public Set<ProductRepresentation> sortInDescendingOrder(Set<ProductRequest> products) {
 		// TODO Auto-generated method stub
-		return null;
+		ProductAcitvity productActivity = new ProductActivityImpl();
+		return productActivity.sortInDescendingOrder(products);
+		
 	}
 
 	@POST
@@ -62,7 +66,9 @@ public class ProductFilterResource implements ProductFilterService {
 	@Override
 	public Set<ProductRepresentation> filterProductByDate(Set<ProductRequest> products, @QueryParam("minimum_date") String date1, @QueryParam("maximum_date") String date2) {
 		// TODO Auto-generated method stub
-		return null;
+		ProductAcitvity productActivity = new ProductActivityImpl();
+		return productActivity.filterProductByDate(products,date1,date2);
+		
 	}
 
 	@POST
@@ -71,7 +77,9 @@ public class ProductFilterResource implements ProductFilterService {
 	@Override
 	public Set<ProductRepresentation> filterProductBySeller(Set<ProductRequest> products, @QueryParam("seller_name") String sellerName) {
 		// TODO Auto-generated method stub
-		return null;
+		ProductAcitvity productActivity = new ProductActivityImpl();
+		return productActivity.filterProductBySeller(products,sellerName);
+		
 	}
 
 }

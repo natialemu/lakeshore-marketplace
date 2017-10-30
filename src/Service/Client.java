@@ -8,7 +8,7 @@ import Domain.Product.ProductImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class Client {
 
     public static void main(String[] args){
 
