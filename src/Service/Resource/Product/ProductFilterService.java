@@ -6,12 +6,7 @@ import Service.Representation.Product.*;
 
 public interface ProductFilterService {
 	
-	
-	
-	
 	Set<ProductRepresentation> filterProductByCost(Set<ProductRequest> products, double minCost, double maxCost);
-	
-	
 	Set<ProductRepresentation> filterProductByRating(Set<ProductRequest> products, int minRating, int maxRating);
 	Set<ProductRepresentation> sortInAscendingOrder(Set<ProductRequest> products);
 	Set<ProductRepresentation> sortInDescendingOrder(Set<ProductRequest> products);
