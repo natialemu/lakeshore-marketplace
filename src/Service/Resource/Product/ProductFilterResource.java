@@ -6,6 +6,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import Service.Representation.Product.ProductRepresentation;
 import Service.Representation.Product.ProductRequest;
@@ -15,20 +16,20 @@ public class ProductFilterResource implements ProductFilterService {
 
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/")
+	@Path("/products")
 	@Override
-	public Set<ProductRepresentation> filterProductByCost(Set<ProductRequest> products, @PathParam("minimum_cost") double minCost,
-			@PathParam("maximum_cost") double maxCost) {
+	public Set<ProductRepresentation> filterProductByCost(Set<ProductRequest> products, @QueryParam("minimum_cost") double minCost,
+			@QueryParam("maximum_cost") double maxCost) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/")
+	@Path("/products")
 	@Override
-	public Set<ProductRepresentation> filterProductByRating(Set<ProductRequest> products, @PathParam("minimum_rating") int minRating,
-			@PathParam("maximum_rating") int maxRating) {
+	public Set<ProductRepresentation> filterProductByRating(Set<ProductRequest> products, @QueryParam("minimum_rating") int minRating,
+			@QueryParam("maximum_rating") int maxRating) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -36,7 +37,7 @@ public class ProductFilterResource implements ProductFilterService {
 
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/ascendingproduct")
+	@Path("/sortedProduct")
 	@Override
 	public Set<ProductRepresentation> sortInAscendingOrder(Set<ProductRequest> products) {
 		// TODO Auto-generated method stub
@@ -45,7 +46,7 @@ public class ProductFilterResource implements ProductFilterService {
 
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/descendingproduct")
+	@Path("/reverseSortedProduct")
 	@Override
 	public Set<ProductRepresentation> sortInDescendingOrder(Set<ProductRequest> products) {
 		// TODO Auto-generated method stub
@@ -54,18 +55,18 @@ public class ProductFilterResource implements ProductFilterService {
 
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/")
+	@Path("/products")
 	@Override
-	public Set<ProductRepresentation> filterProductByDate(Set<ProductRequest> products, @PathParam("minimum_date") String date1, @PathParam("maximum_date") String date2) {
+	public Set<ProductRepresentation> filterProductByDate(Set<ProductRequest> products, @QueryParam("minimum_date") String date1, @QueryParam("maximum_date") String date2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/")
+	@Path("/products")
 	@Override
-	public Set<ProductRepresentation> filterProductBySeller(Set<ProductRequest> products, @PathParam("seller_name") String sellerName) {
+	public Set<ProductRepresentation> filterProductBySeller(Set<ProductRequest> products, @QueryParam("seller_name") String sellerName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
