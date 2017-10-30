@@ -1,4 +1,4 @@
-package Service.Workflow;
+package Service.Workflow.Report;
 
 public class ReportActivityImpl {
 

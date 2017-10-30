@@ -1,4 +1,4 @@
-package Service.Workflow;
+package Service.Workflow.Delivery;
 
 public interface DeliveryActivity {
 

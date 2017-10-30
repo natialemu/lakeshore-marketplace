@@ -1,4 +1,4 @@
-package Service.Workflow;
+package Service.Workflow.Account;
 
 public interface AccountActivity {
 

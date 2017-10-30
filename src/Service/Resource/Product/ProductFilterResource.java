@@ -10,6 +10,8 @@ import javax.ws.rs.QueryParam;
 
 import Service.Representation.Product.ProductRepresentation;
 import Service.Representation.Product.ProductRequest;
+import Service.Workflow.Product.ProductAcitvity;
+import Service.Workflow.Product.ProductActivityImpl;
 
 @Path("/")
 public class ProductFilterResource implements ProductFilterService {
@@ -20,6 +22,7 @@ public class ProductFilterResource implements ProductFilterService {
 	@Override
 	public Set<ProductRepresentation> filterProductByCost(Set<ProductRequest> products, @QueryParam("minimum_cost") double minCost,
 			@QueryParam("maximum_cost") double maxCost) {
+		ProductAcitvity productActivity = new ProductActivityImpl();
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,10 +1,15 @@
 package Service.Resource.Account;
 
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+
 import Service.Representation.Account.PersonalInformationRepresentation;
 import Service.Representation.Account.PersonalInformationRequest;
 
+@Path("/")
 public class PersonalInfoResource implements PersonalInfoService {
 
+	@PUT
 	@Override
 	public void updateEmail(String oldEmail, String newEmail) {
 		// TODO Auto-generated method stub

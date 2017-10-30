@@ -1,8 +1,11 @@
 package Service.Resource.Account;
 
+import javax.ws.rs.Path;
+
 import Service.Representation.Account.BankInfoRepresentation;
 import Service.Representation.Account.BankInfoRequest;
 
+@Path("/")
 public class BankInfoResource implements BankInfoService{
 
 	@Override
