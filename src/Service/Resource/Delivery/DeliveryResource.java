@@ -1,5 +1,5 @@
 package Service.Resource.Delivery;
 
-public class DeliveryResource {
+public class DeliveryResource implements DeliveryService{
 
 }

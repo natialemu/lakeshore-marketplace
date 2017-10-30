@@ -1,6 +1,8 @@
-package Service.Representation;
+package Service.Representation.Order;
 
 import java.util.List;
+
+import Service.Representation.Product.ProductRepresentation;
 
 public interface OrderRepresentation {
 	

@@ -1,4 +1,4 @@
-package Service.Representation;
+package Service.Representation.Product;
 
 public interface ProductRepresentation {
 	

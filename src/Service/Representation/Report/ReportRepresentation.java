@@ -1,4 +1,4 @@
-package Service.Representation;
+package Service.Representation.Report;
 
 public interface ReportRepresentation {
 

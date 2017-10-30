@@ -1,4 +1,4 @@
-package Service.Representation;
+package Service.Representation.Delivery;
 
 public interface DeliveryStatusRepresentation {
 	void setDeliveryConfirmationID(String deliveryConfirmationID);

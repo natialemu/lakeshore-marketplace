@@ -1,4 +1,4 @@
-package Service.Representation;
+package Service.Representation.Product;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
