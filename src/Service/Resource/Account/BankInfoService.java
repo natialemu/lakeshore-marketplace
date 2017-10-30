@@ -23,20 +23,21 @@ public interface BankInfoService {
 	
 	
 	//DELETE
-	void deleteBankName(String bankAccountNumber);
+	void deleteBankName(String bankAccountNumber, String bankName);
 	void deleteAccountNumber(String accountNumber);
-	void deleteRoutingNumber(String accountNumber);
-	void deleteSwiftCode(String accountNumber);
-	void deleteAccountType(String accountNumber);
+	void deleteRoutingNumber(String accountNumber, String routingNumber);
+	void deleteSwiftCode(String accountNumber, String swiftCode);
+	void deleteAccountType(String accountNumber, String accountType);
 	
 	void deleteCardNumber(String cardNumber);
-	void deleteCardExpirationDate(String cardNumber);
-	void deleteNameOnCard(String cardNumber);
-	void deleteSecurityCode(String cardNumber);
+	void deleteCardExpirationDate(String cardNumber, String expirationDate);
+	void deleteNameOnCard(String cardNumber, String cardName);
+	void deleteSecurityCode(String cardNumber, int securityCode);
 	
 	
 	//CREATE
 	
 	void createBankInformation(BankInfoRequest bankInformation);
+	
 
 }
