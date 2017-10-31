@@ -2,6 +2,7 @@ package Service.Resource.Order;
 
 import java.util.Set;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -58,6 +59,16 @@ public class OrderResource implements OrderService{
 		// TODO Auto-generated method stub
 		OrderActivity orderActivity = new OrderActivityImpl();
 		return orderActivity.getOrderStatus(orderID);
+		
+	}
+
+	@POST
+	@Consumes({"application/xml", "application/json"})
+	@Override
+	public void notifyCancellation(int orderID) {
+		OrderActivity orderActivity = new OrderActivityImpl();
+		orderActivity.notifyCancellation();
+		// TODO Auto-generated method stub
 		
 	}
 

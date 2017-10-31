@@ -13,8 +13,8 @@ public interface PersonalInfoService {
 	void updatePhone(String email, int areacode, int countrycode, int phoneNumber, int phoneType);
 	
 	
-	void securityQuestion(String email, String newSecurityQuestion);
-	void securityAnswer(String email, String newSecurityQuestionAnswer);
+	void updateSecurityQuestion(String email, String newSecurityQuestion);
+	void updateSecurityAnswer(String email, String newSecurityQuestionAnswer);
 	
 	//GET
 	PersonalInformationRepresentation getPersonalInformation();

@@ -13,6 +13,8 @@ public interface OrderService {
 	OrderRepresentation getOrder(int orderID);
 	OrderStatusRepresentation getOrderStatus(int orderID);
 	
+	void notifyCancellation(int orderID);
+	
 	
 	
 }

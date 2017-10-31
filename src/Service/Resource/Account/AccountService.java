@@ -4,8 +4,11 @@ import Service.Representation.Account.AccountRepresentation;
 
 public interface AccountService {
 	
-	void registerAccount(String username, String password);
-	void registerAccount(String username, String email, String password);
+	void registerCustomerForAccount(String username, String password);
+	void registerCustomerForAccountWithEmail(String username, String email, String password);
+	
+	void registerPartnerForAccount(String username, String password);
+	void registerPartnerForAccountWithEmail(String username, String email, String password);
 	
 	boolean loginWithEmail(String email, String password);
 	boolean loginWithUsername(String username, String password);

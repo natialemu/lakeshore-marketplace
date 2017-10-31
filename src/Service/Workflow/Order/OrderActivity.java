@@ -17,4 +17,6 @@ public interface OrderActivity {
 
 	OrderStatusRepresentation getOrderStatus(int orderID);
 
+	void notifyCancellation();
+
 }

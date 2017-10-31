@@ -9,6 +9,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import Service.Representation.Account.AccountRepresentation;
+import Service.Workflow.Account.AccountActivity;
+import Service.Workflow.Account.AccountActivityImpl;
 
 @Path("/")
 public class AccountResource implements AccountService{
@@ -17,8 +19,10 @@ public class AccountResource implements AccountService{
 	@Produces({"application/xml", "application/json"})
 	@Path("/account")
 	@Override
-	public void registerAccount(@QueryParam("username") String username, @QueryParam("password") String password) {
+	public void registerCustomerForAccount(@QueryParam("username") String username, @QueryParam("password") String password) {
 		// TODO Auto-generated method stub
+		AccountActivity accountActivity = new AccountActivityImpl();
+		accountActivity.regsiterCustomerForAccount(username, password);
 		
 	}
 
@@ -26,8 +30,10 @@ public class AccountResource implements AccountService{
 	@Produces({"application/xml", "application/json"})
 	@Path("/account")
 	@Override
-	public void registerAccount(@QueryParam("username") String username, @QueryParam("email") String email, @QueryParam("password") String password) {
+	public void registerCustomerForAccountWithEmail(@QueryParam("username") String username, @QueryParam("email") String email, @QueryParam("password") String password) {
 		// TODO Auto-generated method stub
+		AccountActivity accountActivity = new AccountActivityImpl();
+		accountActivity.registerCustomerForAccountWithEmail(username,email, password);
 		
 	}
 
@@ -37,7 +43,9 @@ public class AccountResource implements AccountService{
 	@Override
 	public boolean loginWithEmail(@QueryParam("username") String email, @QueryParam("password")String password) {
 		// TODO Auto-generated method stub
-		return false;
+		AccountActivity accountActivity = new AccountActivityImpl();
+		return accountActivity.loginWithUsername(email, password);
+		
 	}
 
 	@PUT
@@ -46,7 +54,8 @@ public class AccountResource implements AccountService{
 	@Override
 	public boolean loginWithUsername(@QueryParam("username")String username, @QueryParam("password")String password) {
 		// TODO Auto-generated method stub
-		return false;
+		AccountActivity accountActivity = new AccountActivityImpl();
+		return accountActivity.loginWithUsername(username, password);
 	}
 
 	@PUT
@@ -55,6 +64,8 @@ public class AccountResource implements AccountService{
 	@Override
 	public void updateUsername(@QueryParam("username")String oldUsername, @QueryParam("new-username")String newUnsername) {
 		// TODO Auto-generated method stub
+		AccountActivity accountActivity = new AccountActivityImpl();
+		accountActivity.updateUsername(oldUsername,newUnsername);
 		
 	}
 
@@ -64,6 +75,8 @@ public class AccountResource implements AccountService{
 	@Override
 	public void updatePassword(String oldPassword, String newPassword) {
 		// TODO Auto-generated method stub
+		AccountActivity accountActivity = new AccountActivityImpl();
+		accountActivity.updatePassword(oldPassword,newPassword);
 		
 	}
 
@@ -73,6 +86,9 @@ public class AccountResource implements AccountService{
 	@Override
 	public void updateAccount(@QueryParam("username")String oldUsername,@QueryParam("new-username") String newUsername, @QueryParam("password")String oldPassowrd, @QueryParam("new-password")String newPassword) {
 		// TODO Auto-generated method stub
+		AccountActivity accountActivity = new AccountActivityImpl();
+		accountActivity.updateAccount(oldUsername, newUsername,oldPassowrd,newPassword);
+		
 		
 	}
 
@@ -82,7 +98,9 @@ public class AccountResource implements AccountService{
 	@Override
 	public AccountRepresentation getAccount() {
 		// TODO Auto-generated method stub
-		return null;
+		AccountActivity accountActivity = new AccountActivityImpl();
+		return accountActivity.getAccount();
+		
 	}
 
 	@DELETE
@@ -91,6 +109,24 @@ public class AccountResource implements AccountService{
 	@Override
 	public void deleteAccount(String username, String passowrd) {
 		// TODO Auto-generated method stub
+		AccountActivity accountActivity = new AccountActivityImpl();
+		accountActivity.deleteAccount(username,passowrd);
+		
+	}
+
+	@Override
+	public void registerPartnerForAccount(String username, String password) {
+		// TODO Auto-generated method stub
+		AccountActivity accountActivity = new AccountActivityImpl();
+		accountActivity.registerPartnerForAccount(username, password);
+		
+	}
+
+	@Override
+	public void registerPartnerForAccountWithEmail(String username, String email, String password) {
+		// TODO Auto-generated method stub
+		AccountActivity accountActivity = new AccountActivityImpl();
+		accountActivity.registerPartnerForAccountWithEmail(username,email, password);
 		
 	}
 

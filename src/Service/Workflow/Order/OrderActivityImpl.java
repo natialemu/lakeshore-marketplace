@@ -40,4 +40,10 @@ public class OrderActivityImpl implements OrderActivity {
 		return null;
 	}
 
+	@Override
+	public void notifyCancellation() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

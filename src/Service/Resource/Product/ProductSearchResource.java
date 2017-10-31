@@ -66,12 +66,12 @@ public class ProductSearchResource implements ProductSearchService{
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/products/{productType}")
+	@Path("/products/{productName}")
 	@Override
-	public Set<ProductRepresentation> getProductsByName(@PathParam("productType") String productType) {
+	public Set<ProductRepresentation> getProductsByName(@PathParam("productName") String productName) {
 		// TODO Auto-generated method stub
 		ProductAcitvity productActivity = new ProductActivityImpl();
-		return productActivity.getProductsByName(productType);
+		return productActivity.getProductsByName(productName);
 		
 	}
 	

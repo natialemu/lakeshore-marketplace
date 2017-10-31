@@ -1,5 +1,5 @@
 package Service.Workflow.Account;
 
-public class PersonalInfoActivityImpl {
+public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 
 }
