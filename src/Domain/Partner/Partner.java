@@ -19,4 +19,6 @@ public interface Partner {
     void setDelivery(Delivery delivery);
 
     void setPartnerID(int partnerID);
+    String getPartnerUsername();
+    void setPartnerUsername(String username);
 }

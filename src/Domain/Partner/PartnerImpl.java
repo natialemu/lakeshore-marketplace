@@ -22,7 +22,16 @@ public class PartnerImpl implements Partner{
     private Account account;
     private Inventory inventory;
 
-    public void setPartnerID(int partnerID) {
+    private String partnerUsername;
+    public String getPartnerUsername() {
+		return partnerUsername;
+	}
+
+	public void setPartnerUsername(String partnerUsername) {
+		this.partnerUsername = partnerUsername;
+	}
+
+	public void setPartnerID(int partnerID) {
         this.partnerID = partnerID;
     }
 
@@ -44,6 +53,7 @@ public class PartnerImpl implements Partner{
     public void setAccount(Account account) {
 
         this.account = account;
+        setPartnerUsername(account.getAccountProfile().getUsername());
     }
 
     @Override

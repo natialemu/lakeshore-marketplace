@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "Product")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class ProductRequestImpl implements ProductRequest {

@@ -1,15 +1,19 @@
 package Service.Representation.Account;
 
 public interface PersonalInformationRequest {
-	String getBirthDate();
-
 	void setBirthDate(String birthDate);
-
-	String getFullName();
-
 	void setFullName(String fullName);
-
-	String getCellPhone();
-
+	void setStreetAddress(String streetAddress);
+	void setZipcode(String zipcode);
+	void setCity(String city);
+	void setState(String state);
 	void setCellPhone(String cellPhone);
+	
+	String getBirthDate();
+	String getFullName();
+	String getStreetAddress();
+	String getZipcode();
+	String getCity();
+	String getState();
+	String getCellPhone();
 }

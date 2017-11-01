@@ -14,6 +14,7 @@ import Domain.Partner.PartnerImpl;
 import Domain.ReviewSystem.ReviewSystemImpl;
 import Service.Representation.Account.AccountRepresentation;
 import Service.Representation.Account.AccountRepresentationImpl;
+import Service.Representation.Account.AccountRequest;
 
 public class AccountActivityImpl implements AccountActivity{
 	private AccountFactory accountFactory;
@@ -73,10 +74,10 @@ public class AccountActivityImpl implements AccountActivity{
 	}
 
 	@Override
-	public void registerCustomerForAccountWithEmail(String username, String email, String password) {
+	public void registerCustomerForAccountWithEmail(AccountRequest accountRequest) {
 		// TODO Auto-generated method stub
 		Customer customer = new CustomerImpl();
-		Account newAccount = accountFactory.getNewAccount(email,username,password);
+		Account newAccount = accountFactory.getNewAccount(accountRequest.getEmail(),accountRequest.getUsername(),accountRequest.getPassword());
         accountFactory.createBasicAccount(newAccount);
         customer.setAccount(newAccount);
         customer.setReviewSystem(new ReviewSystemImpl());

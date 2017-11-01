@@ -9,7 +9,7 @@ import Service.Representation.Product.ProductRequest;
 public interface OrderActivity {
 	
 
-	void placeOrder(Set<ProductRequest> products, String username);
+	void placeOrder(Set<ProductRequest> products, String username,String password);
 
 	void cancelOrder(int orderID);
 

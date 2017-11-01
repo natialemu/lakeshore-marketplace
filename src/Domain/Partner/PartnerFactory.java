@@ -9,7 +9,7 @@ import Domain.Product.Product;
 public interface PartnerFactory {
 	void createPartner(Partner partner);
 	void registerPartner(String email, String username, String password);
-	void addProducts(int partnerID, List<Product> products);
+	void addProducts(String username, List<Product> products);
 	Delivery acceptDelivery(Partner partner, Delivery delivery);
 	void acceptOrder(List<Product> products, Customer customer);
 	void provideDeliveryStatus(int deliveryID, int trackingNumber);

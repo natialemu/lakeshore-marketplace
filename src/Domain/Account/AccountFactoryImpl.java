@@ -202,4 +202,210 @@ public class AccountFactoryImpl implements AccountFactory {
 		}
 		return null;
 	}
+
+	@Override
+	public void updateBankName(String bankAccountNumber, String newBankName) {
+		System.out.println("Update Successful!");
+		
+	}
+
+	@Override
+	public void updateAccountNumber(String oldAccountNumber, String newAccountNumber) {
+		// TODO Auto-generated method stub
+		System.out.println("Update Successful!");
+		
+	}
+
+	@Override
+	public void updateRoutingNumber(String accountNumber, String newRoutingNumber) {
+		// TODO Auto-generated method stub
+		System.out.println("Update Successful!");
+		
+	}
+
+	@Override
+	public void updateSwiftCode(String accountNumber, int newSwiftCode) {
+		// TODO Auto-generated method stub
+		System.out.println("Update Successful!");
+		
+	}
+
+	@Override
+	public void updateAccountType(String accountNumber, String newAccountType) {
+		// TODO Auto-generated method stub
+		System.out.println("Update Successful!");
+		
+	}
+
+	@Override
+	public void updateCardNumber(String cardNumber, String newPaymentCard) {
+		// TODO Auto-generated method stub
+		System.out.println("Update Successful!");
+		
+	}
+
+	@Override
+	public void updateCardExpirationDate(String cardNumber, String newDate) {
+		// TODO Auto-generated method stub
+		System.out.println("Update Successful!");
+		
+	}
+
+	@Override
+	public void updateNameOnCard(String cardNumber, String newNameOncard) {
+		// TODO Auto-generated method stub
+		System.out.println("Update Successful!");
+		
+	}
+
+	@Override
+	public void updateSecurityCode(String cardNumber, String newSecurityCode) {
+		// TODO Auto-generated method stub
+		System.out.println("Update Successful!");
+		
+	}
+
+	@Override
+	public void deleteBankName(String bankAccountNumber, String bankName) {
+		// TODO Auto-generated method stub
+		System.out.println("Deletion Successful!");
+	}
+
+	@Override
+	public void deleteAccountNumber(String accountNumber) {
+		// TODO Auto-generated method stub
+		System.out.println("Deletion Successful!");
+		
+	}
+
+	@Override
+	public void deleteRoutingNumber(String accountNumber, String routingNumber) {
+		// TODO Auto-generated method stub
+		System.out.println("Deletion Successful!");
+		
+	}
+
+	@Override
+	public void deleteSwiftCode(String accountNumber, String swiftCode) {
+		// TODO Auto-generated method stub
+		System.out.println("Deletion Successful!");
+		
+	}
+
+	@Override
+	public void deleteAccountType(String accountNumber, String accountType) {
+		// TODO Auto-generated method stub
+		System.out.println("Deletion Successful!");
+		
+	}
+
+	@Override
+	public void deleteCardNumber(String cardNumber) {
+		// TODO Auto-generated method stub
+		System.out.println("Deletion Successful!");
+		
+	}
+
+	@Override
+	public void deleteCardExpirationDate(String cardNumber, String expirationDate) {
+		// TODO Auto-generated method stub
+		System.out.println("Deletion Successful!");
+		
+	}
+
+	@Override
+	public void deleteNameOnCard(String cardNumber, String cardName) {
+		// TODO Auto-generated method stub
+		System.out.println("Deletion Successful!");
+		
+	}
+
+	@Override
+	public void deleteSecurityCode(String cardNumber, int securityCode) {
+		// TODO Auto-generated method stub
+		System.out.println("Deletion Successful!");
+	}
+
+	@Override
+	public void createPersonalInformation(String birthDate, String cellPhone, String fullName, String city,
+			String fullName2, String state, String streetAddress, String zipcode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeSecurityAnswer(String email, String newSecurityQuestionAnswer) {
+		System.out.println("removal successful!");
+		
+	}
+
+	@Override
+	public void removesecurityQuestion(String email, String newSecurityQuestion) {
+		// TODO Auto-generated method stub
+		System.out.println("removal successful!");System.out.println("removal successful!");
+		
+	}
+
+	@Override
+	public void removePhone(String email, int areacode, int countrycode, int phoneNumber, int phoneType) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeLocation(String email, String streetAddress, String state, String city, int zipcode,
+			String country) {
+		// TODO Auto-generated method stub
+		System.out.println("removal successful!");
+	}
+
+	@Override
+	public void removeBirthDate(String email, String birthDate) {
+		// TODO Auto-generated method stub
+		System.out.println("removal successful!");
+	}
+
+	@Override
+	public void removeFullName(String email, String fullName) {
+		// TODO Auto-generated method stub
+		System.out.println("removal successful!");
+	}
+
+	@Override
+	public void removeEmail(String newEmail) {
+		// TODO Auto-generated method stub
+		System.out.println("removal successful!");
+	}
+
+	@Override
+	public void updatePhone(String email, int areacode, int countrycode, int phoneNumber, int phoneType) {
+		// TODO Auto-generated method stub
+		System.out.println("Update successful!");
+	}
+
+	@Override
+	public void updateAddress(String email, String streetAddress, String state, String city, int zipcode,
+			String country) {
+		// TODO Auto-generated method stub
+		System.out.println("Update successful!");
+	}
+
+	@Override
+	public void updateBirthDate(String email, String birthDate) {
+		// TODO Auto-generated method stub
+		System.out.println("Update successful!");
+	}
+
+	@Override
+	public void updateFullName(String email, String newFullName) {
+		// TODO Auto-generated method stub
+		System.out.println("Update successful!");
+	}
+
+	@Override
+	public boolean validateAccount(String username, String password) {
+		// TODO Auto-generated method stub
+		System.out.println("Account Validated!");
+		return true;
+	}
 }

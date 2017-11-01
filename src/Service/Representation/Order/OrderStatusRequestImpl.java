@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import Service.Representation.Product.ProductRepresentation;
 
-@XmlRootElement(name = "Order Status")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class OrderStatusRequestImpl implements OrderStatusRequest{

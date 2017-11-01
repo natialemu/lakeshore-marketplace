@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 import Service.Representation.Product.ProductRepresentation;
 import Service.Representation.Product.ProductRequest;
 
-@XmlRootElement(name = "Order")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class OrderRequestImpl implements OrderRequest{

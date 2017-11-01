@@ -31,7 +31,7 @@ public interface ProductAcitvity {
 
 	Set<ProductRepresentation> getProductsByName(String productType);
 
-	void addProduct(int partner_id, Set<ProductRequest> products);
+	void addProduct(String username, Set<ProductRequest> products);
 
 	void deleteProduct(int partner_id, int product_id);
 

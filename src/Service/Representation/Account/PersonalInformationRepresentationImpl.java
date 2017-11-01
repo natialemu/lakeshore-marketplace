@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "User Information")
+@XmlRootElement(name = "UserInformation")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class PersonalInformationRepresentationImpl implements PersonalInformationRepresentation{

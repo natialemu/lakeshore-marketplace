@@ -2,9 +2,13 @@ package Service.Resource.Product;
 
 import java.util.Set;
 
+import javax.jws.WebService;
+
+import Service.Representation.Account.BasicAccountRequest;
 import Service.Representation.Product.ProductRepresentation;
 import Service.Representation.Product.ProductRequest;
 
+@WebService
 public interface ProductService {
 	
 	Set<ProductRepresentation> getProducts();
@@ -19,7 +23,7 @@ public interface ProductService {
 	
 	
 	//CREATE
-	void addProduct(int partner_id, Set<ProductRequest> products);
+	void addProduct(String username, Set<ProductRequest> products);
 	
 	//DELETE
 	void deleteProduct(int partner_id, int product_id);

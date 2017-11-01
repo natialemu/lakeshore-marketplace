@@ -2,8 +2,11 @@ package Service.Resource.Product;
 
 import java.util.*;
 
+import javax.jws.WebService;
+
 import Service.Representation.Product.*;
 
+@WebService
 public interface ProductFilterService {
 	
 	Set<ProductRepresentation> filterProductByCost(Set<ProductRequest> products, double minCost, double maxCost);

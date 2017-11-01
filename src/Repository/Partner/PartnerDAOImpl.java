@@ -43,7 +43,7 @@ public class PartnerDAOImpl implements PartnerDAO {
         try{
             Statement insertStatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO partner (partner_id, partner_acct_id) VALUES("+partner.getPartnerID()+","+partner.getAccount().getAccountID()+")";
+            String insertQuery = "INSERT INTO partner (partner_id, partner_acct_id,partner_username) VALUES("+partner.getPartnerID()+","+partner.getAccount().getAccountID()+", '"+partner.getPartnerUsername()+"')";
             insertStatement.executeUpdate(insertQuery);
 
             inserted = true;
@@ -64,6 +64,7 @@ public class PartnerDAOImpl implements PartnerDAO {
     @Override
     public Partner getPartner(int partner_id) {
         int account_id = 0;
+        String username = "";
 
 
 
@@ -77,6 +78,8 @@ public class PartnerDAOImpl implements PartnerDAO {
 
 
             account_id = resultSet.getInt("partner_account_id");
+            resultSet.next();
+            username = resultSet.getString("partner_username");
 
         } catch (SQLException se) {
             se.printStackTrace();
@@ -95,7 +98,51 @@ public class PartnerDAOImpl implements PartnerDAO {
         Partner partner = new PartnerImpl();
         partner.setAccount(account);
         partner.setPartnerID(partner_id);
+        partner.setPartnerUsername(username);
 
         return partner;
     }
+
+	@Override
+	public Partner getPartner(String username) {
+		// TODO Auto-generated method stub
+		int account_id = 0;
+        int partner_id = 0;
+
+
+
+        Connection connection = openConnection();
+        try {
+            Statement selectStatement = connection.createStatement();
+
+            String selectQuery = "SELECT * from partner where partner_username='" + username+"'";
+            ResultSet resultSet = selectStatement.executeQuery(selectQuery);
+            resultSet.next();
+
+
+            account_id = resultSet.getInt("partner_account_id");
+            resultSet.next();
+            partner_id = resultSet.getInt("partner_id");
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+
+        Account account = accountDAO.getAccount(account_id);
+
+        Partner partner = new PartnerImpl();
+        partner.setAccount(account);
+        partner.setPartnerID(partner_id);
+        partner.setPartnerUsername(username);
+
+        return partner;
+	}
 }

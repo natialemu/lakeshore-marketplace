@@ -11,6 +11,7 @@ import javax.ws.rs.QueryParam;
 
 import Service.Representation.Account.BankInfoRepresentation;
 import Service.Representation.Account.BankInfoRequest;
+import Service.Representation.Account.BasicAccountRequest;
 import Service.Workflow.Account.BankInfoActivity;
 import Service.Workflow.Account.BankInfoActivityImpl;
 
@@ -120,12 +121,13 @@ public class BankInfoResource implements BankInfoService{
 
 	@GET
 	@Produces({"application/xml","application/json"})
+	@Consumes({"application/xml", "application/json"})
 	@Path("/bank-information")
 	@Override
-	public BankInfoRepresentation getBankInfo(@QueryParam("username")String username) {
+	public BankInfoRepresentation getBankInfo(BasicAccountRequest basicAccountRequest) {
 		// TODO Auto-generated method stub
 		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
-	    return bankInfoActivity.getBankInfo(username);
+	    return bankInfoActivity.getBankInfo(basicAccountRequest);
 	
 	}
 
@@ -233,10 +235,10 @@ public class BankInfoResource implements BankInfoService{
 	@Consumes({"application/xml","application/json"})
 	@Path("/bank-information")
 	@Override
-	public void createBankInformation(BankInfoRequest bankInformation) {
+	public void createBankInformation(String username,BankInfoRequest bankInformation) {
 		// TODO Auto-generated method stub
 		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
-		bankInfoActivity.createBankInformation(bankInformation);
+		bankInfoActivity.createBankInformation(username,bankInformation);
 		
 	}
 

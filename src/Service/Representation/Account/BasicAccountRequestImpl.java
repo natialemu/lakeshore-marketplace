@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class AccountRequestImpl implements AccountRequest {
+public class BasicAccountRequestImpl implements BasicAccountRequest{
+	
 	private String username;
 	private String password;
-	private String email;
 	
-	public AccountRequestImpl() {}
+	public BasicAccountRequestImpl() {}
 
 	public String getUsername() {
 		return username;
@@ -30,16 +30,6 @@ public class AccountRequestImpl implements AccountRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	
 	
 
 }

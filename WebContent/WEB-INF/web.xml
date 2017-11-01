@@ -3,7 +3,7 @@
 "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-  <display-name>RESTful LakeShore MarketPlace Services</display-name>
+  <display-name>RESTful Employee Services</display-name>
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>WEB-INF/cxf.xml</param-value>

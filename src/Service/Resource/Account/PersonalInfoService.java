@@ -1,8 +1,12 @@
 package Service.Resource.Account;
 
+import javax.jws.WebService;
+
+import Service.Representation.Account.BasicAccountRequest;
 import Service.Representation.Account.PersonalInformationRepresentation;
 import Service.Representation.Account.PersonalInformationRequest;
 
+@WebService
 public interface PersonalInfoService {
 	
 	//Update
@@ -17,7 +21,7 @@ public interface PersonalInfoService {
 	void updateSecurityAnswer(String email, String newSecurityQuestionAnswer);
 	
 	//GET
-	PersonalInformationRepresentation getPersonalInformation();
+	PersonalInformationRepresentation getPersonalInformation(BasicAccountRequest basicAccountRequest);
 	
 	
 	//DElETE

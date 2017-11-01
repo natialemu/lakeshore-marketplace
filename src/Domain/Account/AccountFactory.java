@@ -50,4 +50,36 @@ public interface AccountFactory {
 
     Account getNewAccount(String email, String username, String password);
     Account getAccount(String username, String password);
+	void updateBankName(String bankAccountNumber, String newBankName);
+	void updateAccountNumber(String oldAccountNumber, String newAccountNumber);
+	void updateRoutingNumber(String accountNumber, String newRoutingNumber);
+	void updateSwiftCode(String accountNumber, int newSwiftCode);
+	void updateAccountType(String accountNumber, String newAccountType);
+	void updateCardNumber(String cardNumber, String newPaymentCard);
+	void updateCardExpirationDate(String cardNumber, String newDate);
+	void updateNameOnCard(String cardNumber, String newNameOncard);
+	void updateSecurityCode(String cardNumber, String newSecurityCode);
+	void deleteBankName(String bankAccountNumber, String bankName);
+	void deleteAccountNumber(String accountNumber);
+	void deleteRoutingNumber(String accountNumber, String routingNumber);
+	void deleteSwiftCode(String accountNumber, String swiftCode);
+	void deleteAccountType(String accountNumber, String accountType);
+	void deleteCardNumber(String cardNumber);
+	void deleteCardExpirationDate(String cardNumber, String expirationDate);
+	void deleteNameOnCard(String cardNumber, String cardName);
+	void deleteSecurityCode(String cardNumber, int securityCode);
+	void createPersonalInformation(String birthDate, String cellPhone, String fullName, String city, String fullName2,
+			String state, String streetAddress, String zipcode);
+	void removeSecurityAnswer(String email, String newSecurityQuestionAnswer);
+	void removesecurityQuestion(String email, String newSecurityQuestion);
+	void removePhone(String email, int areacode, int countrycode, int phoneNumber, int phoneType);
+	void removeLocation(String email, String streetAddress, String state, String city, int zipcode, String country);
+	void removeBirthDate(String email, String birthDate);
+	void removeFullName(String email, String fullName);
+	void removeEmail(String newEmail);
+	void updatePhone(String email, int areacode, int countrycode, int phoneNumber, int phoneType);
+	void updateAddress(String email, String streetAddress, String state, String city, int zipcode, String country);
+	void updateBirthDate(String email, String birthDate);
+	void updateFullName(String email, String newFullName);
+	boolean validateAccount(String username, String password);
 }

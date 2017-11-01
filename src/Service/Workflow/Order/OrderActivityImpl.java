@@ -2,6 +2,8 @@ package Service.Workflow.Order;
 
 import java.util.*;
 
+import Domain.Account.AccountFactory;
+import Domain.Account.AccountFactoryImpl;
 import Domain.Customer.CustomerFactory;
 import Domain.Customer.CustomerFactoryImpl;
 import Domain.Order.Order;
@@ -24,19 +26,22 @@ public class OrderActivityImpl implements OrderActivity {
 	private OrderFactory orderFactory;
 	private CustomerFactory customerFactory;
 	private PartnerFactory partnerFactory;
+	private AccountFactory accountFactory;
 	
 	public OrderActivityImpl() {
 		orderFactory = new OrderFactoryImpl();
 		customerFactory = new CustomerFactoryImpl();
 		partnerFactory = new PartnerFactoryImpl();
+		accountFactory = new AccountFactoryImpl();
 	}
 
 	@Override
-	public void placeOrder(Set<ProductRequest> products, String username) {
+	public void placeOrder(Set<ProductRequest> products, String username,String password) {
 
 		List<Product> productList = new ArrayList<>();
 		getProductList(products,productList);
-		orderFactory.createOrder(productList, customerFactory.createCustomer());
+		if(accountFactory.validateAccount(username, password))
+			orderFactory.createOrder(productList, customerFactory.createCustomer());
 		
 	}
 
@@ -105,7 +110,6 @@ public class OrderActivityImpl implements OrderActivity {
 	public void notifyCancellation(int orderID) {
 		partnerFactory.orderReturned(orderID);
 		
-		// TODO Auto-generated method stub
 		
 	}
 

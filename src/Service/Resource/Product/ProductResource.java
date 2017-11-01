@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import Service.Representation.Account.BasicAccountRequest;
 import Service.Representation.Product.ProductRepresentation;
 import Service.Representation.Product.ProductRequest;
 import Service.Workflow.Product.ProductAcitvity;
@@ -82,11 +83,11 @@ public class ProductResource implements ProductService{
 
 	@POST
 	@Consumes({"application/xml" , "application/json"})
-	@Path("/products")
+	@Path("/products/{username}")
 	@Override
-	public void addProduct(int partner_id, Set<ProductRequest> products) {
+	public void addProduct(@PathParam("username")String username, Set<ProductRequest> products) {
 		ProductAcitvity productActivity = new ProductActivityImpl();
-		productActivity.addProduct(partner_id,products);
+		productActivity.addProduct(username,products);
 		
 		// TODO Auto-generated method stub
 		

@@ -51,10 +51,10 @@ public class PartnerFactoryImpl implements PartnerFactory {
         partner.setAccount(newAccount);
         createPartner(partner);
     }
-    public void addProducts(int partnerID, List<Product> products) {
+    public void addProducts(String username, List<Product> products) {
     	
 
-    	Partner partner = partnerDAO.getPartner(partnerID);
+    	Partner partner = partnerDAO.getPartner(username);
     	
     	for(Product p: products){
             p.setPartner(partner);

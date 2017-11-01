@@ -1,17 +1,21 @@
 package Service.Resource.Account;
 
-import Service.Representation.Account.AccountRepresentation;
+import javax.jws.WebService;
 
+import Service.Representation.Account.AccountRepresentation;
+import Service.Representation.Account.AccountRequest;
+import Service.Representation.Account.BasicAccountRequest;
+@WebService
 public interface AccountService {
 	
 	void registerCustomerForAccount(String username, String password);
-	void registerCustomerForAccountWithEmail(String username, String email, String password);
+	void registerCustomerForAccountWithEmail(AccountRequest accountRequest);
 	
 	void registerPartnerForAccount(String username, String password);
-	void registerPartnerForAccountWithEmail(String username, String email, String password);
+	void registerPartnerForAccountWithEmail(AccountRequest accountRequest);
 	
 	boolean loginWithEmail(String email, String password);
-	boolean loginWithUsername(String username, String password);
+	boolean loginWithUsername(BasicAccountRequest basicAccountRequest);
 	
 	
 	void updateUsername(String oldUsername, String newUnsername);

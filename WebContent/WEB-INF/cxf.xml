@@ -29,10 +29,9 @@
 
 	</jaxrs:server>
   	<bean id="accountServiceRest" class="Service.Resource.Account.AccountResource" />
-  
-</beans>
-
-<jaxrs:server name="BankInfoService" address="http://localhost:8081/bank-information-service">
+  	
+  	
+  	<jaxrs:server name="BankInfoService" address="http://localhost:8081/bank-information-service">
 		<jaxrs:serviceBeans>
 			<ref bean="bankInfoServiceRest" />
 		</jaxrs:serviceBeans>
@@ -48,9 +47,8 @@
 	</jaxrs:server>
   	<bean id="bankInfoServiceRest" class="Service.Resource.Account.BankInfoResource" />
   
-</beans>
-
-<jaxrs:server name="PersonalInfoService" address="http://localhost:8081/personal-information-service">
+  
+  <jaxrs:server name="PersonalInfoService" address="http://localhost:8081/personal-information-service">
 		<jaxrs:serviceBeans>
 			<ref bean="personalInfoServiceRest" />
 		</jaxrs:serviceBeans>
@@ -65,11 +63,8 @@
 
 	</jaxrs:server>
   	<bean id="personalInfoServiceRest" class="Service.Resource.Account.PersonalInfoResource" />
-  
-</beans>
-
-
-<jaxrs:server name="DeliveryService" address="http://localhost:8081/delivery-delivery-service">
+  	
+  	<jaxrs:server name="DeliveryService" address="http://localhost:8081/delivery-delivery-service">
 		<jaxrs:serviceBeans>
 			<ref bean="deliveryServiceRest" />
 		</jaxrs:serviceBeans>
@@ -85,9 +80,8 @@
 	</jaxrs:server>
   	<bean id="deliveryServiceRest" class="Service.Resource.Delivery.DeliveryResource" />
   
-</beans>
-
-<jaxrs:server name="OrderService" address="http://localhost:8081/order-service">
+  
+  <jaxrs:server name="OrderService" address="http://localhost:8081/order-service">
 		<jaxrs:serviceBeans>
 			<ref bean="orderServiceRest" />
 		</jaxrs:serviceBeans>
@@ -102,10 +96,9 @@
 
 	</jaxrs:server>
   	<bean id="orderServiceRest" class="Service.Resource.Order.OrderResource" />
-  
-</beans>
-
-<jaxrs:server name="ProductFilterService" address="http://localhost:8081/product-filter-service">
+  	
+  	
+  	<jaxrs:server name="ProductFilterService" address="http://localhost:8081/product-filter-service">
 		<jaxrs:serviceBeans>
 			<ref bean="productFilterServiceRest" />
 		</jaxrs:serviceBeans>
@@ -120,10 +113,8 @@
 
 	</jaxrs:server>
   	<bean id="productFilterServiceRest" class="Service.Resource.Product.ProductFilterResource" />
-  
-</beans>
-
-<jaxrs:server name="ProductService" address="http://localhost:8081/product-service">
+  	
+  	<jaxrs:server name="ProductService" address="http://localhost:8081/product-service">
 		<jaxrs:serviceBeans>
 			<ref bean="productSearchServiceRest" />
 		</jaxrs:serviceBeans>
@@ -139,22 +130,28 @@
 	</jaxrs:server>
   	<bean id="productSearchServiceRest" class="Service.Resource.Product.ProductResource" />
   
-</beans>
-
-<jaxrs:server name="ReportService" address="http://localhost:8081/report-service">
-		<jaxrs:serviceBeans>
-			<ref bean="reportServiceRest" />
-		</jaxrs:serviceBeans>
-		<jaxrs:providers>
-			<ref bean="jacksonProvider" />
-		</jaxrs:providers> 
-
-		<jaxrs:schemaLocations>
-			<jaxrs:schemaLocation>Service.Representation.Report.ReportRepresentation</jaxrs:schemaLocation>
-			<jaxrs:schemaLocation>Service.Representation.Report.ReportRequest</jaxrs:schemaLocation>
-		</jaxrs:schemaLocations>
-
-	</jaxrs:server>
-  	<bean id="reportServiceRest" class="Service.Resource.Report.ReportResource" />
   
-</beans>
+  
+  </beans>
+  
+  
+  
+
+ 
+
+
+
+
+
+
+
+
+  
+
+  	
+  
+
+  
+ 
+ 
+  

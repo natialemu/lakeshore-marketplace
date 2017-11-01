@@ -1,6 +1,7 @@
 package Service.Workflow.Account;
 
 import Service.Representation.Account.AccountRepresentation;
+import Service.Representation.Account.AccountRequest;
 
 public interface AccountActivity {
 
@@ -16,7 +17,7 @@ public interface AccountActivity {
 
 	boolean loginWithUsername(String username, String password);
 
-	void registerCustomerForAccountWithEmail(String username, String email, String password);
+	void registerCustomerForAccountWithEmail(AccountRequest accountRequest);
 
 	void regsiterCustomerForAccount(String username, String password);
 

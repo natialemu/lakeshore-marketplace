@@ -187,11 +187,11 @@ public class ProductActivityImpl implements ProductAcitvity {
 	}
 
 	@Override
-	public void addProduct(int partner_id, Set<ProductRequest> products) {
+	public void addProduct(String username, Set<ProductRequest> products) {
 		// TODO Auto-generated method stub
 		List<Product> productList = new ArrayList<>();
 		getProductList(products,productList);
-		partnerFactory.addProducts(partner_id, productList);
+		partnerFactory.addProducts(username, productList);
 		
 		
 		
