@@ -1,8 +1,10 @@
 package Domain.Order;
 
 import Domain.Customer.Customer;
+
 import Domain.Order.OrderState.OrderState;
 import Domain.Product.Product;
+
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ public interface OrderFactory {
 
     boolean cancelOrder(int confirmationID);
 
-    String getOrderStatus();
+    String getOrderStatus(int orderID);
+
+	Order getOrder(int orderID);
 
 }

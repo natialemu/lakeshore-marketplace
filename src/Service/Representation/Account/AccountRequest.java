@@ -8,7 +8,7 @@ public interface AccountRequest {
 
 	String getPassword();
 
-	void setPassword(String password) 
+	void setPassword(String password); 
 
 	String getEmail();
 

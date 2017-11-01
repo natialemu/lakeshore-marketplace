@@ -22,7 +22,6 @@ public class OrderFactoryImpl implements OrderFactory{
     private TransactionFactory transaction;
     private Validator validator;
     private OrderCancellation orderCancellation;
-    private Order order;
     private DeliveryFactory delivery;
     private OrderDAO orderDAO;
     private OrderValidation orderValidation;
@@ -40,7 +39,7 @@ public class OrderFactoryImpl implements OrderFactory{
     public boolean createOrder(List<Product> products, Customer customer){
 
 
-        order = new OrderImpl(products,customer);
+        Order order = new OrderImpl(products,customer);
 
         validator = new ValidatorImpl(new ValidatePayment(order));
         if(validator.executeCommand()){
@@ -87,13 +86,21 @@ public class OrderFactoryImpl implements OrderFactory{
         return true;
     }
 
-    public String getOrderStatus(){
+    public String getOrderStatus(int orderID){
+    	Order order = orderDAO.retrieveOrder(orderID);
         return order.getStringOrderState();
     }
 
     private void confirmOrder(){
         System.out.println("Order has been proccessed! ");
     }
+
+	@Override
+	public Order getOrder(int orderID) {
+		// TODO Auto-generated method stub
+		return orderDAO.retrieveOrder(orderID);
+	}
+    
 
 
 

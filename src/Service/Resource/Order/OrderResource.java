@@ -67,7 +67,7 @@ public class OrderResource implements OrderService{
 	@Override
 	public void notifyCancellation(int orderID) {
 		OrderActivity orderActivity = new OrderActivityImpl();
-		orderActivity.notifyCancellation();
+		orderActivity.notifyCancellation(orderID);
 		// TODO Auto-generated method stub
 		
 	}

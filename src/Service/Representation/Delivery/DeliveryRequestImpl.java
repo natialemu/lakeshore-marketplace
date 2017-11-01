@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 public class DeliveryRequestImpl implements DeliveryRequest{
 	private String tracking_number;
     
-    public DeliveryStatusRequestImpl() {}
+    public DeliveryRequestImpl() {}
     
     public String getTracking_number() {
 		return tracking_number;

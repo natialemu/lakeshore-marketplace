@@ -1,6 +1,8 @@
 package Service.Representation.Order;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,10 +19,12 @@ public class OrderRepresentationImpl implements OrderRepresentation{
 	private String customerName;
 	private double orderCost;
 	private String orderDate;
-	private List<ProductRepresentation> productsInOrder;
+	private Set<ProductRepresentation> productsInOrder;
 	private int orderConfirmationNumber;
 	
-	public OrderRepresentationImpl() {}
+	public OrderRepresentationImpl() {
+		productsInOrder = new HashSet<>();
+	}
 	
 	public String getCustomerName() {
 		return customerName;
@@ -48,10 +52,10 @@ public class OrderRepresentationImpl implements OrderRepresentation{
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
-	public List<ProductRepresentation> getProductsInOrder() {
+	public Set<ProductRepresentation> getProductsInOrder() {
 		return productsInOrder;
 	}
-	public void setProductsInOrder(List<ProductRepresentation> productsInOrder) {
+	public void setProductsInOrder(Set<ProductRepresentation> productsInOrder) {
 		this.productsInOrder = productsInOrder;
 	}
 	

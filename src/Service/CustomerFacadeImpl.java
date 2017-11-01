@@ -55,6 +55,6 @@ public class CustomerFacadeImpl implements CustomerFaccade {
 
     @Override
     public String getOrderStatus() {
-        return orderFactory.getOrderStatus();
+        return "";
     }
 }

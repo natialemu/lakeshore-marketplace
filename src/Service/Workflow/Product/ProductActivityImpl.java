@@ -9,7 +9,9 @@ import Domain.Partner.PartnerImpl;
 import Domain.Product.Product;
 import Domain.Product.ProductFactory;
 import Domain.Product.ProductFactoryImpl;
+import Domain.Product.ProductImpl;
 import Service.Representation.Product.ProductRepresentation;
+import Service.Representation.Product.ProductRepresentationImpl;
 import Service.Representation.Product.ProductRequest;
 
 public class ProductActivityImpl implements ProductAcitvity {
@@ -37,6 +39,16 @@ public class ProductActivityImpl implements ProductAcitvity {
 	private void convertToProductRepresentation(List<Product> filteredProduct,
 			Set<ProductRepresentation> productRepresentation) {
 		// TODO Auto-generated method stub
+		for(Product p: filteredProduct) {
+			ProductRepresentation prep = new ProductRepresentationImpl();
+			prep.setPartnerName(p.getParner().getAccount().getAccountProfile().getContactInfo().getFullName());
+			prep.setProductCost(p.getProductCost());
+			prep.setProductName(p.getProductName());
+			prep.setProductTag(p.getProductTag());
+			prep.setProductType(p.getProductType());
+			
+			productRepresentation.add(prep);
+		}
 		
 	}
 
@@ -45,6 +57,11 @@ public class ProductActivityImpl implements ProductAcitvity {
 		//double productCost, String productName, String productTag, String productTyp
 		
 		// TODO: will depend on what the request methods contain
+		
+		for(ProductRequest pr: products) {
+			Product newProduct = new ProductImpl(pr.getProductCost(),pr.getProductName(),pr.getProductTag(),pr.getProductType());
+			productList.add(newProduct);
+		}
 		
 	}
 

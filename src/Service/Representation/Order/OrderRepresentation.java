@@ -1,13 +1,14 @@
 package Service.Representation.Order;
 
 import java.util.List;
+import java.util.Set;
 
 import Service.Representation.Product.ProductRepresentation;
 
 public interface OrderRepresentation {
 	
-	void setProductsInOrder(List<ProductRepresentation> productsInOrder);
-	List<ProductRepresentation> getProductsInOrder();
+	void setProductsInOrder(Set<ProductRepresentation> productsInOrder);
+	Set<ProductRepresentation> getProductsInOrder();
 	void setOrderDate(String orderDate);
 	String getOrderDate();
 	void setOrderCost(double orderCost);

@@ -2,6 +2,8 @@ package Domain.Delivery;
 
 import Domain.Order.Order;
 import Domain.Partner.Partner;
+import Domain.Partner.PartnerFactory;
+import Domain.Partner.PartnerFactoryImpl;
 import Domain.Partner.PartnerImpl;
 import Domain.Product.Product;
 import Repository.Delivery.DeliveryDAO;
@@ -14,15 +16,17 @@ public class DeliveryFactoryImpl implements DeliveryFactory{
     private List<Partner> partners;
     private DeliveryDAO deliveryDAO;
     private DeliveryConfirmation deliveryConfirmation;
+    private PartnerFactory partnerFactory;
 
     public DeliveryFactoryImpl(Order order){
+    	partnerFactory = new PartnerFactoryImpl();
         delivery = new DeliveryImpl(order);
         deliveryDAO  =new DeliveryDAOImpl();
         partners = order.getOrderDetail().getAllPartners();
 
         for(Partner p: partners){
             List<Product> products = order.getOrderDetail().getProductByPartner(p);
-            p.acceptOrder(products,order.getOrderDetail().getCustomer());
+            partnerFactory.acceptOrder(products, order.getOrderDetail().getCustomer());
         }
         deliveryDAO.createDelivery(delivery);
         deliveryConfirmation = new DeliveryConfirmationImpl();

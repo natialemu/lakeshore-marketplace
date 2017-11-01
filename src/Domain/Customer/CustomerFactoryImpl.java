@@ -13,4 +13,9 @@ public class CustomerFactoryImpl implements CustomerFactory {
     public boolean createCustomer(Customer customer) {
         return customerDAO.createCustomer(customer);
     }
+    
+    @Override
+    public Customer createCustomer() {
+        return new CustomerImpl();
+    }
 }
