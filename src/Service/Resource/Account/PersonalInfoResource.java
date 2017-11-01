@@ -18,8 +18,19 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Consumes({"application/xml","application/json"})
 	@Path("/personal-information")
 	@Override
-	public void updateEmail(String oldEmail, String newEmail) {
-		// TODO Auto-generated method stub
+	public void updateEmail(@QueryParam("oldEmail") String oldEmail, @QueryParam("newEmail") String newEmail) {
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.updateEmail(oldEmail, newEmail);
+		
+	}
+
+	@PUT
+	@Consumes({"application/xml","application/json"})
+	@Path("/personal-information")
+	@Override
+	public void updateFullName(@QueryParam("email") String email, @QueryParam("newFullName") String newFullName) {
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.updateFullName(email, newFullName);
 		
 		
 	}
@@ -28,18 +39,9 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Consumes({"application/xml","application/json"})
 	@Path("/personal-information")
 	@Override
-	public void updateFullName(String email, String newFullName) {
-		// TODO Auto-generated method stub
-		
-		
-	}
-
-	@PUT
-	@Consumes({"application/xml","application/json"})
-	@Path("/personal-information")
-	@Override
-	public void updateBirthDate(String email, String birthDate) {
-		// TODO Auto-generated method stub
+	public void updateBirthDate(@QueryParam("email") String email, @QueryParam("birthDate") String birthDate) {
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.updateBirthDate(email, birthDate);
 		
 	}
 
@@ -47,9 +49,10 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Consumes({"application/xml","application/json"})
 	@Path("/personal-information")
 	@Override
-	public void updateLocation(String email, int zipcode, String streetAddress, String city, String country,
+	public void updateLocation(@QueryParam("email") String email,@QueryParam("zipcode")  int zipcode,@QueryParam("streetAddress")  String streetAddress,@QueryParam("city")  String city,@QueryParam("country")  String country,@QueryParam("state")
 			String state) {
-		// TODO Auto-generated method stub
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.updateLocation(email, zipcode, streetAddress, city, country, state);
 		
 	}
 
@@ -57,8 +60,9 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Consumes({"application/xml","application/json"})
 	@Path("/personal-information")
 	@Override
-	public void updatePhone(String email, int areacode, int countrycode, int phoneNumber, int phoneType) {
-		// TODO Auto-generated method stub
+	public void updatePhone(@QueryParam("email") String email,@QueryParam("areacode")  int areacode,@QueryParam("countrycode")  int countrycode,@QueryParam("phoneNumber")  int phoneNumber,@QueryParam("phoneType")  int phoneType) {
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.updatePhone(email, areacode, countrycode, phoneNumber, phoneType);
 		
 	}
 
@@ -66,8 +70,9 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Consumes({"application/xml","application/json"})
 	@Path("/personal-information")
 	@Override
-	public void updateSecurityQuestion(String email, String newSecurityQuestion) {
-		// TODO Auto-generated method stub
+	public void updateSecurityQuestion(@QueryParam("email") String email,@QueryParam("newSecurityQuestion")  String newSecurityQuestion) {
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.updateSecurityQuestion(email, newSecurityQuestion);
 		
 	}
 
@@ -75,8 +80,9 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Consumes({"application/xml","application/json"})
 	@Path("/personal-information")
 	@Override
-	public void updateSecurityAnswer(String email, String newSecurityQuestionAnswer) {
-		// TODO Auto-generated method stub
+	public void updateSecurityAnswer(@QueryParam("email") String email,@QueryParam("newSecurityQuestionAnswer")  String newSecurityQuestionAnswer) {
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.updateSecurityAnswer(email, newSecurityQuestionAnswer);
 		
 	}
 
@@ -85,8 +91,8 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Path("/personal-information")
 	@Override
 	public PersonalInformationRepresentation getPersonalInformation() {
-		// TODO Auto-generated method stub
-		return null;
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		return personalInfoActivity.getPersonalInformation();
 	}
 
 	@DELETE
@@ -94,8 +100,8 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Path("/personal-information")
 	@Override
 	public void removeEmail(String newEmail) {
-		// TODO Auto-generated method stub
-		
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.removeEmail(newEmail);
 	}
 
 	@DELETE
@@ -103,8 +109,8 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Path("/personal-information")
 	@Override
 	public void removeFullName(String email, String FullName) {
-		// TODO Auto-generated method stub
-		
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.removeFullName(email, FullName);
 	}
 
 	@DELETE
@@ -112,18 +118,17 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Path("/personal-information")
 	@Override
 	public void removeBirthDate(String email, String birthDate) {
-		// TODO Auto-generated method stub
-		
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.removeBirthDate(email, birthDate);
 	}
 
 	@DELETE
 	@Produces({"application/xml","application/json"})
 	@Path("/personal-information")
 	@Override
-	public void removeLocation(String email, int zipcode, String streetAddress, String city, String country,
-			String state) {
-		// TODO Auto-generated method stub
-		
+	public void removeLocation(String email, int zipcode, String streetAddress, String city, String country, String state) {
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.removeLocation(email, zipcode, streetAddress, city, country);
 	}
 
 	@DELETE
@@ -131,8 +136,8 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Path("/personal-information")
 	@Override
 	public void removePhone(String email, int areacode, int countrycode, int phoneNumber, int phoneType) {
-		// TODO Auto-generated method stub
-		
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.removePhone(email, areacode, countrycode, phoneNumber, phoneType);
 	}
 
 	@DELETE
@@ -140,8 +145,8 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Path("/personal-information")
 	@Override
 	public void removesecurityQuestion(String email, String newSecurityQuestion) {
-		// TODO Auto-generated method stub
-		
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.removesecurityQuestion(email, newSecurityQuestion);
 	}
 
 	@DELETE
@@ -149,8 +154,8 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Path("/personal-information")
 	@Override
 	public void removesecurityAnswer(String email, String newSecurityQuestionAnswer) {
-		// TODO Auto-generated method stub
-		
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.removesecurityAnswer(email, newSecurityQuestionAnswer);
 	}
 
 	@POST
@@ -158,8 +163,8 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Path("/personal-information")
 	@Override
 	public void createPersonalInformation(PersonalInformationRequest personalInformation) {
-		// TODO Auto-generated method stub
-		
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		personalInfoActivity.createPersonalInformation(personalInformation);
 	}
 
 }
