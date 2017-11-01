@@ -18,11 +18,5 @@ public interface Partner {
     Delivery getDelivery();
     void setDelivery(Delivery delivery);
 
-    Delivery acceptDelivery(Delivery delivery);
-
-    void acceptOrder(List<Product> products, Customer customer);
-
-    void createPartner();
-
     void setPartnerID(int partnerID);
 }

@@ -193,4 +193,13 @@ public class AccountFactoryImpl implements AccountFactory {
 
         return new AccountImpl(email,username,password);
     }
+
+	@Override
+	public Account getAccount(String username, String password) {
+		// TODO Auto-generated method stub
+		if(accountManagement.validateAccount(username, password)) {
+			return accountManagement.getAccount(username);
+		}
+		return null;
+	}
 }

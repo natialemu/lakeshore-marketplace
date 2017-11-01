@@ -60,8 +60,8 @@ public class ProductFactoryImpl implements ProductFactory{
         return productFilter.filterProductByTag(products);
     }
 
-    public List<Product> sortProductsByName(List<Product> products){
-        return productFilter.sortProductsByName(products);
+    public List<Product> sortProductsByName(List<Product> products, boolean order){
+        return productFilter.sortProductsByName(products,order);
     }
 
     public List<Product> sortProductsByPrice(List<Product> products){
@@ -75,5 +75,59 @@ public class ProductFactoryImpl implements ProductFactory{
     public void createProduct(Product product){
         productDAO.createProduct(product);
     }
+
+	@Override
+	public List<Product> filterProductByCost(List<Product> productList, double minCost, double maxCost) {
+		// TODO Auto-generated method stub
+		return productFilter.filterProductByCost(productList,minCost, maxCost);
+	}
+
+	@Override
+	public List<Product> filterProductByRating(List<Product> productList, int minRating, int maxRating) {
+		
+		return productFilter.filterProductByRating(productList,minRating, maxRating);
+	}
+
+	@Override
+	public List<Product> filterProductByDate(List<Product> productList, String date1, String date2) {
+		// TODO Auto-generated method stub
+		return productFilter.filterProductByDate(productList,date1,date2);
+	}
+
+	@Override
+	public List<Product> filterProductBySeller(List<Product> productList, String sellerName) {
+		// TODO Auto-generated method stub
+		return productFilter.filterProductBySeller(productList,sellerName);
+	}
+
+	@Override
+	public List<Product> getProduct(int productID) {
+		// TODO Auto-generated method stub
+		return productSearch.getProduct(productID);
+	}
+
+	@Override
+	public List<Product> getProductBySeller(String sellerName) {
+		// TODO Auto-generated method stub
+		return productSearch.getProductBySeller(sellerName);
+	}
+
+	@Override
+	public List<Product> getProductByType(String productType) {
+		// TODO Auto-generated method stub
+		return productSearch.getProductByType(productType);
+	}
+
+	@Override
+	public List<Product> getProductsBySellerAndType(String sellerName, String productType) {
+		// TODO Auto-generated method stub
+		return productSearch.getProductsBySellerAndType(sellerName,productType);
+	}
+
+	@Override
+	public List<Product> getProductsByName(String productName) {
+		// 
+		return productSearch.getProductByType(productName);
+	}
 
 }

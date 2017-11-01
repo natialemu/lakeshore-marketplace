@@ -123,7 +123,7 @@
   
 </beans>
 
-<jaxrs:server name="ProductSearchService" address="http://localhost:8081/product-search-service">
+<jaxrs:server name="ProductService" address="http://localhost:8081/product-service">
 		<jaxrs:serviceBeans>
 			<ref bean="productSearchServiceRest" />
 		</jaxrs:serviceBeans>
@@ -137,7 +137,7 @@
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
-  	<bean id="productSearchServiceRest" class="Service.Resource.Product.ProductSearchResource" />
+  	<bean id="productSearchServiceRest" class="Service.Resource.Product.ProductResource" />
   
 </beans>
 

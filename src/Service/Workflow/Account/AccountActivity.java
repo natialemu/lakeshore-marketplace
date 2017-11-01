@@ -6,11 +6,11 @@ public interface AccountActivity {
 
 	void deleteAccount(String username, String passowrd);
 
-	AccountRepresentation getAccount();
+	AccountRepresentation getAccount(String username, String password);
 
 	void updateAccount(String oldUsername, String newUsername, String oldPassowrd, String newPassword);
 
-	void updatePassword(String oldPassword, String newPassword);
+	void updatePassword(String username, String oldPassword, String newPassword);
 
 	void updateUsername(String oldUsername, String newUnsername);
 

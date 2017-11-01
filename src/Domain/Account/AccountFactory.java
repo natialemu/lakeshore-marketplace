@@ -49,4 +49,5 @@ public interface AccountFactory {
 
 
     Account getNewAccount(String email, String username, String password);
+    Account getAccount(String username, String password);
 }

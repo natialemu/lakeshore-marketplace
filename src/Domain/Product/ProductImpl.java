@@ -10,6 +10,14 @@ public class ProductImpl implements Product {
 	private String productName;
 	private double productCost;
 
+	public ProductImpl(double productCost, String productName, String productTag, String productType){
+	    this.productID = IDGenerator.getId();
+	    this.productCost = productCost;
+	    this.productName = productName;
+	    this.productTag = productTag;
+	    this.productType = productType;
+	    this.productPhoto = "UNDEFINED";
+    }
 	public ProductImpl(double productCost, String productName, String productPhoto, String productTag, String productType){
 	    this.productPhoto = productPhoto;
 	    this.productID = IDGenerator.getId();

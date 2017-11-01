@@ -2,17 +2,21 @@ package Service.Resource.Product;
 
 import java.util.Set;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import Service.Representation.Product.ProductRepresentation;
+import Service.Representation.Product.ProductRequest;
 import Service.Workflow.Product.ProductAcitvity;
 import Service.Workflow.Product.ProductActivityImpl;
 @Path("/")
-public class ProductSearchResource implements ProductSearchService{
+public class ProductResource implements ProductService{
 	
 
 	@GET
@@ -73,6 +77,30 @@ public class ProductSearchResource implements ProductSearchService{
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		return productActivity.getProductsByName(productName);
 		
+	}
+	
+
+	@POST
+	@Consumes({"application/xml" , "application/json"})
+	@Path("/products")
+	@Override
+	public void addProduct(int partner_id, Set<ProductRequest> products) {
+		ProductAcitvity productActivity = new ProductActivityImpl();
+		productActivity.addProduct(partner_id,products);
+		
+		// TODO Auto-generated method stub
+		
+	}
+
+	@DELETE
+	@Consumes({"application/xml" , "application/json"})
+	@Path("/products")
+	@Override
+	public void deleteProduct(int partner_id, int product_id) {
+		// TODO Auto-generated method stub
+		
+		ProductAcitvity productActivity = new ProductActivityImpl();
+		productActivity.deleteProduct(partner_id,product_id);
 	}
 	
 	

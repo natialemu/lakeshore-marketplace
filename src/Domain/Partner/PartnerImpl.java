@@ -20,6 +20,7 @@ import java.util.List;
 
 public class PartnerImpl implements Partner{
     private Account account;
+    private Inventory inventory;
 
     public void setPartnerID(int partnerID) {
         this.partnerID = partnerID;
@@ -27,27 +28,13 @@ public class PartnerImpl implements Partner{
 
     private int partnerID;
 
-    private DeliveryFactory deliveryFactory;
-    private OrderFactory orderFactory;
-    private Inventory inventory;
-    private PartnerDAO partnerDAO;
-
-
-
     public PartnerImpl(){
         partnerID = IDGenerator.getId();
-        deliveryFactory = new DeliveryFactoryImpl();
-        partnerDAO = new PartnerDAOImpl();
-        orderFactory = new OrderFactoryImpl();
-
+        inventory = new InventoryImpl();
 
 
     }
 
-    public void createPartner(){
-
-        partnerDAO.createPartner(this);
-    }
     @Override
     public Account getAccount() {
         return account;
@@ -87,29 +74,8 @@ public class PartnerImpl implements Partner{
 
     @Override
     public void setDelivery(Delivery delivery) {
-
+    
     }
 
-    @Override
-    public Delivery acceptDelivery(Delivery delivery) {
-        //subscription
-       return deliveryFactory.sendDelivery();
-
-    }
-
-    @Override
-    public void acceptOrder(List<Product> products, Customer customer) {
-        System.out.println("Order accepted by partner");
-    }
-
-    public void sendDeliveryStatus(int deliveryID, int trackingNumber){
-        deliveryFactory.acceptDeliveryStatus(deliveryID,trackingNumber);
-    }
-    public void sendDeliveryStatus(int deliveryID, int trackingNumber, String deliveryMethod,String deliveryCarrier){
-        deliveryFactory.acceptDeliveryStatus(deliveryID,trackingNumber,deliveryMethod,deliveryCarrier);
-    }
-
-    public boolean orderReturned(Order order){
-        return orderFactory.cancelOrder(order.getOrderID());
-    }
+    
 }

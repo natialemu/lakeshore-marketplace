@@ -1,5 +1,6 @@
 package Service.Resource.Account;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -73,10 +74,10 @@ public class AccountResource implements AccountService{
 	@Produces({"application/xml", "application/json"})
 	@Path("/account/password")
 	@Override
-	public void updatePassword(String oldPassword, String newPassword) {
+	public void updatePassword(String username,String oldPassword, String newPassword) {
 		// TODO Auto-generated method stub
 		AccountActivity accountActivity = new AccountActivityImpl();
-		accountActivity.updatePassword(oldPassword,newPassword);
+		accountActivity.updatePassword(username,oldPassword,newPassword);
 		
 	}
 
@@ -92,14 +93,15 @@ public class AccountResource implements AccountService{
 		
 	}
 
-	@GET
+	@POST
 	@Produces({"application/xml", "application/json"})
+	@Consumes({"application/xml", "application/json"})
 	@Path("/account")
 	@Override
-	public AccountRepresentation getAccount() {
+	public AccountRepresentation getAccount(String username, String password) {
 		// TODO Auto-generated method stub
 		AccountActivity accountActivity = new AccountActivityImpl();
-		return accountActivity.getAccount();
+		return accountActivity.getAccount(username, password);
 		
 	}
 

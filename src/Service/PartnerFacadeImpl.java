@@ -29,19 +29,19 @@ public class PartnerFacadeImpl implements PartnerFacade{
     @Override
     public void registerPartner(Partner partner, String email, String username, String password) {
 
-        Account newAccount = accountFactory.getNewAccount(email,username,password);
-        accountFactory.createBasicAccount(newAccount);
-        partner.setAccount(newAccount);
-        partner.createPartner();
+//        Account newAccount = accountFactory.getNewAccount(email,username,password);
+//        accountFactory.createBasicAccount(newAccount);
+//        partner.setAccount(newAccount);
+//        partner.createPartner();
     }
 
     @Override
     public void addProducts(List<Product> productList, Partner partner) {
 
-        for(Product p: productList){
-            p.setPartner(partner);
-            productFactory.createProduct(p);
-        }
+//        for(Product p: productList){
+//            p.setPartner(partner);
+//            productFactory.createProduct(p);
+//        }
 
     }
 

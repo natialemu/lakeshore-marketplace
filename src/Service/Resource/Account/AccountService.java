@@ -15,10 +15,10 @@ public interface AccountService {
 	
 	
 	void updateUsername(String oldUsername, String newUnsername);
-	void updatePassword(String oldPassword, String newPassword);
+	void updatePassword(String username, String oldPassword, String newPassword);
 	void updateAccount(String oldUsername, String newUsername, String oldPassowrd, String newPassword);
 	
-	AccountRepresentation getAccount();
+	AccountRepresentation getAccount(String username, String password);
 	
 	void deleteAccount(String username, String passowrd);
 	

@@ -31,6 +31,7 @@ public class PersonalInfoResource implements PersonalInfoService {
 	public void updateFullName(String email, String newFullName) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 	@PUT
