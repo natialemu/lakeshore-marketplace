@@ -5,10 +5,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import Service.Representation.AbstractRepresentation;
+
 @XmlRootElement(name = "BankInformation")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class BankInfoRepresentationImpl implements BankInfoRepresentation {
+public class BankInfoRepresentationImpl extends AbstractRepresentation implements BankInfoRepresentation {
 
 	private String bankName;
 	private String accountType;

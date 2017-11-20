@@ -1,6 +1,8 @@
 package Service.Representation.Product;
 
-public interface ProductRepresentation {
+import Service.Representation.AbstractRepresentationInterface;
+
+public interface ProductRepresentation extends AbstractRepresentationInterface{
 	
 	double getProductCost();
 	void setProductCost(double productCost);

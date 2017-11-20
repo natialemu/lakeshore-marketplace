@@ -5,10 +5,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import Service.Representation.AbstractRepresentation;
+
 @XmlRootElement(name = "UserInformation")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class PersonalInformationRepresentationImpl implements PersonalInformationRepresentation{
+public class PersonalInformationRepresentationImpl extends AbstractRepresentation implements PersonalInformationRepresentation{
 
 	private String birthDate;
 	private String fullName;

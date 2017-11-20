@@ -12,17 +12,17 @@ public class ActiveAccount implements AccountState {
 
     @Override
     public boolean updateUserName(String username) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean updatePassword(String username, String password) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean updateDateOfBirth(String dateOfBirth) {
-        return false;
+        return true;
     }
 
     @Override
@@ -32,32 +32,32 @@ public class ActiveAccount implements AccountState {
 
     @Override
     public boolean updatePaymentCard(String cardNumber, String expirationDate, String cardHolderName, int securityCode) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean updateBankInformation(String bankName, String accountNumber, String routingNumber) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean deleteAccount(int accountID) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean deleteAccountAccount(String email, String password) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean deleteAccountWithPassword(String username, String password) {
-        return false;
+        return true;
     }
 
     @Override
@@ -89,17 +89,7 @@ public class ActiveAccount implements AccountState {
         //account.getAccountSettings().setDefaultBankAccount(bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
-    @Override
-    public boolean logInToAccount(String username, String password) {
-        account.setAccountState(account.getLoggedInState());
-        return true;
-    }
-
-    @Override
-    public boolean logInToAccountWithEmail(String email, String password) {
-        account.setAccountState(account.getLoggedInState());
-        return true;
-    }
+   
 
     @Override
     public boolean ReactivateAccount(String oldUsername, String oldPassword) {

@@ -46,7 +46,6 @@ public class AccountImpl implements Account{
 
     private AccountState ACTIVE_STATE = new ActiveAccount(this);
     private AccountState INACTIVE_STATE = new InactiveAccount(this);
-    private AccountState LOGGED_IN_STATE = new LoggedInState(this);
 
 
 
@@ -142,15 +141,7 @@ public class AccountImpl implements Account{
         currentstate.setDefaultBankAccount(bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
-    @Override
-    public boolean logInToAccount(String username, String password) {
-        return currentstate.logInToAccount(username,password);
-    }
-
-    @Override
-    public boolean logInToAccountWithEmail(String email, String password) {
-        return currentstate.logInToAccountWithEmail(email,password);
-    }
+    
 
     @Override
     public boolean ReactivateAccount(String oldUsername, String oldPassword) {
@@ -178,10 +169,6 @@ public class AccountImpl implements Account{
         return INACTIVE_STATE;
     }
 
-    @Override
-    public AccountState getLoggedInState() {
-        return LOGGED_IN_STATE;
-    }
 
     @Override
     public String getStringAccountState() {

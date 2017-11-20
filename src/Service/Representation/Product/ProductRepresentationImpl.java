@@ -5,10 +5,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import Service.Representation.AbstractRepresentation;
+
 @XmlRootElement(name = "Product")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class ProductRepresentationImpl implements ProductRepresentation {
+public class ProductRepresentationImpl extends AbstractRepresentation implements ProductRepresentation {
     
     private double productCost;
     private String productName;

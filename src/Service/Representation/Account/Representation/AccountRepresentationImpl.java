@@ -1,14 +1,16 @@
-package Service.Representation.Account;
+package Service.Representation.Account.Representation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import Service.Representation.AbstractRepresentation;
+
 @XmlRootElement(name = "Account")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class AccountRepresentationImpl implements AccountRepresentation{
+public class AccountRepresentationImpl extends AbstractRepresentation implements AccountRepresentation{
 	
 	private String username;
 	private String accountStatus;

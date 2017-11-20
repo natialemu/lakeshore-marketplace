@@ -1,6 +1,8 @@
 package Service.Representation.Order;
 
-public interface OrderStatusRepresentation {
+import Service.Representation.AbstractRepresentationInterface;
+
+public interface OrderStatusRepresentation extends AbstractRepresentationInterface{
 	void setOrderStatus(String orderStatus);
 	String getOrderStatus();
 

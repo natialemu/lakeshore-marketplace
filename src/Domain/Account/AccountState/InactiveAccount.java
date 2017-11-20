@@ -89,16 +89,7 @@ public class InactiveAccount implements AccountState{
 
     }
 
-    @Override
-    public boolean logInToAccount(String username, String password) {
-        return false;
-    }
-
-    @Override
-    public boolean logInToAccountWithEmail(String email, String password) {
-        return false;
-    }
-
+   
     @Override
     public boolean ReactivateAccount(String oldUsername, String oldPassword) {
         account.setAccountState(account.getActiveState());

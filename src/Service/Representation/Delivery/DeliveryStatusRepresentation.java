@@ -1,6 +1,8 @@
 package Service.Representation.Delivery;
 
-public interface DeliveryStatusRepresentation {
+import Service.Representation.AbstractRepresentationInterface;
+
+public interface DeliveryStatusRepresentation extends AbstractRepresentationInterface {
 	void setDeliveryConfirmationID(String deliveryConfirmationID);
 	void setDeliveryMethod(String deliveryMethod);
 	void setDeliveryCarrier(String deliveryCarrier);

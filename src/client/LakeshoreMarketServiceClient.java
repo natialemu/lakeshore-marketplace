@@ -9,10 +9,10 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import Domain.Product.Product;
-import Service.Representation.Account.AccountRequest;
-import Service.Representation.Account.AccountRequestImpl;
 import Service.Representation.Account.BasicAccountRequest;
 import Service.Representation.Account.BasicAccountRequestImpl;
+import Service.Representation.Account.Request.AccountRequest;
+import Service.Representation.Account.Request.AccountRequestImpl;
 import Service.Representation.Product.ProductRequest;
 import Service.Representation.Product.ProductRequestImpl;
 
@@ -49,12 +49,14 @@ public final class LakeshoreMarketServiceClient {
         String postAccountRequestHeaders = postAccountClient.getHeaders().toString();
         System.out.println("Client POST METHOD Request Headers:  " + postAccountRequestHeaders);
         AccountRequest accountRequest = new AccountRequestImpl();
-        accountRequest.setEmail("test@test.com");
+        accountRequest.setEmail("test5@test.com");
         accountRequest.setPassword("testPassword");
-        accountRequest.setUsername("testUsername");
+        accountRequest.setUsername("testUsername5");
+        accountRequest.setIsCustomer(true);
         
         String accountResponsePost =  postAccountClient.post(accountRequest, String.class);
         System.out.println("POST MEDTHOD Response ........." + accountResponsePost);
+        
         
         /*****************************************************************************************
          * Partner creates an account
@@ -71,9 +73,10 @@ public final class LakeshoreMarketServiceClient {
         String postAccountPRequestHeaders = postAccountClient.getHeaders().toString();
         System.out.println("Client POST METHOD Request Headers:  " + postAccountPRequestHeaders);
         AccountRequest accountRequestPartner = new AccountRequestImpl();
-        accountRequestPartner.setEmail("testPartner@test.com");
+        accountRequestPartner.setEmail("testPartner1@test.com");
         accountRequestPartner.setPassword("testPartnerPassword");
-        accountRequestPartner.setUsername("testPartnerUsername");
+        accountRequestPartner.setUsername("testPartnerUsername1");
+        accountRequestPartner.setIsCustomer(false);
         
         String accountPResponsePost =  postAccountClient.post(accountRequest, String.class);
         System.out.println("POST MEDTHOD Response ........." + accountPResponsePost);
@@ -157,79 +160,79 @@ public final class LakeshoreMarketServiceClient {
         String putLoginResponse = putLoginClient.put(customerBAR, String.class);
         System.out.println("PUT METHOD Response: ...." + putLoginResponse);
         
-
-        
-        /*****************************************************************************************
-         * Customer searches for a product
-         *****************************************************************************************/
-        System.out.println("GET METHOD for searching for product.........................................................");
-        WebClient getProductSearchClient = WebClient.create("http://localhost:8081/product-service", providers);
-        
-        WebClient.getConfig(getProductSearchClient).getOutInterceptors().add(new LoggingOutInterceptor());
-
-        WebClient.getConfig(getProductSearchClient).getInInterceptors().add(new LoggingInInterceptor());
-        
-        getProductSearchClient = getProductSearchClient.accept("application/json").type("application/json").path("/products");
-        
-        String getProductSearchRequestURI = getProductSearchClient.getCurrentURI().toString();
-        System.out.println("Client GET METHOD URI for products search Request :  " + getProductSearchRequestURI);
-        String getProductSearchRequestHeaders = getProductSearchClient.getHeaders().toString();
-        System.out.println("Client GET METHOD Request Headers:  " + getProductSearchRequestHeaders);
-        
-        
-        String productSearchResponse = getProductSearchClient.get(String.class);
-        System.out.println("GET METHOD Response: ...." + productSearchResponse);
-        
-        //to get the response as object of Employee class
-        //Employee employee = client.get(Employee.class);
-        Set<Product> searchResults = (Set<Product>)getProductSearchClient.getCollection(Product.class);
-        
-        //System.out.println("Name:" + employee.getFirstName());
-        //System.out.println("privileges:" + employee.getPrivileges());
-        
-        /*****************************************************************************************
-         * Customer Buys a product
-         *****************************************************************************************/
-        Set<ProductRequest> shoppingCart = new HashSet<>();
-        
-        Iterator<Product> productIterator = searchResults.iterator();
-        
-        
-        int i =0;
-        while(productIterator.hasNext()) {
-        	Product currentProduct = productIterator.next();
-        	if(i < 3) {
-        		
-        		ProductRequest pr1 = new ProductRequestImpl();
-        		pr1.setProductCost(currentProduct.getProductCost());
-        		pr1.setProductName(currentProduct.getProductName());
-        		pr1.setProductTag(currentProduct.getProductTag());
-        		pr1.setProductType(currentProduct.getProductType());
-        		
-        		shoppingCart.add(pr1);
-        		
-        	}
-        }
-        
-        System.out.println("POST METHOD for placing an order .........................................................");
-        WebClient getOrderClient = WebClient.create("http://localhost:8081/order-service", providers);
-        
-        WebClient.getConfig(getOrderClient).getOutInterceptors().add(new LoggingOutInterceptor());
-        WebClient.getConfig(getOrderClient).getInInterceptors().add(new LoggingInInterceptor());
-        
-        getOrderClient = getOrderClient.accept("application/json").type("application/json").path("/order");
-        
-        String getOrderRequestURI = getOrderClient.getCurrentURI().toString();
-        System.out.println("Client GET METHOD  to bank-information Request URI:  " + getOrderRequestURI);
-        String getOrderRequestHeaders = getOrderClient.getHeaders().toString();
-        System.out.println("Client GET METHOD Request Headers:  " + getOrderRequestHeaders);
-        BasicAccountRequest basicAccountRequest2 = new BasicAccountRequestImpl();
-        basicAccountRequest2.setUsername("testUser");
-        basicAccountRequest2.setPassword("testPassword");
-        
-        String orderResponse = getOrderClient.post(basicAccountRequest2,String.class);
-        System.out.println("GET METHOD Response: ...." + orderResponse);
-        
+//
+//        
+//        /*****************************************************************************************
+//         * Customer searches for a product
+//         *****************************************************************************************/
+//        System.out.println("GET METHOD for searching for product.........................................................");
+//        WebClient getProductSearchClient = WebClient.create("http://localhost:8081/product-service", providers);
+//        
+//        WebClient.getConfig(getProductSearchClient).getOutInterceptors().add(new LoggingOutInterceptor());
+//
+//        WebClient.getConfig(getProductSearchClient).getInInterceptors().add(new LoggingInInterceptor());
+//        
+//        getProductSearchClient = getProductSearchClient.accept("application/json").type("application/json").path("/products");
+//        
+//        String getProductSearchRequestURI = getProductSearchClient.getCurrentURI().toString();
+//        System.out.println("Client GET METHOD URI for products search Request :  " + getProductSearchRequestURI);
+//        String getProductSearchRequestHeaders = getProductSearchClient.getHeaders().toString();
+//        System.out.println("Client GET METHOD Request Headers:  " + getProductSearchRequestHeaders);
+//        
+//        
+//        String productSearchResponse = getProductSearchClient.get(String.class);
+//        System.out.println("GET METHOD Response: ...." + productSearchResponse);
+//        
+//        //to get the response as object of Employee class
+//        //Employee employee = client.get(Employee.class);
+//        Set<Product> searchResults = (Set<Product>)getProductSearchClient.getCollection(Product.class);
+//        
+//        //System.out.println("Name:" + employee.getFirstName());
+//        //System.out.println("privileges:" + employee.getPrivileges());
+//        
+//        /*****************************************************************************************
+//         * Customer Buys a product
+//         *****************************************************************************************/
+//        Set<ProductRequest> shoppingCart = new HashSet<>();
+//        
+//        Iterator<Product> productIterator = searchResults.iterator();
+//        
+//        
+//        int i =0;
+//        while(productIterator.hasNext()) {
+//        	Product currentProduct = productIterator.next();
+//        	if(i < 3) {
+//        		
+//        		ProductRequest pr1 = new ProductRequestImpl();
+//        		pr1.setProductCost(currentProduct.getProductCost());
+//        		pr1.setProductName(currentProduct.getProductName());
+//        		pr1.setProductTag(currentProduct.getProductTag());
+//        		pr1.setProductType(currentProduct.getProductType());
+//        		
+//        		shoppingCart.add(pr1);
+//        		
+//        	}
+//        }
+//        
+//        System.out.println("POST METHOD for placing an order .........................................................");
+//        WebClient getOrderClient = WebClient.create("http://localhost:8081/order-service", providers);
+//        
+//        WebClient.getConfig(getOrderClient).getOutInterceptors().add(new LoggingOutInterceptor());
+//        WebClient.getConfig(getOrderClient).getInInterceptors().add(new LoggingInInterceptor());
+//        
+//        getOrderClient = getOrderClient.accept("application/json").type("application/json").path("/order");
+//        
+//        String getOrderRequestURI = getOrderClient.getCurrentURI().toString();
+//        System.out.println("Client GET METHOD  to bank-information Request URI:  " + getOrderRequestURI);
+//        String getOrderRequestHeaders = getOrderClient.getHeaders().toString();
+//        System.out.println("Client GET METHOD Request Headers:  " + getOrderRequestHeaders);
+//        BasicAccountRequest basicAccountRequest2 = new BasicAccountRequestImpl();
+//        basicAccountRequest2.setUsername("testUser");
+//        basicAccountRequest2.setPassword("testPassword");
+//        
+//        String orderResponse = getOrderClient.post(basicAccountRequest2,String.class);
+//        System.out.println("GET METHOD Response: ...." + orderResponse);
+//        
        
         System.exit(0);
 	}

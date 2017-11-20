@@ -85,7 +85,7 @@ public class ProductResource implements ProductService{
 	@Consumes({"application/xml" , "application/json"})
 	@Path("/products/{username}")
 	@Override
-	public void addProduct(@PathParam("username")String username, Set<ProductRequest> products) {
+	public void addProduct(Set<ProductRequest> products,@PathParam("username")String username ) {
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		productActivity.addProduct(username,products);
 		

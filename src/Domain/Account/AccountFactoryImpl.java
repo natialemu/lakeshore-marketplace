@@ -11,7 +11,7 @@ public class AccountFactoryImpl implements AccountFactory {
 
 
     private AccountManagement accountManagement;
-    private  Account account;//set when logging in
+    //private  Account account;//set when logging in
 
     public AccountFactoryImpl(){
 
@@ -21,82 +21,82 @@ public class AccountFactoryImpl implements AccountFactory {
 
     @Override
     public boolean updateUserName(String username,String password) {
-        if(account != null && account.updateUserName(username)){
+        //if(account != null && account.updateUserName(username)){
             return accountManagement.updateUserName(username,password);
-        }
-        return false;
+        //}
+        //return false;
     }
 
     @Override
     public boolean updatePassword(String username, String password) {
-        if(account != null && account.updatePassword(username, password)){
+        //if(account != null && account.updatePassword(username, password)){
             return accountManagement.updatePassword(username, password);
-        }
-        return false;
+        //}
+        //return false;
     }
 
     @Override
     public boolean updateDateOfBirth(String dateOfBirth) {
-        if(account != null && account.updateDateOfBirth(dateOfBirth)){
+       // if(account != null && account.updateDateOfBirth(dateOfBirth)){
             return accountManagement.updateDateOfBirth(dateOfBirth);
-        }
-        return false;
+        //}
+        //return false;
     }
 
     @Override
     public boolean updateEmail(String email,String password) {
-        if(account != null && account.updateEmail(email)){
+        //if(account != null && account.updateEmail(email)){
             return accountManagement.updateEmail(email,password);
-        }
-        return false;
+        //}
+        //return false;
     }
 
     @Override
     public boolean updatePaymentCard(String cardNumber, String expirationDate, String cardHolderName, int securityCode) {
-        if(account != null && account.updatePaymentCard(cardNumber,expirationDate,cardHolderName,securityCode)){
+        //if(account != null && account.updatePaymentCard(cardNumber,expirationDate,cardHolderName,securityCode)){
             return accountManagement.updatePaymentCard(cardNumber,expirationDate,cardHolderName,securityCode);
-        }
-        return false;
+        //}
+        //return false;
     }
 
     @Override
     public boolean updateBankInformation(String bankName, String accountNumber, String routingNumber) {
-        if(account != null && account.updateBankInformation(bankName,accountNumber,routingNumber)){
+       // if(account != null && account.updateBankInformation(bankName,accountNumber,routingNumber)){
             return accountManagement.updateBankInformation(bankName,accountNumber,routingNumber);
-        }
-        return false;
+        //}
+        //return false;
     }
 
     @Override
     public boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox) {
-        if(account != null && account.updateAddress(streetAddress,state,city,zipcode,country,pobox)){
+        //if(account != null && account.updateAddress(streetAddress,state,city,zipcode,country,pobox)){
             return accountManagement.updateAddress(streetAddress,state,city,zipcode,country,pobox);
-        }
-        return false;
+        //}
+        //return false;
     }
 
     @Override
     public boolean deleteAccount(int accountID) {
-        if(account != null && account.deleteAccount(accountID)){
+        //if(account != null && account.deleteAccount(accountID)){
             return accountManagement.deleteAccount(accountID);
-        }
-        return false;
+        //}
+        //return false;
     }
 
     @Override
     public boolean deleteAccountAccount(String email, String password) {
-        if(account != null && account.deleteAccountAccount(email,password)){
+        //if(account != null && account.deleteAccountAccount(email,password)){
             return accountManagement.deleteAccountAccount(email,password);
-        }
-        return false;
+        //}
+        //return false;
     }
 
     @Override
     public boolean deleteAccountWithUsername(String username, String password) {
-        if(account != null && account.deleteAccountWithUsername(username,password)){
+        //if(account != null && account.deleteAccountWithUsername(username,password)){
             return accountManagement.deleteAccountWithUsername(username,password);
-        }
-        return false;
+        //}
+        //return false;
     }
 
     @Override
@@ -113,54 +113,57 @@ public class AccountFactoryImpl implements AccountFactory {
 
     @Override
     public void setDefaultLocation(Location location) {
-        if(account != null){
-            account.setDefaultLocation(location);
-            accountManagement.setDefaultLocation(location);
-        }
+    	//TODO: will need login information
+        //if(account != null){
+           // account.setDefaultLocation(location);
+            //accountManagement.setDefaultLocation(location);
+        //}
 
     }
 
     @Override
     public void setDefaultPaymentCard(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
-        if(account != null){
+        /*if(account != null){
             account.setDefaultPaymentCard(cardHolderName,cardNumber,cardExpirationDate,securityNumber);
             accountManagement.setDefaultPaymentCard(cardHolderName,cardNumber,cardExpirationDate,securityNumber);
-        }
+        }*/
 
     }
 
     @Override
     public void setDefaultBankAccount(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        if(account != null){
-            account.setDefaultBankAccount(bankName,routingNumber,accountType,billingAddress,swiftCode);
-            accountManagement.setDefaultBankAccount(bankName,routingNumber,accountType,billingAddress,swiftCode);
-        }
+        //if(account != null){
+          //  account.setDefaultBankAccount(bankName,routingNumber,accountType,billingAddress,swiftCode);
+            //accountManagement.setDefaultBankAccount(bankName,routingNumber,accountType,billingAddress,swiftCode);
+       // }
     }
 
     @Override
     public boolean logInToAccount(String username, String password) {
-        if(account == null && accountManagement.validateAccount(username,password)){
+        //if(account == null && accountManagement.validateAccount(username,password)){
 
-            account = accountManagement.getAccount(username);
+          Account account = accountManagement.getAccount(username);
 
-            return account.logInToAccount(username,password);
-        }
-        return false;
+            return account != null;
+        //}
+        //return false;
     }
 
     @Override
     public boolean logInToAccountWithEmail(String email, String password) {
-        if(account == null && accountManagement.validateAccountWithEmail(email,password)){
+        //if(account == null && accountManagement.validateAccountWithEmail(email,password)){
 
-            account = accountManagement.getAccountWithEmail(email);
+          Account account = accountManagement.getAccountWithEmail(email);
 
-            return account.logInToAccountWithEmail(email,password);
-        }
-        return false;
+            return account != null;
+        //}
+        //return false;
     }
 
     @Override
     public boolean ReactivateAccount(String oldUsername, String oldPassword) {
+    	Account account = accountManagement.getAccount(oldUsername);
+    	
         if(account != null && account.ReactivateAccount(oldUsername,oldPassword)){
             return accountManagement.ReactivateAccount(oldUsername,oldPassword);
 

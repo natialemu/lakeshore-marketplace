@@ -1,7 +1,7 @@
 package Service.Workflow.Account;
 
-import Service.Representation.Account.AccountRepresentation;
-import Service.Representation.Account.AccountRequest;
+import Service.Representation.Account.Representation.AccountRepresentation;
+import Service.Representation.Account.Request.AccountRequest;
 
 public interface AccountActivity {
 

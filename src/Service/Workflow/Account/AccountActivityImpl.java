@@ -12,9 +12,10 @@ import Domain.Partner.PartnerFactory;
 import Domain.Partner.PartnerFactoryImpl;
 import Domain.Partner.PartnerImpl;
 import Domain.ReviewSystem.ReviewSystemImpl;
-import Service.Representation.Account.AccountRepresentation;
-import Service.Representation.Account.AccountRepresentationImpl;
-import Service.Representation.Account.AccountRequest;
+import Service.Representation.Link;
+import Service.Representation.Account.Representation.AccountRepresentation;
+import Service.Representation.Account.Representation.AccountRepresentationImpl;
+import Service.Representation.Account.Request.AccountRequest;
 
 public class AccountActivityImpl implements AccountActivity{
 	private AccountFactory accountFactory;

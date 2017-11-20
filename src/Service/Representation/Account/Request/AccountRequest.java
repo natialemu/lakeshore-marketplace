@@ -1,4 +1,4 @@
-package Service.Representation.Account;
+package Service.Representation.Account.Request;
 
 public interface AccountRequest {
 
@@ -13,4 +13,8 @@ public interface AccountRequest {
 	String getEmail();
 
 	void setEmail(String email);
+	
+	void setIsCustomer(boolean isCustomer);
+	
+	boolean getIsCustomer();
 }

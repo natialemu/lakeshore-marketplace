@@ -1,5 +1,7 @@
 package Service.Representation.Report;
 
-public interface ReportRepresentation {
+import Service.Representation.AbstractRepresentationInterface;
+
+public interface ReportRepresentation extends AbstractRepresentationInterface {
 
 }

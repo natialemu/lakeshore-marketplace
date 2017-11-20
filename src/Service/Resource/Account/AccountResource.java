@@ -9,9 +9,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
-import Service.Representation.Account.AccountRepresentation;
-import Service.Representation.Account.AccountRequest;
 import Service.Representation.Account.BasicAccountRequest;
+import Service.Representation.Account.Representation.AccountRepresentation;
+import Service.Representation.Account.Request.AccountRequest;
 import Service.Workflow.Account.AccountActivity;
 import Service.Workflow.Account.AccountActivityImpl;
 
@@ -23,7 +23,7 @@ public class AccountResource implements AccountService{
 	@Consumes({"application/xml", "application/json"})
 	@Path("/account")
 	@Override
-	public void registerCustomerForAccount(@QueryParam("username") String username, @QueryParam("password") String password) {
+	public void registerForAccount(@QueryParam("username") String username, @QueryParam("password") String password) {
 		// TODO Auto-generated method stub
 		AccountActivity accountActivity = new AccountActivityImpl();
 		accountActivity.regsiterCustomerForAccount(username, password);
@@ -34,10 +34,14 @@ public class AccountResource implements AccountService{
 	@Consumes({"application/xml", "application/json"})
 	@Path("/account")
 	@Override
-	public void registerCustomerForAccountWithEmail(AccountRequest accountRequest) {
+	public void registerForAccountWithEmail(AccountRequest accountRequest) {
 		// TODO Auto-generated method stub
 		AccountActivity accountActivity = new AccountActivityImpl();
-		accountActivity.registerCustomerForAccountWithEmail(accountRequest);
+		if(accountRequest.getIsCustomer()) {
+		   accountActivity.registerCustomerForAccountWithEmail(accountRequest);
+		}else {
+			accountActivity.registerPartnerForAccountWithEmail(accountRequest.getUsername(), accountRequest.getEmail(), accountRequest.getPassword());
+		}
 		
 	}
 
@@ -97,17 +101,17 @@ public class AccountResource implements AccountService{
 		
 	}
 
-	@POST
-	@Produces({"application/xml", "application/json"})
-	@Consumes({"application/xml", "application/json"})
-	@Path("/account")
-	@Override
-	public AccountRepresentation getAccount(String username, String password) {
-		// TODO Auto-generated method stub
-		AccountActivity accountActivity = new AccountActivityImpl();
-		return accountActivity.getAccount(username, password);
-		
-	}
+//	@POST
+//	@Produces({"application/xml", "application/json"})
+//	@Consumes({"application/xml", "application/json"})
+//	@Path("/account")
+//	@Override
+//	public AccountRepresentation getAccount(String username, String password) {
+//		// TODO Auto-generated method stub
+//		AccountActivity accountActivity = new AccountActivityImpl();
+//		return accountActivity.getAccount(username, password);
+//		
+//	}
 
 	@DELETE
 	@Produces({"application/xml", "application/json"})
@@ -120,27 +124,7 @@ public class AccountResource implements AccountService{
 		
 	}
 
-	@DELETE
-	@Produces({"application/xml", "application/json"})
-	@Path("/account")
-	@Override
-	public void registerPartnerForAccount(String username, String password) {
-		// TODO Auto-generated method stub
-		AccountActivity accountActivity = new AccountActivityImpl();
-		accountActivity.registerPartnerForAccount(username, password);
-		
-	}
 
-	@DELETE
-	@Produces({"application/xml", "application/json"})
-	@Path("/account")
-	@Override
-	public void registerPartnerForAccountWithEmail(AccountRequest accountRequest) {
-		// TODO Auto-generated method stub
-		AccountActivity accountActivity = new AccountActivityImpl();
-		accountActivity.registerPartnerForAccountWithEmail(accountRequest.getUsername(),accountRequest.getEmail(), accountRequest.getPassword());
-		
-	}
 
 	
 }

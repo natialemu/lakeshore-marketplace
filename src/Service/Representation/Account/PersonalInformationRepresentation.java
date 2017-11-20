@@ -1,6 +1,8 @@
 package Service.Representation.Account;
 
-public interface PersonalInformationRepresentation {
+import Service.Representation.AbstractRepresentationInterface;
+
+public interface PersonalInformationRepresentation extends AbstractRepresentationInterface {
 	void setBirthDate(String birthDate);
 	void setFullName(String fullName);
 	void setStreetAddress(String streetAddress);

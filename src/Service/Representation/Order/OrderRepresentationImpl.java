@@ -9,12 +9,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import Service.Representation.AbstractRepresentation;
 import Service.Representation.Product.ProductRepresentation;
 
 @XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class OrderRepresentationImpl implements OrderRepresentation{
+public class OrderRepresentationImpl extends AbstractRepresentation implements OrderRepresentation{
 	
 	private String customerName;
 	private double orderCost;

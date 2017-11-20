@@ -33,9 +33,6 @@ public interface Account {
     void setDefaultPaymentCard(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
     void setDefaultBankAccount(String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
 
-    //Login to Account
-    boolean logInToAccount(String username, String password);
-    boolean logInToAccountWithEmail(String email, String password);
 
     //Re-activate Account
     boolean ReactivateAccount(String oldUsername, String oldPassword);
@@ -46,7 +43,6 @@ public interface Account {
     AccountState getAccountSate();
     AccountState getActiveState();
     AccountState getInActiveState();
-    AccountState  getLoggedInState();
     String getStringAccountState();
 
     //Setter and getter

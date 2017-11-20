@@ -1,6 +1,8 @@
 package Service.Representation.Account;
 
-public interface BankInfoRepresentation {
+import Service.Representation.AbstractRepresentationInterface;
+
+public interface BankInfoRepresentation extends AbstractRepresentationInterface {
 	
 	void setCardSecurityCode(String cardSecurityCode);
 	void setCardExpirationDate(String cardExpirationDate);

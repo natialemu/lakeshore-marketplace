@@ -5,10 +5,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import Service.Representation.AbstractRepresentation;
+
 @XmlRootElement(name = "DeliveryStatus")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class DeliveryStatusRepresentationImpl implements DeliveryStatusRepresentation {
+public class DeliveryStatusRepresentationImpl extends AbstractRepresentation implements DeliveryStatusRepresentation {
 
 	private String tracking_number;
     private String deliveryCarrier;

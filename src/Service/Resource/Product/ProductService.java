@@ -23,7 +23,7 @@ public interface ProductService {
 	
 	
 	//CREATE
-	void addProduct(String username, Set<ProductRequest> products);
+	void addProduct(Set<ProductRequest> products,String username);
 	
 	//DELETE
 	void deleteProduct(int partner_id, int product_id);

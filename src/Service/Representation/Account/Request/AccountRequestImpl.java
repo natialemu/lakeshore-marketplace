@@ -1,4 +1,4 @@
-package Service.Representation.Account;
+package Service.Representation.Account.Request;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,6 +12,7 @@ public class AccountRequestImpl implements AccountRequest {
 	private String username;
 	private String password;
 	private String email;
+	private boolean isCustomer;
 	
 	public AccountRequestImpl() {}
 
@@ -37,6 +38,19 @@ public class AccountRequestImpl implements AccountRequest {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public void setIsCustomer(boolean isCustomer) {
+		// TODO Auto-generated method stub
+		this.isCustomer = isCustomer;
+		
+	}
+
+	@Override
+	public boolean getIsCustomer() {
+		// TODO Auto-generated method stub
+		return isCustomer;
 	}
 	
 	

@@ -54,12 +54,12 @@ public class PartnerFactoryImpl implements PartnerFactory {
     public void addProducts(String username, List<Product> products) {
     	
 
-    	Partner partner = partnerDAO.getPartner(username);
-    	
-    	for(Product p: products){
-            p.setPartner(partner);
-            productFactory.createProduct(p);
-        }
+//    	Partner partner = partnerDAO.getPartner(username);
+//    	
+//    	for(Product p: products){
+//            p.setPartner(partner);
+//            productFactory.createProduct(p);
+//        }
     }
     @Override
     public Delivery acceptDelivery(Partner partner, Delivery delivery) {

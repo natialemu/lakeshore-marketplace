@@ -1,6 +1,8 @@
-package Service.Representation.Account;
+package Service.Representation.Account.Representation;
 
-public interface AccountRepresentation {
+import Service.Representation.AbstractRepresentationInterface;
+
+public interface AccountRepresentation extends AbstractRepresentationInterface{
 	
 	void setUsername(String username);
 	void setAccountStatus(String accountStatus);
