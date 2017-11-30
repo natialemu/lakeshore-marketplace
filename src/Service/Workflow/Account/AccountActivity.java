@@ -25,4 +25,6 @@ public interface AccountActivity {
 
 	void registerPartnerForAccountWithEmail(String username, String email, String password);
 
+	boolean loginWithEmail(String email, String password);
+
 }

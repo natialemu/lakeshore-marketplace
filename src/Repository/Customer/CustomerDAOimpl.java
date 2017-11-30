@@ -110,4 +110,45 @@ public class CustomerDAOimpl implements CustomerDAO {
 
         return customer;
     }
+
+	@Override
+	public Customer getCustomerwithAccount(int account_id) {
+		int customer_id = 0;
+        int review_system_id = 0;
+
+
+
+        Connection connection = openConnection();
+        try {
+            Statement selectStatement = connection.createStatement();
+
+            String selectQuery = "SELECT * from customer where account_id=" + account_id;
+            ResultSet resultSet = selectStatement.executeQuery(selectQuery);
+            resultSet.next();
+
+            customer_id = resultSet.getInt("customer_id");
+            review_system_id = resultSet.getInt("review_system_id");
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+
+        Account account = accountDAO.getAccount(account_id);
+        ReviewSystem reviewSystem = reviewSystemDAO.getReviewSystem(review_system_id);
+
+        Customer customer = new CustomerImpl();
+        customer.setAccount(account);
+        customer.setReviewSystem(reviewSystem);
+        customer.setCustomerID(customer_id);
+
+        return customer;
+	}
 }

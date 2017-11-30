@@ -5,21 +5,22 @@ import java.util.Set;
 import javax.jws.WebService;
 
 import Service.Representation.Account.BasicAccountRequest;
+import Service.Representation.Product.MinProductRepresentation;
 import Service.Representation.Product.ProductRepresentation;
 import Service.Representation.Product.ProductRequest;
 
 @WebService
 public interface ProductService {
 	
-	Set<ProductRepresentation> getProducts();
+	Set<MinProductRepresentation> getProducts();
 	Set<ProductRepresentation> getProductByID(int productID);
 
 	Set<ProductRepresentation> getProductsBySeller(String sellerName);
 
-	Set<ProductRepresentation> getProductsByType(String productType);
+	Set<MinProductRepresentation> getProductsByType(String productType);
 
-	Set<ProductRepresentation> getProductsBySellerAndType(String sellerName, String productType);
-	Set<ProductRepresentation> getProductsByName(String productName);
+	Set<MinProductRepresentation> getProductsBySellerAndType(String sellerName, String productType);
+	Set<MinProductRepresentation> getProductsByName(String productName);
 	
 	
 	//CREATE

@@ -12,39 +12,40 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import Service.Representation.Account.BasicAccountRequest;
+import Service.Representation.Product.MinProductRepresentation;
 import Service.Representation.Product.ProductRepresentation;
 import Service.Representation.Product.ProductRequest;
 import Service.Workflow.Product.ProductAcitvity;
 import Service.Workflow.Product.ProductActivityImpl;
-@Path("/")
+@Path("/products/")
 public class ProductResource implements ProductService{
 	
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/products")
+	@Path("/")
 	@Override
-	public Set<ProductRepresentation> getProducts() {
-		// TODO Auto-generated method stub
+	public Set<MinProductRepresentation> getProducts() {
+
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		return productActivity.getAllProducts();
 	}
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/product/{productID}")
+	@Path("/{productID}")
 	@Override
 	public Set<ProductRepresentation> getProductByID(@PathParam("productID") int productID) {
-		// TODO Auto-generated method stub
+
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		return productActivity.getProductByID(productID);	}
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/products/{sellerName}")
+	@Path("/{sellerName}")
 	@Override
 	public Set<ProductRepresentation> getProductsBySeller(@PathParam("sellerName") String sellerName) {
-		// TODO Auto-generated method stub
+
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		return productActivity.getProductBySeller(sellerName);
 		
@@ -52,29 +53,29 @@ public class ProductResource implements ProductService{
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/products/{productType}")
+	@Path("/{productType}")
 	@Override
-	public Set<ProductRepresentation> getProductsByType(@PathParam("productType") String productType) {
-		// TODO Auto-generated method stub
+	public Set<MinProductRepresentation> getProductsByType(@PathParam("productType") String productType) {
+
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		return productActivity.getProductByType(productType);	}
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/products")
+	@Path("/")
 	@Override
-	public Set<ProductRepresentation> getProductsBySellerAndType(@QueryParam("employeeId") String sellerName, @QueryParam("productType") String productType) {
-		// TODO Auto-generated method stub
+	public Set<MinProductRepresentation> getProductsBySellerAndType(@QueryParam("employeeId") String sellerName, @QueryParam("productType") String productType) {
+
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		return productActivity.getProductsBySellerAndType(sellerName, productType);
 	}
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/products/{productName}")
+	@Path("/{productName}")
 	@Override
-	public Set<ProductRepresentation> getProductsByName(@PathParam("productName") String productName) {
-		// TODO Auto-generated method stub
+	public Set<MinProductRepresentation> getProductsByName(@PathParam("productName") String productName) {
+
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		return productActivity.getProductsByName(productName);
 		
@@ -83,22 +84,20 @@ public class ProductResource implements ProductService{
 
 	@POST
 	@Consumes({"application/xml" , "application/json"})
-	@Path("/products/{username}")
+	@Path("/{username}")
 	@Override
 	public void addProduct(Set<ProductRequest> products,@PathParam("username")String username ) {
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		productActivity.addProduct(username,products);
 		
-		// TODO Auto-generated method stub
 		
 	}
 
 	@DELETE
 	@Consumes({"application/xml" , "application/json"})
-	@Path("/products")
+	@Path("/")
 	@Override
 	public void deleteProduct(int partner_id, int product_id) {
-		// TODO Auto-generated method stub
 		
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		productActivity.deleteProduct(partner_id,product_id);

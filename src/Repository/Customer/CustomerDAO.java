@@ -6,4 +6,6 @@ public interface CustomerDAO {
     boolean createCustomer(Customer customer);
 
     Customer getCustomer(int customer_id);
+
+	Customer getCustomerwithAccount(int accountID);
 }

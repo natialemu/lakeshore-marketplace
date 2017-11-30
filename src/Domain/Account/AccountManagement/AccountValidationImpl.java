@@ -24,7 +24,7 @@ public class AccountValidationImpl implements AccountValidation{
 
     @Override
     public boolean validateAccount(String username, String password) {
-        return true;//accountDAO.validateAccount(username,password);
+        return accountDAO.validateAccount(username,password);
     }
 
     @Override

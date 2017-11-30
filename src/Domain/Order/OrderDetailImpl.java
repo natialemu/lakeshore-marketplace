@@ -82,17 +82,38 @@ public class OrderDetailImpl implements OrderDetail {
     }
 
     private double calculateTotalCost(List<Product> products) {
-
-        return 10.0;
+        double totalCost = 0.0;
+        for(Product p: products) {
+        	totalCost+=p.getProductCost();
+        }
+        return totalCost;
     }
 
     private void populateMapInventory(List<Product> products, Map<Partner, List<Product>> mapProductInOrder) {
-        //TODO
+    	
+    	for(Product p: products) {
+    		if(mapProductInOrder.containsKey(p.getParner())) {
+    			List<Product> inventory = mapProductInOrder.get(p.getParner());
+    			inventory.add(p);
+    			mapProductInOrder.put(p.getParner(), inventory);
+    		}else {
+    			List<Product> inventory = new ArrayList<>();
+    			inventory.add(p);
+    			mapProductInOrder.put(p.getParner(), inventory);
+    		}
+    	}
 
     }
 
     private void populateMapCount(List<Product> products, Map<Product, Integer> mapProductCount)
     {
+    	for(Product p: products) {
+    		if(mapProductCount.containsKey(p)) {
+    			mapProductCount.put(p, mapProductCount.get(p)+1);
+    		}else {
+    			mapProductCount.put(p, 1);
+    		}
+    	}
 
     }
 

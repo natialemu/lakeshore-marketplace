@@ -12,38 +12,16 @@ import Repository.Delivery.DeliveryDAOImpl;
 import java.util.List;
 
 public class DeliveryFactoryImpl implements DeliveryFactory{
-    private Delivery delivery;
-    private List<Partner> partners;
     private DeliveryDAO deliveryDAO;
-    private DeliveryConfirmation deliveryConfirmation;
     private PartnerFactory partnerFactory;
 
-    public DeliveryFactoryImpl(Order order){
-    	partnerFactory = new PartnerFactoryImpl();
-        delivery = new DeliveryImpl(order);
-        deliveryDAO  =new DeliveryDAOImpl();
-        partners = order.getOrderDetail().getAllPartners();
-
-        for(Partner p: partners){
-            List<Product> products = order.getOrderDetail().getProductByPartner(p);
-            partnerFactory.acceptOrder(products, order.getOrderDetail().getCustomer());
-        }
-        deliveryDAO.createDelivery(delivery);
-        deliveryConfirmation = new DeliveryConfirmationImpl();
-        sendConfirmation();
-        //send it to the partner
-        //partner.acceptDelivery(delivery);
-    }
-
+   
     public DeliveryFactoryImpl(){
         deliveryDAO = new DeliveryDAOImpl();
+    	partnerFactory = new PartnerFactoryImpl();
     }
 
-    @Override
-    public Delivery sendDelivery() {
-        return delivery;
-    }
-
+    
     @Override
     public void acceptDeliveryStatus(int deliveryId, int trackingNumber) {
 
@@ -67,5 +45,21 @@ public class DeliveryFactoryImpl implements DeliveryFactory{
         return deliveryDAO.getDelivery(deliveryID);
     }
 
+    public void notifyPartnersOfDelivery(Order order) {
+    	List<Partner> partners = order.getOrderDetail().getAllPartners();
+
+        for(Partner p: partners){
+            List<Product> products = order.getOrderDetail().getProductByPartner(p);
+            //partnerFactory.acceptOrder(products, order.getOrderDetail().getCustomer());
+            System.out.println("Email notification for delivery has been sent to partner: "+ p.getAccount().getAccountProfile().getContactInfo().getFullName());
+            System.out.println("The seller will deliver " + products.size() + " products to "+order.getOrderDetail().getCustomer().getAccount().getAccountProfile().getContactInfo().getFullName());
+        }
+        Delivery delivery = new DeliveryImpl(order);
+        deliveryDAO.createDelivery(delivery);
+        DeliveryConfirmation deliveryConfirmation = new DeliveryConfirmationImpl();
+
+
+    	
+    }
 
 }

@@ -34,7 +34,12 @@ public class ProductSearchImpl implements ProductSearch{
 	@Override
 	public List<Product> getProduct(int productID) {
 		// TODO Auto-generated method stub
-		return new ArrayList<>();
+		List<Product> result = new ArrayList<>();
+		Product returnedProduct = productDAO.getProductByID(productID);
+		if(returnedProduct != null) {
+			result.add(returnedProduct);
+		}
+		return result;
 	}
 	@Override
 	public List<Product> getProductBySeller(String sellerName) {
@@ -44,11 +49,17 @@ public class ProductSearchImpl implements ProductSearch{
 	@Override
 	public List<Product> getProductByType(String productType) {
 		// TODO Auto-generated method stub
-		return new ArrayList<>();
+		return productDAO.getProductWithType(productType);
 	}
 	@Override
 	public List<Product> getProductsBySellerAndType(String sellerName, String productType) {
 		// TODO Auto-generated method stub
 		return new ArrayList<>();
+	}
+	@Override
+	public List<Product> getProductByName(String productName) {
+		// TODO Auto-generated method stub
+		return productDAO.getProductsWithName(productName);
+
 	}
 }

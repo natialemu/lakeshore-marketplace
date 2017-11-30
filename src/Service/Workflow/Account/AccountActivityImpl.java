@@ -105,4 +105,10 @@ public class AccountActivityImpl implements AccountActivity{
 		
 	}
 
+	@Override
+	public boolean loginWithEmail(String email, String password) {
+		// TODO Auto-generated method stub
+		return accountFactory.logInToAccountWithEmail(email, password);
+	}
+
 }

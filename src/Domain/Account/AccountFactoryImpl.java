@@ -408,7 +408,6 @@ public class AccountFactoryImpl implements AccountFactory {
 	@Override
 	public boolean validateAccount(String username, String password) {
 		// TODO Auto-generated method stub
-		System.out.println("Account Validated!");
-		return true;
+		return accountManagement.validateAccount(username, password);
 	}
 }

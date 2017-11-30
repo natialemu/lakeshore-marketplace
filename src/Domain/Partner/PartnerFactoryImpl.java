@@ -54,17 +54,34 @@ public class PartnerFactoryImpl implements PartnerFactory {
     public void addProducts(String username, List<Product> products) {
     	
 
-//    	Partner partner = partnerDAO.getPartner(username);
+    	Partner partner = partnerDAO.getPartner(username);
+    	assert(partner != null);
+    	assert(partner.getPartnerUsername().equals(username));
+    	assert(partner.getAccount() != null);
+    	assert(partner.getPartnerID() != 0);
+    	
+    	
+    	assert(products != null);
+    	assert(products.size() > 0);
+    	
 //    	
-//    	for(Product p: products){
-//            p.setPartner(partner);
+    	for(Product p: products){
+    		assert(p.getParner() == null);
+    		 p.setPartner(partner);
+    		 assert(p.getParner() != null);
+    		 productFactory.createProduct(p);
+    		 System.out.println("Check DB -> just added product: " + p.getProductName());
+   
+    	}
+    	
+             // p.setPartner(partner);
 //            productFactory.createProduct(p);
 //        }
     }
     @Override
     public Delivery acceptDelivery(Partner partner, Delivery delivery) {
         //subscription
-       return deliveryFactory.sendDelivery();
+       return null;
 
     }
 

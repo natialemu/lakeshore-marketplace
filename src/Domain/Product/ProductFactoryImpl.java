@@ -127,7 +127,7 @@ public class ProductFactoryImpl implements ProductFactory{
 	@Override
 	public List<Product> getProductsByName(String productName) {
 		// 
-		return productSearch.getProductByType(productName);
+		return productSearch.getProductByName(productName);
 	}
 
 }

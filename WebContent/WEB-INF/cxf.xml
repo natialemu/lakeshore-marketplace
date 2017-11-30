@@ -31,7 +31,7 @@
   	<bean id="accountServiceRest" class="Service.Resource.Account.AccountResource" />
   	
   	
-  	<jaxrs:server name="BankInfoService" address="http://localhost:8081/bank-information-service">
+  	<jaxrs:server name="BankInfoService" address="http://localhost:8081/bank-service">
 		<jaxrs:serviceBeans>
 			<ref bean="bankInfoServiceRest" />
 		</jaxrs:serviceBeans>
@@ -48,7 +48,7 @@
   	<bean id="bankInfoServiceRest" class="Service.Resource.Account.BankInfoResource" />
   
   
-  <jaxrs:server name="PersonalInfoService" address="http://localhost:8081/personal-information-service">
+  <jaxrs:server name="PersonalInfoService" address="http://localhost:8081/profile-service">
 		<jaxrs:serviceBeans>
 			<ref bean="personalInfoServiceRest" />
 		</jaxrs:serviceBeans>
@@ -64,7 +64,7 @@
 	</jaxrs:server>
   	<bean id="personalInfoServiceRest" class="Service.Resource.Account.PersonalInfoResource" />
   	
-  	<jaxrs:server name="DeliveryService" address="http://localhost:8081/delivery-delivery-service">
+  	<jaxrs:server name="DeliveryService" address="http://localhost:8081/delivery-service">
 		<jaxrs:serviceBeans>
 			<ref bean="deliveryServiceRest" />
 		</jaxrs:serviceBeans>
@@ -98,7 +98,7 @@
   	<bean id="orderServiceRest" class="Service.Resource.Order.OrderResource" />
   	
   	
-  	<jaxrs:server name="ProductFilterService" address="http://localhost:8081/product-filter-service">
+  	<jaxrs:server name="ProductFilterService" address="http://localhost:8081/product-service">
 		<jaxrs:serviceBeans>
 			<ref bean="productFilterServiceRest" />
 		</jaxrs:serviceBeans>

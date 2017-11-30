@@ -2,6 +2,7 @@ package Service.Workflow.Product;
 
 import java.util.Set;
 
+import Service.Representation.Product.MinProductRepresentation;
 import Service.Representation.Product.ProductRepresentation;
 import Service.Representation.Product.ProductRequest;
 
@@ -19,17 +20,17 @@ public interface ProductAcitvity {
 
 	Set<ProductRepresentation> filterProductBySeller(Set<ProductRequest> products, String sellerName);
 
-	Set<ProductRepresentation> getAllProducts();
+	Set<MinProductRepresentation> getAllProducts();
 
 	Set<ProductRepresentation> getProductByID(int productID);
 
 	Set<ProductRepresentation> getProductBySeller(String sellerName);
 
-	Set<ProductRepresentation> getProductByType(String productType);
+	Set<MinProductRepresentation> getProductByType(String productType);
 
-	Set<ProductRepresentation> getProductsBySellerAndType(String sellerName, String productType);
+	Set<MinProductRepresentation> getProductsBySellerAndType(String sellerName, String productType);
 
-	Set<ProductRepresentation> getProductsByName(String productType);
+	Set<MinProductRepresentation> getProductsByName(String productType);
 
 	void addProduct(String username, Set<ProductRequest> products);
 

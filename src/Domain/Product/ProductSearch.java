@@ -23,4 +23,7 @@ public interface ProductSearch {
 
 
 	List<Product> getProductsBySellerAndType(String sellerName, String productType);
+
+
+	List<Product> getProductByName(String productName);
 }

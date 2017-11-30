@@ -9,7 +9,7 @@ import Repository.Transaction.TransactionDAOImpl;
 import java.util.Date;
 
 public class TransactionFactoryImpl implements TransactionFactory{
-    private  Transaction transaction;
+    //private  Transaction transaction;
     private PaymentNotification paymentNotification;
     private ProcessPayment processPayment;
     private PaymentValidation paymentValidation;
@@ -20,8 +20,8 @@ public class TransactionFactoryImpl implements TransactionFactory{
 
 
 
-    public TransactionFactoryImpl(Order order){
-        transaction = new TransactionImpl(order);
+    public TransactionFactoryImpl(){
+        //transaction = new TransactionImpl(order);
         paymentNotification = new PaymentNotificationImpl();
         transactionHistory = new TransactionHistoryImpl();
 
@@ -37,19 +37,14 @@ public class TransactionFactoryImpl implements TransactionFactory{
 
     @Override
     public void processPayment(Order order) {
-        processPayment.processPayment(order,true);
+        processPayment.processPayment(order,true);//if false, reversing transaction
+        Transaction transaction = new TransactionImpl(order);
         transaction.setOrder(order);
         transactionDAO.createTransaction(transaction);
 
     }
 
-    public Transaction getTransaction() {
-        return transaction;
-    }
-
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
-    }
+  
 
 
     public PaymentNotification getPaymentNotification() {

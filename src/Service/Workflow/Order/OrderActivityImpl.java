@@ -2,8 +2,10 @@ package Service.Workflow.Order;
 
 import java.util.*;
 
+import Domain.Account.Account;
 import Domain.Account.AccountFactory;
 import Domain.Account.AccountFactoryImpl;
+import Domain.Customer.Customer;
 import Domain.Customer.CustomerFactory;
 import Domain.Customer.CustomerFactoryImpl;
 import Domain.Order.Order;
@@ -40,8 +42,15 @@ public class OrderActivityImpl implements OrderActivity {
 
 		List<Product> productList = new ArrayList<>();
 		getProductList(products,productList);
-		if(accountFactory.validateAccount(username, password))
-			orderFactory.createOrder(productList, customerFactory.createCustomer());
+		assert(productList.size() == products.size());
+		
+		if(accountFactory.validateAccount(username, password)) {
+			Account account = accountFactory.getAccount(username, password);
+			int accountID = account.getAccountID();
+			Customer c = customerFactory.getCustomer(accountID);
+			
+            orderFactory.createOrder(productList, c);
+		}
 		
 	}
 

@@ -9,8 +9,6 @@ public interface TransactionFactory {
     boolean validatePayment(Order order);
 
     void processPayment(Order order);
-    Transaction getTransaction();
-    void setTransaction(Transaction transaction);
 
     ProcessPayment getProcessPayment();
     void setProcessPayment(ProcessPayment processPayment);

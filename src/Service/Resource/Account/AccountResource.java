@@ -37,7 +37,7 @@ public class AccountResource implements AccountService{
 	public void registerForAccountWithEmail(AccountRequest accountRequest) {
 		// TODO Auto-generated method stub
 		AccountActivity accountActivity = new AccountActivityImpl();
-		if(accountRequest.getIsCustomer()) {
+		if(accountRequest.getIsCustomer()) {//if a buyer is registering for an account
 		   accountActivity.registerCustomerForAccountWithEmail(accountRequest);
 		}else {
 			accountActivity.registerPartnerForAccountWithEmail(accountRequest.getUsername(), accountRequest.getEmail(), accountRequest.getPassword());
@@ -52,7 +52,7 @@ public class AccountResource implements AccountService{
 	public boolean loginWithEmail(@QueryParam("username") String email, @QueryParam("password")String password) {
 		// TODO Auto-generated method stub
 		AccountActivity accountActivity = new AccountActivityImpl();
-		return accountActivity.loginWithUsername(email, password);
+		return accountActivity.loginWithEmail(email,password);
 		
 	}
 

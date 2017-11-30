@@ -4,6 +4,7 @@ import Domain.Account.Account;
 import Domain.Account.AccountFactory;
 import Domain.Partner.Partner;
 import Domain.ReviewSystem.ReviewSystem;
+import Domain.ReviewSystem.ReviewSystemImpl;
 import Domain.Tools.IDGenerator;
 
 public class CustomerImpl implements Customer {
@@ -18,6 +19,8 @@ public class CustomerImpl implements Customer {
 
     public CustomerImpl(){
         customerID = IDGenerator.getId();
+        partner = null;
+        reviewSystem = new ReviewSystemImpl();
     }
 
 

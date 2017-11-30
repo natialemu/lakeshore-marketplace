@@ -17,6 +17,7 @@ public class ProductImpl implements Product {
 	    this.productTag = productTag;
 	    this.productType = productType;
 	    this.productPhoto = "UNDEFINED";
+	    this.partner = null;
     }
 	public ProductImpl(double productCost, String productName, String productPhoto, String productTag, String productType){
 	    this.productPhoto = productPhoto;
@@ -25,6 +26,7 @@ public class ProductImpl implements Product {
 	    this.productName = productName;
 	    this.productTag = productTag;
 	    this.productType = productType;
+	    this.partner = null;
     }
 
 

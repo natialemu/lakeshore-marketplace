@@ -18,4 +18,14 @@ public class CustomerFactoryImpl implements CustomerFactory {
     public Customer createCustomer() {
         return new CustomerImpl();
     }
+	@Override
+	public Customer getCustomer(int accountID) {
+		// TODO Auto-generated method stub
+		return customerDAO.getCustomerwithAccount(accountID);
+	}
+	@Override
+	public Customer getCustomerWithCustomerID(int customerID) {
+		// TODO Auto-generated method stub
+		return customerDAO.getCustomer(customerID);
+	}
 }
