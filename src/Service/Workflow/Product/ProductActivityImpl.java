@@ -10,11 +10,11 @@ import Domain.Product.Product;
 import Domain.Product.ProductFactory;
 import Domain.Product.ProductFactoryImpl;
 import Domain.Product.ProductImpl;
-import Service.Representation.Product.MinProductRepresentation;
-import Service.Representation.Product.MinProductRepresentationImpl;
-import Service.Representation.Product.ProductRepresentation;
-import Service.Representation.Product.ProductRepresentationImpl;
-import Service.Representation.Product.ProductRequest;
+import Service.Representation.Product.Representation.MinProductRepresentation;
+import Service.Representation.Product.Representation.MinProductRepresentationImpl;
+import Service.Representation.Product.Representation.ProductRepresentation;
+import Service.Representation.Product.Representation.ProductRepresentationImpl;
+import Service.Representation.Product.Request.ProductRequest;
 
 public class ProductActivityImpl implements ProductAcitvity {
 	private ProductFactory productFactory;

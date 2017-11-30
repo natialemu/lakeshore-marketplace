@@ -2,9 +2,9 @@ package Service.Resource.Account;
 
 import javax.jws.WebService;
 
-import Service.Representation.Account.BasicAccountRequest;
-import Service.Representation.Account.PersonalInformationRepresentation;
-import Service.Representation.Account.PersonalInformationRequest;
+import Service.Representation.Account.Representation.PersonalInformationRepresentation;
+import Service.Representation.Account.Request.BasicAccountRequest;
+import Service.Representation.Account.Request.PersonalInformationRequest;
 
 @WebService
 public interface PersonalInfoService {
@@ -39,7 +39,7 @@ public interface PersonalInfoService {
 	
 	//CREATE
 	
-	void createPersonalInformation(PersonalInformationRequest personalInformation);
+	void createPersonalInformation(String username, PersonalInformationRequest personalInformation);
 	
 
 }

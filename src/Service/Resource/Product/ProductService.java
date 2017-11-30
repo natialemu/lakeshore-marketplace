@@ -4,10 +4,10 @@ import java.util.Set;
 
 import javax.jws.WebService;
 
-import Service.Representation.Account.BasicAccountRequest;
-import Service.Representation.Product.MinProductRepresentation;
-import Service.Representation.Product.ProductRepresentation;
-import Service.Representation.Product.ProductRequest;
+import Service.Representation.Account.Request.BasicAccountRequest;
+import Service.Representation.Product.Representation.MinProductRepresentation;
+import Service.Representation.Product.Representation.ProductRepresentation;
+import Service.Representation.Product.Request.ProductRequest;
 
 @WebService
 public interface ProductService {

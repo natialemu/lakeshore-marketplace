@@ -5,6 +5,8 @@ import java.util.*;
 import javax.jws.WebService;
 
 import Service.Representation.Product.*;
+import Service.Representation.Product.Representation.ProductRepresentation;
+import Service.Representation.Product.Request.ProductRequest;
 
 @WebService
 public interface ProductFilterService {

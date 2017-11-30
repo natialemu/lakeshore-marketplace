@@ -3,10 +3,10 @@ package Service.Workflow.Account;
 import Domain.Account.Account;
 import Domain.Account.AccountFactory;
 import Domain.Account.AccountFactoryImpl;
-import Service.Representation.Account.BasicAccountRequest;
-import Service.Representation.Account.PersonalInformationRepresentation;
-import Service.Representation.Account.PersonalInformationRepresentationImpl;
-import Service.Representation.Account.PersonalInformationRequest;
+import Service.Representation.Account.Representation.PersonalInformationRepresentation;
+import Service.Representation.Account.Representation.PersonalInformationRepresentationImpl;
+import Service.Representation.Account.Request.BasicAccountRequest;
+import Service.Representation.Account.Request.PersonalInformationRequest;
 
 public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 	private AccountFactory accountFactory;
@@ -16,10 +16,10 @@ public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 	}
 
 	@Override
-	public void createPersonalInformation(PersonalInformationRequest personalInformation) {
+	public void createPersonalInformation(String username, PersonalInformationRequest personalInformation) {
 		// TODO Auto-generated method stub
 		
-		accountFactory.createPersonalInformation(personalInformation.getBirthDate(),personalInformation.getCellPhone(),personalInformation.getFullName(),personalInformation.getCity(),personalInformation.getFullName(),personalInformation.getState(),personalInformation.getStreetAddress(),personalInformation.getZipcode());
+		accountFactory.createPersonalInformation(username,personalInformation.getBirthDate(),personalInformation.getCellPhone(),personalInformation.getFullName(),personalInformation.getCity(),personalInformation.getFullName(),personalInformation.getState(),personalInformation.getStreetAddress(),personalInformation.getZipcode());
 		
 	}
 

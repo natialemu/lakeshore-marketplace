@@ -6,8 +6,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import Service.Representation.Delivery.DeliveryRequest;
-import Service.Representation.Delivery.DeliveryStatusRepresentation;
+import Service.Representation.Delivery.Representation.DeliveryStatusRepresentation;
+import Service.Representation.Delivery.Request.DeliveryRequest;
 import Service.Workflow.Delivery.DeliveryActivity;
 import Service.Workflow.Delivery.DeliveryActivityImpl;
 

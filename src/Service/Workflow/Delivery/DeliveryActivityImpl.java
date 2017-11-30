@@ -2,8 +2,8 @@ package Service.Workflow.Delivery;
 
 import Domain.Delivery.DeliveryFactory;
 import Domain.Delivery.DeliveryFactoryImpl;
-import Service.Representation.Delivery.DeliveryRequest;
-import Service.Representation.Delivery.DeliveryStatusRepresentation;
+import Service.Representation.Delivery.Representation.DeliveryStatusRepresentation;
+import Service.Representation.Delivery.Request.DeliveryRequest;
 
 public class DeliveryActivityImpl implements DeliveryActivity{
 

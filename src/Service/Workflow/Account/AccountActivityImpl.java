@@ -111,4 +111,25 @@ public class AccountActivityImpl implements AccountActivity{
 		return accountFactory.logInToAccountWithEmail(email, password);
 	}
 
+	@Override
+	public AccountRepresentation getAccount(String username) {
+		// TODO Auto-generated method stub
+		Account account =  accountFactory.getAccount(username);
+		AccountRepresentation ar = new AccountRepresentationImpl();
+		ar.setAccountStatus(account.getStringAccountState());
+		ar.setEmailAddress(account.getAccountProfile().getContactInfo().getEmail());
+		ar.setUsername(account.getAccountProfile().getUsername());
+		return ar;
+	}
+
+	@Override
+	public void deleteAccount(String username) {
+
+		
+		Account account = accountFactory.getAccount(username);
+		if(account != null) {
+			accountFactory.deleteAccount(account.getAccountID());
+		}
+	}
+
 }

@@ -2,9 +2,9 @@ package Service.Resource.Account;
 
 import javax.jws.WebService;
 
-import Service.Representation.Account.BankInfoRepresentation;
-import Service.Representation.Account.BankInfoRequest;
-import Service.Representation.Account.BasicAccountRequest;
+import Service.Representation.Account.Representation.BankInfoRepresentation;
+import Service.Representation.Account.Request.BankInfoRequest;
+import Service.Representation.Account.Request.BasicAccountRequest;
 
 @WebService
 public interface BankInfoService {
@@ -23,7 +23,7 @@ public interface BankInfoService {
 	
 	
 	//GET
-	BankInfoRepresentation getBankInfo(BasicAccountRequest basicAccountRequest);	
+	BankInfoRepresentation getBankInfo(String username);	
 	
 	
 	//DELETE

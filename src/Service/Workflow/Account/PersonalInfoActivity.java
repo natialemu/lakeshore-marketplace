@@ -1,12 +1,12 @@
 package Service.Workflow.Account;
 
-import Service.Representation.Account.BasicAccountRequest;
-import Service.Representation.Account.PersonalInformationRepresentation;
-import Service.Representation.Account.PersonalInformationRequest;
+import Service.Representation.Account.Representation.PersonalInformationRepresentation;
+import Service.Representation.Account.Request.BasicAccountRequest;
+import Service.Representation.Account.Request.PersonalInformationRequest;
 
 public interface PersonalInfoActivity {
 
-	void createPersonalInformation(PersonalInformationRequest personalInformation);
+	void createPersonalInformation(String username, PersonalInformationRequest personalInformation);
 
 	void removesecurityAnswer(String email, String newSecurityQuestionAnswer);
 

@@ -6,23 +6,23 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
-import Service.Representation.Account.BankInfoRepresentation;
-import Service.Representation.Account.BankInfoRequest;
-import Service.Representation.Account.BasicAccountRequest;
+import Service.Representation.Account.Representation.BankInfoRepresentation;
+import Service.Representation.Account.Request.BankInfoRequest;
+import Service.Representation.Account.Request.BasicAccountRequest;
 import Service.Workflow.Account.BankInfoActivity;
 import Service.Workflow.Account.BankInfoActivityImpl;
 
-@Path("/")
+@Path("/bank")
 public class BankInfoResource implements BankInfoService{
-	
 	
 
 	@PUT
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void updateBankName(@QueryParam("account_number")String bankAccountNumber, @QueryParam("bank_name")String newBankName) {
 		// TODO Auto-generated method stub
@@ -34,7 +34,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@PUT
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void updateAccountNumber(@QueryParam("account_number")String oldAccountNumber, @QueryParam("account_number")String newAccountNumber) {
 		// TODO Auto-generated method stub
@@ -45,7 +45,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@PUT
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void updateRoutingNumber(@QueryParam("account_number")String accountNumber, @QueryParam("routing_number")String newRoutingNumber) {
 		// TODO Auto-generated method stub
@@ -55,7 +55,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@PUT
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void updateSwiftCode(@QueryParam("account_number")String accountNumber, @QueryParam("new_swift_code")int newSwiftCode) {
 		// TODO Auto-generated method stub
@@ -66,7 +66,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@PUT
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void updateAccountType(@QueryParam("account_number")String accountNumber, @QueryParam("account_type")String newAccountType) {
 		// TODO Auto-generated method stub
@@ -77,7 +77,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@PUT
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void updateCardNumber(@QueryParam("card_number")String cardNumber, @QueryParam("new_card_number")String newPaymentCard) {
 		// TODO Auto-generated method stub
@@ -88,7 +88,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@PUT
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void updateCardExpirationDate(@QueryParam("card_number")String cardNumber, @QueryParam("new_Date")String newDate) {
 		// TODO Auto-generated method stub
@@ -99,7 +99,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@PUT
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void updateNameOnCard(@QueryParam("card_number")String cardNumber, @QueryParam("card_name")String newNameOncard) {
 		// TODO Auto-generated method stub
@@ -110,10 +110,9 @@ public class BankInfoResource implements BankInfoService{
 
 	@PUT
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void updateSecurityCode(@QueryParam("card_number")String cardNumber, @QueryParam("new_security_code")String newSecurityCode) {
-		// TODO Auto-generated method stub
 		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
 		bankInfoActivity.updateSecurityCode(cardNumber,newSecurityCode);
 		
@@ -122,21 +121,19 @@ public class BankInfoResource implements BankInfoService{
 	@GET
 	@Produces({"application/xml","application/json"})
 	@Consumes({"application/xml", "application/json"})
-	@Path("/bank-information")
+	@Path("/{username}")
 	@Override
-	public BankInfoRepresentation getBankInfo(BasicAccountRequest basicAccountRequest) {
-		// TODO Auto-generated method stub
+	public BankInfoRepresentation getBankInfo(@PathParam("username") String username) {
 		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
-	    return bankInfoActivity.getBankInfo(basicAccountRequest);
+	    return bankInfoActivity.getBankInfo(username);
 	
 	}
 
 	@DELETE
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void deleteBankName(@QueryParam("account_number")String bankAccountNumber,@QueryParam("bank_name")String bankName) {
-		// TODO Auto-generated method stub
 		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
 		bankInfoActivity.deleteBankName(bankAccountNumber,bankName);
 		
@@ -155,7 +152,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@DELETE
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void deleteRoutingNumber(@QueryParam("account_number")String accountNumber,@QueryParam("routing_number")String routingNumber) {
 		// TODO Auto-generated method stub
@@ -177,7 +174,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@DELETE
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void deleteAccountType(@QueryParam("account_number")String accountNumber,@QueryParam("account_type")String accountType) {
 		// TODO Auto-generated method stub
@@ -188,7 +185,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@DELETE
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void deleteCardNumber(@QueryParam("card_number")String cardNumber) {
 		// TODO Auto-generated method stub
@@ -199,7 +196,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@DELETE
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void deleteCardExpirationDate(@QueryParam("card_number")String cardNumber,@QueryParam("expiration_date")String expirationDate) {
 		// TODO Auto-generated method stub
@@ -210,7 +207,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@DELETE
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void deleteNameOnCard(@QueryParam("card_number")String cardNumber,@QueryParam("card_name")String cardName) {
 		// TODO Auto-generated method stub
@@ -221,7 +218,7 @@ public class BankInfoResource implements BankInfoService{
 
 	@DELETE
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/")
 	@Override
 	public void deleteSecurityCode( @QueryParam("card_number") String cardNumber, @QueryParam("security_code") int securityCode ) {
 		// TODO Auto-generated method stub
@@ -231,11 +228,10 @@ public class BankInfoResource implements BankInfoService{
 	}
 
 	@POST
-	@Produces({"application/xml","application/json"})
 	@Consumes({"application/xml","application/json"})
-	@Path("/bank-information")
+	@Path("/{username}")
 	@Override
-	public void createBankInformation(String username,BankInfoRequest bankInformation) {
+	public void createBankInformation(@PathParam("username") String username,BankInfoRequest bankInformation) {
 		// TODO Auto-generated method stub
 		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
 		bankInfoActivity.createBankInformation(username,bankInformation);

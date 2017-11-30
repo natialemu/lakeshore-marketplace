@@ -8,8 +8,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
-import Service.Representation.Product.ProductRepresentation;
-import Service.Representation.Product.ProductRequest;
+import Service.Representation.Product.Representation.ProductRepresentation;
+import Service.Representation.Product.Request.ProductRequest;
 import Service.Workflow.Product.ProductAcitvity;
 import Service.Workflow.Product.ProductActivityImpl;
 

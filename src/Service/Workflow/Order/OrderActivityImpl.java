@@ -15,13 +15,13 @@ import Domain.Partner.PartnerFactory;
 import Domain.Partner.PartnerFactoryImpl;
 import Domain.Product.Product;
 import Domain.Product.ProductImpl;
-import Service.Representation.Order.OrderRepresentation;
-import Service.Representation.Order.OrderRepresentationImpl;
-import Service.Representation.Order.OrderStatusRepresentation;
-import Service.Representation.Order.OrderStatusRepresentationImpl;
-import Service.Representation.Product.ProductRepresentation;
-import Service.Representation.Product.ProductRepresentationImpl;
-import Service.Representation.Product.ProductRequest;
+import Service.Representation.Order.Representation.OrderRepresentation;
+import Service.Representation.Order.Representation.OrderRepresentationImpl;
+import Service.Representation.Order.Representation.OrderStatusRepresentation;
+import Service.Representation.Order.Representation.OrderStatusRepresentationImpl;
+import Service.Representation.Product.Representation.ProductRepresentation;
+import Service.Representation.Product.Representation.ProductRepresentationImpl;
+import Service.Representation.Product.Request.ProductRequest;
 
 public class OrderActivityImpl implements OrderActivity {
 
@@ -38,18 +38,19 @@ public class OrderActivityImpl implements OrderActivity {
 	}
 
 	@Override
-	public void placeOrder(Set<ProductRequest> products, String username,String password) {
+	public void placeOrder(Set<ProductRequest> products, String username) {
 
 		List<Product> productList = new ArrayList<>();
 		getProductList(products,productList);
 		assert(productList.size() == products.size());
-		
-		if(accountFactory.validateAccount(username, password)) {
-			Account account = accountFactory.getAccount(username, password);
+		Account account = accountFactory.getAccount(username);
+		if(account != null) {
 			int accountID = account.getAccountID();
 			Customer c = customerFactory.getCustomer(accountID);
 			
             orderFactory.createOrder(productList, c);
+		}else {
+			System.out.println("Account with username of "+username+" not found");
 		}
 		
 	}

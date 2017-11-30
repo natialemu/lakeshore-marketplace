@@ -5,10 +5,10 @@ import Domain.Account.AccountFactoryImpl;
 import Domain.Account.AccountProfile.Contact.Location;
 import Domain.Account.AccountProfile.Contact.LocationImpl;
 import Domain.Account.AccountProfile.Finance.FinancialInfo;
-import Service.Representation.Account.BankInfoRepresentation;
-import Service.Representation.Account.BankInfoRepresentationImpl;
-import Service.Representation.Account.BankInfoRequest;
-import Service.Representation.Account.BasicAccountRequest;
+import Service.Representation.Account.Representation.BankInfoRepresentation;
+import Service.Representation.Account.Representation.BankInfoRepresentationImpl;
+import Service.Representation.Account.Request.BankInfoRequest;
+import Service.Representation.Account.Request.BasicAccountRequest;
 
 public class BankInfoActivityImpl implements BankInfoActivity{
 	private AccountFactory accountFactory;
@@ -77,10 +77,10 @@ public class BankInfoActivityImpl implements BankInfoActivity{
 	}
 
 	@Override
-	public BankInfoRepresentation getBankInfo(BasicAccountRequest basicAccount) {
+	public BankInfoRepresentation getBankInfo(String username) {
 		// TODO Auto-generated method stub
 		
-		 FinancialInfo finInfo = accountFactory.getAccount(basicAccount.getUsername(), basicAccount.getPassword()).getAccountProfile().getFinancialInfo();
+		 FinancialInfo finInfo = accountFactory.getAccount(username).getAccountProfile().getFinancialInfo();
 		 BankInfoRepresentation bir = new BankInfoRepresentationImpl();
 		 bir.setAccountNumber(finInfo.getBankAccount().getAccountNumber());
 		 bir.setAccountType(finInfo.getBankAccount().getAccountType());

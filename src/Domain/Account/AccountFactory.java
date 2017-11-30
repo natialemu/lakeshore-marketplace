@@ -4,6 +4,7 @@ import Domain.Account.AccountProfile.AccountProfile;
 import Domain.Account.AccountProfile.Contact.Location;
 import Domain.Account.AccountSettings.AccountSettings;
 import Domain.Account.AccountState.AccountState;
+import Service.Representation.Account.Representation.AccountRepresentation;
 
 public interface AccountFactory {
 
@@ -69,7 +70,7 @@ public interface AccountFactory {
 	void deleteNameOnCard(String cardNumber, String cardName);
 	void deleteSecurityCode(String cardNumber, int securityCode);
 	void createPersonalInformation(String birthDate, String cellPhone, String fullName, String city, String fullName2,
-			String state, String streetAddress, String zipcode);
+			String state, String streetAddress, String zipcode, String username);
 	void removeSecurityAnswer(String email, String newSecurityQuestionAnswer);
 	void removesecurityQuestion(String email, String newSecurityQuestion);
 	void removePhone(String email, int areacode, int countrycode, int phoneNumber, int phoneType);
@@ -82,4 +83,5 @@ public interface AccountFactory {
 	void updateBirthDate(String email, String birthDate);
 	void updateFullName(String email, String newFullName);
 	boolean validateAccount(String username, String password);
+	Account getAccount(String username);
 }

@@ -6,7 +6,6 @@ import Domain.Account.AccountProfile.AccountProfile;
 import Domain.Account.AccountProfile.Contact.Location;
 import Domain.Account.AccountSettings.AccountSettings;
 import Domain.Account.AccountState.AccountState;
-
 public class AccountFactoryImpl implements AccountFactory {
 
 
@@ -331,8 +330,8 @@ public class AccountFactoryImpl implements AccountFactory {
 
 	@Override
 	public void createPersonalInformation(String birthDate, String cellPhone, String fullName, String city,
-			String fullName2, String state, String streetAddress, String zipcode) {
-		// TODO Auto-generated method stub
+			String fullName2, String state, String streetAddress, String zipcode,String username) {
+		// TODO Insert all the info to the account with a username of "username"
 		
 	}
 
@@ -409,5 +408,11 @@ public class AccountFactoryImpl implements AccountFactory {
 	public boolean validateAccount(String username, String password) {
 		// TODO Auto-generated method stub
 		return accountManagement.validateAccount(username, password);
+	}
+
+	@Override
+	public Account getAccount(String username) {
+		// TODO Auto-generated method stub
+		return accountManagement.getAccount(username);
 	}
 }

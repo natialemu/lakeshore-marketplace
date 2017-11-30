@@ -2,9 +2,9 @@ package Service.Workflow.Product;
 
 import java.util.Set;
 
-import Service.Representation.Product.MinProductRepresentation;
-import Service.Representation.Product.ProductRepresentation;
-import Service.Representation.Product.ProductRequest;
+import Service.Representation.Product.Representation.MinProductRepresentation;
+import Service.Representation.Product.Representation.ProductRepresentation;
+import Service.Representation.Product.Request.ProductRequest;
 
 public interface ProductAcitvity {
 

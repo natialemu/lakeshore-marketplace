@@ -6,25 +6,27 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
-import Service.Representation.Account.BasicAccountRequest;
 import Service.Representation.Account.Representation.AccountRepresentation;
 import Service.Representation.Account.Request.AccountRequest;
+import Service.Representation.Account.Request.BasicAccountRequest;
+import Service.Representation.Account.Request.BasicEmailAccountRequest;
 import Service.Workflow.Account.AccountActivity;
 import Service.Workflow.Account.AccountActivityImpl;
 
-@Path("/")
+@Path("/account/")
 public class AccountResource implements AccountService{
 
 	@POST
 	@Produces({"application/xml", "application/json"})
 	@Consumes({"application/xml", "application/json"})
-	@Path("/account")
+	@Path("/")
 	@Override
 	public void registerForAccount(@QueryParam("username") String username, @QueryParam("password") String password) {
-		// TODO Auto-generated method stub
+		// TODO: not to be used yet
 		AccountActivity accountActivity = new AccountActivityImpl();
 		accountActivity.regsiterCustomerForAccount(username, password);
 		
@@ -32,10 +34,9 @@ public class AccountResource implements AccountService{
 
 	@POST
 	@Consumes({"application/xml", "application/json"})
-	@Path("/account")
+	@Path("/")
 	@Override
 	public void registerForAccountWithEmail(AccountRequest accountRequest) {
-		// TODO Auto-generated method stub
 		AccountActivity accountActivity = new AccountActivityImpl();
 		if(accountRequest.getIsCustomer()) {//if a buyer is registering for an account
 		   accountActivity.registerCustomerForAccountWithEmail(accountRequest);
@@ -47,19 +48,18 @@ public class AccountResource implements AccountService{
 
 	@PUT
 	@Produces({"application/xml", "application/json"})
-	@Path("/account")
+	@Path("/")
 	@Override
-	public boolean loginWithEmail(@QueryParam("username") String email, @QueryParam("password")String password) {
-		// TODO Auto-generated method stub
+	public boolean loginWithEmail(BasicEmailAccountRequest basicEmailAccountRequest) {
 		AccountActivity accountActivity = new AccountActivityImpl();
-		return accountActivity.loginWithEmail(email,password);
+		return accountActivity.loginWithEmail(basicEmailAccountRequest.getEmail(),basicEmailAccountRequest.getPassword());
 		
 	}
 
 	@PUT
 	@Produces({"application/xml", "application/json"})
 	@Consumes({"application/xml", "application/json"})
-	@Path("/account")
+	@Path("/")
 	@Override
 	public boolean loginWithUsername(BasicAccountRequest basicAccountRequest) {
 		// TODO Auto-generated method stub
@@ -101,26 +101,26 @@ public class AccountResource implements AccountService{
 		
 	}
 
-//	@POST
-//	@Produces({"application/xml", "application/json"})
-//	@Consumes({"application/xml", "application/json"})
-//	@Path("/account")
-//	@Override
-//	public AccountRepresentation getAccount(String username, String password) {
-//		// TODO Auto-generated method stub
-//		AccountActivity accountActivity = new AccountActivityImpl();
-//		return accountActivity.getAccount(username, password);
-//		
-//	}
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Consumes({"application/xml", "application/json"})
+	@Path("/{username}")
+	@Override
+	public AccountRepresentation getAccount(@PathParam("username")String username) {
+		// TODO Auto-generated method stub
+		AccountActivity accountActivity = new AccountActivityImpl();
+		return accountActivity.getAccount(username);
+		
+	}
 
 	@DELETE
 	@Produces({"application/xml", "application/json"})
-	@Path("/account")
+	@Path("/{username}")
 	@Override
-	public void deleteAccount(String username, String passowrd) {
+	public void deleteAccount(@PathParam("username")String username) {
 		// TODO Auto-generated method stub
 		AccountActivity accountActivity = new AccountActivityImpl();
-		accountActivity.deleteAccount(username,passowrd);
+		accountActivity.deleteAccount(username);
 		
 	}
 

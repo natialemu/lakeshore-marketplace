@@ -2,16 +2,17 @@ package Service.Resource.Account;
 
 import javax.jws.WebService;
 
-import Service.Representation.Account.BasicAccountRequest;
 import Service.Representation.Account.Representation.AccountRepresentation;
 import Service.Representation.Account.Request.AccountRequest;
+import Service.Representation.Account.Request.BasicAccountRequest;
+import Service.Representation.Account.Request.BasicEmailAccountRequest;
 @WebService
 public interface AccountService {
 	
 	void registerForAccount(String username, String password);
 	void registerForAccountWithEmail(AccountRequest accountRequest);
 
-	boolean loginWithEmail(String email, String password);
+	boolean loginWithEmail(BasicEmailAccountRequest basicEmailAccountRequest);
 	boolean loginWithUsername(BasicAccountRequest basicAccountRequest);
 	
 	
@@ -19,9 +20,9 @@ public interface AccountService {
 	void updatePassword(String username, String oldPassword, String newPassword);
 	void updateAccount(String oldUsername, String newUsername, String oldPassowrd, String newPassword);
 	
-	//AccountRepresentation getAccount(String username, String password);
+	AccountRepresentation getAccount(String username);
 	
-	void deleteAccount(String username, String passowrd);
+	void deleteAccount(String username);
 	
 	
 

@@ -17,4 +17,6 @@ public interface AccountRequest {
 	void setIsCustomer(boolean isCustomer);
 	
 	boolean getIsCustomer();
+	
+	
 }

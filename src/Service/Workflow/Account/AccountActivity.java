@@ -27,4 +27,8 @@ public interface AccountActivity {
 
 	boolean loginWithEmail(String email, String password);
 
+	AccountRepresentation getAccount(String username);
+
+	void deleteAccount(String username);
+
 }
