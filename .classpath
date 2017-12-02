@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/CSSE/Desktop/deploy-1.6.jar/deploy-1.6.jar.zip"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.ws.cxf.core.CXF_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/CSSE/Documents/GitHub/lakeshore-marketplace/jackson-all-1.9.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/CSSE/Documents/GitHub/lakeshore-marketplace/mysql-connector-java-5.1.44-bin.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
