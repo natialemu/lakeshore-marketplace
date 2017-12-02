@@ -6,4 +6,8 @@ public interface Link {
 	String getUrl();
 	void setAction(String action);
 	String getAction();
+	String getRel();
+	String getType();
+	void setRel(String rel);
+	void setType(String type);
 }

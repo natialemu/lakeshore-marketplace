@@ -10,6 +10,10 @@ import Domain.Product.Product;
 import Domain.Product.ProductFactory;
 import Domain.Product.ProductFactoryImpl;
 import Domain.Product.ProductImpl;
+import Service.Common.MediaTypes;
+import Service.Common.URIs;
+import Service.Representation.Link;
+import Service.Representation.LinkImpl;
 import Service.Representation.Product.Representation.MinProductRepresentation;
 import Service.Representation.Product.Representation.MinProductRepresentationImpl;
 import Service.Representation.Product.Representation.ProductRepresentation;
@@ -206,19 +210,36 @@ public class ProductActivityImpl implements ProductAcitvity {
 
 	@Override
 	public Set<MinProductRepresentation> getProductsByName(String productType) {
-		// TODO Auto-generated method stub
 		List<Product> filteredProduct = productFactory.getProductsByName(productType);
 		assert(filteredProduct != null);
 		Set<MinProductRepresentation> productRepresentation = new HashSet<>();
 		
 		convertToProductRepresentation(filteredProduct,productRepresentation);
 		assert(productRepresentation.size() == filteredProduct.size());
+		
+		setLinks(productRepresentation);
 		return productRepresentation;
+	}
+
+	private void setLinks(Set<MinProductRepresentation> productRepresentation) {
+		
+		for(MinProductRepresentation mpr: productRepresentation) {
+			List<Link> links = new ArrayList<>();
+			
+			// view product
+			Link viewProduct = new LinkImpl("GET",URIs.VIEW_DETAILED_PRODUCT+mpr.getProductName(),"View Product",MediaTypes.JSON);
+			links.add(viewProduct);
+			
+			//place order
+			Link placeOrder = new LinkImpl("POST",URIs.PLACE_ORDER+"?productName="+mpr.getProductName(),"Place order","");
+			Link[] linkArray = new Link[links.size()];
+			mpr.setLinks(links.toArray(linkArray));
+		}
+		
 	}
 
 	@Override
 	public void addProduct(String username, Set<ProductRequest> products) {
-		// TODO Auto-generated method stub
 		List<Product> productList = new ArrayList<>();
 		
 		getProductList(products,productList);
