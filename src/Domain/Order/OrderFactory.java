@@ -18,4 +18,6 @@ public interface OrderFactory {
 
 	Order getOrder(int orderID);
 
+	List<Order> getMostRecentOrders(int numOrders);
+
 }

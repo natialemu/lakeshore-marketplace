@@ -65,6 +65,16 @@ public class OrderResource implements OrderService{
 		
 	}
 
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/status/{orderID}")
+
+	@Override
+	public Set<OrderRepresentation> getMostRecentOrders(int numOrders) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

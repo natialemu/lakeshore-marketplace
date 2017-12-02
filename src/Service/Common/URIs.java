@@ -31,6 +31,9 @@ public class URIs {
 	public static final String GET_TRANSACTION = "";
 	public static final String PROVIDE_DELIVERY_STATUS = "";
 	
+	public static final String LOG_IN = "";
+	public static final String REGISTER = "";
+	
 
 
 }

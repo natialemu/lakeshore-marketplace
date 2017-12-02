@@ -12,4 +12,6 @@ public interface OrderDAO {
     Order retrieveOrder(int confirmationID);
 
     void updateStatus(Order retrievedOrder, int confirmation_id);
+
+	List<Order> getMostRecentOrders(int i);
 }

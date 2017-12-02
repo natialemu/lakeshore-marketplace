@@ -123,4 +123,27 @@ public class OrderActivityImpl implements OrderActivity {
 		
 	}
 
+	@Override
+	public Set<OrderRepresentation> getMostRecentOrders(int numOrders) {
+		Set<OrderRepresentation> or = new HashSet<>();
+		List<Order> orders = orderFactory.getMostRecentOrders(numOrders);
+		convertToOrderRepresentations(orders,or);
+		return or;
+		
+	}
+
+	private void convertToOrderRepresentations(List<Order> orders, Set<OrderRepresentation> or) {
+		
+		for(Order order:orders) {
+			OrderRepresentation orderRepresentation = new OrderRepresentationImpl();
+			orderRepresentation.setCustomerName(order.getOrderDetail().getCustomer().getAccount().getAccountProfile().getContactInfo().getFullName());
+			orderRepresentation.setOrderConfirmationNumber(order.getConfirmationID());
+			orderRepresentation.setOrderCost(order.getOrderDetail().getTotalCost());
+			orderRepresentation.setOrderDate(order.getOrderDetail().getOrderCreated().toString());
+			or.add(orderRepresentation);
+			
+		}
+		
+	}
+
 }

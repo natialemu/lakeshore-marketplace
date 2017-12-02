@@ -19,4 +19,6 @@ public interface OrderActivity {
 
 	void notifyCancellation(int orderID);
 
+	Set<OrderRepresentation> getMostRecentOrders(int numOrders);
+
 }

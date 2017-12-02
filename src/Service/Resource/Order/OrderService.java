@@ -17,6 +17,7 @@ public interface OrderService {
 	void cancelOrder(int orderID);
 	OrderRepresentation getOrder(int orderID);
 	OrderStatusRepresentation getOrderStatus(int orderID);
+	Set<OrderRepresentation> getMostRecentOrders(int numOrders);
 	
 	
 	

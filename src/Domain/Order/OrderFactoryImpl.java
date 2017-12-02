@@ -101,6 +101,11 @@ public class OrderFactoryImpl implements OrderFactory{
 		// TODO Auto-generated method stub
 		return orderDAO.retrieveOrder(orderID);
 	}
+
+	@Override
+	public List<Order> getMostRecentOrders(int numOrders) {
+		return orderDAO.getMostRecentOrders(5);
+	}
     
 
 

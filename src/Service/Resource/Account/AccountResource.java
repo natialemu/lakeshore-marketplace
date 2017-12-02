@@ -52,6 +52,7 @@ public class AccountResource implements AccountService{
 
 	@PUT
 	@Produces({"application/xml", "application/json"})
+	@Consumes({"application/xml", "application/json"})
 	@Path("/login")
 	@Override
 	public AccountValidationRepresentation loginWithEmail(BasicEmailAccountRequest basicEmailAccountRequest) {
