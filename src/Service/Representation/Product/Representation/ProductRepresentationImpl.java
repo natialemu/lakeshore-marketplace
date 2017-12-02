@@ -17,6 +17,16 @@ public class ProductRepresentationImpl extends AbstractRepresentation implements
     private String productTag;
     private String productType;
     private String partnerName;
+    private int productID;
+    
+    @Override
+    public int getProductID() {
+    	return productID;
+    }
+    @Override
+    public void setProductID(int productID) {
+    	this.productID = productID;
+    }
     
     
     public ProductRepresentationImpl() {}

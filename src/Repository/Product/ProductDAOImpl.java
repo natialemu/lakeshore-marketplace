@@ -307,5 +307,41 @@ public class ProductDAOImpl implements ProductDAO{
 
     }
 
+	@Override
+	public List<Product> getRecentlyAddedProducts(int numOrders) {
+		Connection connection = openConnection();
+		List<Integer> ids = new ArrayList<>();
+		try {
+			Statement statement = connection.createStatement();
+			String selectQuery = "SELECT TOP" +numOrders+ "product_id \r\n" + 
+					"FROM table product \r\n" + 
+					"GROUP BY product_id \r\n" + 
+					"ORDER BY max(time) desc";
+			ResultSet resultSet = statement.executeQuery(selectQuery);
+	        assert (!resultSet.isLast());
+	        while(resultSet.next()) {
+	        	int product_id = resultSet.getInt(0);
+	        	ids.add(product_id);
+	        	
+	        	
+	        }
+		}catch (SQLException se) {
+	        se.printStackTrace();
+	    } finally {
+	
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException e) { /* ignored */}
+	        }
+	    }
+		List<Product> products = new ArrayList<>();
+		for(Integer id:ids) {
+			Product product = getProductByID(id);
+			products.add(product);
+		}
+		return products;
+	}
+
 
 }

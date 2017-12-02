@@ -30,6 +30,7 @@ public interface ProductFactory {
 	List<Product> getProductByType(String productType);
 	List<Product> getProductsBySellerAndType(String sellerName, String productType);
 	List<Product> getProductsByName(String productType);
+	List<Product> getRecentlyAddedProducts(int numOrders);
 
 	
 	

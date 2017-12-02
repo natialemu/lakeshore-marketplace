@@ -258,4 +258,15 @@ public class ProductActivityImpl implements ProductAcitvity {
 		
 	}
 
+	@Override
+	public Set<MinProductRepresentation> getRecentlyAddedProducts(int numOrders) {
+
+		List<Product> products = productFactory.getRecentlyAddedProducts(numOrders);
+		Set<MinProductRepresentation> pr = new HashSet<>();
+		convertToProductRepresentation(products,pr);
+		setLinks(pr);
+		return pr;
+		
+	}
+
 }

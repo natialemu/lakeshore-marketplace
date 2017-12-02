@@ -102,6 +102,16 @@ public class ProductResource implements ProductService{
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		productActivity.deleteProduct(partner_id,product_id);
 	}
+
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/{product_number}")
+	@Override
+	public Set<MinProductRepresentation> getRecentlyAddedProducts(@PathParam("product_number")int numOrders) {
+		
+		ProductAcitvity productActivity = new ProductActivityImpl();
+		return productActivity.getRecentlyAddedProducts(numOrders);
+	}
 	
 	
 

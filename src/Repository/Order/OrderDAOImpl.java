@@ -177,7 +177,7 @@ public class OrderDAOImpl implements OrderDAO {
         }else if(order_status == "UnprocesedOrder"){
             order.setState(order.getUnproccessedState());
         }
-        return null;
+        return order;
     }
 
     @Override
@@ -205,7 +205,38 @@ public class OrderDAOImpl implements OrderDAO {
 
 	@Override
 	public List<Order> getMostRecentOrders(int i) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Connection connection = openConnection();
+		List<Integer> ids = new ArrayList<>();
+		try {
+			Statement getOrderIDs = connection.createStatement();
+			String selectQuery = "SELECT TOP" +i+ "placed_order_id \r\n" + 
+					"FROM table placed_order \r\n" + 
+					"GROUP BY placed_order_id \r\n" + 
+					"ORDER BY max(time) desc";
+			ResultSet resultSet = getOrderIDs.executeQuery(selectQuery);
+	        assert (!resultSet.isLast());
+	        while(resultSet.next()) {
+	        	int placed_order_id = resultSet.getInt(0);
+	        	ids.add(placed_order_id);
+	        	
+	        	
+	        }
+		}catch (SQLException se) {
+	        se.printStackTrace();
+	    } finally {
+	
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException e) { /* ignored */}
+	        }
+	    }
+		List<Order> orders = new ArrayList<>();
+		for(Integer id:ids) {
+			Order order = retrieveOrder(id);
+			orders.add(order);
+		}
+		return orders;
 	}
 }

@@ -38,7 +38,7 @@ public class AccountResource implements AccountService{
 	@POST
 	@Produces({"application/xml", "application/json"})
 	@Consumes({"application/xml", "application/json"})
-	@Path("/register")
+	@Path("/")
 	@Override
 	public AccountValidationRepresentation registerForAccountWithEmail(AccountRequest accountRequest) {
 		AccountActivity accountActivity = new AccountActivityImpl();
@@ -98,7 +98,7 @@ public class AccountResource implements AccountService{
 
 	@PUT
 	@Produces({"application/xml", "application/json"})
-	@Path("/account")
+	@Path("/")
 	@Override
 	public void updateAccount(@QueryParam("username")String oldUsername,@QueryParam("new-username") String newUsername, @QueryParam("password")String oldPassowrd, @QueryParam("new-password")String newPassword) {
 		// TODO Auto-generated method stub

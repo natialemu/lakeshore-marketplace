@@ -19,56 +19,59 @@ public class MinProductRepresentationImpl extends AbstractRepresentation impleme
     private String productName;
     private String productType;
     private String rating;
+    private int productID;
 	@Override
 	public double getProductCost() {
-		// TODO Auto-generated method stub
 		return productCost;
 	}
 
 	@Override
 	public void setProductCost(double productCost) {
-		// TODO Auto-generated method stub
 		this.productCost = productCost; 
 		
 	}
 
 	@Override
 	public void setProductName(String productName) {
-		// TODO Auto-generated method stub
 		this.productName = productName;
 		
 	}
 
 	@Override
 	public String getProductName() {
-		// TODO Auto-generated method stub
 		return productName;
 	}
 
 	@Override
 	public void setProductType(String productType) {
-		// TODO Auto-generated method stub
 		this.productType = productType;
 		
 	}
 
 	@Override
 	public String getProductType() {
-		// TODO Auto-generated method stub
 		return productType;
 	}
 
 	@Override
 	public void setRating(String rating) {
-		// TODO Auto-generated method stub
 		this.rating = rating;
 		
 	}
 
 	@Override
 	public String getRating() {
-		// TODO Auto-generated method stub
 		return rating;
+	}
+
+	@Override
+	public int getProductID() {
+		return productID;
+	}
+
+	@Override
+	public void setProductID(int productID) {
+		this.productID = productID;
 	}
 
 

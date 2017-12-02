@@ -48,7 +48,6 @@ public class ProductSearchImpl implements ProductSearch{
 	}
 	@Override
 	public List<Product> getProductByType(String productType) {
-		// TODO Auto-generated method stub
 		return productDAO.getProductWithType(productType);
 	}
 	@Override
@@ -58,8 +57,11 @@ public class ProductSearchImpl implements ProductSearch{
 	}
 	@Override
 	public List<Product> getProductByName(String productName) {
-		// TODO Auto-generated method stub
 		return productDAO.getProductsWithName(productName);
 
+	}
+	@Override
+	public List<Product> getRecentlyAddedProducts(int numOrders) {
+		return productDAO.getRecentlyAddedProducts(numOrders);
 	}
 }

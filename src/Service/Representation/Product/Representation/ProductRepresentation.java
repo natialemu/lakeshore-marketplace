@@ -14,6 +14,8 @@ public interface ProductRepresentation extends AbstractRepresentationInterface{
 	String getProductType();
 	void setPartnerName(String partnerName);
 	String getPartnerName();
+	int getProductID();
+	void setProductID(int productID);
 	
 
 }

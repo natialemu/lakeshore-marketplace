@@ -11,5 +11,7 @@ public interface MinProductRepresentation extends AbstractRepresentationInterfac
 	String getProductType();
 	void setRating(String rating);
 	String getRating();
+	int getProductID();
+	void setProductID(int productID);
 
 }

@@ -13,4 +13,5 @@ public interface ProductDAO {
 
 
     void setOrderID(Product p, int orderID);
+	List<Product> getRecentlyAddedProducts(int numOrders);
 }

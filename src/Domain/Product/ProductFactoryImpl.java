@@ -130,4 +130,9 @@ public class ProductFactoryImpl implements ProductFactory{
 		return productSearch.getProductByName(productName);
 	}
 
+	@Override
+	public List<Product> getRecentlyAddedProducts(int numOrders) {
+		return productSearch.getRecentlyAddedProducts(numOrders);
+	}
+
 }

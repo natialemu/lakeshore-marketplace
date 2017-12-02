@@ -26,4 +26,7 @@ public interface ProductSearch {
 
 
 	List<Product> getProductByName(String productName);
+
+
+	List<Product> getRecentlyAddedProducts(int numOrders);
 }

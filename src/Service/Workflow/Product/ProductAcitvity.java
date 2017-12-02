@@ -36,4 +36,6 @@ public interface ProductAcitvity {
 
 	void deleteProduct(int partner_id, int product_id);
 
+	Set<MinProductRepresentation> getRecentlyAddedProducts(int numOrders);
+
 }
