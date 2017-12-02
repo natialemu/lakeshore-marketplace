@@ -8,7 +8,7 @@ import Domain.Product.Product;
 
 public interface PartnerFactory {
 	void createPartner(Partner partner);
-	void registerPartner(String email, String username, String password);
+	boolean registerPartner(String email, String username, String password);
 	void addProducts(String username, List<Product> products);
 	Delivery acceptDelivery(Partner partner, Delivery delivery);
 	void acceptOrder(List<Product> products, Customer customer);

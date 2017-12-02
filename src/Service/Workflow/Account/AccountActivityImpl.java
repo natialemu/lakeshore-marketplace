@@ -15,6 +15,8 @@ import Domain.ReviewSystem.ReviewSystemImpl;
 import Service.Representation.Link;
 import Service.Representation.Account.Representation.AccountRepresentation;
 import Service.Representation.Account.Representation.AccountRepresentationImpl;
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Account.Request.AccountRequest;
 
 public class AccountActivityImpl implements AccountActivity{
@@ -75,14 +77,27 @@ public class AccountActivityImpl implements AccountActivity{
 	}
 
 	@Override
-	public void registerCustomerForAccountWithEmail(AccountRequest accountRequest) {
+	public AccountValidationRepresentation registerCustomerForAccountWithEmail(AccountRequest accountRequest) {
 		// TODO Auto-generated method stub
 		Customer customer = new CustomerImpl();
 		Account newAccount = accountFactory.getNewAccount(accountRequest.getEmail(),accountRequest.getUsername(),accountRequest.getPassword());
-        accountFactory.createBasicAccount(newAccount);
+        AccountValidationRepresentation accountRepresentation  = new AccountValidationRepresentationImpl();
+		if(accountFactory.createBasicAccount(newAccount)) {
+        	accountRepresentation.setIsSuccessful(true);
+        }else {
+        	accountRepresentation.setIsSuccessful(false);
+        }
         customer.setAccount(newAccount);
         customer.setReviewSystem(new ReviewSystemImpl());
         customerFactory.createCustomer(customer);
+        setAccountValidationLinks(accountRepresentation);
+        return accountRepresentation;
+        
+		
+	}
+
+	private void setAccountValidationLinks(AccountValidationRepresentation accountRepresentation) {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -99,16 +114,33 @@ public class AccountActivityImpl implements AccountActivity{
 	}
 
 	@Override
-	public void registerPartnerForAccountWithEmail(String username, String email, String password) {
+	public AccountValidationRepresentation registerPartnerForAccountWithEmail(String username, String email, String password) {
 		// TODO
-		partnerFactory.registerPartner(email, username, password);
+		
+        AccountValidationRepresentation accountRepresentation  = new AccountValidationRepresentationImpl();
+		if(partnerFactory.registerPartner(email, username, password)) {
+			accountRepresentation.setIsSuccessful(true);
+		}else {
+			accountRepresentation.setIsSuccessful(false);
+		}
+		
+		//TODO: include links
+		return accountRepresentation;
 		
 	}
 
 	@Override
-	public boolean loginWithEmail(String email, String password) {
+	public AccountValidationRepresentation loginWithEmail(String email, String password) {
 		// TODO Auto-generated method stub
-		return accountFactory.logInToAccountWithEmail(email, password);
+		AccountValidationRepresentation avr = new AccountValidationRepresentationImpl();
+		
+		if(accountFactory.logInToAccountWithEmail(email, password))
+			avr.setIsSuccessful(true);
+		else
+			avr.setIsSuccessful(false);
+		
+		//set links
+		return avr;
 	}
 
 	@Override

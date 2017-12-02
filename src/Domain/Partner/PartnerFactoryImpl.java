@@ -43,13 +43,14 @@ public class PartnerFactoryImpl implements PartnerFactory {
     }
 
 
-    public void registerPartner(String email, String username, String password) {
+    public boolean registerPartner(String email, String username, String password) {
 
     	Partner partner = new PartnerImpl();
         Account newAccount = accountFactory.getNewAccount(email,username,password);
-        accountFactory.createBasicAccount(newAccount);
+        boolean returnType = accountFactory.createBasicAccount(newAccount);
         partner.setAccount(newAccount);
         createPartner(partner);
+        return returnType;
     }
     public void addProducts(String username, List<Product> products) {
     	
