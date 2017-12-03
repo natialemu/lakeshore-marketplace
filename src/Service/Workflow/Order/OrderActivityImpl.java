@@ -240,8 +240,11 @@ public class OrderActivityImpl implements OrderActivity {
 	}
 
 	private void setLinksAfterOrderDisplay(Set<OrderRepresentation> or) {
+	    //TODO: links for manupilating the orders
 		
-		//TODO
+		
+		//cancelling the order
+		//update status of order
 	}
 
 }

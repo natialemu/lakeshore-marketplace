@@ -51,7 +51,27 @@ public class AccountActivityImpl implements AccountActivity{
 		accountRepresentation.setAccountStatus(account.getStringAccountState());
 		accountRepresentation.setEmailAddress(account.getAccountProfile().getContactInfo().getEmail());
 		accountRepresentation.setUsername(account.getAccountProfile().getUsername());
+		setLinksAfterGettingAccount(accountRepresentation);
 		return accountRepresentation;
+	}
+
+	private void setLinksAfterGettingAccount(AccountRepresentation accountRepresentation) {
+
+		List<Link> links = new ArrayList<>();
+		
+		//get personal info
+		Link personalInfo = new LinkImpl("GET",URIs.PERSONALINFO+"/"+accountRepresentation.getUsername(),"get personal info",MediaTypes.JSON);
+		links.add(personalInfo);
+		
+		Link fin_info = new LinkImpl("GET",URIs.BANKINFO+"/"+accountRepresentation.getUsername(),"get financial info",MediaTypes.JSON);
+		links.add(fin_info);
+		
+		Link delete_account = new LinkImpl("DELETE",URIs.ACCOUNT+"/"+accountRepresentation.getUsername(),"delete account",MediaTypes.JSON);
+		links.add(delete_account);
+		
+		
+		Link[] linkArray = new Link[links.size()];
+		accountRepresentation.setLinks(links.toArray(linkArray));
 	}
 
 	@Override

@@ -190,9 +190,7 @@ public class ProductActivityImpl implements ProductAcitvity {
 			//searh for another product
 			Link searchProduct = new LinkImpl("GET",URIs.PRODUCTS,"Search for products",MediaTypes.JSON);
 			links.add(searchProduct);
-			//Rate a product
-			//subscribe to a partner
-			//
+		
 			
 			Link[] linkArray = new Link[links.size()];
 			pr.setLinks(links.toArray(linkArray));
@@ -279,8 +277,18 @@ public class ProductActivityImpl implements ProductAcitvity {
 	}
 
 	private void setLinksAfterProductAddition(AccountValidationRepresentation avr) {
-		// TODO Auto-generated method stub
+
+		List<Link> links = new ArrayList<>();
 		
+		Link getAccountLink = new LinkImpl("GET",URIs.ACCOUNT,"Get account", MediaTypes.JSON);
+		links.add(getAccountLink);
+		
+		Link deleteProducts = new LinkImpl("DELETE",URIs.PRODUCTS,"Delete product", MediaTypes.JSON);
+		links.add(deleteProducts);
+		
+		Link[] linkArray = new Link[links.size()];
+		links.toArray(linkArray);
+		avr.setLinks(linkArray);	
 	}
 
 	@Override
@@ -320,6 +328,23 @@ public class ProductActivityImpl implements ProductAcitvity {
 	}
 
 	private void setLinkAfterGettingInventory(Set<MinProductRepresentation> mpr) {
+		for(MinProductRepresentation prorep:mpr) {
+			List<Link> links = new ArrayList<>();
+			
+			//Add products
+			Link addProducts = new LinkImpl("POST",URIs.PRODUCTS,"Add products",MediaTypes.JSON);
+			links.add(addProducts);
+			
+			//get Account
+			Link getAccountLink = new LinkImpl("GET",URIs.ACCOUNT,"Get account", MediaTypes.JSON);
+			links.add(getAccountLink);
+			
+			
+			Link[] linkArray = new Link[links.size()];
+			prorep.setLinks(links.toArray(linkArray));
+			
+		}
+		
 		
 	}
 

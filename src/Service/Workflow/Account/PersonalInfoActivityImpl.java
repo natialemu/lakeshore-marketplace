@@ -1,8 +1,15 @@
 package Service.Workflow.Account;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Domain.Account.Account;
 import Domain.Account.AccountFactory;
 import Domain.Account.AccountFactoryImpl;
+import Service.Common.MediaTypes;
+import Service.Common.URIs;
+import Service.Representation.Link;
+import Service.Representation.LinkImpl;
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
 import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Account.Representation.PersonalInformationRepresentation;
@@ -87,9 +94,20 @@ public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 		pir.setState(account.getAccountProfile().getContactInfo().getLocation().getState());
 		pir.setStreetAddress(account.getAccountProfile().getContactInfo().getLocation().getStreetAddress());
 		pir.setZipcode(Integer.toString(account.getAccountProfile().getContactInfo().getLocation().getZipcode()));
-		
+		setLinkPersonalInformation(pir);
 		return pir;
 		
+	}
+
+	private void setLinkPersonalInformation(PersonalInformationRepresentation pir) {
+		List<Link> links = new ArrayList<>();
+		
+		//Update personal info
+		Link createPersonalInfo = new LinkImpl("POST",URIs.PERSONALINFO,"update personal information",MediaTypes.JSON);
+		links.add(createPersonalInfo);
+		
+		Link[] linkArray = new Link[links.size()];
+		pir.setLinks(links.toArray(linkArray));
 	}
 
 	@Override

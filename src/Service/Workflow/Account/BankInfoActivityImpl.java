@@ -1,10 +1,17 @@
 package Service.Workflow.Account;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Domain.Account.AccountFactory;
 import Domain.Account.AccountFactoryImpl;
 import Domain.Account.AccountProfile.Contact.Location;
 import Domain.Account.AccountProfile.Contact.LocationImpl;
 import Domain.Account.AccountProfile.Finance.FinancialInfo;
+import Service.Common.MediaTypes;
+import Service.Common.URIs;
+import Service.Representation.Link;
+import Service.Representation.LinkImpl;
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
 import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Account.Representation.BankInfoRepresentation;
@@ -188,8 +195,15 @@ public class BankInfoActivityImpl implements BankInfoActivity{
 	}
 
 	private void setLinksAfterBankProfile(AccountValidationRepresentation avr) {
-		// TODO 
+
+		List<Link> links = new ArrayList<>();
 		
+		//Update personal info
+		Link createBankInfo = new LinkImpl("POST",URIs.BANKINFO,"update bank information",MediaTypes.JSON);
+		links.add(createBankInfo);
+		
+		Link[] linkArray = new Link[links.size()];
+		avr.setLinks(links.toArray(linkArray));
 	}
 
 }
