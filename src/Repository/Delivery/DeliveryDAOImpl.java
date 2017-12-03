@@ -132,4 +132,9 @@ public class DeliveryDAOImpl implements DeliveryDAO {
 
         deliveryStatusDAO.insertDeliveryStatus(deliveryId,trackingNumber,deliveryMethod,deliveryCarrier);
     }
+
+	@Override
+	public DeliveryStatus getDeliveryStatus(int tracking_number) {
+		return deliveryStatusDAO.getDeliveryStatus(tracking_number);
+	}
 }

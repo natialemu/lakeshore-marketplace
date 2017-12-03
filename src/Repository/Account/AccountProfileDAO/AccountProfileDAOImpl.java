@@ -402,4 +402,43 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
         financialInfoDAO.createBasicFinProfile(fin_profile_id);
 
     }
+
+	@Override
+	public boolean updateAccountContactProfile(String username, String fullName, Location location, String birthDate,
+			String cellPhone) {
+		
+		AccountProfile ap = getAccountProfile(username);
+		String email = ap.getContactInfo().getEmail();
+		boolean locationUpdated =contactDAO.updateLocation(email,location);//
+		boolean contactUpdated = contactDAO.updateNameAndBirth(email,fullName,birthDate);
+		boolean phoneUpdated = contactDAO.updatePhone(email,cellPhone);
+		return locationUpdated && contactUpdated && phoneUpdated;
+		
+		
+        
+	}
+
+	@Override
+	public String getUsername(String password) {
+		Connection connection = openConnection();
+		String username = "";
+        try {
+            Statement selectSqlStatement = connection.createStatement();
+            String selectQuery = "SELECT * from account_profile WHERE password='" + password+"'";
+            ResultSet resultSet = selectSqlStatement.executeQuery(selectQuery);
+            resultSet.next();
+            username = resultSet.getString("username");
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+        return username;
+	}
 }

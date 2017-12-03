@@ -32,4 +32,6 @@ public interface AccountActivity {
 
 	void deleteAccount(String username);
 
+	AccountValidationRepresentation loginPartnerWithEmail(String email, String password);
+
 }

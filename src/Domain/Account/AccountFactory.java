@@ -69,7 +69,7 @@ public interface AccountFactory {
 	void deleteCardExpirationDate(String cardNumber, String expirationDate);
 	void deleteNameOnCard(String cardNumber, String cardName);
 	void deleteSecurityCode(String cardNumber, int securityCode);
-	void createPersonalInformation(String birthDate, String cellPhone, String fullName, String city, String fullName2,
+	boolean createPersonalInformation(String birthDate, String cellPhone, String fullName, String city, String fullName2,
 			String state, String streetAddress, String zipcode, String username);
 	void removeSecurityAnswer(String email, String newSecurityQuestionAnswer);
 	void removesecurityQuestion(String email, String newSecurityQuestion);
@@ -84,4 +84,5 @@ public interface AccountFactory {
 	void updateFullName(String email, String newFullName);
 	boolean validateAccount(String username, String password);
 	Account getAccount(String username);
+	String getUsername(String password);
 }

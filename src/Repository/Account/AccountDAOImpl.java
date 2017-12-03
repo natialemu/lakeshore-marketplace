@@ -416,4 +416,17 @@ public class AccountDAOImpl implements AccountDAO {
         return null;
 
     }
+
+	@Override
+	public boolean createAccountContactProfile(String username, String fullName, Location location, String birthDate,
+			String cellPhone) {
+		// TODO Auto-generated method stub
+        return accountProfileDAO.updateAccountContactProfile(username, fullName, location, birthDate, cellPhone);
+
+	}
+
+	@Override
+	public String getUsername(String password) {
+		return accountProfileDAO.getUsername(password);
+	}
 }

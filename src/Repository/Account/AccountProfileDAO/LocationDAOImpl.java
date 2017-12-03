@@ -53,8 +53,8 @@ public class LocationDAOImpl implements LocationDAO{
     }
 
     @Override
-    public void createLocation(Location location) {
-        updateAddress(location.getStreetAddress(),location.getState(),location.getCity(),location.getZipcode(),location.getCountry(),location.getPobox());
+    public boolean createLocation(Location location) {
+        return updateAddress(location.getStreetAddress(),location.getState(),location.getCity(),location.getZipcode(),location.getCountry(),location.getPobox());
 
     }
 

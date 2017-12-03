@@ -8,5 +8,6 @@ public interface DeliveryFactory {
     void acceptDeliveryStatus(int deliveryId, int trackingNumber, String deliveryCarrier, String deliveryMethod);
     void sendConfirmation();
     void notifyPartnersOfDelivery(Order order);
+	DeliveryStatus getDeliveryStatus(int orderID);
 
 }

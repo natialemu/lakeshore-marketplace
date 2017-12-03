@@ -9,9 +9,10 @@ public interface ProductDAO {
     List<Product> getProductsWithName(String productName);
     List<Product> getProductWithType(String productType);
     Product getProductByID(int productID);
-    void createProduct(Product product);
+    boolean createProduct(Product product);
 
 
     void setOrderID(Product p, int orderID);
 	List<Product> getRecentlyAddedProducts(int numOrders);
+	List<Product> getInventory(String username);
 }

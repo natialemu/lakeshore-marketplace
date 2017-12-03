@@ -4,6 +4,7 @@ import Domain.Account.AccountManagement.AccountManagement;
 import Domain.Account.AccountManagement.AccountManagementImpl;
 import Domain.Account.AccountProfile.AccountProfile;
 import Domain.Account.AccountProfile.Contact.Location;
+import Domain.Account.AccountProfile.Contact.LocationImpl;
 import Domain.Account.AccountSettings.AccountSettings;
 import Domain.Account.AccountState.AccountState;
 public class AccountFactoryImpl implements AccountFactory {
@@ -329,10 +330,13 @@ public class AccountFactoryImpl implements AccountFactory {
 	}
 
 	@Override
-	public void createPersonalInformation(String birthDate, String cellPhone, String fullName, String city,
+	public boolean createPersonalInformation(String birthDate, String cellPhone, String fullName, String city,
 			String fullName2, String state, String streetAddress, String zipcode,String username) {
-		// TODO Insert all the info to the account with a username of "username"
+		//String streetAddress, String city, int zipcode, String state, String country, int pobo
+		Location location = new LocationImpl(streetAddress,city,Integer.parseInt(zipcode),state,"USA",1234);
 		
+		
+		return accountManagement.createPersonalInformation(username,birthDate,cellPhone,fullName,location);
 	}
 
 	@Override
@@ -414,5 +418,12 @@ public class AccountFactoryImpl implements AccountFactory {
 	public Account getAccount(String username) {
 		// TODO Auto-generated method stub
 		return accountManagement.getAccount(username);
+	}
+
+	@Override
+	public String getUsername(String password) {
+		// TODO Auto-generated method stub
+		return accountManagement.getUsername(password);
+	
 	}
 }

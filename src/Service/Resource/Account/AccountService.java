@@ -24,6 +24,7 @@ public interface AccountService {
 	AccountRepresentation getAccount(String username);
 	
 	void deleteAccount(String username);
+	AccountValidationRepresentation loginPartnerWithEmail(BasicEmailAccountRequest basicEmailAccountRequest);
 	
 	
 

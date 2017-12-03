@@ -59,4 +59,9 @@ public interface AccountDAO {
 
 
     Account getAccount(int account_id);
+
+	boolean createAccountContactProfile(String username, String fullName, Location location, String birthDate,
+			String cellPhone);
+
+	String getUsername(String password);
 }

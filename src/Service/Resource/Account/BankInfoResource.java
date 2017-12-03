@@ -10,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
 import Service.Representation.Account.Representation.BankInfoRepresentation;
 import Service.Representation.Account.Request.BankInfoRequest;
 import Service.Representation.Account.Request.BasicAccountRequest;
@@ -120,7 +121,6 @@ public class BankInfoResource implements BankInfoService{
 
 	@GET
 	@Produces({"application/xml","application/json"})
-	@Consumes({"application/xml", "application/json"})
 	@Path("/{username}")
 	@Override
 	public BankInfoRepresentation getBankInfo(@PathParam("username") String username) {
@@ -229,12 +229,13 @@ public class BankInfoResource implements BankInfoService{
 
 	@POST
 	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
 	@Path("/{username}")
 	@Override
-	public void createBankInformation(@PathParam("username") String username,BankInfoRequest bankInformation) {
+	public AccountValidationRepresentation createBankInformation(@PathParam("username") String username,BankInfoRequest bankInformation) {
 		// TODO Auto-generated method stub
 		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
-		bankInfoActivity.createBankInformation(username,bankInformation);
+		return bankInfoActivity.createBankInformation(username,bankInformation);
 		
 	}
 

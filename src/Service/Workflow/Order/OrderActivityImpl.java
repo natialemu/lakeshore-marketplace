@@ -15,6 +15,12 @@ import Domain.Partner.PartnerFactory;
 import Domain.Partner.PartnerFactoryImpl;
 import Domain.Product.Product;
 import Domain.Product.ProductImpl;
+import Service.Common.MediaTypes;
+import Service.Common.URIs;
+import Service.Representation.Link;
+import Service.Representation.LinkImpl;
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Order.Representation.OrderRepresentation;
 import Service.Representation.Order.Representation.OrderRepresentationImpl;
 import Service.Representation.Order.Representation.OrderStatusRepresentation;
@@ -38,8 +44,9 @@ public class OrderActivityImpl implements OrderActivity {
 	}
 
 	@Override
-	public void placeOrder(Set<ProductRequest> products, String username) {
+	public AccountValidationRepresentation placeOrder(Set<ProductRequest> products, String username) {
 
+		AccountValidationRepresentation avr = new AccountValidationRepresentationImpl();
 		List<Product> productList = new ArrayList<>();
 		getProductList(products,productList);
 		assert(productList.size() == products.size());
@@ -49,12 +56,52 @@ public class OrderActivityImpl implements OrderActivity {
 			Customer c = customerFactory.getCustomer(accountID);
 			
             orderFactory.createOrder(productList, c);
+            avr.setIsSuccessful(true);
+            
 		}else {
+			avr.setIsSuccessful(false);
 			System.out.println("Account with username of "+username+" not found");
 		}
 		
+		setPlacedOrderLinks(avr,username);
+		return avr;
+		
+		
 	}
 
+
+	private void setPlacedOrderLinks(AccountValidationRepresentation avr,String username) {
+
+		//ac
+		List<Link> links = new ArrayList<>();
+		
+		//place order
+		
+		List<Order> mostRecentOrder = orderFactory.getMostRecentOrders(1);
+		assert(mostRecentOrder.size() <= 1);
+		int mostRecentOrderID = mostRecentOrder.get(0).getOrderID();
+		
+		Link cancelOrder = new LinkImpl("DELETE",URIs.ORDER+"/"+mostRecentOrderID,"Cancel order",MediaTypes.JSON);
+		links.add(cancelOrder);
+		
+		
+
+		//get order
+		Link getOrder = new LinkImpl("GET",URIs.ORDER+"/"+mostRecentOrderID,"Get order",MediaTypes.JSON);
+		links.add(getOrder);
+		
+		
+		//view order Confirmation
+		Link orderConfirmation = new LinkImpl("GET",URIs.ORDER+"/status/"+mostRecentOrderID,"Get order status",MediaTypes.JSON);
+		links.add(orderConfirmation);
+		
+		//track order
+		Link trackOrder = new LinkImpl("GET",URIs.DELIVERYSTATUS,"Order tracking",MediaTypes.JSON);
+		links.add(trackOrder);
+		
+		Link[] linkArray = new Link[links.size()];
+		avr.setLinks(links.toArray(linkArray));
+	}
 
 	private void getProductList(Set<ProductRequest> products,List<Product> productList) {
 		
@@ -65,8 +112,16 @@ public class OrderActivityImpl implements OrderActivity {
 		
 	}
 	@Override
-	public void cancelOrder(int orderID) {
-		orderFactory.cancelOrder(orderID);
+	public AccountValidationRepresentation cancelOrder(int orderID) {
+		AccountValidationRepresentation avr = new AccountValidationRepresentationImpl();
+		if(orderFactory.cancelOrder(orderID)) {
+			avr.setIsSuccessful(true);
+		}else {
+			avr.setIsSuccessful(false);
+		}
+		
+		//setLinks(avr);
+		return avr;
 		
 	}
 	
@@ -89,6 +144,7 @@ public class OrderActivityImpl implements OrderActivity {
 	@Override
 	public OrderRepresentation getOrder(int orderID) {
 		Order order = orderFactory.getOrder(orderID);
+		assert(order.getOrderID() == orderID);
 		OrderRepresentation orderRepresentation = new OrderRepresentationImpl();
 		orderRepresentation.setCustomerName(order.getOrderDetail().getCustomer().getAccount().getAccountProfile().getContactInfo().getFullName());
 		orderRepresentation.setOrderConfirmationNumber(order.getConfirmationID());
@@ -99,9 +155,34 @@ public class OrderActivityImpl implements OrderActivity {
 		
 		convertToProductRepresentation(order.getOrderDetail().getAllProducts(),productRepresentation);
 		orderRepresentation.setProductsInOrder(productRepresentation);
+		setLinkAfterGettingOrder(orderRepresentation,order.getOrderID());
+		
 		
 		return orderRepresentation;
 
+		
+	}
+
+	private void setLinkAfterGettingOrder(OrderRepresentation orderRepresentation, int orderID) {
+		List<Link> links = new ArrayList<>();
+		
+		
+		
+		
+		Link cancelOrder = new LinkImpl("DELETE",URIs.ORDER+"/"+orderID,"Cancel order",MediaTypes.JSON);
+		links.add(cancelOrder);
+		
+		
+		//view order Confirmation
+		Link orderConfirmation = new LinkImpl("GET",URIs.ORDER+"/status/"+orderID,"Get order status",MediaTypes.JSON);
+		links.add(orderConfirmation);
+		
+		//track order
+		Link trackOrder = new LinkImpl("GET",URIs.DELIVERYSTATUS,"Order tracking",MediaTypes.JSON);
+		links.add(trackOrder);
+		
+		Link[] linkArray = new Link[links.size()];
+		orderRepresentation.setLinks(links.toArray(linkArray));
 		
 	}
 
@@ -128,6 +209,7 @@ public class OrderActivityImpl implements OrderActivity {
 		Set<OrderRepresentation> or = new HashSet<>();
 		List<Order> orders = orderFactory.getMostRecentOrders(numOrders);
 		convertToOrderRepresentations(orders,or);
+		
 		return or;
 		
 	}
@@ -144,6 +226,22 @@ public class OrderActivityImpl implements OrderActivity {
 			
 		}
 		
+	}
+
+	@Override
+	public Set<OrderRepresentation> getOrdersOfPartner(String partner_username) {
+		Set<OrderRepresentation> or = new HashSet<>();
+
+		List<Order> orders = orderFactory.getOrdersOfPartner(partner_username);
+		convertToOrderRepresentations(orders,or);
+		setLinksAfterOrderDisplay(or);
+		return or;
+
+	}
+
+	private void setLinksAfterOrderDisplay(Set<OrderRepresentation> or) {
+		
+		//TODO
 	}
 
 }

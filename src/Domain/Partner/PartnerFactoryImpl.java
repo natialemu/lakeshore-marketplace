@@ -52,10 +52,12 @@ public class PartnerFactoryImpl implements PartnerFactory {
         createPartner(partner);
         return returnType;
     }
-    public void addProducts(String username, List<Product> products) {
+    public boolean addProducts(String username, List<Product> products) {
     	
 
+    	boolean successful = true;
     	Partner partner = partnerDAO.getPartner(username);
+    	successful = partner == null & successful;
     	assert(partner != null);
     	assert(partner.getPartnerUsername().equals(username));
     	assert(partner.getAccount() != null);
@@ -70,10 +72,13 @@ public class PartnerFactoryImpl implements PartnerFactory {
     		assert(p.getParner() == null);
     		 p.setPartner(partner);
     		 assert(p.getParner() != null);
-    		 productFactory.createProduct(p);
+    		 
+    		 boolean productCreated = productFactory.createProduct(p);
+    		 successful = successful && productCreated;
     		 System.out.println("Check DB -> just added product: " + p.getProductName());
    
     	}
+    	return successful;
     	
              // p.setPartner(partner);
 //            productFactory.createProduct(p);
@@ -108,9 +113,10 @@ public class PartnerFactoryImpl implements PartnerFactory {
         return new PartnerImpl();
     }
 	@Override
-	public void deleteProduct(int partner_id, int product_id) {
+	public boolean deleteProduct(int partner_id, int product_id) {
 		// TODO: should send to product DAO for deletion
 		System.out.println("Product is deleted! ");
+		return true;
 		
 	}
 }

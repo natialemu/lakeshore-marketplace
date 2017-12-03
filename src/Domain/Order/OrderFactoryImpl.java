@@ -106,6 +106,12 @@ public class OrderFactoryImpl implements OrderFactory{
 	public List<Order> getMostRecentOrders(int numOrders) {
 		return orderDAO.getMostRecentOrders(5);
 	}
+
+	@Override
+	public List<Order> getOrdersOfPartner(String partner_username) {
+		// TODO Auto-generated method stub
+		return orderDAO.getOrdersOfPartner(partner_username);
+	}
     
 
 

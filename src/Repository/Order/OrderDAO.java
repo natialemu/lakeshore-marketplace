@@ -14,4 +14,6 @@ public interface OrderDAO {
     void updateStatus(Order retrievedOrder, int confirmation_id);
 
 	List<Order> getMostRecentOrders(int i);
+
+	List<Order> getOrdersOfPartner(String partner_username);
 }

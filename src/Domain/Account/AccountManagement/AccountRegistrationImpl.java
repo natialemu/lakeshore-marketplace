@@ -36,4 +36,9 @@ public class AccountRegistrationImpl implements AccountRegistration{
     public boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
         return accountDAO.createPaymentCardProfile(accountNumber, cardHolderName,cardNumber,cardExpirationDate,securityNumber);
     }
+	@Override
+	public boolean createAccountContactProfile(String username, String fullName, Location location, String birthDate,
+			String cellPhone) {
+		return accountDAO.createAccountContactProfile(username, fullName, location, birthDate, cellPhone);
+	}
 }

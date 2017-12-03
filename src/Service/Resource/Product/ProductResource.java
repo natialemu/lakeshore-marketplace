@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
 import Service.Representation.Account.Request.BasicAccountRequest;
 import Service.Representation.Product.Representation.MinProductRepresentation;
 import Service.Representation.Product.Representation.ProductRepresentation;
@@ -84,23 +85,24 @@ public class ProductResource implements ProductService{
 
 	@POST
 	@Consumes({"application/xml" , "application/json"})
+	@Produces({"application/xml" , "application/json"})
 	@Path("/{username}")
 	@Override
-	public void addProduct(Set<ProductRequest> products,@PathParam("username")String username ) {
+	public AccountValidationRepresentation addProduct(Set<ProductRequest> products,@PathParam("username")String username ) {
 		ProductAcitvity productActivity = new ProductActivityImpl();
-		productActivity.addProduct(username,products);
+		return productActivity.addProduct(username,products);
 		
 		
 	}
 
 	@DELETE
-	@Consumes({"application/xml" , "application/json"})
+	@Produces({"application/xml" , "application/json"})
 	@Path("/")
 	@Override
-	public void deleteProduct(int partner_id, int product_id) {
-		
+	public AccountValidationRepresentation deleteProduct(@QueryParam("partner_id") int partner_id, @QueryParam("product_id")int product_id) {
+		//WRONG
 		ProductAcitvity productActivity = new ProductActivityImpl();
-		productActivity.deleteProduct(partner_id,product_id);
+		return productActivity.deleteProduct(partner_id,product_id);
 	}
 
 	@GET
@@ -111,6 +113,15 @@ public class ProductResource implements ProductService{
 		
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		return productActivity.getRecentlyAddedProducts(numOrders);
+	}
+	
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/{partner_username}")
+	@Override
+	public Set<MinProductRepresentation> getInventory(@PathParam("partner_username") String username){
+		ProductAcitvity productActivity = new ProductActivityImpl();
+		return productActivity.getInventory(username);
 	}
 	
 	

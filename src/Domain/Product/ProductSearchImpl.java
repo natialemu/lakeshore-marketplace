@@ -64,4 +64,8 @@ public class ProductSearchImpl implements ProductSearch{
 	public List<Product> getRecentlyAddedProducts(int numOrders) {
 		return productDAO.getRecentlyAddedProducts(numOrders);
 	}
+	@Override
+	public List<Product> getInventory(String username) {
+		return productDAO.getInventory(username);
+	}
 }

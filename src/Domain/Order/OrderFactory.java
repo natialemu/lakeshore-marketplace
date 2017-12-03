@@ -20,4 +20,6 @@ public interface OrderFactory {
 
 	List<Order> getMostRecentOrders(int numOrders);
 
+	List<Order> getOrdersOfPartner(String partner_username);
+
 }

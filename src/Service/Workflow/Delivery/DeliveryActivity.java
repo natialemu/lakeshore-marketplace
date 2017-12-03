@@ -7,4 +7,6 @@ public interface DeliveryActivity {
 
 	void provideStatus(int orderID, DeliveryRequest deliveryRequest);
 
+	DeliveryStatusRepresentation getDeliveryStatus(int tracking_number);
+
 }

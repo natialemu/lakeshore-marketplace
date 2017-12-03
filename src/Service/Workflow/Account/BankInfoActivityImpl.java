@@ -5,6 +5,8 @@ import Domain.Account.AccountFactoryImpl;
 import Domain.Account.AccountProfile.Contact.Location;
 import Domain.Account.AccountProfile.Contact.LocationImpl;
 import Domain.Account.AccountProfile.Finance.FinancialInfo;
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Account.Representation.BankInfoRepresentation;
 import Service.Representation.Account.Representation.BankInfoRepresentationImpl;
 import Service.Representation.Account.Request.BankInfoRequest;
@@ -165,8 +167,9 @@ public class BankInfoActivityImpl implements BankInfoActivity{
 	}
 
 	@Override
-	public void createBankInformation(String username,BankInfoRequest bankInformation) {
+	public AccountValidationRepresentation createBankInformation(String username,BankInfoRequest bankInformation) {
 		// TODO Auto-generated method stub
+		AccountValidationRepresentation avr = new AccountValidationRepresentationImpl();
 		String defaultRoutingNumber = "123456";
 		String defaultSwiftCode = "12345";
 		Location location = new LocationImpl();
@@ -175,10 +178,18 @@ public class BankInfoActivityImpl implements BankInfoActivity{
 		location.setStreetAddress(bankInformation.getBillingStreetAddress());
 		location.setZipcode(Integer.parseInt(bankInformation.getBillingZipcode()));
 		
-		accountFactory.createAccountFinancialProfile(username, bankInformation.getAccountNumber(), bankInformation.getBankName(), defaultRoutingNumber, bankInformation.getAccountType(), location, defaultSwiftCode);
-		accountFactory.createPaymentCardProfile(bankInformation.getAccountNumber(), bankInformation.getNameOnCard(), bankInformation.getCardNumber(), bankInformation.getCardExpirationDate(), Integer.parseInt(bankInformation.getCardSecurityCode()));
+		boolean fin_profile_created = accountFactory.createAccountFinancialProfile(username, bankInformation.getAccountNumber(), bankInformation.getBankName(), defaultRoutingNumber, bankInformation.getAccountType(), location, defaultSwiftCode);
+		boolean payment_card_created = accountFactory.createPaymentCardProfile(bankInformation.getAccountNumber(), bankInformation.getNameOnCard(), bankInformation.getCardNumber(), bankInformation.getCardExpirationDate(), Integer.parseInt(bankInformation.getCardSecurityCode()));
 		
+		avr.setIsSuccessful(fin_profile_created && payment_card_created);
+		setLinksAfterBankProfile(avr);
+		return avr;
 
+	}
+
+	private void setLinksAfterBankProfile(AccountValidationRepresentation avr) {
+		// TODO 
+		
 	}
 
 }

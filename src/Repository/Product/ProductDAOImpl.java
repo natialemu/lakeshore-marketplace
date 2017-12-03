@@ -15,6 +15,7 @@ import java.util.List;
 
 public class ProductDAOImpl implements ProductDAO{
     private PartnerDAO partnerDAO;
+    
 
     public ProductDAOImpl(){
         partnerDAO = new PartnerDAOImpl();
@@ -254,7 +255,7 @@ public class ProductDAOImpl implements ProductDAO{
     }
 
     @Override
-    public void createProduct(Product product) {
+    public boolean createProduct(Product product) {
         boolean inserted = false;
 
         Connection connection = openConnection();
@@ -277,6 +278,7 @@ public class ProductDAOImpl implements ProductDAO{
 
             }
         }
+        return inserted;
 
     }
 
@@ -341,6 +343,54 @@ public class ProductDAOImpl implements ProductDAO{
 			products.add(product);
 		}
 		return products;
+	}
+
+	@Override
+	public List<Product> getInventory(String username) {
+		int partnerID = partnerDAO.getPartnerID(username);
+		return getProductsByPartnerID(partnerID);
+	}
+
+	private List<Product> getProductsByPartnerID(int partnerID) {
+        int product_Id = 0;
+
+
+
+        List<Product> products = new ArrayList<>();
+        List<Integer> productIDS = new ArrayList<>();
+        Connection connection = openConnection();
+        try {
+            Statement selectStatement = connection.createStatement();
+
+            String selectQuery = "SELECT * from product where partner_id=" + partnerID;
+            ResultSet resultSet = selectStatement.executeQuery(selectQuery);
+
+            while(resultSet.next()) {
+                 product_Id = resultSet.getInt("product_id");
+                 productIDS.add(product_Id);
+            	
+            }
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+
+        for(Integer id:productIDS) {
+        	Product product = getProductByID(id);
+        	products.add(product);
+        }
+        
+        return products;
+        
+		
 	}
 
 

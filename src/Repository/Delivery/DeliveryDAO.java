@@ -1,6 +1,7 @@
 package Repository.Delivery;
 
 import Domain.Delivery.Delivery;
+import Domain.Delivery.DeliveryStatus;
 
 public interface DeliveryDAO {
 
@@ -12,5 +13,7 @@ public interface DeliveryDAO {
 
 
     void insertDeliveryStatus(int deliveryId,int trackingNumber, String deliveryMethod, String deliveryCarrier);
+
+	DeliveryStatus getDeliveryStatus(int tracking_number);
 
 }

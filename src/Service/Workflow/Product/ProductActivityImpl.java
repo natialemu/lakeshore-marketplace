@@ -14,6 +14,8 @@ import Service.Common.MediaTypes;
 import Service.Common.URIs;
 import Service.Representation.Link;
 import Service.Representation.LinkImpl;
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Product.Representation.MinProductRepresentation;
 import Service.Representation.Product.Representation.MinProductRepresentationImpl;
 import Service.Representation.Product.Representation.ProductRepresentation;
@@ -32,7 +34,6 @@ public class ProductActivityImpl implements ProductAcitvity {
 	@Override
 	public Set<ProductRepresentation> filterProductByCost(Set<ProductRequest> products, double minCost,
 			double maxCost) {
-		// TODO Auto-generated method stub
 		List<Product> productList = new ArrayList<>();
 		getProductList(products,productList);
 		List<Product> filteredProduct = productFactory.filterProductByCost(productList,minCost,maxCost);
@@ -45,9 +46,6 @@ public class ProductActivityImpl implements ProductAcitvity {
 	private void convertToDetailedProductRepresentation(List<Product> filteredProduct,
 			Set<ProductRepresentation> productRepresentation) {
 		
-	
-		
-			// TODO Auto-generated method stub
 			for(Product p: filteredProduct) {
 				ProductRepresentation prep = new ProductRepresentationImpl();
 				prep.setProductCost(p.getProductCost());
@@ -64,7 +62,6 @@ public class ProductActivityImpl implements ProductAcitvity {
 
 	private void convertToProductRepresentation(List<Product> filteredProduct,
 			Set<MinProductRepresentation> productRepresentation) {
-		// TODO Auto-generated method stub
 		for(Product p: filteredProduct) {
 			MinProductRepresentation prep = new MinProductRepresentationImpl();
 			prep.setProductCost(p.getProductCost());
@@ -117,7 +114,6 @@ public class ProductActivityImpl implements ProductAcitvity {
 
 	@Override
 	public Set<ProductRepresentation> sortInDescendingOrder(Set<ProductRequest> products) {
-		// TODO Auto-generated method stub
 		List<Product> productList = new ArrayList<>();
 		getProductList(products,productList);
 		List<Product> filteredProduct = productFactory.sortProductsByName(productList,false);
@@ -141,7 +137,6 @@ public class ProductActivityImpl implements ProductAcitvity {
 
 	@Override
 	public Set<ProductRepresentation> filterProductBySeller(Set<ProductRequest> products, String sellerName) {
-		// TODO Auto-generated method stub
 		List<Product> productList = new ArrayList<>();
 		getProductList(products,productList);
 		List<Product> filteredProduct = productFactory.filterProductBySeller(productList,sellerName);
@@ -164,23 +159,50 @@ public class ProductActivityImpl implements ProductAcitvity {
 		
 		assert(filteredProduct.size() == productRepresentation.size());
 		
+		setLinks(productRepresentation);
+		
 		return productRepresentation;
 		
 	}
 
 	@Override
 	public Set<ProductRepresentation> getProductByID(int productID) {
-		// TODO Auto-generated method stub
 		List<Product> filteredProduct = productFactory.getProduct(productID);
 		Set<ProductRepresentation> productRepresentation = new HashSet<>();
 		
 		convertToDetailedProductRepresentation(filteredProduct,productRepresentation);
+ 
+		setDetailedLinks(productRepresentation);
 		return productRepresentation;
+	}
+
+	private void setDetailedLinks(Set<ProductRepresentation> productRepresentation) {
+
+		for(ProductRepresentation pr: productRepresentation) {
+			List<Link> links = new ArrayList<>();
+			
+			//place order
+			
+			Link placeOrder = new LinkImpl("POST",URIs.ORDER,"Place order",MediaTypes.JSON);
+			links.add(placeOrder);
+			
+			
+			//searh for another product
+			Link searchProduct = new LinkImpl("GET",URIs.PRODUCTS,"Search for products",MediaTypes.JSON);
+			links.add(searchProduct);
+			//Rate a product
+			//subscribe to a partner
+			//
+			
+			Link[] linkArray = new Link[links.size()];
+			pr.setLinks(links.toArray(linkArray));
+			
+		}
+		
 	}
 
 	@Override
 	public Set<ProductRepresentation> getProductBySeller(String sellerName) {
-		// TODO Auto-generated method stub
 		List<Product> filteredProduct = productFactory.getProductBySeller(sellerName);
 		Set<ProductRepresentation> productRepresentation = new HashSet<>();
 		
@@ -190,7 +212,6 @@ public class ProductActivityImpl implements ProductAcitvity {
 
 	@Override
 	public Set<MinProductRepresentation> getProductByType(String productType) {
-		// TODO Auto-generated method stub
 		List<Product> filteredProduct = productFactory.getProductByType(productType);
 		Set<MinProductRepresentation> productRepresentation = new HashSet<>();
 		
@@ -200,7 +221,6 @@ public class ProductActivityImpl implements ProductAcitvity {
 
 	@Override
 	public Set<MinProductRepresentation> getProductsBySellerAndType(String sellerName, String productType) {
-		// TODO Auto-generated method stub
 		List<Product> filteredProduct = productFactory.getProductsBySellerAndType(sellerName,productType);
 		Set<MinProductRepresentation> productRepresentation = new HashSet<>();
 		
@@ -227,11 +247,13 @@ public class ProductActivityImpl implements ProductAcitvity {
 			List<Link> links = new ArrayList<>();
 			
 			// view product
-			Link viewProduct = new LinkImpl("GET",URIs.VIEW_DETAILED_PRODUCT+mpr.getProductName(),"View Product",MediaTypes.JSON);
+			Link viewProduct = new LinkImpl("GET",URIs.PRODUCTS+"/"+mpr.getProductID(),"View Product",MediaTypes.JSON);
 			links.add(viewProduct);
 			
 			//place order
-			Link placeOrder = new LinkImpl("POST",URIs.PLACE_ORDER+"?productName="+mpr.getProductName(),"Place order","");
+			
+			Link placeOrder = new LinkImpl("POST",URIs.ORDER,"Place order",MediaTypes.JSON);
+			links.add(placeOrder);
 			Link[] linkArray = new Link[links.size()];
 			mpr.setLinks(links.toArray(linkArray));
 		}
@@ -239,22 +261,40 @@ public class ProductActivityImpl implements ProductAcitvity {
 	}
 
 	@Override
-	public void addProduct(String username, Set<ProductRequest> products) {
+	public AccountValidationRepresentation addProduct(String username, Set<ProductRequest> products) {
+		AccountValidationRepresentation avr = new AccountValidationRepresentationImpl();
+		
 		List<Product> productList = new ArrayList<>();
 		
 		getProductList(products,productList);
 		assert(productList.size() == products.size());
 		
-		partnerFactory.addProducts(username, productList);
+		boolean productAdded = partnerFactory.addProducts(username, productList);
+		avr.setIsSuccessful(productAdded);
+		setLinksAfterProductAddition(avr);
+		return avr;
 		
 		
 		
 	}
 
+	private void setLinksAfterProductAddition(AccountValidationRepresentation avr) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
-	public void deleteProduct(int partner_id, int product_id) {
+	public AccountValidationRepresentation deleteProduct(int partner_id, int product_id) {
 		// 
-		partnerFactory.deleteProduct(partner_id, product_id);
+		boolean productDeleted= partnerFactory.deleteProduct(partner_id, product_id);
+		AccountValidationRepresentation avr = new AccountValidationRepresentationImpl();
+		avr.setIsSuccessful(productDeleted);
+		setLinksAfterProductDeletetion(avr);
+		return avr;
+		
+	}
+
+	private void setLinksAfterProductDeletetion(AccountValidationRepresentation avr) {
 		
 	}
 
@@ -266,6 +306,20 @@ public class ProductActivityImpl implements ProductAcitvity {
 		convertToProductRepresentation(products,pr);
 		setLinks(pr);
 		return pr;
+		
+	}
+
+	@Override
+	public Set<MinProductRepresentation> getInventory(String username) {
+		List<Product> productList = productFactory.getInventory(username);
+		Set<MinProductRepresentation> mpr = new HashSet<>();
+		convertToProductRepresentation(productList,mpr);
+		setLinkAfterGettingInventory(mpr);
+		return mpr;
+
+	}
+
+	private void setLinkAfterGettingInventory(Set<MinProductRepresentation> mpr) {
 		
 	}
 

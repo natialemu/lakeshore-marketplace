@@ -1,8 +1,10 @@
 package Domain.Product;
 
 import Repository.Product.ProductDAO;
+import Service.Representation.Product.Representation.MinProductRepresentation;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ProductFactory {
     void setProductFilter(ProductFilter productFilter);
@@ -20,7 +22,7 @@ public interface ProductFactory {
     List<Product> sortProductsByName(List<Product> products,boolean order);
     List<Product> sortProductsByPrice(List<Product> products);
     List<Product> sortProductsByRating(List<Product> products);
-    void createProduct(Product product);
+    boolean createProduct(Product product);
 	List<Product> filterProductByCost(List<Product> productList, double minCost, double maxCost);
 	List<Product> filterProductByRating(List<Product> productList, int minRating, int maxRating);
 	List<Product> filterProductByDate(List<Product> productList, String date1, String date2);
@@ -31,6 +33,7 @@ public interface ProductFactory {
 	List<Product> getProductsBySellerAndType(String sellerName, String productType);
 	List<Product> getProductsByName(String productType);
 	List<Product> getRecentlyAddedProducts(int numOrders);
+	List<Product> getInventory(String username);
 
 	
 	

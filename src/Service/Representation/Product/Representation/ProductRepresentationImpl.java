@@ -18,6 +18,7 @@ public class ProductRepresentationImpl extends AbstractRepresentation implements
     private String productType;
     private String partnerName;
     private int productID;
+    private String rating;
     
     @Override
     public int getProductID() {
@@ -62,6 +63,15 @@ public class ProductRepresentationImpl extends AbstractRepresentation implements
 	}
 	public void setProductType(String productType) {
 		this.productType = productType;
+	}
+	@Override
+	public void setRating(String rating) {
+
+		this.rating = rating;
+	}
+	@Override
+	public String getRating() {
+		return rating;
 	}
     
     

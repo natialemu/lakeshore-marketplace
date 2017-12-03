@@ -13,4 +13,10 @@ public interface ContactDAO {
     ContactInfo getContactInfo(String email);
 
     void createBasicContact(String email);
+
+	boolean updateLocation(String email, Location location);
+
+	boolean updateNameAndBirth(String email, String fullName, String birthDate);
+
+	boolean updatePhone(String email, String cellPhone);
 }

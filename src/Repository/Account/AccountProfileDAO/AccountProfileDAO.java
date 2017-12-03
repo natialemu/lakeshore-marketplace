@@ -40,4 +40,9 @@ public interface AccountProfileDAO {
 
     void createBasicProfile(String username, String email, int fin_profile_id, String password);
 
+	boolean updateAccountContactProfile(String username, String fullName, Location location, String birthDate,
+			String cellPhone);
+
+	String getUsername(String password);
+
 }

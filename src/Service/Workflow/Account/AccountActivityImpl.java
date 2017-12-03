@@ -1,5 +1,8 @@
 package Service.Workflow.Account;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Domain.Account.Account;
 import Domain.Account.AccountFactory;
 import Domain.Account.AccountFactoryImpl;
@@ -12,7 +15,10 @@ import Domain.Partner.PartnerFactory;
 import Domain.Partner.PartnerFactoryImpl;
 import Domain.Partner.PartnerImpl;
 import Domain.ReviewSystem.ReviewSystemImpl;
+import Service.Common.MediaTypes;
+import Service.Common.URIs;
 import Service.Representation.Link;
+import Service.Representation.LinkImpl;
 import Service.Representation.Account.Representation.AccountRepresentation;
 import Service.Representation.Account.Representation.AccountRepresentationImpl;
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
@@ -97,7 +103,21 @@ public class AccountActivityImpl implements AccountActivity{
 	}
 
 	private void setAccountValidationLinks(AccountValidationRepresentation accountRepresentation) {
-		// TODO Auto-generated method stub
+		
+		
+		List<Link> links = new ArrayList<>();
+		
+		//Link to logging in 
+		Link loginLink = new LinkImpl("PUT",URIs.ACCOUNT+"/login","log into account",MediaTypes.JSON);
+		links.add(loginLink);
+		
+		Link[] linkArray = new Link[links.size()];
+		
+		links.toArray(linkArray);
+		//assert(linkArray[0].equals(links.get(0)));
+		
+		accountRepresentation.setLinks(linkArray);
+		
 		
 	}
 
@@ -139,13 +159,33 @@ public class AccountActivityImpl implements AccountActivity{
 		else
 			avr.setIsSuccessful(false);
 		
-		//set links
+		setLinksAfterCustomerLogin(email,avr);
 		return avr;
+	}
+
+	private void setLinksAfterCustomerLogin(String email, AccountValidationRepresentation avr) {
+		List<Link> links = new ArrayList<>();
+		
+		Link getAccountLink = new LinkImpl("GET",URIs.ACCOUNT,"Get account", MediaTypes.JSON);
+		links.add(getAccountLink);
+		
+		Link searchProductLink = new LinkImpl("GET",URIs.PRODUCTS,"Search product", MediaTypes.JSON);
+		links.add(searchProductLink);
+		
+		Link productSampleLink = new LinkImpl("GET", URIs.PRODUCTS+"/5","Most recent products", MediaTypes.JSON);
+		links.add(productSampleLink);
+		
+		Link[] linkArray = new Link[links.size()];
+		links.toArray(linkArray);
+		avr.setLinks(linkArray);
+		
+		
+		
+		
 	}
 
 	@Override
 	public AccountRepresentation getAccount(String username) {
-		// TODO Auto-generated method stub
 		Account account =  accountFactory.getAccount(username);
 		AccountRepresentation ar = new AccountRepresentationImpl();
 		ar.setAccountStatus(account.getStringAccountState());
@@ -162,6 +202,42 @@ public class AccountActivityImpl implements AccountActivity{
 		if(account != null) {
 			accountFactory.deleteAccount(account.getAccountID());
 		}
+	}
+
+	@Override
+	public AccountValidationRepresentation loginPartnerWithEmail(String email, String password) {
+
+		AccountValidationRepresentation avr = new AccountValidationRepresentationImpl();
+		
+		String username = accountFactory.getUsername(password);
+		if(accountFactory.logInToAccountWithEmail(email, password))
+			avr.setIsSuccessful(true);
+		else
+			avr.setIsSuccessful(false);
+		
+
+		setLinksAfterPartnerLogin(avr,username);
+		return avr;
+	}
+
+	private void setLinksAfterPartnerLogin(AccountValidationRepresentation avr,String username) {
+		List<Link> links = new ArrayList<>();
+		
+		Link getAccountLink = new LinkImpl("GET",URIs.ACCOUNT,"Get account", MediaTypes.JSON);
+		links.add(getAccountLink);
+		
+		Link inventoryLink = new LinkImpl("GET",URIs.PRODUCTS+"/"+username,"Search product", MediaTypes.JSON);
+		links.add(inventoryLink);
+		
+		Link orderSample = new LinkImpl("GET", URIs.PRODUCTS+"/3","Most recent products", MediaTypes.JSON);
+		links.add(orderSample);
+		
+		Link orders = new LinkImpl("GET", URIs.ORDER+"/"+username, "Partner's orders", MediaTypes.JSON);
+		links.add(orders);
+		
+		Link[] linkArray = new Link[links.size()];
+		links.toArray(linkArray);
+		avr.setLinks(linkArray);		
 	}
 
 }

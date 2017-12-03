@@ -10,6 +10,8 @@ import Domain.Product.Product;
 import Domain.Transaction.Transaction;
 import Repository.Delivery.DeliveryDAO;
 import Repository.Delivery.DeliveryDAOImpl;
+import Repository.Partner.PartnerDAO;
+import Repository.Partner.PartnerDAOImpl;
 import Repository.Product.ProductDAO;
 import Repository.Product.ProductDAOImpl;
 import Repository.Transaction.TransactionDAO;
@@ -18,7 +20,9 @@ import Repository.Transaction.TransactionDAOImpl;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class OrderDAOImpl implements OrderDAO {
     private OrderConfirmationDAO orderConfirmationDAO;
@@ -26,6 +30,7 @@ public class OrderDAOImpl implements OrderDAO {
     private TransactionDAO transactionDAO;
     private DeliveryDAO deliveryDAO;
     private ProductDAO productDAO;
+    private PartnerDAO partnerDAO;
 
     public OrderDAOImpl(){
         orderConfirmationDAO = new OrderConfirmationDAOImpl();
@@ -33,6 +38,7 @@ public class OrderDAOImpl implements OrderDAO {
         transactionDAO = new TransactionDAOImpl();
         deliveryDAO = new DeliveryDAOImpl();
         productDAO = new ProductDAOImpl();
+        partnerDAO = new PartnerDAOImpl();
     }
 
     private Connection openConnection() {
@@ -238,5 +244,47 @@ public class OrderDAOImpl implements OrderDAO {
 			orders.add(order);
 		}
 		return orders;
+	}
+
+	@Override
+	public List<Order> getOrdersOfPartner(String partner_username) {
+		int order_id = 0;
+		int partnerID = partnerDAO.getPartnerID(partner_username);
+
+
+
+        List<Order> orders = new ArrayList<>();
+        Set<Integer> order_ids = new HashSet<>();
+        Connection connection = openConnection();
+        try {
+            Statement selectStatement = connection.createStatement();
+
+            String selectQuery = "SELECT * from product where partner_id=" + partnerID;
+            ResultSet resultSet = selectStatement.executeQuery(selectQuery);
+
+            while(resultSet.next()) {
+                 order_id = resultSet.getInt("order_id");
+                 order_ids.add(order_id);
+            	
+            }
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+
+        for(Integer id:order_ids) {
+        	Order order = retrieveOrder(id);
+        	orders.add(order);
+        }
+        
+        return orders;		
 	}
 }

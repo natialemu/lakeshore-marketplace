@@ -10,4 +10,7 @@ public interface DeliveryRequest {
 	String getDeliveryMethod();
 	String getDeliveryCarrier();
 	String getTracking_number();
+	
+	void setOrderID(int orderID);
+	int getOrderID();
 }

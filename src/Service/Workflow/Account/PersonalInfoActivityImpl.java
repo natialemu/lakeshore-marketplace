@@ -3,6 +3,8 @@ package Service.Workflow.Account;
 import Domain.Account.Account;
 import Domain.Account.AccountFactory;
 import Domain.Account.AccountFactoryImpl;
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Account.Representation.PersonalInformationRepresentation;
 import Service.Representation.Account.Representation.PersonalInformationRepresentationImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
@@ -16,16 +18,20 @@ public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 	}
 
 	@Override
-	public void createPersonalInformation(String username, PersonalInformationRequest personalInformation) {
-		// TODO Auto-generated method stub
-		
-		accountFactory.createPersonalInformation(username,personalInformation.getBirthDate(),personalInformation.getCellPhone(),personalInformation.getFullName(),personalInformation.getCity(),personalInformation.getFullName(),personalInformation.getState(),personalInformation.getStreetAddress(),personalInformation.getZipcode());
+	public AccountValidationRepresentation createPersonalInformation(String username, PersonalInformationRequest personalInformation) {
+		AccountValidationRepresentation avr = new AccountValidationRepresentationImpl();
+		boolean profileCreated = accountFactory.createPersonalInformation(username,personalInformation.getBirthDate(),personalInformation.getCellPhone(),personalInformation.getFullName(),personalInformation.getCity(),personalInformation.getFullName(),personalInformation.getState(),personalInformation.getStreetAddress(),personalInformation.getZipcode());
+		avr.setIsSuccessful(profileCreated);
+		setLinksAfterProfileCreation(avr);
+		return avr;
+	}
+
+	private void setLinksAfterProfileCreation(AccountValidationRepresentation avr) {
 		
 	}
 
 	@Override
 	public void removesecurityAnswer(String email, String newSecurityQuestionAnswer) {
-		// TODO Auto-generated method stub
 		accountFactory.removeSecurityAnswer(email,newSecurityQuestionAnswer);
 		
 	}
@@ -66,14 +72,12 @@ public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 
 	@Override
 	public void removeEmail(String newEmail) {
-		// TODO Auto-generated method stub
 		accountFactory.removeEmail(newEmail);
 	}
 
 	@Override
-	public PersonalInformationRepresentation getPersonalInformation(BasicAccountRequest basicAccountRequest) {
-		// TODO Auto-generated method stub
-		Account account = accountFactory.getAccount(basicAccountRequest.getUsername(), basicAccountRequest.getPassword());
+	public PersonalInformationRepresentation getPersonalInformation(String username) {
+		Account account = accountFactory.getAccount(username);
 		PersonalInformationRepresentation pir = new PersonalInformationRepresentationImpl();
 		
 		pir.setBirthDate(account.getAccountProfile().getContactInfo().getBirthDate());
@@ -104,19 +108,16 @@ public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 	@Override
 	public void updateLocation(String email, int zipcode, String streetAddress, String city, String country,
 			String state) {
-		// TODO Auto-generated method stub
 		accountFactory.updateAddress(email,streetAddress, state, city, zipcode, country);
 	}
 
 	@Override
 	public void updateBirthDate(String email, String birthDate) {
-		// TODO Auto-generated method stub
 		accountFactory.updateBirthDate(email,birthDate);
 	}
 
 	@Override
 	public void updateFullName(String email, String newFullName) {
-		// TODO Auto-generated method stub
 		accountFactory.updateFullName(email,newFullName);
 		
 	}

@@ -12,6 +12,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
 import Service.Representation.Account.Request.BasicAccountRequest;
 import Service.Representation.Order.Representation.OrderRepresentation;
 import Service.Representation.Order.Representation.OrderStatusRepresentation;
@@ -26,21 +27,22 @@ public class OrderResource implements OrderService{
 	@POST
 	@Path("/")
 	@Produces({"application/xml" , "application/json"})
+	@Consumes({"application/xml" , "application/json"})
 	@Override
-	public void placeOrder(OrderRequest orderRequest) {
+	public AccountValidationRepresentation placeOrder(OrderRequest orderRequest) {
 		// TODO Auto-generated method stub
 		OrderActivity orderActivity = new OrderActivityImpl();
-		orderActivity.placeOrder(orderRequest.getProductsInOrder(),orderRequest.getUsername());
+		return orderActivity.placeOrder(orderRequest.getProductsInOrder(),orderRequest.getUsername());
 	}
 
 	@DELETE
 	@Path("/{orderID}")
 	@Produces({"application/xml" , "application/json"})
 	@Override
-	public void cancelOrder(@PathParam("orderID") int orderID) {
+	public AccountValidationRepresentation cancelOrder(@PathParam("orderID") int orderID) {
 		// TODO Auto-generated method stub
 		OrderActivity orderActivity = new OrderActivityImpl();
-		orderActivity.cancelOrder(orderID);
+		return orderActivity.cancelOrder(orderID);
 	}
 
 	@GET
@@ -67,13 +69,24 @@ public class OrderResource implements OrderService{
 
 	@GET
 	@Produces({"application/xml", "application/json"})
-	@Path("/status/{orderID}")
-
+	@Path("/{num_order}")
 	@Override
-	public Set<OrderRepresentation> getMostRecentOrders(int numOrders) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<OrderRepresentation> getMostRecentOrders(@PathParam("num_order") int numOrders) {
+		OrderActivity orderActivity = new OrderActivityImpl();
+		
+		return orderActivity.getMostRecentOrders(numOrders);
 	}
+	
+	@GET
+	@Produces({"application/xml", "application/json"})
+	@Path("/{partner_username}")
+	@Override
+	public Set<OrderRepresentation> getOrdersOfPartner(@PathParam("partner_username") String partner_username) {
+		OrderActivity orderActivity = new OrderActivityImpl();
+		
+		return orderActivity.getOrdersOfPartner(partner_username);
+	}
+
 
 	
 

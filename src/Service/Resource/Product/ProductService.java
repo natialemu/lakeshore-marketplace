@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.jws.WebService;
 
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
 import Service.Representation.Account.Request.BasicAccountRequest;
 import Service.Representation.Order.Representation.OrderRepresentation;
 import Service.Representation.Product.Representation.MinProductRepresentation;
@@ -25,12 +26,13 @@ public interface ProductService {
 	
 	
 	//CREATE
-	void addProduct(Set<ProductRequest> products,String username);
+	AccountValidationRepresentation addProduct(Set<ProductRequest> products,String username);
 	
 	//DELETE
-	void deleteProduct(int partner_id, int product_id);
+	AccountValidationRepresentation deleteProduct(int partner_id, int product_id);
 	
 	Set<MinProductRepresentation> getRecentlyAddedProducts(int numOrders);
+	Set<MinProductRepresentation> getInventory(String username);
 
 	
 

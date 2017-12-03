@@ -29,4 +29,7 @@ public interface ProductSearch {
 
 
 	List<Product> getRecentlyAddedProducts(int numOrders);
+
+
+	List<Product> getInventory(String username);
 }

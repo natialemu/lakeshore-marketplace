@@ -164,4 +164,73 @@ public class ContactDAOImpl implements ContactDAO {
             }
         }
     }
+	@Override
+	public boolean updateLocation(String email, Location location) {
+		
+		Connection connection = openConnection();
+		boolean zipUpdated = false;
+        try {
+            Statement updateSqlStatement = connection.createStatement();
+            String updateQuery = "UPDATE contact SET zipcode=" + location.getZipcode() + " WHERE email='" + email+"'";
+            updateSqlStatement.executeUpdate(updateQuery);
+            zipUpdated = true;
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+        return zipUpdated && locationDAO.createLocation(location);
+        
+		
+	}
+	@Override
+	public boolean updateNameAndBirth(String email, String fullName, String birthDate) {
+		Connection connection = openConnection();
+        try {
+            Statement updateSqlStatement = connection.createStatement();
+            String updateQuery = "UPDATE contact SET birthDate='" + birthDate + "',full_name='"+fullName +"' WHERE email='" + email+"'";
+            updateSqlStatement.executeUpdate(updateQuery);
+            return true;
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+        return false;
+	}
+	@Override
+	public boolean updatePhone(String email, String cellPhone) {
+		// TODO Auto-generated method stub
+		Connection connection = openConnection();
+        try {
+            Statement updateSqlStatement = connection.createStatement();
+            String updateQuery = "UPDATE contact SET phone_id=" + Integer.parseInt(cellPhone) + " WHERE email='" + email+"'";
+            updateSqlStatement.executeUpdate(updateQuery);
+            return true;
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+        return false;
+		
+	}
 }

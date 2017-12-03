@@ -60,6 +60,16 @@ public class AccountResource implements AccountService{
 		return accountActivity.loginWithEmail(basicEmailAccountRequest.getEmail(),basicEmailAccountRequest.getPassword());
 		
 	}
+	@PUT
+	@Produces({"application/xml", "application/json"})
+	@Consumes({"application/xml", "application/json"})
+	@Path("/login/partner")
+	@Override
+	public AccountValidationRepresentation loginPartnerWithEmail(BasicEmailAccountRequest basicEmailAccountRequest) {
+		AccountActivity accountActivity = new AccountActivityImpl();
+		return accountActivity.loginPartnerWithEmail(basicEmailAccountRequest.getEmail(),basicEmailAccountRequest.getPassword());
+		
+	}
 
 	@PUT
 	@Produces({"application/xml", "application/json"})
@@ -110,7 +120,6 @@ public class AccountResource implements AccountService{
 
 	@GET
 	@Produces({"application/xml", "application/json"})
-	@Consumes({"application/xml", "application/json"})
 	@Path("/{username}")
 	@Override
 	public AccountRepresentation getAccount(@PathParam("username")String username) {

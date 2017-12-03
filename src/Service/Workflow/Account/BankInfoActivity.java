@@ -1,5 +1,6 @@
 package Service.Workflow.Account;
 
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
 import Service.Representation.Account.Representation.BankInfoRepresentation;
 import Service.Representation.Account.Request.BankInfoRequest;
 import Service.Representation.Account.Request.BasicAccountRequest;
@@ -44,7 +45,7 @@ public interface BankInfoActivity {
 
 	void deleteSecurityCode(String cardNumber, int securityCode);
 
-	void createBankInformation(String username, BankInfoRequest bankInformation);
+	AccountValidationRepresentation createBankInformation(String username, BankInfoRequest bankInformation);
 
 	
 

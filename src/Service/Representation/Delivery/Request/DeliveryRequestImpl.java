@@ -12,6 +12,17 @@ public class DeliveryRequestImpl implements DeliveryRequest{
     private String deliveryCarrier;
     private String deliveryMethod;
     private String deliveryConfirmationID;
+    private int orderID;
+    
+    @Override
+    public int getOrderID() {
+    	return orderID;
+    }
+    @Override
+    public void setOrderID(int orderID) {
+    	this.orderID = orderID;
+    }
+    
     
     public DeliveryRequestImpl() {}
 

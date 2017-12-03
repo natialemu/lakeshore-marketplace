@@ -10,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
 import Service.Representation.Account.Representation.PersonalInformationRepresentation;
 import Service.Representation.Account.Request.BasicAccountRequest;
 import Service.Representation.Account.Request.PersonalInformationRequest;
@@ -94,12 +95,11 @@ public class PersonalInfoResource implements PersonalInfoService {
 
 	@GET
 	@Produces({"application/xml","application/json"})
-	@Consumes({"application/xml", "application/json"})
-	@Path("/")
+	@Path("/{username}")
 	@Override
-	public PersonalInformationRepresentation getPersonalInformation(BasicAccountRequest basicAccountRequest) {
+	public PersonalInformationRepresentation getPersonalInformation(@PathParam("username")String username) {
 		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
-		return personalInfoActivity.getPersonalInformation(basicAccountRequest);
+		return personalInfoActivity.getPersonalInformation(username);
 	}
 
 	@DELETE
@@ -175,11 +175,12 @@ public class PersonalInfoResource implements PersonalInfoService {
 
 	@POST
 	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
 	@Path("/{username}")
 	@Override
-	public void createPersonalInformation(@PathParam("username") String username, PersonalInformationRequest personalInformation) {
+	public AccountValidationRepresentation createPersonalInformation(@PathParam("username") String username, PersonalInformationRequest personalInformation) {
 		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
-		personalInfoActivity.createPersonalInformation(username, personalInformation);
+		return personalInfoActivity.createPersonalInformation(username, personalInformation);
 		
 	}
 

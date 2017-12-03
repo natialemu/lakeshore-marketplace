@@ -2,6 +2,7 @@ package Service.Workflow.Product;
 
 import java.util.Set;
 
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
 import Service.Representation.Product.Representation.MinProductRepresentation;
 import Service.Representation.Product.Representation.ProductRepresentation;
 import Service.Representation.Product.Request.ProductRequest;
@@ -32,10 +33,12 @@ public interface ProductAcitvity {
 
 	Set<MinProductRepresentation> getProductsByName(String productType);
 
-	void addProduct(String username, Set<ProductRequest> products);
+	AccountValidationRepresentation addProduct(String username, Set<ProductRequest> products);
 
-	void deleteProduct(int partner_id, int product_id);
+	AccountValidationRepresentation deleteProduct(int partner_id, int product_id);
 
 	Set<MinProductRepresentation> getRecentlyAddedProducts(int numOrders);
+
+	Set<MinProductRepresentation> getInventory(String username);
 
 }

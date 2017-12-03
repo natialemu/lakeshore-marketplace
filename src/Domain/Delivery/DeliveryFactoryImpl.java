@@ -62,4 +62,10 @@ public class DeliveryFactoryImpl implements DeliveryFactory{
     	
     }
 
+
+	@Override
+	public DeliveryStatus getDeliveryStatus(int tracking_number) {
+		return deliveryDAO.getDeliveryStatus(tracking_number);
+	}
+
 }

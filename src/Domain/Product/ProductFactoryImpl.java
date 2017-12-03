@@ -2,8 +2,10 @@ package Domain.Product;
 
 import Repository.Product.ProductDAO;
 import Repository.Product.ProductDAOImpl;
+import Service.Representation.Product.Representation.MinProductRepresentation;
 
 import java.util.List;
+import java.util.Set;
 
 public class ProductFactoryImpl implements ProductFactory{
     private ProductFilter productFilter;
@@ -72,8 +74,8 @@ public class ProductFactoryImpl implements ProductFactory{
         return productFilter.sortProductsByRating(products);
     }
 
-    public void createProduct(Product product){
-        productDAO.createProduct(product);
+    public boolean createProduct(Product product){
+        return productDAO.createProduct(product);
     }
 
 	@Override
@@ -133,6 +135,11 @@ public class ProductFactoryImpl implements ProductFactory{
 	@Override
 	public List<Product> getRecentlyAddedProducts(int numOrders) {
 		return productSearch.getRecentlyAddedProducts(numOrders);
+	}
+
+	@Override
+	public List<Product> getInventory(String username) {
+		return productSearch.getInventory(username);
 	}
 
 }

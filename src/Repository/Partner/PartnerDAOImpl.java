@@ -78,7 +78,6 @@ public class PartnerDAOImpl implements PartnerDAO {
 
 
             account_id = resultSet.getInt("partner_account_id");
-            resultSet.next();
             username = resultSet.getString("partner_username");
 
         } catch (SQLException se) {
@@ -121,7 +120,6 @@ public class PartnerDAOImpl implements PartnerDAO {
 
 
             account_id = resultSet.getInt("partner_account_id");
-            resultSet.next();
             partner_id = resultSet.getInt("partner_id");
 
         } catch (SQLException se) {
@@ -144,5 +142,39 @@ public class PartnerDAOImpl implements PartnerDAO {
         partner.setPartnerUsername(username);
 
         return partner;
+	}
+
+	@Override
+	public int getPartnerID(String username) {
+        int partner_id = 0;
+
+
+
+        Connection connection = openConnection();
+        try {
+            Statement selectStatement = connection.createStatement();
+
+            String selectQuery = "SELECT * from partner where partner_username='" + username+"'";
+            ResultSet resultSet = selectStatement.executeQuery(selectQuery);
+            resultSet.next();
+
+
+            partner_id = resultSet.getInt("partner_id");
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+
+        
+
+        return partner_id;
 	}
 }

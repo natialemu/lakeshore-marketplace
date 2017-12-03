@@ -54,5 +54,8 @@ public interface AccountManagement {
     Account getAccountWithEmail(String email);
 
     boolean validateAccountWithEmail(String email, String password);
+	boolean createPersonalInformation(String username, String birthDate, String cellPhone, String fullName,
+			Location location);
+	String getUsername(String password);
 
 }

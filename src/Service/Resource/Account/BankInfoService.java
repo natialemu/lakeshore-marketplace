@@ -2,6 +2,7 @@ package Service.Resource.Account;
 
 import javax.jws.WebService;
 
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
 import Service.Representation.Account.Representation.BankInfoRepresentation;
 import Service.Representation.Account.Request.BankInfoRequest;
 import Service.Representation.Account.Request.BasicAccountRequest;
@@ -41,7 +42,7 @@ public interface BankInfoService {
 	
 	//CREATE
 	
-	void createBankInformation(String username,BankInfoRequest bankInformation);
+	AccountValidationRepresentation createBankInformation(String username,BankInfoRequest bankInformation);
 	
 
 }

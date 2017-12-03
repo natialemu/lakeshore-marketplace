@@ -165,4 +165,15 @@ public class AccountManagementImpl implements AccountManagement {
 
         return accountValidation.validateAccountWithEmail(email,password);
     }
+	@Override
+	public boolean createPersonalInformation(String username, String birthDate, String cellPhone, String fullName,
+			Location location) {
+		// TODO Auto-generated method stub
+		return accountRegistration.createAccountContactProfile(username, fullName, location, birthDate, cellPhone);
+	}
+	@Override
+	public String getUsername(String password) {
+		// TODO Auto-generated method stub
+		return accountDAO.getUsername(password);
+	}
 }

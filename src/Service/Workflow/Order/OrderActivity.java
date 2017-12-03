@@ -2,6 +2,7 @@ package Service.Workflow.Order;
 
 import java.util.Set;
 
+import Service.Representation.Account.Representation.AccountValidationRepresentation;
 import Service.Representation.Order.Representation.OrderRepresentation;
 import Service.Representation.Order.Representation.OrderStatusRepresentation;
 import Service.Representation.Product.Request.ProductRequest;
@@ -9,9 +10,9 @@ import Service.Representation.Product.Request.ProductRequest;
 public interface OrderActivity {
 	
 
-	void placeOrder(Set<ProductRequest> products, String username);
+	AccountValidationRepresentation placeOrder(Set<ProductRequest> products, String username);
 
-	void cancelOrder(int orderID);
+	AccountValidationRepresentation cancelOrder(int orderID);
 
 	OrderRepresentation getOrder(int orderID);
 
@@ -20,5 +21,7 @@ public interface OrderActivity {
 	void notifyCancellation(int orderID);
 
 	Set<OrderRepresentation> getMostRecentOrders(int numOrders);
+
+	Set<OrderRepresentation> getOrdersOfPartner(String partner_username);
 
 }
