@@ -12,7 +12,7 @@ public class PaymentCardDAOImpl implements PaymentCardDAO {
     public boolean createPaymentCardProfile(String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
         boolean inserted = false;
         Connection connection = openConnection();
-        try{
+        try{ 
             Statement insertSatement = connection.createStatement();
 
             String insertQuery = "INSERT INTO payment_card (card_number,card_holder_name,security_code,expriation_date) VALUES("+Long.parseLong(cardNumber)+", '"+cardHolderName+"', "+securityNumber+", '"+cardExpirationDate+"')";

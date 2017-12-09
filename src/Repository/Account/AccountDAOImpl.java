@@ -4,6 +4,7 @@ import Domain.Account.Account;
 import Domain.Account.AccountImpl;
 import Domain.Account.AccountProfile.AccountProfile;
 import Domain.Account.AccountProfile.Contact.Location;
+import Domain.Account.AccountProfile.Contact.LocationImpl;
 import Domain.Account.AccountSettings.AccountSettings;
 import Repository.Account.AccountProfileDAO.AccountProfileDAO;
 import Repository.Account.AccountProfileDAO.AccountProfileDAOImpl;
@@ -11,6 +12,8 @@ import Repository.Account.AccountSettingsDAO.AccountSettingsDAO;
 import Repository.Account.AccountSettingsDAO.AccountSettingsDAOImpl;
 
 import java.sql.*;
+import javax.sql.*;
+import com.mysql.jdbc.Driver;
 
 public class AccountDAOImpl implements AccountDAO {
     AccountProfileDAO accountProfileDAO;
@@ -25,15 +28,14 @@ public class AccountDAOImpl implements AccountDAO {
     private Connection openConnection() {
         Connection connection = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/lakeshore_market", "root", "Natlocus13");
+        	Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/lakeshore_market?useSSL=false", "root", "Natlocus13");
 
 
-        } catch (ClassNotFoundException exception) {
-            exception.printStackTrace();
-            //exception.printStackTrace();
-
-        } catch (SQLException es) {
+        } catch(ClassNotFoundException ce) {
+        	ce.printStackTrace();
+        	}
+        catch (SQLException es) {
 
             es.printStackTrace();
         }
@@ -51,7 +53,7 @@ public class AccountDAOImpl implements AccountDAO {
 
 
             sqlStatement = connection.createStatement();
-            String insertAccountProfile = "INSERT INTO account (account_id, acct_username,acct_settings_id,account_state) VALUES (" + account_id +",'" +username +"', "+account_Settings_id+", 'ActiveAccount')";
+            String insertAccountProfile = "INSERT INTO account (account_id, acct_settings_id,account_state, acct_username) VALUES (" + account_id +"," +account_Settings_id +", 'ActiveAccount','"+username+"')";
             sqlStatement.executeUpdate(insertAccountProfile);
             inserted = true;
 
@@ -85,9 +87,9 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public boolean createAccountFinancialProfile(String username, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+    public boolean createAccountFinancialProfile(String username, String cardNumber, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
 
-        return accountProfileDAO.createAccountFinancialProfile(username, accountNumber, bankName, routingNumber, accountType, billingAddress, swiftCode);
+        return accountProfileDAO.createAccountFinancialProfile(username, cardNumber, accountNumber, bankName, routingNumber, accountType, billingAddress, swiftCode);
 
     }
 
@@ -228,8 +230,10 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox) {
-        return accountProfileDAO.updateAddress(streetAddress, state, city, zipcode, country, pobox);
+    public boolean updateAddress(String username, String streetAddress, String state, String city, int zipcode, String country, int pobox) {
+        Location location = new LocationImpl(streetAddress,city,zipcode,state,country,pobox);
+        Account account = getAccount(username);
+    	return accountProfileDAO.updateAddress(account.getAccountProfile().getContactInfo().getEmail(),location);
     }
 
     @Override
@@ -340,9 +344,9 @@ public class AccountDAOImpl implements AccountDAO {
             ResultSet resultSet = statement.executeQuery(query);
             assert (resultSet.isLast());
             resultSet.next();
-            account_id = resultSet.getInt(0);
-            account_state = resultSet.getString(1);
-            acct_settings_id = resultSet.getString(3);
+            account_id = resultSet.getInt("account_id");
+            account_state = resultSet.getString("account_state");
+            acct_settings_id = resultSet.getString("acct_settings_id");
 
         } catch (SQLException exception) {
 
@@ -395,9 +399,9 @@ public class AccountDAOImpl implements AccountDAO {
             Statement statement = connection.createStatement();
             String query = "SELECT * from account where account_id=" + account_id;
             ResultSet resultSet = statement.executeQuery(query);
-            assert (resultSet.isLast());
+            //assert (resultSet.isLast());
             resultSet.next();
-            username = resultSet.getString("username");
+            username = resultSet.getString("acct_username");
 
 
         } catch (SQLException exception) {
@@ -421,7 +425,7 @@ public class AccountDAOImpl implements AccountDAO {
 	public boolean createAccountContactProfile(String username, String fullName, Location location, String birthDate,
 			String cellPhone) {
 		// TODO Auto-generated method stub
-        return accountProfileDAO.updateAccountContactProfile(username, fullName, location, birthDate, cellPhone);
+        return accountProfileDAO.createAccountContactProfile(username, fullName, location, birthDate, cellPhone);
 
 	}
 

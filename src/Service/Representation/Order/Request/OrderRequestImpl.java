@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import Service.Representation.Product.Representation.ProductRepresentation;
 import Service.Representation.Product.Request.ProductRequest;
+import Service.Representation.Product.Request.ProductRequestImpl;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -18,7 +19,7 @@ import Service.Representation.Product.Request.ProductRequest;
 public class OrderRequestImpl implements OrderRequest{
 	private String username;
 	private String orderDate;
-	private Set<ProductRequest> productsInOrder;
+	private Set<ProductRequestImpl> productsInOrder;
 	
 	public String getUsername() {
 		return username;
@@ -36,11 +37,11 @@ public class OrderRequestImpl implements OrderRequest{
 		this.orderDate = orderDate;
 	}
 
-	public Set<ProductRequest> getProductsInOrder() {
+	public Set<ProductRequestImpl> getProductsInOrder() {
 		return productsInOrder;
 	}
 
-	public void setProductsInOrder(Set<ProductRequest> productsInOrder) {
+	public void setProductsInOrder(Set<ProductRequestImpl> productsInOrder) {
 		this.productsInOrder = productsInOrder;
 	}
 

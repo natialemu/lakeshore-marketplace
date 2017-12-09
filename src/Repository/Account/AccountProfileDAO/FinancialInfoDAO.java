@@ -4,7 +4,7 @@ import Domain.Account.AccountProfile.Contact.Location;
 import Domain.Account.AccountProfile.Finance.FinancialInfo;
 
 public interface FinancialInfoDAO {
-    boolean createAccountFinancialProfile(int financial_id, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
+    boolean createAccountFinancialProfile(int financial_id, String cardNumber, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
 
     boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
 

@@ -9,6 +9,7 @@ import Domain.Product.Product;
 import Repository.Customer.CustomerDAO;
 import Repository.Customer.CustomerDAOimpl;
 import Repository.Product.ProductDAO;
+import Repository.Product.ProductDAOImpl;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,8 @@ public class OrderDetailDAOImpl implements OrderDetailDAO{
     private ProductDAO productDAO;
     public OrderDetailDAOImpl(){
         customerDAO = new CustomerDAOimpl();
+        
+        productDAO = new ProductDAOImpl();
     }
 
     private Connection openConnection() {
@@ -43,7 +46,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO{
 
     }
     @Override
-    public OrderDetail getOrderDetail(Date orderCreated, int order_id) {
+    public OrderDetail getOrderDetail(Date orderCreated, int detailID) {
         int customer_id = 0;
         int num_products = 0;
         double total_cost = 0;
@@ -53,7 +56,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO{
         try {
             Statement selectStatement = connection.createStatement();
 
-            String selectQuery = "SELECT * from order_detail where order_creation_date=" + orderCreated;
+            String selectQuery = "SELECT * from ordeR_detail where order_detail_id=" + detailID;
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
             resultSet.next();
 
@@ -90,7 +93,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO{
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO order_detail (customer_id,total_cost,order_creation_Date) VALUES("+orderDetail.getCustomer().getCustomerID()+", "+orderDetail.getTotalCost()+", "+getDateSring(orderDetail.getOrderCreated())+")";
+            String insertQuery = "INSERT INTO order_detail (order_detail_id, customer_id,total_cost,order_creation_Date) VALUES("+orderDetail.getDetailID()+","+orderDetail.getCustomer().getCustomerID()+", "+orderDetail.getTotalCost()+", "+getDateSring(orderDetail.getOrderCreated())+")";
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;

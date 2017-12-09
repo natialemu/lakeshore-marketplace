@@ -14,7 +14,7 @@ public interface AccountManagement {
     boolean updateEmail(String email,String password);
     boolean updatePaymentCard(String cardNumber, String expirationDate, String cardHolderName, int securityCode);
     boolean updateBankInformation(String bankName, String accountNumber, String routingNumber);
-    boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox);
+    boolean updateAddress(String username,String streetAddress, String state, String city, int zipcode, String country, int pobox);
 
     //Deleting An account
     boolean deleteAccount(int accountID);
@@ -44,7 +44,7 @@ public interface AccountManagement {
     //Creating an account
     boolean createBasicAccount(Account account);
     boolean createAccountContactProfile(String username,String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);
-    boolean createAccountFinancialProfile(String username, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
+    boolean createAccountFinancialProfile(String username, String cardNumber, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
     boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
 
     boolean validateAccount(String username, String password);

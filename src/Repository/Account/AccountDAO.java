@@ -9,7 +9,7 @@ public interface AccountDAO {
 
     boolean createAccountContactProfile(String username, String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);
 
-    boolean createAccountFinancialProfile(String usernmae, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
+    boolean createAccountFinancialProfile(String usernmae, String cardNumber, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
 
     boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
 
@@ -31,7 +31,7 @@ public interface AccountDAO {
 
     boolean updateBankInformation(String bankName, String accountNumber, String routingNumber);
 
-    boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox);
+    boolean updateAddress(String username,String streetAddress, String state, String city, int zipcode, String country, int pobox);
 
     boolean activateStatusOfAccount(String oldUsername, String oldPassword);
 

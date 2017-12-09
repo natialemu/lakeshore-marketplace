@@ -17,6 +17,7 @@ import Service.Representation.Account.Representation.AccountValidationRepresenta
 import Service.Representation.Account.Representation.BankInfoRepresentation;
 import Service.Representation.Account.Representation.BankInfoRepresentationImpl;
 import Service.Representation.Account.Request.BankInfoRequest;
+import Service.Representation.Account.Request.BankInfoRequestImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
 
 public class BankInfoActivityImpl implements BankInfoActivity{
@@ -86,11 +87,11 @@ public class BankInfoActivityImpl implements BankInfoActivity{
 	}
 
 	@Override
-	public BankInfoRepresentation getBankInfo(String username) {
+	public BankInfoRepresentationImpl getBankInfo(String username) {
 		// TODO Auto-generated method stub
 		
 		 FinancialInfo finInfo = accountFactory.getAccount(username).getAccountProfile().getFinancialInfo();
-		 BankInfoRepresentation bir = new BankInfoRepresentationImpl();
+		 BankInfoRepresentationImpl bir = new BankInfoRepresentationImpl();
 		 bir.setAccountNumber(finInfo.getBankAccount().getAccountNumber());
 		 bir.setAccountType(finInfo.getBankAccount().getAccountType());
 		 bir.setBankName(finInfo.getBankAccount().getBankName());
@@ -102,9 +103,25 @@ public class BankInfoActivityImpl implements BankInfoActivity{
 		 bir.setCardNumber(finInfo.getPaymentCard().getCardNumber());
 		 bir.setNameOnCard(finInfo.getPaymentCard().getCardHolderName());
 		 bir.setCardSecurityCode(Integer.toString(finInfo.getPaymentCard().getCardSecurityNumber()));
+		 
+		 setLinksAfterBankInfoRetrieval(bir,finInfo);
 		 return bir;
 		 
 		 
+	}
+
+	private void setLinksAfterBankInfoRetrieval(BankInfoRepresentationImpl bir, FinancialInfo finInfo) {
+
+
+		List<LinkImpl> links = new ArrayList<>();
+		
+
+		//Link for updating bank info
+		
+		
+		//link for retrieving bank info
+		
+		
 	}
 
 	@Override
@@ -174,18 +191,18 @@ public class BankInfoActivityImpl implements BankInfoActivity{
 	}
 
 	@Override
-	public AccountValidationRepresentation createBankInformation(String username,BankInfoRequest bankInformation) {
+	public AccountValidationRepresentationImpl createBankInformation(String username,BankInfoRequestImpl bankInformation) {
 		// TODO Auto-generated method stub
-		AccountValidationRepresentation avr = new AccountValidationRepresentationImpl();
+		AccountValidationRepresentationImpl avr = new AccountValidationRepresentationImpl();
 		String defaultRoutingNumber = "123456";
-		String defaultSwiftCode = "12345";
+		String defaultSwiftCode = "12345"; 
 		Location location = new LocationImpl();
 		location.setCity(bankInformation.getBillingCity());
 		location.setState(bankInformation.getBillingState());
 		location.setStreetAddress(bankInformation.getBillingStreetAddress());
 		location.setZipcode(Integer.parseInt(bankInformation.getBillingZipcode()));
 		
-		boolean fin_profile_created = accountFactory.createAccountFinancialProfile(username, bankInformation.getAccountNumber(), bankInformation.getBankName(), defaultRoutingNumber, bankInformation.getAccountType(), location, defaultSwiftCode);
+		boolean fin_profile_created = accountFactory.createAccountFinancialProfile(username, bankInformation.getCardNumber(),bankInformation.getAccountNumber(), bankInformation.getBankName(), defaultRoutingNumber, bankInformation.getAccountType(), location, defaultSwiftCode);
 		boolean payment_card_created = accountFactory.createPaymentCardProfile(bankInformation.getAccountNumber(), bankInformation.getNameOnCard(), bankInformation.getCardNumber(), bankInformation.getCardExpirationDate(), Integer.parseInt(bankInformation.getCardSecurityCode()));
 		
 		avr.setIsSuccessful(fin_profile_created && payment_card_created);
@@ -196,13 +213,13 @@ public class BankInfoActivityImpl implements BankInfoActivity{
 
 	private void setLinksAfterBankProfile(AccountValidationRepresentation avr) {
 
-		List<Link> links = new ArrayList<>();
+		List<LinkImpl> links = new ArrayList<>();
 		
 		//Update personal info
-		Link createBankInfo = new LinkImpl("POST",URIs.BANKINFO,"update bank information",MediaTypes.JSON);
+		LinkImpl createBankInfo = new LinkImpl("POST",URIs.BANKINFO,"update bank information",MediaTypes.JSON);
 		links.add(createBankInfo);
 		
-		Link[] linkArray = new Link[links.size()];
+		LinkImpl[] linkArray = new LinkImpl[links.size()];
 		avr.setLinks(links.toArray(linkArray));
 	}
 

@@ -100,13 +100,13 @@ public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 	}
 
 	private void setLinkPersonalInformation(PersonalInformationRepresentation pir) {
-		List<Link> links = new ArrayList<>();
+		List<LinkImpl> links = new ArrayList<>();
 		
 		//Update personal info
-		Link createPersonalInfo = new LinkImpl("POST",URIs.PERSONALINFO,"update personal information",MediaTypes.JSON);
+		LinkImpl createPersonalInfo = new LinkImpl("POST",URIs.PERSONALINFO,"update personal information",MediaTypes.JSON);
 		links.add(createPersonalInfo);
 		
-		Link[] linkArray = new Link[links.size()];
+		LinkImpl[] linkArray = new LinkImpl[links.size()];
 		pir.setLinks(links.toArray(linkArray));
 	}
 

@@ -4,24 +4,26 @@ import java.util.Set;
 
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
 import Service.Representation.Order.Representation.OrderRepresentation;
+import Service.Representation.Order.Representation.OrderRepresentationImpl;
 import Service.Representation.Order.Representation.OrderStatusRepresentation;
-import Service.Representation.Product.Request.ProductRequest;
+import Service.Representation.Order.Representation.OrderStatusRepresentationImpl;
+import Service.Representation.Product.Request.*;
 
 public interface OrderActivity {
 	
 
-	AccountValidationRepresentation placeOrder(Set<ProductRequest> products, String username);
+	AccountValidationRepresentation placeOrder(Set<ProductRequestImpl> products, String username);
 
 	AccountValidationRepresentation cancelOrder(int orderID);
 
-	OrderRepresentation getOrder(int orderID);
+	OrderRepresentationImpl getOrder(int orderID);
 
-	OrderStatusRepresentation getOrderStatus(int orderID);
+	OrderStatusRepresentationImpl getOrderStatus(int orderID);
 
 	void notifyCancellation(int orderID);
 
-	Set<OrderRepresentation> getMostRecentOrders(int numOrders);
+	Set<OrderRepresentationImpl> getMostRecentOrders(int numOrders);
 
-	Set<OrderRepresentation> getOrdersOfPartner(String partner_username);
+	Set<OrderRepresentationImpl> getOrdersOfPartner(String partner_username);
 
 }

@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface OrderFactory {
 
-   boolean createOrder(List<Product> productList, Customer customer);
+   Order createOrder(List<Product> productList, Customer customer);
 
-    boolean cancelOrder(int confirmationID);
+    Order cancelOrder(int confirmationID);
 
     String getOrderStatus(int orderID);
 

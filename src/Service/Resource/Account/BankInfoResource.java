@@ -3,22 +3,81 @@ package Service.Resource.Account;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.Response;
+
+import org.apache.cxf.rs.security.cors.CorsHeaderConstants;
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+import org.apache.cxf.rs.security.cors.LocalPreflight;
 
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Account.Representation.BankInfoRepresentation;
+import Service.Representation.Account.Representation.BankInfoRepresentationImpl;
 import Service.Representation.Account.Request.BankInfoRequest;
+import Service.Representation.Account.Request.BankInfoRequestImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
 import Service.Workflow.Account.BankInfoActivity;
 import Service.Workflow.Account.BankInfoActivityImpl;
 
-@Path("/bank")
+@CrossOriginResourceSharing(
+        allowOrigins = {"http://localhost:63342"}, 
+        allowCredentials = true,
+        		allowHeaders = {
+        				
+                    "'Accept': 'application/json'",
+                    "'Content-Type': 'application/json'"
+                
+        		        }
+        		   
+        
+)
+@Path("/bank/")
 public class BankInfoResource implements BankInfoService{
+	
+	@Context
+	private HttpHeaders headers;
+	
+	@OPTIONS
+    @Path("/")
+    @LocalPreflight
+    public Response options() {
+        String origin = headers.getRequestHeader("Origin").get(0);
+        
+        if("http://localhost:63342".equals(origin)) {return Response.ok()
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
+                           .build();
+        }else {
+        	return Response.ok().build();
+        }
+	}
+	@OPTIONS
+    @Path("/{username}")
+    @LocalPreflight
+    public Response options(@PathParam("username") String username) {
+        String origin = headers.getRequestHeader("Origin").get(0);
+        
+        if("http://localhost:63342".equals(origin)) {return Response.ok()
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT DELETE GET")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
+                           .build();
+        }else {
+        	return Response.ok().build();
+        }
+	}
 	
 
 	@PUT
@@ -123,7 +182,7 @@ public class BankInfoResource implements BankInfoService{
 	@Produces({"application/xml","application/json"})
 	@Path("/{username}")
 	@Override
-	public BankInfoRepresentation getBankInfo(@PathParam("username") String username) {
+	public BankInfoRepresentationImpl getBankInfo(@PathParam("username") String username) {
 		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
 	    return bankInfoActivity.getBankInfo(username);
 	
@@ -232,7 +291,7 @@ public class BankInfoResource implements BankInfoService{
 	@Produces({"application/xml","application/json"})
 	@Path("/{username}")
 	@Override
-	public AccountValidationRepresentation createBankInformation(@PathParam("username") String username,BankInfoRequest bankInformation) {
+	public AccountValidationRepresentationImpl createBankInformation(@PathParam("username") String username,BankInfoRequestImpl bankInformation) {
 		// TODO Auto-generated method stub
 		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
 		return bankInfoActivity.createBankInformation(username,bankInformation);

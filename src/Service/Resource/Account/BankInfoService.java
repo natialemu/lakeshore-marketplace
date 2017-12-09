@@ -3,8 +3,11 @@ package Service.Resource.Account;
 import javax.jws.WebService;
 
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Account.Representation.BankInfoRepresentation;
+import Service.Representation.Account.Representation.BankInfoRepresentationImpl;
 import Service.Representation.Account.Request.BankInfoRequest;
+import Service.Representation.Account.Request.BankInfoRequestImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
 
 @WebService
@@ -24,7 +27,7 @@ public interface BankInfoService {
 	
 	
 	//GET
-	BankInfoRepresentation getBankInfo(String username);	
+	BankInfoRepresentationImpl getBankInfo(String username);	
 	
 	
 	//DELETE
@@ -42,7 +45,7 @@ public interface BankInfoService {
 	
 	//CREATE
 	
-	AccountValidationRepresentation createBankInformation(String username,BankInfoRequest bankInformation);
+	AccountValidationRepresentationImpl createBankInformation(String username,BankInfoRequestImpl bankInformation);
 	
 
 }

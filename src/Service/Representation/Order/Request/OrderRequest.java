@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Set;
 
 import Service.Representation.Product.Request.ProductRequest;
+import Service.Representation.Product.Request.ProductRequestImpl;
 
 public interface OrderRequest {
 	String getUsername();
 	void setUsername(String username);
 	String getOrderDate();
 	void setOrderDate(String orderDate);
-	Set<ProductRequest> getProductsInOrder();
-	void setProductsInOrder(Set<ProductRequest> productsInOrder);
+	Set<ProductRequestImpl> getProductsInOrder();
+	void setProductsInOrder(Set<ProductRequestImpl> productsInOrder);
 }

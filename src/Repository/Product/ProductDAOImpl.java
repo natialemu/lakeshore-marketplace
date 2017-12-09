@@ -58,7 +58,7 @@ public class ProductDAOImpl implements ProductDAO{
         try {
             Statement selectStatement = connection.createStatement();
 
-            String selectQuery = "SELECT * from product=";
+            String selectQuery = "SELECT * from product";
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
             while(resultSet.next()){
 
@@ -223,6 +223,7 @@ public class ProductDAOImpl implements ProductDAO{
             String selectQuery = "SELECT * from product where product_id=" + productID;
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
 
+            resultSet.next();
 
                 productName = resultSet.getString("product_name");
                 productCost = resultSet.getInt("product_cost");

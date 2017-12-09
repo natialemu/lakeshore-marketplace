@@ -9,13 +9,13 @@ import javax.xml.bind.annotation.XmlElement;
 public abstract class AbstractRepresentation implements AbstractRepresentationInterface {
 	
 	@XmlElement(name="link", namespace="")
-	protected List<Link> links;
+	protected List<LinkImpl> links;
 	
-	public List<Link> getLinks() {
+	public List<LinkImpl> getLinks() {
 		return links;
 	}
 	
-	public void setLinks(Link...links) {
+	public void setLinks(LinkImpl...links) {
 		this.links = Arrays.asList(links);
 	}
 

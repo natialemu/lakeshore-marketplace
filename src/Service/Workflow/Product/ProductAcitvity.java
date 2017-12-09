@@ -3,42 +3,46 @@ package Service.Workflow.Product;
 import java.util.Set;
 
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Product.Representation.MinProductRepresentation;
+import Service.Representation.Product.Representation.MinProductRepresentationImpl;
 import Service.Representation.Product.Representation.ProductRepresentation;
+import Service.Representation.Product.Representation.ProductRepresentationImpl;
 import Service.Representation.Product.Request.ProductRequest;
+import Service.Representation.Product.Request.ProductRequestImpl;
 
 public interface ProductAcitvity {
 
-	Set<ProductRepresentation> filterProductByCost(Set<ProductRequest> products, double minCost, double maxCost);
+	Set<ProductRepresentationImpl> filterProductByCost(Set<ProductRequestImpl> products, double minCost, double maxCost);
 
-	Set<ProductRepresentation> filterProductByRating(Set<ProductRequest> products, int minRating, int maxRating);
+	Set<ProductRepresentationImpl> filterProductByRating(Set<ProductRequestImpl> products, int minRating, int maxRating);
 
-	Set<ProductRepresentation> sortInAscendingOrder(Set<ProductRequest> products);
+	Set<ProductRepresentationImpl> sortInAscendingOrder(Set<ProductRequestImpl> products);
 
-	Set<ProductRepresentation> sortInDescendingOrder(Set<ProductRequest> products);
+	Set<ProductRepresentationImpl> sortInDescendingOrder(Set<ProductRequestImpl> products);
 
-	Set<ProductRepresentation> filterProductByDate(Set<ProductRequest> products, String date1, String date2);
+	Set<ProductRepresentationImpl> filterProductByDate(Set<ProductRequestImpl> products, String date1, String date2);
 
-	Set<ProductRepresentation> filterProductBySeller(Set<ProductRequest> products, String sellerName);
+	Set<ProductRepresentationImpl> filterProductBySeller(Set<ProductRequestImpl> products, String sellerName);
 
-	Set<MinProductRepresentation> getAllProducts();
+	Set<MinProductRepresentationImpl> getAllProducts();
 
-	Set<ProductRepresentation> getProductByID(int productID);
+	Set<ProductRepresentationImpl> getProductByID(int productID);
 
-	Set<ProductRepresentation> getProductBySeller(String sellerName);
+	Set<ProductRepresentationImpl> getProductBySeller(String sellerName);
 
-	Set<MinProductRepresentation> getProductByType(String productType);
+	Set<MinProductRepresentationImpl> getProductByType(String productType);
 
-	Set<MinProductRepresentation> getProductsBySellerAndType(String sellerName, String productType);
+	Set<MinProductRepresentationImpl> getProductsBySellerAndType(String sellerName, String productType);
 
-	Set<MinProductRepresentation> getProductsByName(String productType);
+	Set<MinProductRepresentationImpl> getProductsByName(String productType);
 
-	AccountValidationRepresentation addProduct(String username, Set<ProductRequest> products);
+	AccountValidationRepresentationImpl addProduct(String username, Set<ProductRequestImpl> products);
 
-	AccountValidationRepresentation deleteProduct(int partner_id, int product_id);
+	AccountValidationRepresentationImpl deleteProduct(int partner_id, int product_id);
 
-	Set<MinProductRepresentation> getRecentlyAddedProducts(int numOrders);
+	Set<MinProductRepresentationImpl> getRecentlyAddedProducts(int numOrders);
 
-	Set<MinProductRepresentation> getInventory(String username);
+	Set<MinProductRepresentationImpl> getInventory(String username);
 
 }

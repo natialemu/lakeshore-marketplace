@@ -6,16 +6,18 @@ import javax.jws.WebService;
 
 import Service.Representation.Product.*;
 import Service.Representation.Product.Representation.ProductRepresentation;
+import Service.Representation.Product.Representation.ProductRepresentationImpl;
 import Service.Representation.Product.Request.ProductRequest;
+import Service.Representation.Product.Request.ProductRequestImpl;
 
 @WebService
 public interface ProductFilterService {
 	
-	Set<ProductRepresentation> filterProductByCost(Set<ProductRequest> products, double minCost, double maxCost);
-	Set<ProductRepresentation> filterProductByRating(Set<ProductRequest> products, int minRating, int maxRating);
-	Set<ProductRepresentation> sortOrders(Set<ProductRequest> products,boolean isAscending);
-	Set<ProductRepresentation> filterProductByDate(Set<ProductRequest> products, String date1, String date2);
-	Set<ProductRepresentation> filterProductBySeller(Set<ProductRequest> products, String sellerName);
+	Set<ProductRepresentationImpl> filterProductByCost(Set<ProductRequestImpl> products, double minCost, double maxCost);
+	Set<ProductRepresentationImpl> filterProductByRating(Set<ProductRequestImpl> products, int minRating, int maxRating);
+	Set<ProductRepresentationImpl> sortOrders(Set<ProductRequestImpl> products,boolean isAscending);
+	Set<ProductRepresentationImpl> filterProductByDate(Set<ProductRequestImpl> products, String date1, String date2);
+	Set<ProductRepresentationImpl> filterProductBySeller(Set<ProductRequestImpl> products, String sellerName);
 	
 	
 

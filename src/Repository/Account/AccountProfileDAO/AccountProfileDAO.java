@@ -6,7 +6,7 @@ import Domain.Account.AccountProfile.Contact.Location;
 public interface AccountProfileDAO {
     boolean createAccountContactProfile(String username, String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);
 
-    boolean createAccountFinancialProfile(String username, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
+    boolean createAccountFinancialProfile(String username, String cardNumber, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
 
     boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
 
@@ -21,7 +21,7 @@ public interface AccountProfileDAO {
 
     boolean updateBankInformation(String bankName, String accountNumber, String routingNumber);
 
-    boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox);
+    boolean updateAddress(String email, Location location);
 
     boolean logIntoAccountWithEmail(String email, String password);
 
@@ -40,7 +40,7 @@ public interface AccountProfileDAO {
 
     void createBasicProfile(String username, String email, int fin_profile_id, String password);
 
-	boolean updateAccountContactProfile(String username, String fullName, Location location, String birthDate,
+	boolean createAccountContactProfile(String username, String fullName, Location location, String birthDate,
 			String cellPhone);
 
 	String getUsername(String password);

@@ -10,6 +10,8 @@ public interface AccountRepresentation extends AbstractRepresentationInterface{
 	String getEmailAddress();
 	String getUsername();
 	String getAccountStatus();
+	String getPassword();
+	void setPassword(String password);
 	
 
 }

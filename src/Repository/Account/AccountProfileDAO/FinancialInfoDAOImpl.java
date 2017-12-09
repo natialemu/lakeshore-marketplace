@@ -37,13 +37,13 @@ public class FinancialInfoDAOImpl implements FinancialInfoDAO {
 
     }
     @Override
-    public boolean createAccountFinancialProfile(int financial_id, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+    public boolean createAccountFinancialProfile(int financial_id, String cardNumber, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
         boolean inserted = false;
         Connection connection = openConnection();
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO financial_info (fin_profile_id, zip_code,account_no) VALUES("+financial_id+", "+billingAddress.getZipcode()+", "+Integer.parseInt(accountNumber)+")";
+            String insertQuery = "UPDATE financial_info SET zip_code="+billingAddress.getZipcode()+",account_no="+Integer.parseInt(accountNumber)+", card_no="+Integer.parseInt(cardNumber)+" where fin_profile_id="+financial_id;
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
@@ -55,7 +55,7 @@ public class FinancialInfoDAOImpl implements FinancialInfoDAO {
                 try {
                     connection.close();
 
-                }catch (Exception e){}
+                }catch (Exception e){} 
 
             }
         }

@@ -40,7 +40,7 @@ public class LocationImpl implements Location {
         this.pobox = pobox;
     }
 
-    public LocationImpl(){
+    public LocationImpl(){ 
         //DEFAULT CONSTRUCTOR
     }
 

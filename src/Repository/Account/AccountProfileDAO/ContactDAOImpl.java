@@ -43,7 +43,7 @@ public class ContactDAOImpl implements ContactDAO {
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO contact (email,birthdate,security_question,security_question_answer,full_name,location_zipcode) VALUES('"+email+"', '"+dateOfBirth+"', '"+securityQuestion+"', '"+securityQuestionAnswer+"', '"+fullName+"',"+location.getZipcode()+")";
+            String insertQuery = "INSERT INTO contact (email,birthdate,security_question,security_question_answer,full_name) VALUES('"+email+"', '"+dateOfBirth+"', '"+securityQuestion+"', '"+securityQuestionAnswer+"', '"+fullName+"')";
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
@@ -60,16 +60,14 @@ public class ContactDAOImpl implements ContactDAO {
             }
         }
         if(inserted){
+        	locationDAO.createContactLocation(location.getZipcode(),email);
             locationDAO.createLocation(location);
             return true;
         }
         return false;
     }
 
-    @Override
-    public boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox) {
-        return locationDAO.updateAddress(streetAddress,state,city,zipcode,country,pobox);
-    }
+    
 
     @Override
     public String getActualAnswer(String email, String securityQuestion) {
@@ -102,7 +100,7 @@ public class ContactDAOImpl implements ContactDAO {
         String birthDate = null;
         int zipcode = 0;
         String securityQuestion = null;
-        String fullName = null;
+        String fullName = "";
         String securityQuestionAnswer = null;
 
         Connection connection = openConnection();
@@ -113,9 +111,8 @@ public class ContactDAOImpl implements ContactDAO {
             ResultSet resultSet = selectStatement.executeQuery(selectQuery);
             resultSet.next();
             birthDate = resultSet.getString("birthdate");
-            zipcode = resultSet.getInt("location_zipcode");
             securityQuestion = resultSet.getString("security_question");
-            fullName = resultSet.getString("full_name");
+            fullName = resultSet.getString("fullName");
             securityQuestionAnswer = resultSet.getString("security_question_answer");
 
         } catch (SQLException se) {
@@ -142,7 +139,7 @@ public class ContactDAOImpl implements ContactDAO {
         Statement sqlStatement = null;
         try {
 
-
+ 
             sqlStatement = connection.createStatement();
             String insertAccountProfile = "INSERT INTO contact (email) VALUE ('" + email + "')";
             sqlStatement.executeUpdate(insertAccountProfile);
@@ -167,25 +164,17 @@ public class ContactDAOImpl implements ContactDAO {
 	@Override
 	public boolean updateLocation(String email, Location location) {
 		
-		Connection connection = openConnection();
-		boolean zipUpdated = false;
-        try {
-            Statement updateSqlStatement = connection.createStatement();
-            String updateQuery = "UPDATE contact SET zipcode=" + location.getZipcode() + " WHERE email='" + email+"'";
-            updateSqlStatement.executeUpdate(updateQuery);
-            zipUpdated = true;
-
-        } catch (SQLException se) {
-            se.printStackTrace();
-        } finally {
-
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
-        return zipUpdated && locationDAO.createLocation(location);
+		
+        return locationDAO.updateContactLocation(email,location.getZipcode()) && locationDAO.updateAddress(location);
+        
+		
+	}
+	
+	@Override
+	public boolean createLocation(String email, Location location) {
+		
+		
+        return locationDAO.createContactLocation(location.getZipcode(),email) && locationDAO.createLocation(location);
         
 		
 	}

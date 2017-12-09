@@ -6,7 +6,7 @@ import Domain.Account.AccountProfile.Contact.Location;
 public interface ContactDAO {
     boolean createAccountContactProfile(String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);
 
-    boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox);
+    //boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox);
 
     String getActualAnswer(String email, String securityQuestion);
 
@@ -19,4 +19,6 @@ public interface ContactDAO {
 	boolean updateNameAndBirth(String email, String fullName, String birthDate);
 
 	boolean updatePhone(String email, String cellPhone);
+
+	boolean createLocation(String email, Location location);
 }

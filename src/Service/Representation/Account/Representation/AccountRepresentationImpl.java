@@ -15,6 +15,17 @@ public class AccountRepresentationImpl extends AbstractRepresentation implements
 	private String username;
 	private String accountStatus;
 	private String emailAddress;
+	private String password;
+	
+	@Override
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	@Override
+	public String getPassword() {
+		return password;
+	}
 	
 	public AccountRepresentationImpl() {}
 

@@ -54,8 +54,8 @@ public class AccountManagementImpl implements AccountManagement {
     }
 
     @Override
-    public boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox) {
-        return accountUpdate.updateAddress(streetAddress,state,city,zipcode,country,pobox);
+    public boolean updateAddress(String username,String streetAddress, String state, String city, int zipcode, String country, int pobox) {
+        return accountUpdate.updateAddress(username,streetAddress,state,city,zipcode,country,pobox);
     }
 
     @Override
@@ -134,15 +134,15 @@ public class AccountManagementImpl implements AccountManagement {
     }
 
     @Override
-    public boolean createAccountFinancialProfile(String username, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        return accountRegistration.createAccountFinancialProfile(username,accountNumber, bankName,routingNumber,accountType,billingAddress,swiftCode);
+    public boolean createAccountFinancialProfile(String username, String cardNumber,String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+        return accountRegistration.createAccountFinancialProfile(username,cardNumber, accountNumber, bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
     @Override
     public boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
         return accountRegistration.createPaymentCardProfile(accountNumber, cardHolderName,cardNumber,cardExpirationDate,securityNumber);
     }
-
+ 
     @Override
     public boolean validateAccount(String username, String password) {
         return accountValidation.validateAccount(username,password);
@@ -168,12 +168,10 @@ public class AccountManagementImpl implements AccountManagement {
 	@Override
 	public boolean createPersonalInformation(String username, String birthDate, String cellPhone, String fullName,
 			Location location) {
-		// TODO Auto-generated method stub
 		return accountRegistration.createAccountContactProfile(username, fullName, location, birthDate, cellPhone);
 	}
 	@Override
 	public String getUsername(String password) {
-		// TODO Auto-generated method stub
 		return accountDAO.getUsername(password);
 	}
 }

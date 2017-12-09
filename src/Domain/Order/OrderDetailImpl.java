@@ -3,6 +3,7 @@ package Domain.Order;
 import Domain.Customer.Customer;
 import Domain.Partner.Partner;
 import Domain.Product.Product;
+import Domain.Tools.IDGenerator;
 
 import java.util.*;
 
@@ -14,6 +15,8 @@ public class OrderDetailImpl implements OrderDetail {
 
     private double totalCost;
     private Customer customer;
+    private int orderDetailID;
+    
 
     public Map<Partner, List<Product>> getMapProductInOrder() {
         return mapProductInOrder;
@@ -78,6 +81,7 @@ public class OrderDetailImpl implements OrderDetail {
 
         totalCost = calculateTotalCost(products);
         orderCreated = new Date();
+        orderDetailID = IDGenerator.getId();
 
     }
 
@@ -120,6 +124,11 @@ public class OrderDetailImpl implements OrderDetail {
     public List<Product> getProductByPartner(Partner partner){
         return mapProductInOrder.get(partner);
     }
+
+	@Override
+	public int getDetailID() {
+		return orderDetailID;
+	}
 
 
 

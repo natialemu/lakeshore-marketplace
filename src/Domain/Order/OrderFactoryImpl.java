@@ -37,7 +37,7 @@ public class OrderFactoryImpl implements OrderFactory{
         orderDAO = new OrderDAOImpl();
     }
 
-    public boolean createOrder(List<Product> products, Customer customer){
+    public Order createOrder(List<Product> products, Customer customer){
 
 
         Order order = new OrderImpl(products,customer);
@@ -68,23 +68,27 @@ public class OrderFactoryImpl implements OrderFactory{
         validator = new ValidatorImpl(new DeliverOrder(order));
         if(validator.executeCommand()){
             delivery = new DeliveryFactoryImpl();
-            delivery.notifyPartnersOfDelivery(order);
+            //delivery.notifyPartnersOfDelivery(order);
 
         }
 
-        return orderDAO.createOrder(order);
+        if(orderDAO.createOrder(order)) {
+        	return order;
+        }else{
+        	return null;
+        }
     }
 
-    public boolean cancelOrder(int confirmationID){
+    public Order cancelOrder(int confirmationID){
         Order retrievedOrder = orderDAO.retrieveOrder(confirmationID);
-        if(retrievedOrder.cancelOrder() && retrievedOrder.getStringOrderState().equals("ProcessedOrder")){
+        if(retrievedOrder.getStringOrderState().equals("ProcessedOrder") && retrievedOrder.cancelOrder()){
             orderCancellation.cancelProccessedOrder(retrievedOrder);
             orderDAO.updateStatus(retrievedOrder,retrievedOrder.getConfirmationID());
-        }else if(retrievedOrder.cancelOrder() && retrievedOrder.getStringOrderState().equals("DeliveredOrder")){
+        }else if(retrievedOrder.getStringOrderState().equals("DeliveredOrder") && retrievedOrder.cancelOrder()){
             orderCancellation.cancelDeliveredOrder(retrievedOrder);
             orderDAO.updateStatus(retrievedOrder, retrievedOrder.getConfirmationID());
         }
-        return true;
+        return retrievedOrder;
     }
 
     public String getOrderStatus(int orderID){

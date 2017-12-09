@@ -45,10 +45,12 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
     }
 
     @Override
-    public boolean createAccountFinancialProfile(String username, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+    public boolean createAccountFinancialProfile(String username, String cardNumber, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
 
-        int financial_id = getFinProfileId(username);
-        return financialInfoDAO.createAccountFinancialProfile(financial_id,accountNumber,bankName, routingNumber, accountType, billingAddress, swiftCode);
+        int financial_id = getFinProfileId(username); 
+        if(financial_id != -1)
+        	return financialInfoDAO.createAccountFinancialProfile(financial_id,cardNumber, accountNumber,bankName, routingNumber, accountType, billingAddress, swiftCode);
+        return false;
     }
 
     private int getFinProfileId(String username) {
@@ -173,8 +175,8 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
     }
 
     @Override
-    public boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox) {
-        return contactDAO.updateAddress(streetAddress, state, city, zipcode, country, pobox);
+    public boolean updateAddress(String email, Location location) {
+        return contactDAO.updateLocation(email,location);
     }
 
     @Override
@@ -404,12 +406,12 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
     }
 
 	@Override
-	public boolean updateAccountContactProfile(String username, String fullName, Location location, String birthDate,
+	public boolean createAccountContactProfile(String username, String fullName, Location location, String birthDate,
 			String cellPhone) {
 		
 		AccountProfile ap = getAccountProfile(username);
 		String email = ap.getContactInfo().getEmail();
-		boolean locationUpdated =contactDAO.updateLocation(email,location);//
+		boolean locationUpdated =contactDAO.createLocation(email,location);//
 		boolean contactUpdated = contactDAO.updateNameAndBirth(email,fullName,birthDate);
 		boolean phoneUpdated = contactDAO.updatePhone(email,cellPhone);
 		return locationUpdated && contactUpdated && phoneUpdated;

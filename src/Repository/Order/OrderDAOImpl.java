@@ -45,7 +45,7 @@ public class OrderDAOImpl implements OrderDAO {
         Connection connection = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/lakeshore_market", "root", "Natlocus13");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/lakeshore_market?useSSL=false", "root", "Natlocus13");
 
 
         } catch (SQLException exception) {
@@ -104,7 +104,7 @@ public class OrderDAOImpl implements OrderDAO {
             Statement insertSatement = connection.createStatement();
             java.util.Date date = order.getOrderDetail().getOrderCreated();
 
-            String insertQuery = "INSERT INTO placed_order (placed_order_id, order_status,order_confirmation_id,order_date) VALUES("+order.getOrderID()+",'"+order.getStringOrderState()+"', "+order.getConfirmationID()+", "+getDateSring(date)+")";
+            String insertQuery = "INSERT INTO placed_order (placed_order_id, order_status,order_confirmation_id,order_date,detail_id) VALUES("+order.getOrderID()+",'"+order.getStringOrderState()+"', "+order.getConfirmationID()+", "+getDateSring(date)+","+order.getOrderDetail().getDetailID()+")";
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
@@ -141,20 +141,22 @@ public class OrderDAOImpl implements OrderDAO {
         String order_status = "";
         int delivery_tracking_id = 0;
         int order_transaction_id = 0;
+        int order_detail_id = 0;
         Date orderDate = null;
         OrderConfirmation orderConfirmation = orderConfirmationDAO.getOrderConfirmation(confirmationID);
         Connection connection = openConnection();
         try {
             Statement statement = connection.createStatement();
-            String query = "SELECT * from account where order_confirmation_id=" + confirmationID;
+            String query = "SELECT * from placed_order where order_confirmation_id=" + confirmationID;
             ResultSet resultSet = statement.executeQuery(query);
             assert (resultSet.isLast());
             resultSet.next();
-            placed_order_id = resultSet.getInt(0);
-            order_status = resultSet.getString(1);
-            delivery_tracking_id = resultSet.getInt(2);
-            order_transaction_id = resultSet.getInt(3);
-            orderDate = resultSet.getDate(5);
+            placed_order_id = resultSet.getInt("placed_order_id");
+            order_status = resultSet.getString("order_status");
+            delivery_tracking_id = resultSet.getInt("delivery_tracking_id");
+            order_transaction_id = resultSet.getInt("order_transaction_id");
+            orderDate = resultSet.getDate("order_date");
+            order_detail_id = resultSet.getInt("detail_id");
 
         } catch (SQLException exception) {
 
@@ -166,21 +168,23 @@ public class OrderDAOImpl implements OrderDAO {
 
             }
         }
-        int order_id = order.getOrderID();
 
 
-        OrderDetail orderDetail = orderDetailDAO.getOrderDetail(orderDate,order_id);
+        OrderDetail orderDetail = orderDetailDAO.getOrderDetail(orderDate,order_detail_id);
         order = new OrderImpl(orderDetail);
         order.setOrderConfirmation(orderConfirmation);
-        order.setOrderID(order_id);
-        if(order_status == "CancelledOrder"){
+        order.setOrderID(placed_order_id);
+        if(order_status.equals("CancelledOrder")){
             order.setState(order.getCancelledState());
-        }else if(order_status == "ProcessedOrder"){
+        } 
+        if(order_status.equals("ProcessedOrder")){
             order.setState(order.getProccessedState());
         }
-        else if(order_status == "DeliveredOrder"){
+        
+        if(order_status.equals("DeliveredOrder")){
             order.setState(order.getDeliveredState());
-        }else if(order_status == "UnprocesedOrder"){
+        }
+        if(order_status.equals("UnprocesedOrder")){
             order.setState(order.getUnproccessedState());
         }
         return order;

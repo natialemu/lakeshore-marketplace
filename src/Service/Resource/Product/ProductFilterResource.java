@@ -8,19 +8,24 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+
 import Service.Representation.Product.Representation.ProductRepresentation;
+import Service.Representation.Product.Representation.ProductRepresentationImpl;
 import Service.Representation.Product.Request.ProductRequest;
+import Service.Representation.Product.Request.ProductRequestImpl;
 import Service.Workflow.Product.ProductAcitvity;
 import Service.Workflow.Product.ProductActivityImpl;
 
-@Path("/filter/products/")
+
+@Path("/filter/")
 public class ProductFilterResource implements ProductFilterService {
 
 	@POST
 	@Produces({"application/xml" , "application/json"})
 	@Path("/")
 	@Override
-	public Set<ProductRepresentation> filterProductByCost(Set<ProductRequest> products, @QueryParam("minimum_cost") double minCost,
+	public Set<ProductRepresentationImpl> filterProductByCost(Set<ProductRequestImpl> products, @QueryParam("minimum_cost") double minCost,
 			@QueryParam("maximum_cost") double maxCost) {
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		return productActivity.filterProductByCost(products,minCost,maxCost);
@@ -31,7 +36,7 @@ public class ProductFilterResource implements ProductFilterService {
 	@Produces({"application/xml" , "application/json"})
 	@Path("/")
 	@Override
-	public Set<ProductRepresentation> filterProductByRating(Set<ProductRequest> products, @QueryParam("minimum_rating") int minRating,
+	public Set<ProductRepresentationImpl> filterProductByRating(Set<ProductRequestImpl> products, @QueryParam("minimum_rating") int minRating,
 			@QueryParam("maximum_rating") int maxRating) {
 		// TODO Auto-generated method stub
 		ProductAcitvity productActivity = new ProductActivityImpl();
@@ -44,7 +49,7 @@ public class ProductFilterResource implements ProductFilterService {
 	@Produces({"application/xml" , "application/json"})
 	@Path("/")
 	@Override
-	public Set<ProductRepresentation> sortOrders(Set<ProductRequest> products,@QueryParam("sorted_order") boolean isAscending) {
+	public Set<ProductRepresentationImpl> sortOrders(Set<ProductRequestImpl> products,@QueryParam("sorted_order") boolean isAscending) {
 		// TODO Auto-generated method stub
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		if(isAscending) {
@@ -59,7 +64,7 @@ public class ProductFilterResource implements ProductFilterService {
 	@Produces({"application/xml" , "application/json"})
 	@Path("/")
 	@Override
-	public Set<ProductRepresentation> filterProductByDate(Set<ProductRequest> products, @QueryParam("minimum_date") String date1, @QueryParam("maximum_date") String date2) {
+	public Set<ProductRepresentationImpl> filterProductByDate(Set<ProductRequestImpl> products, @QueryParam("minimum_date") String date1, @QueryParam("maximum_date") String date2) {
 		// TODO Auto-generated method stub
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		return productActivity.filterProductByDate(products,date1,date2);
@@ -70,7 +75,7 @@ public class ProductFilterResource implements ProductFilterService {
 	@Produces({"application/xml" , "application/json"})
 	@Path("/")
 	@Override
-	public Set<ProductRepresentation> filterProductBySeller(Set<ProductRequest> products, @QueryParam("seller_name") String sellerName) {
+	public Set<ProductRepresentationImpl> filterProductBySeller(Set<ProductRequestImpl> products, @QueryParam("seller_name") String sellerName) {
 		// TODO Auto-generated method stub
 		ProductAcitvity productActivity = new ProductActivityImpl();
 		return productActivity.filterProductBySeller(products,sellerName);

@@ -29,7 +29,6 @@ public class PartnerFactoryImpl implements PartnerFactory {
     private PartnerDAO partnerDAO;
     private ProductDAO productDAO;
     public PartnerFactoryImpl() {
-    	deliveryFactory = new DeliveryFactoryImpl();
         partnerDAO = new PartnerDAOImpl();
         orderFactory = new OrderFactoryImpl();
         productFactory = new ProductFactoryImpl();

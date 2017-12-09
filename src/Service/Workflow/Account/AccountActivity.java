@@ -1,8 +1,11 @@
 package Service.Workflow.Account;
 
 import Service.Representation.Account.Representation.AccountRepresentation;
+import Service.Representation.Account.Representation.AccountRepresentationImpl;
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Account.Request.AccountRequest;
+import Service.Representation.Account.Request.AccountRequestImpl;
 
 public interface AccountActivity {
 
@@ -18,20 +21,20 @@ public interface AccountActivity {
 
 	boolean loginWithUsername(String username, String password);
 
-	AccountValidationRepresentation registerCustomerForAccountWithEmail(AccountRequest accountRequest);
+	AccountValidationRepresentationImpl registerCustomerForAccountWithEmail(AccountRequestImpl accountRequest);
 
 	void regsiterCustomerForAccount(String username, String password);
 
 	void registerPartnerForAccount(String username, String password);
 
-	AccountValidationRepresentation registerPartnerForAccountWithEmail(String username, String email, String password);
+	AccountValidationRepresentationImpl registerPartnerForAccountWithEmail(String username, String email, String password);
 
-	AccountValidationRepresentation loginWithEmail(String email, String password);
+	AccountValidationRepresentationImpl loginWithEmail(String email, String password);
 
-	AccountRepresentation getAccount(String username);
+	AccountRepresentationImpl getAccount(String username);
 
 	void deleteAccount(String username);
 
-	AccountValidationRepresentation loginPartnerWithEmail(String email, String password);
+	AccountValidationRepresentationImpl loginPartnerWithEmail(String email, String password);
 
 }

@@ -28,8 +28,8 @@ public class AccountRegistrationImpl implements AccountRegistration{
     }
 
     @Override
-    public boolean createAccountFinancialProfile(String username, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        return accountDAO.createAccountFinancialProfile(username, accountNumber, bankName,routingNumber,accountType,billingAddress,swiftCode);
+    public boolean createAccountFinancialProfile(String username, String cardNumber, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+        return accountDAO.createAccountFinancialProfile(username, cardNumber, accountNumber, bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
     @Override

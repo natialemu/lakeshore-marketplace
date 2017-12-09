@@ -5,34 +5,37 @@ import java.util.Set;
 import javax.jws.WebService;
 
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
 import Service.Representation.Order.Representation.OrderRepresentation;
 import Service.Representation.Product.Representation.MinProductRepresentation;
+import Service.Representation.Product.Representation.MinProductRepresentationImpl;
 import Service.Representation.Product.Representation.ProductRepresentation;
+import Service.Representation.Product.Representation.ProductRepresentationImpl;
 import Service.Representation.Product.Request.ProductRequest;
+import Service.Representation.Product.Request.ProductRequestImpl;
 
 @WebService
 public interface ProductService {
 	
-	Set<MinProductRepresentation> getProducts();
-	Set<ProductRepresentation> getProductByID(int productID);
+	Set<MinProductRepresentationImpl> getProducts();
+	Set<ProductRepresentationImpl> getProductByID(int productID);
 
-	Set<ProductRepresentation> getProductsBySeller(String sellerName);
+	Set<ProductRepresentationImpl> getProductsBySeller(String sellerName);
 
-	Set<MinProductRepresentation> getProductsByType(String productType);
+	Set<MinProductRepresentationImpl> getProductsByType(String productType);
 
-	Set<MinProductRepresentation> getProductsBySellerAndType(String sellerName, String productType);
-	Set<MinProductRepresentation> getProductsByName(String productName);
+	Set<MinProductRepresentationImpl> getProductsByName(String productName);
 	
 	
 	//CREATE
-	AccountValidationRepresentation addProduct(Set<ProductRequest> products,String username);
+	AccountValidationRepresentationImpl addProduct(Set<ProductRequestImpl> products,String username);
 	
 	//DELETE
 	AccountValidationRepresentation deleteProduct(int partner_id, int product_id);
 	
-	Set<MinProductRepresentation> getRecentlyAddedProducts(int numOrders);
-	Set<MinProductRepresentation> getInventory(String username);
+	Set<MinProductRepresentationImpl> getRecentlyAddedProducts(int numOrders);
+	Set<MinProductRepresentationImpl> getInventory(String username);
 
 	
 

@@ -11,7 +11,7 @@ public class BankAccountDAOImpl implements BankAccountDAO{
     @Override
     public boolean updateBankInformation(String bankName, String accountNumber, String routingNumber) {
         boolean inserted = false;
-        Connection connection = openConnection();
+        Connection connection = openConnection(); 
         try{
             Statement insertSatement = connection.createStatement();
 

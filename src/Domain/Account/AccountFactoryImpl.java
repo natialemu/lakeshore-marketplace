@@ -68,9 +68,9 @@ public class AccountFactoryImpl implements AccountFactory {
     }
 
     @Override
-    public boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox) {
+    public boolean updateAddress(String username,String streetAddress, String state, String city, int zipcode, String country, int pobox) {
         //if(account != null && account.updateAddress(streetAddress,state,city,zipcode,country,pobox)){
-            return accountManagement.updateAddress(streetAddress,state,city,zipcode,country,pobox);
+            return accountManagement.updateAddress(username, streetAddress,state,city,zipcode,country,pobox);
         //}
         //return false;
     }
@@ -182,8 +182,8 @@ public class AccountFactoryImpl implements AccountFactory {
     }
 
     @Override
-    public boolean createAccountFinancialProfile(String username,String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
-        return accountManagement.createAccountFinancialProfile(username,accountNumber,bankName,routingNumber,accountType,billingAddress,swiftCode);
+    public boolean createAccountFinancialProfile(String username,String cardNumber, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode) {
+        return accountManagement.createAccountFinancialProfile(username,cardNumber,accountNumber,bankName,routingNumber,accountType,billingAddress,swiftCode);
     }
 
     @Override

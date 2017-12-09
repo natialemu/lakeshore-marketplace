@@ -77,7 +77,7 @@ public class PartnerDAOImpl implements PartnerDAO {
             resultSet.next();
 
 
-            account_id = resultSet.getInt("partner_account_id");
+            account_id = resultSet.getInt("partner_acct_id");
             username = resultSet.getString("partner_username");
 
         } catch (SQLException se) {
@@ -119,7 +119,7 @@ public class PartnerDAOImpl implements PartnerDAO {
             resultSet.next();
 
 
-            account_id = resultSet.getInt("partner_account_id");
+            account_id = resultSet.getInt("partner_acct_id");
             partner_id = resultSet.getInt("partner_id");
 
         } catch (SQLException se) {
@@ -136,6 +136,7 @@ public class PartnerDAOImpl implements PartnerDAO {
 
         Account account = accountDAO.getAccount(account_id);
 
+        assert(account != null);
         Partner partner = new PartnerImpl();
         partner.setAccount(account);
         partner.setPartnerID(partner_id);

@@ -30,7 +30,7 @@ class FinancialInfoDAOImplTest {
     @Test
     void createAccountFinancialProfile() {
 
-        financialInfoDAO.createAccountFinancialProfile(fin_id,accountNumber,bankName,routingNumbe,accountType,billingAddress,swiftCode);
+       // financialInfoDAO.createAccountFinancialProfile(fin_id,accountNumber,bankName,routingNumbe,accountType,billingAddress,swiftCode);
 
     }
 
@@ -39,7 +39,7 @@ class FinancialInfoDAOImplTest {
         financialInfoDAO.createPaymentCardProfile(accountNumber,"Nati","123456","89898989",347);
         //Tested
     }
-
+ 
     @Test
     void updatePaymentCard() {
 

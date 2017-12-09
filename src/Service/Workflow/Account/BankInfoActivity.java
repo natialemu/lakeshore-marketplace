@@ -1,8 +1,10 @@
 package Service.Workflow.Account;
 
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
-import Service.Representation.Account.Representation.BankInfoRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
+import Service.Representation.Account.Representation.*;
 import Service.Representation.Account.Request.BankInfoRequest;
+import Service.Representation.Account.Request.BankInfoRequestImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
 
 public interface BankInfoActivity {
@@ -25,7 +27,7 @@ public interface BankInfoActivity {
 
 	void updateSecurityCode(String cardNumber, String newSecurityCode);
 
-	BankInfoRepresentation getBankInfo(String username);
+	BankInfoRepresentationImpl getBankInfo(String username);
 
 	void deleteBankName(String bankAccountNumber, String bankName);
 
@@ -45,7 +47,7 @@ public interface BankInfoActivity {
 
 	void deleteSecurityCode(String cardNumber, int securityCode);
 
-	AccountValidationRepresentation createBankInformation(String username, BankInfoRequest bankInformation);
+	AccountValidationRepresentationImpl createBankInformation(String username, BankInfoRequestImpl bankInformation);
 
 	
 

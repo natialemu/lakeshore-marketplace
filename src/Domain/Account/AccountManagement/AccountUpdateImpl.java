@@ -16,7 +16,7 @@ public class AccountUpdateImpl implements AccountUpdate {
         return accountDAO.updateUserName(username,password);
     }
 
-    @Override
+    @Override 
     public boolean updatePassword(String username, String password) {
         return accountDAO.updatePassword(username,password);
     }
@@ -45,8 +45,8 @@ public class AccountUpdateImpl implements AccountUpdate {
     }
 
     @Override
-    public boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox) {
-        return accountDAO.updateAddress(streetAddress,state,city,zipcode,country,pobox);
+    public boolean updateAddress(String username,String streetAddress, String state, String city, int zipcode, String country, int pobox) {
+        return accountDAO.updateAddress(username,streetAddress,state,city,zipcode,country,pobox);
     }
 
     @Override

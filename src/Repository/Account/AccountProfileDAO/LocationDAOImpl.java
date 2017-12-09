@@ -27,13 +27,13 @@ public class LocationDAOImpl implements LocationDAO{
 
     }
     @Override
-    public boolean updateAddress(String streetAddress, String state, String city, int zipcode, String country, int pobox) {
+    public boolean updateAddress(Location location) {
         boolean inserted = false;
         Connection connection = openConnection();
         try{
             Statement insertSatement = connection.createStatement();
 
-            String insertQuery = "INSERT INTO location (zipcode,street_address,city,state,country,pobox) VALUES ("+zipcode+", '"+streetAddress+"', '"+city+"', '"+state+"', '"+country+"',"+pobox+")";
+            String insertQuery = "UPDATE table location SET street_address='"+location.getStreetAddress()+"',city='"+location.getCity()+"',state='"+location.getState()+"',country='"+location.getCountry()+"',pobox="+location.getPobox()+" WHERE zipcode="+location.getZipcode();
             insertSatement.executeUpdate(insertQuery);
 
             inserted = true;
@@ -54,7 +54,28 @@ public class LocationDAOImpl implements LocationDAO{
 
     @Override
     public boolean createLocation(Location location) {
-        return updateAddress(location.getStreetAddress(),location.getState(),location.getCity(),location.getZipcode(),location.getCountry(),location.getPobox());
+    	boolean inserted = false;
+        Connection connection = openConnection();
+        try{
+            Statement insertSatement = connection.createStatement();
+
+            String insertQuery = "INSERT INTO location (zipcode,street_address,city,state,country,pobox) VALUES ("+location.getZipcode()+", '"+location.getStreetAddress()+"', '"+location.getCity()+"', '"+location.getState()+"', '"+location.getCountry()+"',"+location.getPobox()+")";
+            insertSatement.executeUpdate(insertQuery);
+
+            inserted = true;
+        }catch (SQLException se){
+            se.printStackTrace();
+
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+
+                }catch (Exception e){}
+
+            }
+        }
+        return inserted;
 
     }
 
@@ -65,7 +86,7 @@ public class LocationDAOImpl implements LocationDAO{
         int pobox = 0;
         String city = null;
         String state = null;
-        String country = null;
+        String country = null; 
 
         Connection connection = openConnection();
         try {
@@ -96,4 +117,56 @@ public class LocationDAOImpl implements LocationDAO{
 
         return location;
     }
+	@Override
+	public boolean createContactLocation(int zipcode, String email) {
+		boolean inserted = false;
+        Connection connection = openConnection();
+        try{
+            Statement insertSatement = connection.createStatement();
+
+            String insertQuery = "INSERT INTO contact_location (contact_email,contact_zipcode) VALUES('"+email+"',"+zipcode+")";
+            insertSatement.executeUpdate(insertQuery);
+
+            inserted = true;
+        }catch (SQLException se){
+            se.printStackTrace();
+
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+
+                }catch (Exception e){}
+
+            }
+        }
+        return inserted;
+        
+	}
+	@Override
+	public boolean updateContactLocation(String email, int zipcode) {
+		// TODO Auto-generated method stub
+		boolean updated = false;
+        Connection connection = openConnection();
+        try{
+            Statement insertSatement = connection.createStatement();
+
+            String insertQuery = "UPDATE table contact_location SET zipcode="+zipcode+" WHERE email='"+email+"'";
+            insertSatement.executeUpdate(insertQuery);
+
+            updated = true;
+        }catch (SQLException se){
+            se.printStackTrace();
+
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+
+                }catch (Exception e){}
+
+            }
+        }
+        return updated;	
+     }
 }
