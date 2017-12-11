@@ -5,6 +5,8 @@ import Domain.Account.AccountProfile.AccountProfileImpl;
 import Domain.Account.AccountProfile.Contact.ContactInfo;
 import Domain.Account.AccountProfile.Contact.ContactInfoImpl;
 import Domain.Account.AccountProfile.Contact.Location;
+import Domain.Account.AccountProfile.Contact.Phone;
+import Domain.Account.AccountProfile.Contact.PhoneImpl;
 import Domain.Account.AccountProfile.Finance.FinancialInfo;
 
 import java.sql.*;
@@ -98,10 +100,10 @@ public class ContactDAOImpl implements ContactDAO {
     @Override
     public ContactInfo getContactInfo(String email) {
         String birthDate = null;
-        int zipcode = 0;
         String securityQuestion = null;
         String fullName = "";
         String securityQuestionAnswer = null;
+        String cellularPhone = null;
 
         Connection connection = openConnection();
         try {
@@ -114,7 +116,7 @@ public class ContactDAOImpl implements ContactDAO {
             securityQuestion = resultSet.getString("security_question");
             fullName = resultSet.getString("fullName");
             securityQuestionAnswer = resultSet.getString("security_question_answer");
-
+            cellularPhone = resultSet.getString("cellular_phone");
         } catch (SQLException se) {
             se.printStackTrace();
         } finally {
@@ -126,9 +128,13 @@ public class ContactDAOImpl implements ContactDAO {
             }
         }
 
-        Location location = locationDAO.getLocation(zipcode);
+        Location location = locationDAO.getLocation(email);
         ContactInfo contactInfo = new ContactInfoImpl(fullName,email,securityQuestion,securityQuestionAnswer,birthDate);
         contactInfo.setLocation(location);
+        Phone phone = new PhoneImpl();
+        phone.setCellularPhone(cellularPhone);
+        
+        contactInfo.setPhone(phone);
 
         return contactInfo;
     }
@@ -183,7 +189,7 @@ public class ContactDAOImpl implements ContactDAO {
 		Connection connection = openConnection();
         try {
             Statement updateSqlStatement = connection.createStatement();
-            String updateQuery = "UPDATE contact SET birthDate='" + birthDate + "',full_name='"+fullName +"' WHERE email='" + email+"'";
+            String updateQuery = "UPDATE contact SET birthDate='" + birthDate + "',fullName='"+fullName +"' WHERE email='" + email+"'";
             updateSqlStatement.executeUpdate(updateQuery);
             return true;
 
@@ -203,11 +209,12 @@ public class ContactDAOImpl implements ContactDAO {
 	public boolean updatePhone(String email, String cellPhone) {
 		// TODO Auto-generated method stub
 		Connection connection = openConnection();
+		boolean updated = false;
         try {
             Statement updateSqlStatement = connection.createStatement();
-            String updateQuery = "UPDATE contact SET phone_id=" + Integer.parseInt(cellPhone) + " WHERE email='" + email+"'";
+            String updateQuery = "UPDATE contact SET cellular_phone='" + cellPhone + "' WHERE email='" + email+"'";
             updateSqlStatement.executeUpdate(updateQuery);
-            return true;
+            updated = true;
 
         } catch (SQLException se) {
             se.printStackTrace();
@@ -219,7 +226,7 @@ public class ContactDAOImpl implements ContactDAO {
                 } catch (SQLException e) { /* ignored */}
             }
         }
-        return false;
+        return updated;
 		
 	}
 }

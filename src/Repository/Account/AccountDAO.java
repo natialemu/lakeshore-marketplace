@@ -11,7 +11,7 @@ public interface AccountDAO {
 
     boolean createAccountFinancialProfile(String usernmae, String cardNumber, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
 
-    boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
+    boolean createPaymentCardProfile(String username, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
 
 
     boolean deleteAccount(int accountID);
@@ -64,4 +64,6 @@ public interface AccountDAO {
 			String cellPhone);
 
 	String getUsername(String password);
+
+	boolean createBankProfile(String username,String accountNumber, String accountType, String bankName, String routingNumber);
 }

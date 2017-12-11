@@ -8,7 +8,7 @@ public interface AccountProfileDAO {
 
     boolean createAccountFinancialProfile(String username, String cardNumber, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
 
-    boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
+    boolean createPaymentCardProfile(String username, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
 
 
     void updateUserName(String username, String password);
@@ -44,5 +44,8 @@ public interface AccountProfileDAO {
 			String cellPhone);
 
 	String getUsername(String password);
+
+	boolean createBankProfile(String username, String accountNumber, String accountType, String bankName,
+			String routingNumber);
 
 }

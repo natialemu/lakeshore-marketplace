@@ -16,6 +16,7 @@ import Service.Representation.Account.Representation.PersonalInformationRepresen
 import Service.Representation.Account.Representation.PersonalInformationRepresentationImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
 import Service.Representation.Account.Request.PersonalInformationRequest;
+import Service.Representation.Account.Request.PersonalInformationRequestImpl;
 
 public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 	private AccountFactory accountFactory;
@@ -25,15 +26,32 @@ public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 	}
 
 	@Override
-	public AccountValidationRepresentation createPersonalInformation(String username, PersonalInformationRequest personalInformation) {
-		AccountValidationRepresentation avr = new AccountValidationRepresentationImpl();
-		boolean profileCreated = accountFactory.createPersonalInformation(username,personalInformation.getBirthDate(),personalInformation.getCellPhone(),personalInformation.getFullName(),personalInformation.getCity(),personalInformation.getFullName(),personalInformation.getState(),personalInformation.getStreetAddress(),personalInformation.getZipcode());
+	public AccountValidationRepresentationImpl createPersonalInformation(String username, PersonalInformationRequestImpl personalInformation) {
+		AccountValidationRepresentationImpl avr = new AccountValidationRepresentationImpl();
+		String streetAddress = personalInformation.getStreetAddress();
+		boolean profileCreated = accountFactory.createPersonalInformation(personalInformation.getBirthDate(),personalInformation.getCellPhone(),personalInformation.getFullName(),personalInformation.getCity(),personalInformation.getState(),streetAddress,personalInformation.getZipcode(),username);
 		avr.setIsSuccessful(profileCreated);
-		setLinksAfterProfileCreation(avr);
+		setLinksAfterProfileCreation(avr,username); 
 		return avr;
 	}
 
-	private void setLinksAfterProfileCreation(AccountValidationRepresentation avr) {
+	private void setLinksAfterProfileCreation(AccountValidationRepresentationImpl avr,String username) {
+		List<LinkImpl> links = new ArrayList<>();
+		
+		//link for  retrieving personal information
+		LinkImpl getPersonalInfo = new LinkImpl("GET",URIs.PERSONALINFO+"/"+username,"Get personal information", MediaTypes.JSON);
+		links.add(getPersonalInfo);
+		//link for updating personal information
+		
+		//link for deleting personal information
+		
+		LinkImpl[] linkArray = new LinkImpl[links.size()];
+		
+		links.toArray(linkArray);
+		
+		avr.setLinks(linkArray);
+		
+		
 		
 	}
 
@@ -83,9 +101,9 @@ public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 	}
 
 	@Override
-	public PersonalInformationRepresentation getPersonalInformation(String username) {
+	public PersonalInformationRepresentationImpl getPersonalInformation(String username) {
 		Account account = accountFactory.getAccount(username);
-		PersonalInformationRepresentation pir = new PersonalInformationRepresentationImpl();
+		PersonalInformationRepresentationImpl pir = new PersonalInformationRepresentationImpl();
 		
 		pir.setBirthDate(account.getAccountProfile().getContactInfo().getBirthDate());
 		pir.setCellPhone(account.getAccountProfile().getContactInfo().getPhone().getCellularPhone());
@@ -103,8 +121,12 @@ public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 		List<LinkImpl> links = new ArrayList<>();
 		
 		//Update personal info
-		LinkImpl createPersonalInfo = new LinkImpl("POST",URIs.PERSONALINFO,"update personal information",MediaTypes.JSON);
+		LinkImpl createPersonalInfo = new LinkImpl("POST",URIs.PERSONALINFO,"update personal information: NEEDS CHANGE",MediaTypes.JSON);
 		links.add(createPersonalInfo);
+		
+		//Delete personal info
+		
+		
 		
 		LinkImpl[] linkArray = new LinkImpl[links.size()];
 		pir.setLinks(links.toArray(linkArray));
@@ -138,6 +160,13 @@ public class PersonalInfoActivityImpl implements PersonalInfoActivity {
 	public void updateFullName(String email, String newFullName) {
 		accountFactory.updateFullName(email,newFullName);
 		
+	}
+
+	@Override
+	public AccountValidationRepresentationImpl updatePersonalInformation(String username,
+			PersonalInformationRequestImpl personalInformation) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

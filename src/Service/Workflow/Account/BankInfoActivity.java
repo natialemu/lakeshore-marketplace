@@ -6,6 +6,8 @@ import Service.Representation.Account.Representation.*;
 import Service.Representation.Account.Request.BankInfoRequest;
 import Service.Representation.Account.Request.BankInfoRequestImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
+import Service.Representation.Account.Request.BasicBankInfoRequestImpl;
+import Service.Representation.Account.Request.PaymentCardRequestImpl;
 
 public interface BankInfoActivity {
 
@@ -48,6 +50,20 @@ public interface BankInfoActivity {
 	void deleteSecurityCode(String cardNumber, int securityCode);
 
 	AccountValidationRepresentationImpl createBankInformation(String username, BankInfoRequestImpl bankInformation);
+
+	AccountValidationRepresentationImpl createBankProfile(String username, BasicBankInfoRequestImpl bankInformation);
+
+	AccountValidationRepresentationImpl createPaymentCardProfile(String username,
+			PaymentCardRequestImpl paymentCardInformation);
+
+	AccountValidationRepresentationImpl updateBankProfile(String username, BasicBankInfoRequestImpl bankInformation);
+
+	AccountValidationRepresentationImpl updatePaymentCardProfile(String username,
+			PaymentCardRequestImpl paymentCardInformation);
+
+	BasicBankInfoRequestImpl getBankProfile(String username);
+
+	PaymentCardRequestImpl getPaymentCardProfile(String username);
 
 	
 

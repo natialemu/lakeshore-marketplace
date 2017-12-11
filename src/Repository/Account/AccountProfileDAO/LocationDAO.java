@@ -7,6 +7,7 @@ public interface LocationDAO {
 
     boolean createLocation(Location location);
 
+    Location getLocation(String email);
     Location getLocation(int zipcode);
 
 	boolean createContactLocation(int zipcode, String email);

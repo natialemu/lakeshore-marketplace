@@ -9,6 +9,8 @@ import Service.Representation.Account.Representation.BankInfoRepresentationImpl;
 import Service.Representation.Account.Request.BankInfoRequest;
 import Service.Representation.Account.Request.BankInfoRequestImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
+import Service.Representation.Account.Request.BasicBankInfoRequestImpl;
+import Service.Representation.Account.Request.PaymentCardRequestImpl;
 
 @WebService
 public interface BankInfoService {
@@ -46,6 +48,21 @@ public interface BankInfoService {
 	//CREATE
 	
 	AccountValidationRepresentationImpl createBankInformation(String username,BankInfoRequestImpl bankInformation);
+	AccountValidationRepresentationImpl createBankProfile(String username, BasicBankInfoRequestImpl bankInformation);
+	AccountValidationRepresentationImpl createPaymentCardProfile(String username, PaymentCardRequestImpl paymentCardInformation);
+	
+	
+	//UPDATE
+	AccountValidationRepresentationImpl updateBankProfile(String username,BasicBankInfoRequestImpl bankInformation);
+	AccountValidationRepresentationImpl updatePaymentCardProfile(String username, PaymentCardRequestImpl paymentCardInformation);
+
+	//GET
+	BasicBankInfoRequestImpl getBankProfile(String username);
+	PaymentCardRequestImpl getPaymentCardProfile(String username);
+
+
+	
+	
 	
 
 }

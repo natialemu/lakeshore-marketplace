@@ -46,7 +46,7 @@ public interface AccountFactory {
     boolean createBasicAccount(Account account);
     boolean createAccountContactProfile(String username,String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);
     boolean createAccountFinancialProfile(String username,String cardNumber,String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
-    boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
+    boolean createPaymentCardProfile(String username, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
 
 
     Account getNewAccount(String email, String username, String password);
@@ -69,7 +69,7 @@ public interface AccountFactory {
 	void deleteCardExpirationDate(String cardNumber, String expirationDate);
 	void deleteNameOnCard(String cardNumber, String cardName);
 	void deleteSecurityCode(String cardNumber, int securityCode);
-	boolean createPersonalInformation(String birthDate, String cellPhone, String fullName, String city, String fullName2,
+	boolean createPersonalInformation(String birthDate, String cellPhone, String fullName, String city,
 			String state, String streetAddress, String zipcode, String username);
 	void removeSecurityAnswer(String email, String newSecurityQuestionAnswer);
 	void removesecurityQuestion(String email, String newSecurityQuestion);
@@ -85,4 +85,5 @@ public interface AccountFactory {
 	boolean validateAccount(String username, String password);
 	Account getAccount(String username);
 	String getUsername(String password);
+	boolean createBankProfile(String username, String accountNumber, String accountType, String bankName, String routingNumber);
 }

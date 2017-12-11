@@ -78,8 +78,9 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
 
 
     @Override
-    public boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
-        return financialInfoDAO.createPaymentCardProfile(accountNumber, cardHolderName, cardNumber, cardExpirationDate, securityNumber);
+    public boolean createPaymentCardProfile(String username, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
+    	int finacialProfileID = this.getFinProfileId(username);
+        return financialInfoDAO.createPaymentCardProfile(finacialProfileID, cardHolderName, cardNumber, cardExpirationDate, securityNumber);
     }
 
     private Connection openConnection() {
@@ -442,5 +443,14 @@ public class AccountProfileDAOImpl implements AccountProfileDAO {
             }
         }
         return username;
+	}
+
+	@Override
+	public boolean createBankProfile(String username, String accountNumber, String accountType, String bankName,
+			String routingNumber) {
+		
+        int finProfileID = this.getFinProfileId(username);
+        return financialInfoDAO.updateBankProfile(finProfileID, accountNumber,accountType,bankName,routingNumber);
+        
 	}
 }

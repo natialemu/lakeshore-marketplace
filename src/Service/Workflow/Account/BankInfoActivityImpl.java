@@ -19,6 +19,8 @@ import Service.Representation.Account.Representation.BankInfoRepresentationImpl;
 import Service.Representation.Account.Request.BankInfoRequest;
 import Service.Representation.Account.Request.BankInfoRequestImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
+import Service.Representation.Account.Request.BasicBankInfoRequestImpl;
+import Service.Representation.Account.Request.PaymentCardRequestImpl;
 
 public class BankInfoActivityImpl implements BankInfoActivity{
 	private AccountFactory accountFactory;
@@ -221,6 +223,149 @@ public class BankInfoActivityImpl implements BankInfoActivity{
 		
 		LinkImpl[] linkArray = new LinkImpl[links.size()];
 		avr.setLinks(links.toArray(linkArray));
+	}
+
+	@Override
+	public AccountValidationRepresentationImpl createBankProfile(String username,
+			BasicBankInfoRequestImpl bankInformation) {
+		// TODO Auto-generated method stub
+		AccountValidationRepresentationImpl avr = new AccountValidationRepresentationImpl();
+		if(accountFactory.createBankProfile(username,bankInformation.getAccountNumber(),bankInformation.getAccountType(),bankInformation.getBankName(),bankInformation.getRoutingNumber())) {
+			avr.setIsSuccessful(true);
+		}else {
+			avr.setIsSuccessful(false);
+		}
+		setLinksAfterBankProfileCreation(avr,username);
+
+		return avr;
+	}
+
+	private void setLinksAfterBankProfileCreation(AccountValidationRepresentationImpl avr, String username) {
+		List<LinkImpl> links = new ArrayList<>();
+		
+		//Link for profile creation
+		LinkImpl profileCreation = new LinkImpl("POST",URIs.PERSONAL_INFO+"/"+username,"Create a personal profile",MediaTypes.JSON);
+		links.add(profileCreation);
+		//Link for updating profile
+		LinkImpl updateProfile = new LinkImpl("PUT",URIs.PERSONAL_INFO+"/"+username,"Update personal profile",MediaTypes.JSON);
+		links.add(updateProfile);
+		
+		
+		//Link for bank profile update
+		LinkImpl updateBankProfile = new LinkImpl("PUT",URIs.BANK_PROFILE_URI+"/"+username,"Update bank profile",MediaTypes.JSON);
+		links.add(updateBankProfile);
+		
+		//Link for updating card profile
+		LinkImpl updateCardProfile = new LinkImpl("PUT",URIs.PAYMENT_CARD_URI+"/"+username,"Update personal profile",MediaTypes.JSON);
+		links.add(updateCardProfile);
+		
+		//Link for updating card profile
+		LinkImpl createCardProfile = new LinkImpl("POST",URIs.PAYMENT_CARD_URI+"/"+username,"Update personal profile",MediaTypes.JSON);
+		links.add(createCardProfile);
+				
+		//link for getting bank info
+		LinkImpl bankProfileRetrieval = new LinkImpl("GET",URIs.BANK_PROFILE_URI+"/"+username,"Get account profile information",MediaTypes.JSON);
+		links.add(bankProfileRetrieval);
+				
+
+		
+		
+		//link for getting account info
+		LinkImpl accountRetrieval = new LinkImpl("GET",URIs.ACCOUNT+"/"+username,"Get account profile information",MediaTypes.JSON);
+		links.add(accountRetrieval);
+		
+		
+		LinkImpl[] linkArray = new LinkImpl[links.size()];
+		links.toArray(linkArray);
+		
+		avr.setLinks(linkArray);
+		// 
+		
+	}
+
+	@Override
+	public AccountValidationRepresentationImpl createPaymentCardProfile(String username,
+			PaymentCardRequestImpl paymentCardInformation) {
+		// TODO Auto-generated method stub
+		
+		AccountValidationRepresentationImpl avr = new AccountValidationRepresentationImpl();
+		if(accountFactory.createPaymentCardProfile(username, paymentCardInformation.getNameOnCard(), paymentCardInformation.getCardNumber(), paymentCardInformation.getCardExpirationDate(), Integer.parseInt(paymentCardInformation.getCardSecurityCode()))) {
+			avr.setIsSuccessful(true);
+		}else {
+			avr.setIsSuccessful(false);
+		}
+		setLinkAfterPaymentCardCreation(avr,username);
+		return avr;
+	}
+
+	private void setLinkAfterPaymentCardCreation(AccountValidationRepresentationImpl avr, String username) {
+		List<LinkImpl> links = new ArrayList<>();
+		
+		//Link for profile creation
+		LinkImpl profileCreation = new LinkImpl("POST",URIs.PERSONAL_INFO+"/"+username,"Create a personal profile",MediaTypes.JSON);
+		links.add(profileCreation);
+		
+		//Link for updating profile
+		LinkImpl updateProfile = new LinkImpl("PUT",URIs.PERSONAL_INFO+"/"+username,"Update personal profile",MediaTypes.JSON);
+		links.add(updateProfile);
+		
+		//Link for updating card profile
+		LinkImpl updateCardProfile = new LinkImpl("PUT",URIs.PAYMENT_CARD_URI+"/"+username,"Update personal profile",MediaTypes.JSON);
+		links.add(updateCardProfile);
+		
+		
+		//Link for bank profile update
+		LinkImpl updateBankProfile = new LinkImpl("PUT",URIs.BANK_PROFILE_URI+"/"+username,"Update bank profile",MediaTypes.JSON);
+		links.add(updateBankProfile);
+		
+		//Link for bank profile update
+		LinkImpl createBankProfile = new LinkImpl("POST",URIs.BANK_PROFILE_URI+"/"+username,"Update bank profile",MediaTypes.JSON);
+		links.add(createBankProfile);
+
+		
+		
+		//link for getting account info
+		LinkImpl accountRetrieval = new LinkImpl("GET",URIs.ACCOUNT+"/"+username,"Get account profile information",MediaTypes.JSON);
+		links.add(accountRetrieval);
+		
+		
+		//link for getting payment info
+		LinkImpl payemntCardRetrieval = new LinkImpl("GET",URIs.PAYMENT_CARD_URI+"/"+username,"Get account profile information",MediaTypes.JSON);
+		links.add(payemntCardRetrieval);
+		
+
+		
+		
+		LinkImpl[] linkArray = new LinkImpl[links.size()];
+		links.toArray(linkArray);
+		
+		avr.setLinks(linkArray);		
+	}
+
+	@Override
+	public AccountValidationRepresentationImpl updateBankProfile(String username,
+			BasicBankInfoRequestImpl bankInformation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AccountValidationRepresentationImpl updatePaymentCardProfile(String username,
+			PaymentCardRequestImpl paymentCardInformation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BasicBankInfoRequestImpl getBankProfile(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PaymentCardRequestImpl getPaymentCardProfile(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

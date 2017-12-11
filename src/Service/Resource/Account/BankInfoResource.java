@@ -25,6 +25,8 @@ import Service.Representation.Account.Representation.BankInfoRepresentationImpl;
 import Service.Representation.Account.Request.BankInfoRequest;
 import Service.Representation.Account.Request.BankInfoRequestImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
+import Service.Representation.Account.Request.BasicBankInfoRequestImpl;
+import Service.Representation.Account.Request.PaymentCardRequestImpl;
 import Service.Workflow.Account.BankInfoActivity;
 import Service.Workflow.Account.BankInfoActivityImpl;
 
@@ -53,7 +55,7 @@ public class BankInfoResource implements BankInfoService{
         String origin = headers.getRequestHeader("Origin").get(0);
         
         if("http://localhost:63342".equals(origin)) {return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
@@ -69,7 +71,24 @@ public class BankInfoResource implements BankInfoService{
         String origin = headers.getRequestHeader("Origin").get(0);
         
         if("http://localhost:63342".equals(origin)) {return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT DELETE GET")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, DELETE, GET")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
+                           .build();
+        }else {
+        	return Response.ok().build();
+        }
+	}
+	
+	@OPTIONS
+    @Path("/profile/{username}")
+    @LocalPreflight
+    public Response options1(@PathParam("username") String username) {
+        String origin = headers.getRequestHeader("Origin").get(0);
+        
+        if("http://localhost:63342".equals(origin)) {return Response.ok()
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, DELETE, GET")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
@@ -297,5 +316,72 @@ public class BankInfoResource implements BankInfoService{
 		return bankInfoActivity.createBankInformation(username,bankInformation);
 		
 	}
+	
+	@POST
+	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
+	@Path("/profile/{username}")
+	@Override
+	public AccountValidationRepresentationImpl createBankProfile(@PathParam("username")String username,
+			BasicBankInfoRequestImpl bankInformation) {
+
+		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
+		return bankInfoActivity.createBankProfile(username,bankInformation);
+	}
+	
+	@POST
+	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
+	@Path("/card/{username}")
+	@Override
+	public AccountValidationRepresentationImpl createPaymentCardProfile(@PathParam("username")String username,
+			PaymentCardRequestImpl paymentCardInformation) {
+		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
+		return bankInfoActivity.createPaymentCardProfile(username,paymentCardInformation);
+	}
+	
+	@PUT
+	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
+	@Path("/profile/{username}")
+	@Override
+	public AccountValidationRepresentationImpl updateBankProfile(@PathParam("username")String username,
+			BasicBankInfoRequestImpl bankInformation) {
+		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
+		return bankInfoActivity.updateBankProfile(username,bankInformation);
+	}
+	
+	@PUT
+	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
+	@Path("/card/{username}")
+	@Override
+	public AccountValidationRepresentationImpl updatePaymentCardProfile(@PathParam("username")String username,
+			PaymentCardRequestImpl paymentCardInformation) {
+		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
+		return bankInfoActivity.updatePaymentCardProfile(username,paymentCardInformation);
+	}
+	
+	@GET
+	@Produces({"application/xml","application/json"})
+	@Path("/profile/{username}")
+	@Override
+	public BasicBankInfoRequestImpl getBankProfile(@PathParam("username")String username) {
+		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
+		return bankInfoActivity.getBankProfile(username);
+	}
+	
+	@GET
+	@Produces({"application/xml","application/json"})
+	@Path("/profile/{username}")
+	@Override
+	public PaymentCardRequestImpl getPaymentCardProfile(@PathParam("username") String username) {
+		BankInfoActivity bankInfoActivity = new BankInfoActivityImpl();
+		return bankInfoActivity.getPaymentCardProfile(username);
+	}
+	
+	
+	
+	
 
 }

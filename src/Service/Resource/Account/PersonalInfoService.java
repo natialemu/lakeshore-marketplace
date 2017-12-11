@@ -2,10 +2,14 @@ package Service.Resource.Account;
 
 import javax.jws.WebService;
 
+
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Account.Representation.PersonalInformationRepresentation;
+import Service.Representation.Account.Representation.PersonalInformationRepresentationImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
 import Service.Representation.Account.Request.PersonalInformationRequest;
+import Service.Representation.Account.Request.PersonalInformationRequestImpl;
 
 @WebService
 public interface PersonalInfoService {
@@ -22,7 +26,7 @@ public interface PersonalInfoService {
 	void updateSecurityAnswer(String email, String newSecurityQuestionAnswer);
 	
 	//GET
-	PersonalInformationRepresentation getPersonalInformation(String username);
+	PersonalInformationRepresentationImpl getPersonalInformation(String username);
 	
 	
 	//DElETE
@@ -40,7 +44,10 @@ public interface PersonalInfoService {
 	
 	//CREATE
 	
-	AccountValidationRepresentation createPersonalInformation(String username, PersonalInformationRequest personalInformation);
+	AccountValidationRepresentationImpl createPersonalInformation(String username, PersonalInformationRequestImpl personalInformation);
+	
+	//UPDATE
+	AccountValidationRepresentationImpl updatePersonalInformation(String username, PersonalInformationRequestImpl personalInformation);
 	
 
 }

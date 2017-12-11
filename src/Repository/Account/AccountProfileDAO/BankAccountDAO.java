@@ -7,4 +7,6 @@ public interface BankAccountDAO {
 
     BankAccount getBankAccount(String accountNumber);
 
+	boolean createBankProfile(String bankName, String accountNumber, String routingNumber, String accountType);
+
 }

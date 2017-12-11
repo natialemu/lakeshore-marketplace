@@ -1,13 +1,16 @@
 package Service.Workflow.Account;
 
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Account.Representation.PersonalInformationRepresentation;
+import Service.Representation.Account.Representation.PersonalInformationRepresentationImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
 import Service.Representation.Account.Request.PersonalInformationRequest;
+import Service.Representation.Account.Request.PersonalInformationRequestImpl;
 
 public interface PersonalInfoActivity {
 
-	AccountValidationRepresentation createPersonalInformation(String username, PersonalInformationRequest personalInformation);
+	AccountValidationRepresentationImpl createPersonalInformation(String username, PersonalInformationRequestImpl personalInformation);
 
 	void removesecurityAnswer(String email, String newSecurityQuestionAnswer);
 
@@ -23,7 +26,7 @@ public interface PersonalInfoActivity {
 
 	void removeEmail(String newEmail);
 
-	PersonalInformationRepresentation getPersonalInformation(String username);
+	PersonalInformationRepresentationImpl getPersonalInformation(String username);
 
 	void updateEmail(String email, String newSecurityQuestionAnswer);
 
@@ -34,5 +37,8 @@ public interface PersonalInfoActivity {
 	void updateBirthDate(String email, String birthDate);
 
 	void updateFullName(String email, String newFullName);
+
+	AccountValidationRepresentationImpl updatePersonalInformation(String username,
+			PersonalInformationRequestImpl personalInformation);
 
 }

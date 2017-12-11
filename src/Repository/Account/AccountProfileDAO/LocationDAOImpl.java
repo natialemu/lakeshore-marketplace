@@ -169,4 +169,37 @@ public class LocationDAOImpl implements LocationDAO{
         }
         return updated;	
      }
+	@Override
+	public Location getLocation(String email) {
+		// TODO Auto-generated method stub
+		int zipcode = getZipcodeFromEmail(email);
+		return getLocation(zipcode);
+	}
+	private int getZipcodeFromEmail(String email) {
+		// TODO Auto-generated method stub
+        Connection connection = openConnection();
+        int zipcode = 0;
+        try{
+            Statement selectStatement = connection.createStatement();
+
+            String selectQuery = "SELECT * from contact_location WHERE contact_email='"+email+"'";
+            ResultSet resultSet = selectStatement.executeQuery(selectQuery);
+            resultSet.next();
+
+            zipcode = resultSet.getInt("contact_zipcode");
+            
+        }catch (SQLException se){
+            se.printStackTrace();
+
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+
+                }catch (Exception e){}
+
+            }
+        }
+        return zipcode;
+	}
 }

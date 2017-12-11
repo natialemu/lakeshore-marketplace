@@ -187,8 +187,8 @@ public class AccountFactoryImpl implements AccountFactory {
     }
 
     @Override
-    public boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
-        return accountManagement.createPaymentCardProfile(accountNumber, cardHolderName,cardNumber,cardExpirationDate,securityNumber);
+    public boolean createPaymentCardProfile(String username, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
+        return accountManagement.createPaymentCardProfile(username, cardHolderName,cardNumber,cardExpirationDate,securityNumber);
     }
 
     @Override
@@ -330,8 +330,7 @@ public class AccountFactoryImpl implements AccountFactory {
 	}
 
 	@Override
-	public boolean createPersonalInformation(String birthDate, String cellPhone, String fullName, String city,
-			String fullName2, String state, String streetAddress, String zipcode,String username) {
+	public boolean createPersonalInformation(String birthDate, String cellPhone, String fullName, String city, String state, String streetAddress, String zipcode,String username) {
 		//String streetAddress, String city, int zipcode, String state, String country, int pobo
 		Location location = new LocationImpl(streetAddress,city,Integer.parseInt(zipcode),state,"USA",1234);
 		
@@ -425,5 +424,11 @@ public class AccountFactoryImpl implements AccountFactory {
 		// TODO Auto-generated method stub
 		return accountManagement.getUsername(password);
 	
+	}
+
+	@Override
+	public boolean createBankProfile(String username,String accountNumber, String accountType, String bankName, String routingNumber) {
+		// TODO Auto-generated method stub
+		return accountManagement.createBankProfile(username,accountNumber,accountType,bankName,routingNumber);
 	}
 }

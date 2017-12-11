@@ -47,6 +47,8 @@ public class URIs {
 	public static final String CARDNAME = "http://localhost:8081/bank-service/bank/cardname";
 	public static final String SECURITYCODE = "http://localhost:8081/bank-service/bank/securitycode";
 	public static final String BANKINFO = "http://localhost:8081/bank-service/bank";
+	public static final String PAYMENT_CARD_URI = "http://localhost:8081/account/bank/card";
+	public static final String BANK_PROFILE_URI = "http://localhost:8081/account/bank/profile";
 	
 	public static final String EMAIL = "http://localhost:8081/profile-service/profile/email";
 	public static final String FULLNAME = "http://localhost:8081/profile-service/profile/fullname";
@@ -54,7 +56,7 @@ public class URIs {
 	public static final String LOCATION = "http://localhost:8081/profile-service/profile/phone";
 	public static final String SECURITYQUESTION = "http://localhost:8081/profile-service/profile/securityquestion";
 	public static final String SECURITYANSWER = "http://localhost:8081/profile-service/profile/securityanswer";
-	public static final String PERSONALINFO = "http://localhost:8081/profile-service/profile";
+	public static final String PERSONALINFO = "http://localhost:8081/account/profile";
 	public static final String PHONE = "http://localhost:8081/profile-service/profile/phone";
 	
 	public static final String DELIVERYSTATUS = "http://localhost:8081/delivery-service/delivery/";

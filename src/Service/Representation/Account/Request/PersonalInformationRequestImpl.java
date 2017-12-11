@@ -16,7 +16,7 @@ public class PersonalInformationRequestImpl implements PersonalInformationReques
 	private String state;
 	private String cellPhone;
 	
-	public PersonalInformationRequestImpl() {}
+	public PersonalInformationRequestImpl() {} 
 
 	public String getBirthDate() {
 		return birthDate;

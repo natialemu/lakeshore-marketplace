@@ -45,7 +45,7 @@ public class DeliveryResource implements DeliveryService{
         String origin = headers.getRequestHeader("Origin").get(0);
         
         if("http://localhost:63342".equals(origin)) {return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
@@ -69,9 +69,9 @@ public class DeliveryResource implements DeliveryService{
 	} 
 	@GET
 	@Produces({"application/xml","application/json"})
-	@Path("/")
+	@Path("/{tracking_number}")
 	@Override
-	public DeliveryStatusRepresentation getDeliveryStatus(int tracking_number) {
+	public DeliveryStatusRepresentation getDeliveryStatus(@PathParam("tracking_number") int tracking_number) {
 		DeliveryActivity deliveryActivity = new DeliveryActivityImpl();
 		return deliveryActivity.getDeliveryStatus(tracking_number);
 	}

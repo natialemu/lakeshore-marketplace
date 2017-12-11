@@ -16,4 +16,10 @@ public interface FinancialInfoDAO {
 
     void createBasicFinProfile(int fin_profile_id);
 
+	boolean updateBankProfile(int finProfileID, String accountNumber, String accountType, String bankName,
+			String routingNumber);
+
+	boolean createPaymentCardProfile(int finacialProfileID, String cardHolderName, String cardNumber,
+			String cardExpirationDate, int securityNumber);
+
 }

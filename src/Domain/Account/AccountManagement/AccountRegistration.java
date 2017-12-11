@@ -9,9 +9,10 @@ public interface AccountRegistration {
     boolean createBasicAccount(Account account);
     boolean createAccountContactProfile(String username,String email, String fullName, Location location, String dateOfBirth, String securityQuestion, String securityQuestionAnswer);
     boolean createAccountFinancialProfile(String username,String cardNumber, String accountNumber, String bankName, String routingNumber, String accountType, Location billingAddress, String swiftCode);
-    boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
+    boolean createPaymentCardProfile(String username, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber);
 	boolean createAccountContactProfile(String username, String fullName, Location location, String birthDate,
 			String cellPhone);
+	boolean createBankProfile(String username,String accountNumber, String accountType, String bankName, String routingNumber);
 
 
 }

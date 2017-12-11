@@ -19,9 +19,12 @@ import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.apache.cxf.rs.security.cors.LocalPreflight;
 
 import Service.Representation.Account.Representation.AccountValidationRepresentation;
+import Service.Representation.Account.Representation.AccountValidationRepresentationImpl;
 import Service.Representation.Account.Representation.PersonalInformationRepresentation;
+import Service.Representation.Account.Representation.PersonalInformationRepresentationImpl;
 import Service.Representation.Account.Request.BasicAccountRequest;
 import Service.Representation.Account.Request.PersonalInformationRequest;
+import Service.Representation.Account.Request.PersonalInformationRequestImpl;
 import Service.Workflow.Account.PersonalInfoActivity;
 import Service.Workflow.Account.PersonalInfoActivityImpl;
 
@@ -51,7 +54,7 @@ public class PersonalInfoResource implements PersonalInfoService {
         String origin = headers.getRequestHeader("Origin").get(0);
         
         if("http://localhost:63342".equals(origin)) {return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT GET DELETE")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, GET, DELETE")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
@@ -68,7 +71,7 @@ public class PersonalInfoResource implements PersonalInfoService {
         String origin = headers.getRequestHeader("Origin").get(0);
         
         if("http://localhost:63342".equals(origin)) {return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT GET DELETE")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, GET, DELETE")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
@@ -155,9 +158,9 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Produces({"application/xml","application/json"})
 	@Path("/{username}")
 	@Override
-	public PersonalInformationRepresentation getPersonalInformation(@PathParam("username")String username) {
+	public PersonalInformationRepresentationImpl getPersonalInformation(@PathParam("username")String username) {
 		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
-		return personalInfoActivity.getPersonalInformation(username);
+		return (PersonalInformationRepresentationImpl)personalInfoActivity.getPersonalInformation(username);
 	}
 
 	@DELETE
@@ -236,10 +239,21 @@ public class PersonalInfoResource implements PersonalInfoService {
 	@Produces({"application/xml","application/json"})
 	@Path("/{username}")
 	@Override
-	public AccountValidationRepresentation createPersonalInformation(@PathParam("username") String username, PersonalInformationRequest personalInformation) {
+	public AccountValidationRepresentationImpl createPersonalInformation(@PathParam("username") String username, PersonalInformationRequestImpl personalInformation) {
 		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
 		return personalInfoActivity.createPersonalInformation(username, personalInformation); 
 		
+	}
+
+	@PUT
+	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
+	@Path("/{username}")
+	@Override
+	public AccountValidationRepresentationImpl updatePersonalInformation(@PathParam("username") String username,
+			PersonalInformationRequestImpl personalInformation) {
+		PersonalInfoActivity personalInfoActivity = new PersonalInfoActivityImpl();
+		return personalInfoActivity.updatePersonalInformation(username, personalInformation); 
 	}
 
 }

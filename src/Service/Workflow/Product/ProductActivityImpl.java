@@ -68,6 +68,7 @@ public class ProductActivityImpl implements ProductAcitvity {
 			prep.setProductName(p.getProductName());
 			prep.setProductType(p.getProductType());
 			prep.setRating("UNRATED");
+			prep.setProductID(p.getProductID());
 			
 			productRepresentation.add(prep);
 		}
@@ -161,7 +162,7 @@ public class ProductActivityImpl implements ProductAcitvity {
 		
 		setLinks(productRepresentation);
 		
-		return productRepresentation;
+		return productRepresentation; 
 		
 	}
 

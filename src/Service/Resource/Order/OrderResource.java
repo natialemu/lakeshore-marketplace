@@ -56,7 +56,7 @@ public class OrderResource implements OrderService{
         String origin = headers.getRequestHeader("Origin").get(0);
         
         if("http://localhost:63342".equals(origin)) {return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
@@ -74,7 +74,7 @@ public class OrderResource implements OrderService{
         String origin = headers.getRequestHeader("Origin").get(0);
         
         if("http://localhost:63342".equals(origin)) {return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT DELETE GET")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, DELETE, GET")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
@@ -92,7 +92,7 @@ public class OrderResource implements OrderService{
         String origin = headers.getRequestHeader("Origin").get(0);
         
         if("http://localhost:63342".equals(origin)) {return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT GET DELETE")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, GET, DELETE")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")

@@ -56,7 +56,7 @@ public class ProductResource implements ProductService{
         String origin = headers.getRequestHeader("Origin").get(0);
         
         if("http://localhost:63342".equals(origin)) {return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT GET")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, GET")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
@@ -75,7 +75,25 @@ public class ProductResource implements ProductService{
         String origin = headers.getRequestHeader("Origin").get(0);
         
         if("http://localhost:63342".equals(origin)) {return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
+                           .build();
+        }else {
+        	return Response.ok().build();
+        }
+        
+    }
+	
+	@OPTIONS
+    @Path("/id/{productID}")
+    @LocalPreflight
+    public Response options(@PathParam("productID") int productID) {
+        String origin = headers.getRequestHeader("Origin").get(0);
+        
+        if("http://localhost:63342".equals(origin)) {return Response.ok()
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, GET")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
@@ -93,7 +111,7 @@ public class ProductResource implements ProductService{
         String origin = headers.getRequestHeader("Origin").get(0);
         
         if("http://localhost:63342".equals(origin)) {return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
@@ -117,7 +135,7 @@ public class ProductResource implements ProductService{
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/{productID}")
+	@Path("/id/{productID}")
 	@Override
 	public Set<ProductRepresentationImpl> getProductByID(@PathParam("productID") int productID) {
 
@@ -182,7 +200,7 @@ public class ProductResource implements ProductService{
 
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/{product_number}")
+	@Path("/recent/{product_number}")
 	@Override
 	public Set<MinProductRepresentationImpl> getRecentlyAddedProducts(@PathParam("product_number")int numOrders) {
 		

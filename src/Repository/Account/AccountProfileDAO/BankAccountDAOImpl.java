@@ -92,4 +92,30 @@ public class BankAccountDAOImpl implements BankAccountDAO{
         bankAccount.setBankName(bankName);
         return bankAccount;
     }
+	@Override
+	public boolean createBankProfile(String bankName, String accountNumber, String routingNumber, String accountType) {
+
+		boolean inserted = false;
+        Connection connection = openConnection(); 
+        try{
+            Statement insertSatement = connection.createStatement();
+
+            String insertQuery = "INSERT INTO bank_account (account_number,routing_number,bank_name,account_type) VALUES("+Integer.parseInt(accountNumber)+", "+Integer.parseInt(routingNumber)+", '"+bankName+"','"+accountType+"')";
+            insertSatement.executeUpdate(insertQuery);
+
+            inserted = true;
+        }catch (SQLException se){
+            se.printStackTrace();
+
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+
+                }catch (Exception e){}
+
+            }
+        }
+        return inserted;
+	}
 }

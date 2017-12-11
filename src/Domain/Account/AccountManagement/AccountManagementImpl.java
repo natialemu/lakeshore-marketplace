@@ -139,8 +139,8 @@ public class AccountManagementImpl implements AccountManagement {
     }
 
     @Override
-    public boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
-        return accountRegistration.createPaymentCardProfile(accountNumber, cardHolderName,cardNumber,cardExpirationDate,securityNumber);
+    public boolean createPaymentCardProfile(String username, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
+        return accountRegistration.createPaymentCardProfile(username, cardHolderName,cardNumber,cardExpirationDate,securityNumber);
     }
  
     @Override
@@ -173,5 +173,10 @@ public class AccountManagementImpl implements AccountManagement {
 	@Override
 	public String getUsername(String password) {
 		return accountDAO.getUsername(password);
+	}
+	@Override
+	public boolean createBankProfile(String username, String accountNumber, String accountType, String bankName, String routingNumber) {
+		// TODO Auto-generated method stub
+		return accountRegistration.createBankProfile(username, accountNumber, accountType,bankName,routingNumber);
 	}
 }

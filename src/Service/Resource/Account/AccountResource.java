@@ -32,7 +32,7 @@ import Service.Workflow.Account.AccountActivity;
 import Service.Workflow.Account.AccountActivityImpl;
 
 @CrossOriginResourceSharing(
-        allowOrigins = {"http://localhost:63342"}, 
+        allowAllOrigins = true, 
         allowCredentials = true,
         		allowHeaders = {
         				
@@ -67,15 +67,59 @@ public class AccountResource implements AccountService{
     public Response options() {
         String origin = headers.getRequestHeader("Origin").get(0);
         
-        if("http://localhost:63342".equals(origin)) {return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST PUT")
+        return Response.ok()
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, GET, DELETE")
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://localhost:63342")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, origin)
                            .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
                            .build();
-        }else {
-        	return Response.ok().build();
-        }
+        
+        
+    }
+	@OPTIONS
+    @Path("/{username}")
+    @LocalPreflight
+    public Response options(@PathParam("username") String username) {
+        String origin = headers.getRequestHeader("Origin").get(0);
+        
+        return Response.ok()
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, GET, DELETE")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, origin)
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
+                           .build();
+        
+        
+    }
+	
+	@OPTIONS
+    @Path("/login")
+    @LocalPreflight
+    public Response options1() {
+        String origin = headers.getRequestHeader("Origin").get(0);
+        
+        return Response.ok()
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, GET, DELETE")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, origin)
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
+                           .build();
+        
+        
+    }
+	@OPTIONS
+    @Path("/login/partner")
+    @LocalPreflight
+    public Response options12() {
+        String origin = headers.getRequestHeader("Origin").get(0);
+        
+        return Response.ok()
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "POST, PUT, GET, DELETE")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "true")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, origin)
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_HEADERS, "Content-Type")
+                           .build();
+        
         
     }
 

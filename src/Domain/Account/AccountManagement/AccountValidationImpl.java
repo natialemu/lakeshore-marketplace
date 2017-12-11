@@ -34,7 +34,7 @@ public class AccountValidationImpl implements AccountValidation{
 
     @Override
     public Account getAccount(String username) {
-        return accountDAO.getAccount(username);
+        return accountDAO.getAccount(username); 
     }
 
     @Override

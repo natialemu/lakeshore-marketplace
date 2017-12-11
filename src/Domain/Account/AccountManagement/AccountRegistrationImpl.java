@@ -33,12 +33,18 @@ public class AccountRegistrationImpl implements AccountRegistration{
     }
 
     @Override
-    public boolean createPaymentCardProfile(String accountNumber, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
-        return accountDAO.createPaymentCardProfile(accountNumber, cardHolderName,cardNumber,cardExpirationDate,securityNumber);
+    public boolean createPaymentCardProfile(String username, String cardHolderName, String cardNumber, String cardExpirationDate, int securityNumber) {
+        return accountDAO.createPaymentCardProfile(username, cardHolderName,cardNumber,cardExpirationDate,securityNumber);
     }
 	@Override
 	public boolean createAccountContactProfile(String username, String fullName, Location location, String birthDate,
 			String cellPhone) {
 		return accountDAO.createAccountContactProfile(username, fullName, location, birthDate, cellPhone);
+	}
+	@Override
+	public boolean createBankProfile(String username,String accountNumber, String accountType, String bankName, String routingNumber) {
+		// TODO Auto-generated method stub
+		return accountDAO.createBankProfile( username,accountNumber,accountType,bankName,routingNumber);
+		
 	}
 }

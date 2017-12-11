@@ -178,4 +178,65 @@ public class FinancialInfoDAOImpl implements FinancialInfoDAO {
             }
         }
     }
+
+	@Override
+	public boolean updateBankProfile(int finProfileID, String accountNumber, String accountType, String bankName,
+			String routingNumber) {
+		// insert account number here, then send it off to bank info
+		boolean updated = false;
+        Connection connection = openConnection();
+        try{
+            Statement updateStatement = connection.createStatement();
+
+            String updateQuery = "UPDATE financial_info SET account_no="+Long.parseLong(accountNumber)+" where fin_profile_id="+finProfileID;
+            updateStatement.executeUpdate(updateQuery);
+
+            updated = true;
+        }catch (SQLException se){
+            se.printStackTrace();
+
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+
+                }catch (Exception e){} 
+
+            }
+        }
+        if(updated) {
+        	return bankAccountDAO.createBankProfile(bankName, accountNumber, routingNumber,accountType);
+        }
+		return updated;
+	}
+
+	@Override
+	public boolean createPaymentCardProfile(int finacialProfileID, String cardHolderName, String cardNumber,
+			String cardExpirationDate, int securityNumber) {
+		boolean updated = false;
+        Connection connection = openConnection();
+        try{
+            Statement updateStatement = connection.createStatement();
+
+            String updateQuery = "UPDATE financial_info SET card_no="+Long.parseLong(cardNumber)+" where fin_profile_id="+finacialProfileID;
+            updateStatement.executeUpdate(updateQuery);
+
+            updated = true;
+        }catch (SQLException se){
+            se.printStackTrace();
+
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+
+                }catch (Exception e){} 
+
+            }
+        }
+        if(updated) {
+        	return paymentCardDAO.createPaymentCardProfile(cardHolderName, cardNumber, cardExpirationDate, securityNumber);
+        }
+		return updated;
+	}
 }

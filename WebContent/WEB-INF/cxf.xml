@@ -41,6 +41,8 @@
 			<jaxrs:schemaLocation>Service.Representation.Account.Request.BankInfoRequestImpl</jaxrs:schemaLocation>	
 			<jaxrs:schemaLocation>Service.Representation.Account.Representation.PersonalInformationRepresentationImpl</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>Service.Representation.Account.Request.PersonalInformationRequestImpl</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Account.Request.BasicBankInfoRequestImpl</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>Service.Representation.Account.Request.PaymentCardRequestImpl</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
