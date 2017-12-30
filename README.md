@@ -56,6 +56,13 @@ modifying our designs.
 ### Partner Registration
 
 
+## External API integrations
+
+- Braintree
+- Google Maps
+
+
+
 
 ## Web service details
 
@@ -86,6 +93,14 @@ Endpoints currently provide the following functionalities:
   - Retrieve most recently placed orders to Partner
   - Retrieve Inventory
   - Provide delivery details on a placed order
+  
+  
+  Endpoints currently under implementation:
+  
+   - review
+   - stats
+   - reccomendation system
+   
    
  A detailed documentation of the Endpoints can be found on Swagger [here](https://swaggerhub.com/apis/ljohnson24/LakeShore_MarketPlace_API/0.0.1)
    
